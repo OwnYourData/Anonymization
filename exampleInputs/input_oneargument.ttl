@@ -1,0 +1,28 @@
+@prefix oyd: <http://ns.ownyourdata.eu/ns/soya-context> .
+
+oyd:test1 a oyd:testobject;
+    oyd:attribute 1234 .
+
+oyd:test2 a oyd:testobject;
+    oyd:attribute 1 .
+
+oyd:test3 a oyd:testobject;
+    oyd:attribute 12 .
+
+oyd:test4 a oyd:testobject;
+    oyd:attribute 123 .
+    
+oyd:test5 a oyd:testobject;
+    oyd:attribute 1234 .
+
+oyd:test6 a oyd:testobject;
+    oyd:attribute 1 .
+
+oyd:test7 a oyd:testobject;
+    oyd:attribute 12 .
+
+oyd:test8 a oyd:testobject;
+    oyd:attribute 123 .
+
+oyd:test9 a oyd:testobject;
+    oyd:attribute 123 .
