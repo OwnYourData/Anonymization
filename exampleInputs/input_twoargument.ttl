@@ -1,37 +1,37 @@
-@prefix oyd: <http://ns.ownyourdata.eu/ns/soya-context> .
+@prefix oyd: <http://ns.ownyourdata.eu/ns/soya-context/> .
 
 oyd:test1 a oyd:testobject;
-    oyd:attribute 1234 ;
-    oyd:attribute2 212 .
+    oyd:latitude 1234 ;
+    oyd:gehalt 212 .
 
 oyd:test2 a oyd:testobject;
-    oyd:attribute 1 ;
-    oyd:attribute2 212 .
+    oyd:latitude 1 ;
+    oyd:gehalt 212 .
 
 oyd:test3 a oyd:testobject;
-    oyd:attribute 12 ;
-     oyd:attribute2 212 .
+    oyd:latitude 12 ;
+    oyd:gehalt 212 .
 
 oyd:test4 a oyd:testobject;
-    oyd:attribute 123 ;
-  oyd:attribute2 212 .
+    oyd:latitude 123 ;
+    oyd:gehalt 212 .
 
 oyd:test5 a oyd:testobject;
-    oyd:attribute 1234 ;
-    oyd:attribute2 212 .
+    oyd:latitude 1234 ;
+    oyd:gehalt 212 .
 
 oyd:test6 a oyd:testobject;
-    oyd:attribute 1 ;
-    oyd:attribute2 212 .
+    oyd:latitude 1 ;
+    oyd:gehalt 212 .
 
 oyd:test7 a oyd:testobject;
-    oyd:attribute 12 ;
-    oyd:attribute2 212 .
+    oyd:latitude 12 ;
+    oyd:gehalt 212 .
 
 oyd:test8 a oyd:testobject;
-    oyd:attribute 123 ;
-    oyd:attribute2 212 .
+    oyd:latitude 123 ;
+    oyd:gehalt 212 .
 
 oyd:test9 a oyd:testobject;
-    oyd:attribute 123 ;
-    oyd:attribute2 212 .
+    oyd:latitude 123 ;
+    oyd:gehalt 212 .

@@ -5,32 +5,32 @@ import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
 import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFParser;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class CofingurationService {
+public class ConfigurationService {
 
     public static List<Configuration> fetchConfig(String url) {
         String configString = fetchStringContent(url);
         Model configModel = ModelFactory.createDefaultModel();
-        RDFDataMgr.read(configModel, configString, Lang.JSONLD);
+        RDFParser.create()
+                .source(new StringReader(configString))
+                .lang(Lang.JSONLD)
+                .parse(configModel);
         return extractConfig(configModel);
     }
 

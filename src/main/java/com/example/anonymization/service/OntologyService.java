@@ -1,5 +1,6 @@
 package com.example.anonymization.service;
 
+import com.example.anonymization.entities.Configuration;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -10,10 +11,7 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class OntologyService {
@@ -40,29 +38,69 @@ public class OntologyService {
         UpdateAction.execute(updateRequest, model);
     }
 
+    /**
+     * Extracts the parameters to with anonymization should be applied --> config is defined and the attribute is used
+     * at least for one object
+     * @param model the input model
+     * @param configs list of configurations
+     * @param objectType definition of the object type to which anonymization is applied
+     */
+    public static List<Property> extractAttributesForAnonymization(Model model, List<Configuration> configs, String objectType) {
+        String attributeQuery = createAttributeQuery(configs, objectType);
+        Query query = QueryFactory.create(attributeQuery);
+        List<Property> properties = new LinkedList<>();
+        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
+            ResultSet resultSet = qexec.execSelect();
+            while(resultSet.hasNext()) {
+                QuerySolution solution = resultSet.nextSolution();
+                if (solution.getLiteral("used").getBoolean()) {
+                    properties.add(model.getProperty(solution.getResource("predicate").getURI()));
+                }
+            }
+        }
+        return properties;
+    }
+
     private static String createQueryForAttributes(List<Property> attributes, String objectType) {
         // TODO check why ? is cutting the first char afterwards (not the case for delte query)
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <http://ns.ownyourdata.eu/ns/soya-context> \n");
-        queryString.append("SELECT ?object ");
-        attributes.forEach(attr -> queryString.append("?a").append(attr.getLocalName()).append(" "));
-        queryString.append("\n");
-        queryString.append("WHERE { ?object ");
-        attributes.forEach(attr -> queryString.append("oyd:").append(attr).append(" ?a").append(attr.getLocalName()).append(" ;\n"));
+        queryString.append("PREFIX oyd: <http://ns.ownyourdata.eu/ns/soya-context/> \n")
+                .append("SELECT ?object ");
+        attributes.forEach(attr -> queryString.append("?").append(attr.getLocalName()).append(" "));
+        queryString.append("\n")
+                .append("WHERE { ?object ");
+        attributes.forEach(attr -> queryString
+                .append("<").append(attr).append("> ?").append(attr.getLocalName()).append(" ;\n"));
         queryString.append("a oyd:").append(objectType).append(".\n}");
-
         return queryString.toString();
     }
 
     private static String createDelteQuery(List<Property> attributes, String objectType) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <http://ns.ownyourdata.eu/ns/soya-context> \n");
-        queryString.append("DELETE {\n");
-        attributes.forEach(attr -> queryString.append("?object oyd:").append(attr).append(" ?").append(attr).append(".\n"));
-        queryString.append("}\nWHERE {\n");
-        queryString.append("?object a oyd:").append(objectType).append(".\n");
-        attributes.forEach(attr -> queryString.append("OPTIONAL { ?object oyd:").append(attr).append(" ?").append(attr).append(" .}\n"));
+        queryString.append("PREFIX oyd: <http://ns.ownyourdata.eu/ns/soya-context/> \n")
+                .append("DELETE {\n");
+        attributes.forEach(attr -> queryString
+                .append("?object ")
+                .append("<").append(attr).append("> ")
+                .append("?").append(attr.getLocalName()).append(".\n"));
+        queryString.append("}\nWHERE {\n")
+                .append("?object a oyd:").append(objectType).append(".\n");
+        attributes.forEach(attr -> queryString
+                .append("OPTIONAL { ?object ")
+                .append("<").append(attr).append("> ")
+                .append("?").append(attr.getLocalName()).append(" .}\n"));
         queryString.append("}");
+        return queryString.toString();
+    }
+
+    private static String createAttributeQuery(List<Configuration> configs, String objectType) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("PREFIX oyd: <http://ns.ownyourdata.eu/ns/soya-context/> \n")
+                .append("SELECT ?predicate (EXISTS {\n?s a oyd:").append(objectType)
+                .append(" ; ?predicate ?o .\n} AS ?used)\n")
+                .append("WHERE { VALUES ?predicate { \n");
+        configs.forEach(config -> queryString.append("oyd:").append(config.getAttribute()).append("\n"));
+        queryString.append("}}");
         return queryString.toString();
     }
 }
