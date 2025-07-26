@@ -1,4 +1,4 @@
-@prefix oyd: <http://ns.ownyourdata.eu/ns/soya-context> .
+@prefix oyd: <http://ns.ownyourdata.eu/ns/soya-context/> .
 
 oyd:test1 a oyd:testobject;
     oyd:attribute 1234 .
