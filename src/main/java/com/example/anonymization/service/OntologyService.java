@@ -25,7 +25,7 @@ public class OntologyService {
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
                 Map<Property, Literal> attributValues = new HashMap<>();
-                attributes.forEach(attr -> attributValues.put(attr, solution.getLiteral(attr.toString())));
+                attributes.forEach(attr -> attributValues.put(attr, solution.getLiteral(attr.getLocalName())));
                 results.put(solution.getResource("object"), attributValues);
             }
         }
@@ -45,7 +45,7 @@ public class OntologyService {
      * @param configs list of configurations
      * @param objectType definition of the object type to which anonymization is applied
      */
-    public static List<Property> extractAttributesForAnonymization(Model model, List<Configuration> configs, String objectType) {
+    public static List<Property> extractAttributesForAnonymization(Model model, Set<String> configs, String objectType) {
         String attributeQuery = createAttributeQuery(configs, objectType);
         Query query = QueryFactory.create(attributeQuery);
         List<Property> properties = new LinkedList<>();
@@ -93,13 +93,13 @@ public class OntologyService {
         return queryString.toString();
     }
 
-    private static String createAttributeQuery(List<Configuration> configs, String objectType) {
+    private static String createAttributeQuery(Set<String> configs, String objectType) {
         StringBuilder queryString = new StringBuilder();
         queryString.append("PREFIX oyd: <http://ns.ownyourdata.eu/ns/soya-context/> \n")
                 .append("SELECT ?predicate (EXISTS {\n?s a oyd:").append(objectType)
                 .append(" ; ?predicate ?o .\n} AS ?used)\n")
                 .append("WHERE { VALUES ?predicate { \n");
-        configs.forEach(config -> queryString.append("oyd:").append(config.getAttribute()).append("\n"));
+        configs.forEach(config -> queryString.append("oyd:").append(config).append("\n"));
         queryString.append("}}");
         return queryString.toString();
     }
