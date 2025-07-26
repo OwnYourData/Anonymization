@@ -24,7 +24,6 @@ public class AnonymizationService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // TODO check out what an Dataset is doing (Dataset dataset = DatasetFactory.create(model);)
         List<Property> attributes = List.of(model.createProperty("attribute"), model.createProperty("attribute2")); // TODO: extract from model
         Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, "testobject");
         OntologyService.deleteOldValues(model, attributes, "testobject");
