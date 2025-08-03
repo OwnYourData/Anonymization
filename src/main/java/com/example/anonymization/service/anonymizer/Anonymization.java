@@ -12,19 +12,30 @@ public interface Anonymization {
 
     void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data);
 
-    public static void test(Configuration config, Model model, Property property, Map<Resource, Literal> data) {
+    static void anonmization(Configuration config, Model model, Property property, Map<Resource, Literal> data) {
         System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
-        // TODO creates the right Anonymization class and calls applyAnonymizaation
+        Anonymization anonymization = anonymizationFactoryFunction(config);
+        anonymization.applyAnoynmization(model, property, data);
     }
 
-    /*
-    Property min = anonymizedModel.createProperty(NS, "min");
-    Property max = anonymizedModel.createProperty(NS, "max");
-
-    anonymized.forEach((key, value) -> {
-        Resource res = anonymizedModel.createResource(key);
-        res.addLiteral(min, value[0]);
-        res.addLiteral(max, value[1]);
-    });
-    */
+    private static Anonymization anonymizationFactoryFunction(Configuration configuration) {
+        return switch (configuration.getAnonymization()) {
+            // TODO evaluate if this should be handled as strings
+            case "generalization" -> switch (configuration.getDataType()) {
+                case "integer" -> new GeneralizationNumeric(); // TODO include all numeric datatypes
+                case "date" -> new GeneralizationDate();
+                case "string" -> throw new IllegalArgumentException("No Generalization possible for type string");
+                default -> new GeneralizationObject();
+            };
+            case "randomization" -> switch (configuration.getDataType()) {
+                case "integer" -> new RandomizationNumeric(); // TODO include all numeric datatypes
+                case "date" -> new RandomizationDate();
+                default ->
+                        throw new IllegalArgumentException("No Randomization possible for type " + configuration.getDataType());
+            };
+            case "masking" -> new Masking();
+            default ->
+                    throw new IllegalArgumentException("No Anonymization implementation for " + configuration.getAnonymization() + ": " + configuration.getDataType());
+        };
+    }
 }
