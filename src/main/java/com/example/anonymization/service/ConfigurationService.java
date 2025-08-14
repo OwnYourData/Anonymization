@@ -18,13 +18,13 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ConfigurationService {
 
-    public static List<Configuration> fetchConfig(String url) {
+    public static Map<String, Configuration> fetchConfig(String url) {
         String configString = fetchStringContent(url);
         Model configModel = ModelFactory.createDefaultModel();
         RDFParser.create()
@@ -51,7 +51,7 @@ public class ConfigurationService {
         }
     }
 
-    private static List<Configuration> extractConfig(Model model) {
+    private static Map<String, Configuration> extractConfig(Model model) {
         String query = """
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX soya: <https://w3id.org/soya/ns#>
@@ -61,19 +61,20 @@ public class ConfigurationService {
               ?attribute <https://w3id.org/soya/ns#classification> ?anonymization .
             }
         """;
-        List<Configuration> congis = new LinkedList<>();
+        Map<String, Configuration> configs = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
-                congis.add(new Configuration(
+                // TODO maybe change to property
+                configs.put(solution.get("attribute").asNode().getLocalName(), new Configuration(
                         extractValueFromURL(solution.get("attribute").toString()),
                         extractValueFromURL(solution.get("datatype").toString()),
                         extractValueFromURL(solution.get("anonymization").toString())
                 ));
             }
         }
-        return congis;
+        return configs;
     }
 
     public static String extractValueFromURL(String url) {
