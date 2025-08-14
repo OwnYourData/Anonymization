@@ -27,14 +27,14 @@ public class AnonymizationService {
         Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, "testobject");
         OntologyService.deleteOldValues(model, attributes, "testobject");
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
-        int nrAnonymizingAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
+        int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.forEach(((property, resourceLiteralMap) ->
                 Anonymization.anonmization(
                         configurations.get(property.getLocalName()),
                         model,
                         property,
                         resourceLiteralMap,
-                        nrAnonymizingAttributes
+                        nrAnonymizeAttributes
                 )));
 
         model.write(System.out, "TTL");
