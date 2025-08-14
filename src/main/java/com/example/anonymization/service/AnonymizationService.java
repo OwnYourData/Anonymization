@@ -27,10 +27,14 @@ public class AnonymizationService {
         Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, "testobject");
         OntologyService.deleteOldValues(model, attributes, "testobject");
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
+        int nrAnonymizingAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.forEach(((property, resourceLiteralMap) ->
                 Anonymization.anonmization(
                         configurations.get(property.getLocalName()),
-                        model, property, resourceLiteralMap
+                        model,
+                        property,
+                        resourceLiteralMap,
+                        nrAnonymizingAttributes
                 )));
 
         model.write(System.out, "TTL");
@@ -50,6 +54,15 @@ public class AnonymizationService {
         data.forEach((resource, value) -> value.forEach((property, literal) ->
                 propertyMap.get(property).put(resource, literal)));
         return propertyMap;
+    }
+
+    private static int getNumberOfAnonymizingAttributes(Map<String, Configuration> configs, List<Property> attributes) {
+        return (int) attributes.stream()
+                .map(Property::getLocalName)
+                .map(configs::get)
+                .map(Configuration::getAnonymization)
+                .filter(anonymization -> List.of("generalization", "randomization").contains(anonymization))
+                .count();
     }
 
     /*

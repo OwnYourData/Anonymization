@@ -12,11 +12,10 @@ public interface Anonymization {
 
     void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes);
 
-    static void anonmization(Configuration config, Model model, Property property, Map<Resource, Literal> data) {
+    static void anonmization(Configuration config, Model model, Property property, Map<Resource, Literal> data, int nrAnonymizingAttributes) {
         System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
         Anonymization anonymization = anonymizationFactoryFunction(config);
-        // TODO: determine how many attributes that apply anonymization
-        anonymization.applyAnoynmization(model, property, data, 2);
+        anonymization.applyAnoynmization(model, property, data, nrAnonymizingAttributes);
     }
 
     private static Anonymization anonymizationFactoryFunction(Configuration configuration) {
