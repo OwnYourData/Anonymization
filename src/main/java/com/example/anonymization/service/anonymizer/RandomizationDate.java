@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class RandomizationDate implements Anonymization {
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data) {
+    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
 
     }
 }

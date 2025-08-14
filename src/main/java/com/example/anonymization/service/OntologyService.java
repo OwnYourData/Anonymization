@@ -63,7 +63,6 @@ public class OntologyService {
     }
 
     private static String createQueryForAttributes(List<Property> attributes, String objectType) {
-        // TODO check why ? is cutting the first char afterwards (not the case for delte query)
         StringBuilder queryString = new StringBuilder();
         queryString.append("PREFIX oyd: <" + SOYA_URL + "> \n")
                 .append("SELECT ?object ");
@@ -78,7 +77,7 @@ public class OntologyService {
 
     private static String createDelteQuery(List<Property> attributes, String objectType) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <\" + SOYA_URL + \"> \n")
+        queryString.append("PREFIX oyd: <" + SOYA_URL + "> \n")
                 .append("DELETE {\n");
         attributes.forEach(attr -> queryString
                 .append("?object ")
@@ -96,7 +95,7 @@ public class OntologyService {
 
     private static String createAttributeQuery(Set<String> configs, String objectType) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <\" + SOYA_URL + \"> \n")
+        queryString.append("PREFIX oyd: <" + SOYA_URL + "> \n")
                 .append("SELECT ?predicate (EXISTS {\n?s a oyd:").append(objectType)
                 .append(" ; ?predicate ?o .\n} AS ?used)\n")
                 .append("WHERE { VALUES ?predicate { \n");

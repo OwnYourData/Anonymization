@@ -12,6 +12,8 @@ import org.apache.jena.vocabulary.RDF;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.lang.StrictMath.floor;
+import static java.lang.StrictMath.pow;
 import static org.apache.jena.rdfs.assembler.VocabRDFS.NS;
 
 public abstract class Generalization<T> implements Anonymization {
@@ -19,24 +21,25 @@ public abstract class Generalization<T> implements Anonymization {
     // TODO include number of buckets used
 
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data) {
+    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+        int numberBuckets = calculateNumberOfBuckets(data.size(), numberAttributes);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
-        Map<Resource, List<T>> ranges = getRanges(sortedValues);
+        Map<Resource, List<T>> ranges = getRanges(sortedValues, numberBuckets);
         writeToModel(model, ranges, property);
     }
 
     protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, Literal> data);
 
-    protected Map<Resource, List<T>> getRanges(List<Pair<Resource, T>> sortedValues) {
+    protected Map<Resource, List<T>> getRanges(List<Pair<Resource, T>> sortedValues, int numberBuckets) {
         List<Pair<Resource, Integer>> positionValues = new LinkedList<>();
         for (int i = 0; i < sortedValues.size(); i++) {
             positionValues.add(new Pair<>(
                     sortedValues.get(i).getLeft(),
-                    3 * i / sortedValues.size())
+                    numberBuckets * i / sortedValues.size())
             );
         }
         return positionValues.stream()
-                .map(e -> new Pair<>(e.getLeft(), getBucketRange(sortedValues, e.getRight())))
+                .map(e -> new Pair<>(e.getLeft(), getBucketRange(sortedValues, e.getRight(), numberBuckets)))
                 .collect(Collectors.toMap(
                         Pair::getLeft,
                         Pair::getRight
@@ -56,9 +59,20 @@ public abstract class Generalization<T> implements Anonymization {
         });
     }
 
-    protected List<T> getBucketRange(List<Pair<Resource, T>> sortedValues, int bucketNumber) {
+    protected List<T> getBucketRange(List<Pair<Resource, T>> sortedValues, int bucketNumber, int nrOfBuckets) {
         return List.of(
-            sortedValues.get(bucketNumber * 3).getRight(),
-            sortedValues.get(((bucketNumber + 1) * 3) - 1).getRight()
+            sortedValues.get(bucketNumber * nrOfBuckets).getRight(),
+            sortedValues.get(((bucketNumber + 1) * nrOfBuckets) - 1).getRight()
         );
-    }}
+    }
+
+    public static int calculateNumberOfBuckets(long dataSize, long numberAttributes) {
+        return (int) floor(
+                1.0 / pow(
+                        1.0 - pow(1.0 - pow(0.99, 1.0 / dataSize), 1.0 / dataSize),
+                        1.0 / numberAttributes
+                )
+        );
+    }
+
+}
