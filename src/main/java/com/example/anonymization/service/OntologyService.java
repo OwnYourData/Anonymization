@@ -68,10 +68,12 @@ public class OntologyService {
                 .append("SELECT ?object ");
         attributes.forEach(attr -> queryString.append("?").append(attr.getLocalName()).append(" "));
         queryString.append("\n")
-                .append("WHERE { ?object ");
+                .append("WHERE \n{\t?object a oyd:").append(objectType).append(".\n");
         attributes.forEach(attr -> queryString
-                .append("<").append(attr).append("> ?").append(attr.getLocalName()).append(" ;\n"));
-        queryString.append("a oyd:").append(objectType).append(".\n}");
+                .append("\tOPTIONAL { ?object ")
+                .append("<").append(attr).append("> ")
+                .append("?").append(attr.getLocalName()).append(" }\n"));
+        queryString.append("}");
         return queryString.toString();
     }
 
