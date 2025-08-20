@@ -17,7 +17,7 @@ public class OntologyService {
 
     public static final String SOYA_URL = "http://ns.ownyourdata.eu/ns/soya-context/";
 
-    public static Map<Resource, Map<Property, Literal>> extractDataFromModel(Model model, List<Property> attributes, String objectType) {
+    public static Map<Resource, Map<Property, Literal>> extractDataFromModel(Model model, List<Property> attributes, Resource objectType) {
         String queryString = createQueryForAttributes(attributes, objectType);
         Query query = QueryFactory.create(queryString);
         Map<Resource, Map<Property, Literal>> results = new HashMap<>();
@@ -33,7 +33,7 @@ public class OntologyService {
         return results;
     }
 
-    public static void deleteOldValues(Model model, List<Property> attributes, String objectType) {
+    public static void deleteOldValues(Model model, List<Property> attributes, Resource objectType) {
         String deleteQuery = createDelteQuery(attributes, objectType);
         UpdateRequest updateRequest = UpdateFactory.create(deleteQuery);
         UpdateAction.execute(updateRequest, model);
@@ -46,7 +46,7 @@ public class OntologyService {
      * @param configs list of configurations
      * @param objectType definition of the object type to which anonymization is applied
      */
-    public static List<Property> extractAttributesForAnonymization(Model model, Set<String> configs, String objectType) {
+    public static List<Property> extractAttributesForAnonymization(Model model, Set<Property> configs, Resource objectType) {
         String attributeQuery = createAttributeQuery(configs, objectType);
         Query query = QueryFactory.create(attributeQuery);
         List<Property> properties = new LinkedList<>();
@@ -62,13 +62,12 @@ public class OntologyService {
         return properties;
     }
 
-    private static String createQueryForAttributes(List<Property> attributes, String objectType) {
+    private static String createQueryForAttributes(List<Property> attributes, Resource objectType) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <" + SOYA_URL + "> \n")
-                .append("SELECT ?object ");
+        queryString.append("SELECT ?object ");
         attributes.forEach(attr -> queryString.append("?").append(attr.getLocalName()).append(" "));
         queryString.append("\n")
-                .append("WHERE \n{\t?object a oyd:").append(objectType).append(".\n");
+                .append("WHERE \n{\t?object a <").append(objectType).append("> .\n");
         attributes.forEach(attr -> queryString
                 .append("\tOPTIONAL { ?object ")
                 .append("<").append(attr).append("> ")
@@ -77,16 +76,15 @@ public class OntologyService {
         return queryString.toString();
     }
 
-    private static String createDelteQuery(List<Property> attributes, String objectType) {
+    private static String createDelteQuery(List<Property> attributes, Resource objectType) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <" + SOYA_URL + "> \n")
-                .append("DELETE {\n");
+        queryString.append("DELETE {\n");
         attributes.forEach(attr -> queryString
                 .append("?object ")
                 .append("<").append(attr).append("> ")
                 .append("?").append(attr.getLocalName()).append(".\n"));
         queryString.append("}\nWHERE {\n")
-                .append("?object a oyd:").append(objectType).append(".\n");
+                .append("?object a <").append(objectType).append("> .\n");
         attributes.forEach(attr -> queryString
                 .append("OPTIONAL { ?object ")
                 .append("<").append(attr).append("> ")
@@ -95,13 +93,12 @@ public class OntologyService {
         return queryString.toString();
     }
 
-    private static String createAttributeQuery(Set<String> configs, String objectType) {
+    private static String createAttributeQuery(Set<Property> configs, Resource objectType) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("PREFIX oyd: <" + SOYA_URL + "> \n")
-                .append("SELECT ?predicate (EXISTS {\n?s a oyd:").append(objectType)
+        queryString.append("SELECT ?predicate (EXISTS {\n?s a <").append(objectType).append(">")
                 .append(" ; ?predicate ?o .\n} AS ?used)\n")
                 .append("WHERE { VALUES ?predicate { \n");
-        configs.forEach(config -> queryString.append("oyd:").append(config).append("\n"));
+        configs.forEach(config -> queryString.append("<").append(config).append(">\n"));
         queryString.append("}}");
         return queryString.toString();
     }
