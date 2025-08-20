@@ -1,38 +1,38 @@
-@prefix oyd: <http://ns.ownyourdata.eu/ns/soya-context/> .
+@prefix oyd: <https://soya.ownyourdata.eu/AnonymisationDemo/> .
 
-oyd:test1 a oyd:testobject;
+oyd:test1 a oyd:AnonymisationDemo;
     oyd:latitude 1234 ;
     oyd:gehalt 211 ;
     oyd:name "Test".
 
-oyd:test2 a oyd:testobject;
+oyd:test2 a oyd:AnonymisationDemo;
     oyd:latitude 1 ;
     oyd:gehalt 212 .
 
-oyd:test3 a oyd:testobject;
+oyd:test3 a oyd:AnonymisationDemo;
     oyd:latitude 12 ;
     oyd:gehalt 213 .
 
-oyd:test4 a oyd:testobject;
+oyd:test4 a oyd:AnonymisationDemo;
     oyd:latitude 123 ;
     oyd:gehalt 214 .
 
-oyd:test5 a oyd:testobject;
+oyd:test5 a oyd:AnonymisationDemo;
     oyd:latitude 1234 ;
     oyd:gehalt 215 .
 
-oyd:test6 a oyd:testobject;
+oyd:test6 a oyd:AnonymisationDemo;
     oyd:latitude 1 ;
     oyd:gehalt 216 .
 
-oyd:test7 a oyd:testobject;
+oyd:test7 a oyd:AnonymisationDemo;
     oyd:latitude 12 ;
     oyd:gehalt 217 .
 
-oyd:test8 a oyd:testobject;
+oyd:test8 a oyd:AnonymisationDemo;
     oyd:latitude 123 ;
     oyd:gehalt 218 .
 
-oyd:test9 a oyd:testobject;
+oyd:test9 a oyd:AnonymisationDemo;
     oyd:latitude 123 ;
     oyd:gehalt 219 .

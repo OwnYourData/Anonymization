@@ -9,8 +9,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Configuration {
-
-    String attribute;
     String dataType;
     String anonymization;
 }

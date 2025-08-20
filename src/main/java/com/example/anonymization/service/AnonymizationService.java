@@ -21,28 +21,31 @@ public class AnonymizationService {
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
 
-        Map<String, Configuration> configurations = ConfigurationService.fetchConfig(request.getConfigurationUrl());
+        Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());
         Model model = getModel("exampleInputs/input_twoargument.ttl"); // TODO: extract from query
-        List<Property> attributes = OntologyService.extractAttributesForAnonymization(model, configurations.keySet(), "testobject");
-        Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, "testobject");
-        OntologyService.deleteOldValues(model, attributes, "testobject");
-        Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
-        int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
-        horizontalData.forEach(((property, resourceLiteralMap) ->
-                Anonymization.anonmization(
-                        configurations.get(property.getLocalName()),
-                        model,
-                        property,
-                        resourceLiteralMap,
-                        nrAnonymizeAttributes
-                )));
-
+        anonymizationObjects.forEach((object, config) -> applyAnonymizationForObject(object, config, model));
         model.write(System.out, "TTL");
 
         return new ResponseEntity<>(
                 "Response",
                 HttpStatus.ACCEPTED
         );
+    }
+
+    private static void applyAnonymizationForObject(Resource resource, Map<Property, Configuration> configurations, Model model) {
+        List<Property> attributes = OntologyService.extractAttributesForAnonymization(model, configurations.keySet(), resource);
+        Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, resource);
+        OntologyService.deleteOldValues(model, attributes, resource);
+        Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
+        int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
+        horizontalData.forEach(((property, resourceLiteralMap) ->
+                Anonymization.anonmization(
+                        configurations.get(property),
+                        model,
+                        property,
+                        resourceLiteralMap,
+                        nrAnonymizeAttributes
+                )));
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
@@ -56,9 +59,8 @@ public class AnonymizationService {
         return propertyMap;
     }
 
-    private static int getNumberOfAnonymizingAttributes(Map<String, Configuration> configs, List<Property> attributes) {
+    private static int getNumberOfAnonymizingAttributes(Map<Property, Configuration> configs, List<Property> attributes) {
         return (int) attributes.stream()
-                .map(Property::getLocalName)
                 .map(configs::get)
                 .map(Configuration::getAnonymization)
                 .filter(anonymization -> List.of("generalization", "randomization").contains(anonymization))

@@ -5,8 +5,7 @@ import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import java.util.Map;
 @Service
 public class ConfigurationService {
 
-    public static Map<String, Configuration> fetchConfig(String url) {
+    public static Map<Resource, Map<Property, Configuration>> fetchConfig(String url) {
         String configString = fetchStringContent(url);
         Model configModel = ModelFactory.createDefaultModel();
         RDFParser.create()
@@ -51,27 +50,34 @@ public class ConfigurationService {
         }
     }
 
-    private static Map<String, Configuration> extractConfig(Model model) {
+    private static Map<Resource, Map<Property, Configuration>> extractConfig(Model model) {
         String query = """
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX soya: <https://w3id.org/soya/ns#>
-            SELECT ?attribute ?datatype ?anonymization WHERE {
-              ?attribute rdfs:domain <https://soya.ownyourdata.eu/AnonymisationDemo/AnonymisationDemo> .
-              ?attribute rdfs:range ?datatype .
-              ?attribute <https://w3id.org/soya/ns#classification> ?anonymization .
-            }
-        """;
-        Map<String, Configuration> configs = new HashMap<>();
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX soya: <https://w3id.org/soya/ns#>
+                    SELECT ?anonymizationObject ?attribute ?datatype ?anonymization WHERE {
+                      ?overlay a soya:OverlayClassification .
+                      ?overlay soya:onBase ?anonymizationObject .
+                      ?attribute rdfs:domain ?anonymizationObject .
+                      ?attribute rdfs:range ?datatype .
+                      ?attribute <https://w3id.org/soya/ns#classification> ?anonymization .
+                    }
+                """;
+        Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
-                // TODO maybe change to property
-                configs.put(solution.get("attribute").asNode().getLocalName(), new Configuration(
-                        extractValueFromURL(solution.get("attribute").toString()),
-                        extractValueFromURL(solution.get("datatype").toString()),
-                        extractValueFromURL(solution.get("anonymization").toString())
-                ));
+                Resource anonymizationObject = solution.get("anonymizationObject").asResource();
+                if (!configs.containsKey(anonymizationObject)) {
+                    configs.put(anonymizationObject, new HashMap<>());
+                }
+                configs.get(anonymizationObject).put(
+                        ResourceFactory.createProperty(solution.get("attribute").asResource().getURI()),
+                        new Configuration(
+                            extractValueFromURL(solution.get("datatype").toString()),
+                            extractValueFromURL(solution.get("anonymization").toString())
+                        )
+                );
             }
         }
         return configs;
