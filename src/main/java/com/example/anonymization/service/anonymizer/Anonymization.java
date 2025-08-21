@@ -8,6 +8,9 @@ import org.apache.jena.rdf.model.Resource;
 
 import java.util.Map;
 
+import static java.lang.StrictMath.floor;
+import static java.lang.StrictMath.pow;
+
 public interface Anonymization {
 
     void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes);
@@ -37,5 +40,14 @@ public interface Anonymization {
             default ->
                     throw new IllegalArgumentException("No Anonymization implementation for " + configuration.getAnonymization() + ": " + configuration.getDataType());
         };
+    }
+
+    static int calculateNumberOfBuckets(long dataSize, long numberAttributes) {
+        return (int) floor(
+                1.0 / pow(
+                        1.0 - pow(1.0 - pow(0.99, 1.0 / dataSize), 1.0 / dataSize),
+                        1.0 / numberAttributes
+                )
+        );
     }
 }

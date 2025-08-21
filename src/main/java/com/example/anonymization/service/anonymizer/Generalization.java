@@ -12,17 +12,13 @@ import org.apache.jena.vocabulary.RDF;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.lang.StrictMath.floor;
-import static java.lang.StrictMath.pow;
 import static org.apache.jena.rdfs.assembler.VocabRDFS.NS;
 
 public abstract class Generalization<T> implements Anonymization {
 
-    // TODO include number of buckets used
-
     @Override
     public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
-        int numberBuckets = calculateNumberOfBuckets(data.size(), numberAttributes);
+        int numberBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
         Map<Resource, List<T>> ranges = getRanges(sortedValues, numberBuckets);
         writeToModel(model, ranges, property);
@@ -65,14 +61,4 @@ public abstract class Generalization<T> implements Anonymization {
             sortedValues.get(((bucketNumber + 1) * nrOfBuckets) - 1).getRight()
         );
     }
-
-    public static int calculateNumberOfBuckets(long dataSize, long numberAttributes) {
-        return (int) floor(
-                1.0 / pow(
-                        1.0 - pow(1.0 - pow(0.99, 1.0 / dataSize), 1.0 / dataSize),
-                        1.0 / numberAttributes
-                )
-        );
-    }
-
 }
