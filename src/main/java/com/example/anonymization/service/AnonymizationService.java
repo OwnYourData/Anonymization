@@ -16,7 +16,6 @@ public class AnonymizationService {
     /*
     TODO
     - Exception handling
-    - Prefix handling
      */
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {

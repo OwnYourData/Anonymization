@@ -1,15 +1,27 @@
 package com.example.anonymization.service.anonymizer;
 
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 
-import java.util.Map;
+import java.util.*;
 
-public class RandomizationNumeric implements Anonymization {
+public class RandomizationNumeric extends Randomization<Double> {
+
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+    protected double distance(Literal a, Literal b) {
+        return a.getDouble() - b.getDouble();
+    }
 
+    @Override
+    protected Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
+        double noise = new Random().nextGaussian() * distance;
+        double randomizedValue = value.getDouble() + noise > max.getDouble() ||
+                value.getDouble() - noise < min.getDouble() ?
+                value.getDouble() - noise : value.getDouble() + noise;
+        return ResourceFactory.createTypedLiteral(randomizedValue);
+    }
+
+    @Override
+    Comparator<Literal> getComparator() {
+        return Comparator.comparingDouble(Literal::getDouble);
     }
 }
