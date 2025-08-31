@@ -14,7 +14,8 @@ public class RandomizationNumeric extends Randomization<Double> {
     @Override
     protected Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
         double noise = new Random().nextGaussian() * distance;
-        double randomizedValue = noise > max.getDouble() || noise < min.getDouble() ?
+        double randomizedValue = value.getDouble() + noise > max.getDouble() ||
+                value.getDouble() - noise < min.getDouble() ?
                 value.getDouble() - noise : value.getDouble() + noise;
         return ResourceFactory.createTypedLiteral(randomizedValue);
     }
