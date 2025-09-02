@@ -11,11 +11,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.*;
 
+@Service
 public class AnonymizationService {
 
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
@@ -41,10 +43,10 @@ public class AnonymizationService {
         }
     }
 
-    private static void applyAnonymizationForObject(Resource resource, Map<Property, Configuration> configurations, Model model) {
-        List<Property> attributes = OntologyService.extractAttributesForAnonymization(model, configurations.keySet(), resource);
-        Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, resource);
-        OntologyService.deleteOldValues(model, attributes, resource);
+    private static void applyAnonymizationForObject(Resource anonymizationObject, Map<Property, Configuration> configurations, Model model) {
+        List<Property> attributes = OntologyService.extractAttributesForAnonymization(model, configurations.keySet(), anonymizationObject);
+        Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, anonymizationObject);
+        OntologyService.deleteOldValues(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.forEach(((property, resourceLiteralMap) ->
@@ -55,6 +57,7 @@ public class AnonymizationService {
                         resourceLiteralMap,
                         nrAnonymizeAttributes
                 )));
+        KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
