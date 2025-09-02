@@ -8,6 +8,8 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,8 +25,12 @@ import java.util.Map;
 @Service
 public class ConfigurationService {
 
+    private static final Logger logger = LogManager.getLogger(Configuration.class);
+
     public static Map<Resource, Map<Property, Configuration>> fetchConfig(String url) {
+        logger.info("Fetching config from url: {}", url);
         String configString = fetchStringContent(url);
+        logger.info("Config successfully fetched");
         Model configModel = ModelFactory.createDefaultModel();
         RDFParser.create()
                 .source(new StringReader(configString))
@@ -34,7 +40,6 @@ public class ConfigurationService {
     }
 
     private static String fetchStringContent(String url) {
-        // TODO proper exception handling
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
@@ -42,10 +47,10 @@ public class ConfigurationService {
             if (response.statusCode() < 300) {
                 return response.body();
             } else {
-                throw new IllegalArgumentException("");
+                throw new IllegalArgumentException("Exception when fetching the URL content");
             }
         } catch (URISyntaxException | IOException | InterruptedException e) {
-            System.out.println("Exception when fetching the URL content");
+            logger.error("Exception when fetching the URL content", e);
             throw new IllegalArgumentException("Exception when fetching the URL content");
         }
     }
@@ -63,6 +68,7 @@ public class ConfigurationService {
                     }
                 """;
         Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
+        logger.info("Extracting configuration from server response");
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
@@ -78,8 +84,15 @@ public class ConfigurationService {
                             extractValueFromURL(solution.get("anonymization").toString())
                         )
                 );
+                logger.info(
+                        "New Config: {}, {}, {}",
+                        extractValueFromURL(String.valueOf(solution.get("datatype"))),
+                        extractValueFromURL(String.valueOf(solution.get("datatype"))),
+                        extractValueFromURL(String.valueOf(solution.get("datatype")))
+                );
             }
         }
+        logger.info("Configuration successfully converted");
         return configs;
     }
 

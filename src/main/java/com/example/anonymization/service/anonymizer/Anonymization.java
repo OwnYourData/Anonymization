@@ -25,13 +25,13 @@ public interface Anonymization {
         return switch (configuration.getAnonymization()) {
             // TODO evaluate if this should be handled as strings
             case "generalization" -> switch (configuration.getDataType()) {
-                case "integer" -> new GeneralizationNumeric(); // TODO include all numeric datatypes
+                case "integer", "double" -> new GeneralizationNumeric();
                 case "date" -> new GeneralizationDate();
                 case "string" -> throw new IllegalArgumentException("No Generalization possible for type string");
                 default -> new GeneralizationObject();
             };
             case "randomization" -> switch (configuration.getDataType()) {
-                case "integer" -> new RandomizationNumeric(); // TODO include all numeric datatypes
+                case "integer", "double" -> new RandomizationNumeric();
                 case "date" -> new RandomizationDate();
                 default ->
                         throw new IllegalArgumentException("No Randomization possible for type " + configuration.getDataType());
