@@ -7,30 +7,38 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.*;
 
 public class AnonymizationService {
 
-    /*
-    TODO
-    - Exception handling
-     */
+    private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
 
-        Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());
-        Model model = getModel(request.getData());
-        anonymizationObjects.forEach((object, config) -> applyAnonymizationForObject(object, config, model));
-        model.write(System.out, "TTL");
+        // TODO Exception handling in whole service
 
-        return new ResponseEntity<>(
-                "Response",
-                HttpStatus.ACCEPTED
-        );
+        try {
+            Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());
+            Model model = getModel(request.getData());
+            anonymizationObjects.forEach((object, config) -> applyAnonymizationForObject(object, config, model));
+            StringWriter out = new StringWriter();
+            model.write(out, "JSON-LD");
+            logger.info(out.toString());
+            return new ResponseEntity<>(
+                    out.toString(),
+                    HttpStatus.ACCEPTED
+            );
+        } catch(Exception e) {
+            logger.error(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     private static void applyAnonymizationForObject(Resource resource, Map<Property, Configuration> configurations, Model model) {
