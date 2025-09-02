@@ -6,10 +6,9 @@ import org.apache.jena.rdf.model.ResourceFactory;
 
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Random;
 
-public class RandomizationDate extends Randomization<XSDDateTime> {
+public class RandomizationDate extends Randomization {
 
     @Override
     double distance(Literal a, Literal b) {

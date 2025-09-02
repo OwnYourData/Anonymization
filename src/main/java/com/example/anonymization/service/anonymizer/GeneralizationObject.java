@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class GeneralizationObject implements Anonymization {
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
-
+    public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+        // TODO
     }
 }

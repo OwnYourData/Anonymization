@@ -1,6 +1,5 @@
 package com.example.anonymization.service.anonymizer;
 
-import com.example.anonymization.service.OntologyService;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Randomization<T> implements Anonymization {
+public abstract class Randomization implements Anonymization {
 
     abstract double distance(Literal a, Literal b);
 
@@ -20,10 +19,10 @@ public abstract class Randomization<T> implements Anonymization {
     abstract Comparator<Literal> getComparator();
 
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+    public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
         int randomizationValue = data.size() / Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         Map<Resource, Literal> randomizedValues = getRandomizedValues(data, randomizationValue);
-        writeToModel(model, randomizedValues);
+        writeToModel(model, randomizedValues, property);
     }
 
     private Map<Resource, Literal> getRandomizedValues(Map<Resource, Literal> data, int randomizationValue) {
@@ -60,8 +59,8 @@ public abstract class Randomization<T> implements Anonymization {
         return randomized;
     }
 
-    private void writeToModel(Model model, Map<Resource, Literal> randomizedValues) {
-        Property randomized = model.createProperty(OntologyService.SOYA_URL, "randomized");
+    private void writeToModel(Model model, Map<Resource, Literal> randomizedValues, Property originalProperty) {
+        Property randomized = model.createProperty(originalProperty.getURI(), "_randomized");
         randomizedValues.forEach((key, value) -> key.addLiteral(randomized, value));
     }
 }

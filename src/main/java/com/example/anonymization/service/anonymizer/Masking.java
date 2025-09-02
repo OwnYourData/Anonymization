@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class Masking implements Anonymization {
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
-        Property anonymizedValue = model.createProperty(OntologyService.SOYA_URL, property.getLocalName() + "Anoynmized");
+    public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+        Property anonymizedValue = model.createProperty(property.getURI() + "_masked");
         data.forEach((key, value) -> {
             key.addLiteral(anonymizedValue, "*****");
         });

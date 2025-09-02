@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.*;
 
 import java.util.*;
 
-public class RandomizationNumeric extends Randomization<Double> {
+public class RandomizationNumeric extends Randomization {
 
     @Override
     protected double distance(Literal a, Literal b) {

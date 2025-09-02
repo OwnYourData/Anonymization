@@ -13,12 +13,12 @@ import static java.lang.StrictMath.pow;
 
 public interface Anonymization {
 
-    void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes);
+    void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes);
 
-    static void anonmization(Configuration config, Model model, Property property, Map<Resource, Literal> data, int nrAnonymizeAttributes) {
+    static void anonymization(Configuration config, Model model, Property property, Map<Resource, Literal> data, int nrAnonymizeAttributes) {
         System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
         Anonymization anonymization = anonymizationFactoryFunction(config);
-        anonymization.applyAnoynmization(model, property, data, nrAnonymizeAttributes);
+        anonymization.applyAnonymization(model, property, data, nrAnonymizeAttributes);
     }
 
     private static Anonymization anonymizationFactoryFunction(Configuration configuration) {

@@ -3,12 +3,14 @@ package com.example.anonymization.service;
 import com.example.anonymization.dto.AnonymizationRequestDto;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.anonymizer.Anonymization;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFLanguages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.StringReader;
 import java.util.*;
 
 public class AnonymizationService {
@@ -21,7 +23,7 @@ public class AnonymizationService {
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
 
         Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());
-        Model model = getModel("exampleInputs/input_twoargument.ttl"); // TODO: extract from query
+        Model model = getModel(request.getData());
         anonymizationObjects.forEach((object, config) -> applyAnonymizationForObject(object, config, model));
         model.write(System.out, "TTL");
 
@@ -38,7 +40,7 @@ public class AnonymizationService {
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.forEach(((property, resourceLiteralMap) ->
-                Anonymization.anonmization(
+                Anonymization.anonymization(
                         configurations.get(property),
                         model,
                         property,
@@ -66,18 +68,10 @@ public class AnonymizationService {
                 .count();
     }
 
-    /*
-    Helper function until extraction from query body is implemented
-     */
-    private static Model getModel(String localPath) {
+    private static Model getModel(JsonNode data) {
+        String jsonLdString = data.toString();
         Model model = ModelFactory.createDefaultModel();
-
-        try (InputStream in = new FileInputStream(localPath)) {
-            model.read(in, null, "TTL");
-            model.write(System.out, "TTL");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RDFDataMgr.read(model, new StringReader(jsonLdString), null, RDFLanguages.JSONLD);
         return model;
     }
 }

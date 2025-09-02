@@ -17,7 +17,7 @@ import static org.apache.jena.rdfs.assembler.VocabRDFS.NS;
 public abstract class Generalization<T> implements Anonymization {
 
     @Override
-    public void applyAnoynmization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+    public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
         int numberBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
         Map<Resource, List<T>> ranges = getRanges(sortedValues, numberBuckets);
@@ -45,11 +45,12 @@ public abstract class Generalization<T> implements Anonymization {
     protected void writeToModel(Model model, Map<Resource, List<T>> data, Property property) {
         Property min = model.createProperty(NS, "min");
         Property max = model.createProperty(NS, "max");
+        Property generalizaed = model.createProperty(property.getURI(), "_generalized");
 
         data.forEach((key, value) -> {
-            Resource generalizationResource = model.createResource(key.getURI() + property.getLocalName());
+            Resource generalizationResource = model.createResource(property.getURI() + "_" + key.getLocalName());
             generalizationResource.addProperty(RDF.type, OntologyService.SOYA_URL + "generalization");
-            key.addProperty(property, generalizationResource);
+            key.addProperty(generalizaed, generalizationResource);
             generalizationResource.addLiteral(min, value.get(0));
             generalizationResource.addLiteral(max, value.get(1));
         });
