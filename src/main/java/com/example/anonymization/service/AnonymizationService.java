@@ -25,6 +25,7 @@ public class AnonymizationService {
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
 
         // TODO Exception handling in whole service
+        // TODO prohibit query injection
 
         try {
             Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());

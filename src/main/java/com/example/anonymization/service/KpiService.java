@@ -1,6 +1,7 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
@@ -18,7 +19,7 @@ public class KpiService {
         anonymizationObject.addProperty(property, kpiObject);
 
         Property kAnonymity = model.createProperty(OntologyService.SOYA_URL, "kAnonymity");
-        kpiObject.addLiteral(kAnonymity, calculateKAnonymity(model, attributes, configurations));
+        kpiObject.addLiteral(kAnonymity, calculateKAnonymity(model, anonymizationObject, attributes, configurations));
     }
 
     public static void addNrBuckets(Model model, Property property, int numberAttributes) {
@@ -27,9 +28,10 @@ public class KpiService {
         kpiObject.addLiteral(numberAttrProperty, numberAttributes);
     }
 
-    private static int calculateKAnonymity(Model model, List<Property> attributes, Map<Property, Configuration> configurations) {
+    private static int calculateKAnonymity(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
 
         // TODO value for generalization
+        getGroups(model, anonymizationObject, attributes, configurations);
 
         // TODO value for classification
 
@@ -41,25 +43,34 @@ public class KpiService {
         List<Property> generalizingAttributes = attributes.stream()
                 .filter(attr -> configurations.get(attr).getAnonymization().equals("generalization"))
                 .toList();
-
         String queryString = createGroupQuery(anonymizationObject, generalizingAttributes);
+        Query query = QueryFactory.create(queryString);
+        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
+            ResultSet resultSet = qexec.execSelect();
+            while(resultSet.hasNext()) {
+                QuerySolution solution = resultSet.nextSolution();
+                System.out.println(String.valueOf(solution.get("values")));
+            }
+        }
     }
 
     private static String createGroupQuery(Resource anonymizationObject, List<Property> generalizingAttributes) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT (GROUP_CONCAT(?value; SEPARATOR=\", \") AS ?values)\n")
+        queryString.append("SELECT (GROUP_CONCAT(?object; SEPARATOR=\", \") AS ?values)\n")
                 .append("WHERE {\n")
-                .append("?object a ")
+                .append("?object a <")
                 .append(anonymizationObject)
-                .append(".");
+                .append(">.\n");
         generalizingAttributes.forEach(attr ->
-                queryString.append("?object ")
+                queryString.append("OPTIONAL { ?object <")
+                        .append(attr.getURI())
+                        .append("_generalized> ?")
                         .append(attr.getLocalName())
-                        .append(" ")
+                        .append(" . } \n")
         );
         queryString.append("}\n")
                 .append("GROUP BY");
-        generalizingAttributes.forEach(attr -> queryString.append(" ").append(attr.getLocalName()));
+        generalizingAttributes.forEach(attr -> queryString.append(" ?").append(attr.getLocalName()));
         return queryString.toString();
     }
 }
