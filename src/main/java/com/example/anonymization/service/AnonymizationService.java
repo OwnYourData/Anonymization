@@ -20,6 +20,10 @@ import java.util.*;
 @Service
 public class AnonymizationService {
 
+    /*
+    TODO: separate data layer
+     */
+
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
@@ -47,7 +51,6 @@ public class AnonymizationService {
     private static void applyAnonymizationForObject(Resource anonymizationObject, Map<Property, Configuration> configurations, Model model) {
         List<Property> attributes = OntologyService.extractAttributesForAnonymization(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, anonymizationObject);
-        OntologyService.deleteOldValues(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.forEach(((property, resourceLiteralMap) ->
@@ -59,6 +62,7 @@ public class AnonymizationService {
                         nrAnonymizeAttributes
                 )));
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
+        OntologyService.deleteOldValues(model, attributes, anonymizationObject);
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
