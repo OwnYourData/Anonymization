@@ -1,0 +1,64 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:test1",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1234,
+        "oyd:longitude": 1234
+      },
+      {
+        "@id": "oyd:test2",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1,
+        "oyd:longitude": 1234
+      },
+      {
+        "@id": "oyd:test3",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 12,
+        "oyd:longitude": 125
+      },
+      {
+        "@id": "oyd:test4",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 123,
+        "oyd:longitude": 12
+      },
+      {
+        "@id": "oyd:test5",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1234,
+        "oyd:longitude": 1234
+      },
+      {
+        "@id": "oyd:test6",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1,
+        "oyd:longitude": 3213
+      },
+      {
+        "@id": "oyd:test7",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 12,
+        "oyd:longitude": 534
+      },
+      {
+        "@id": "oyd:test8",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 123,
+        "oyd:longitude": 124
+      },
+      {
+        "@id": "oyd:test9",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 123,
+        "oyd:longitude": 213
+      }
+    ]
+  }
+}

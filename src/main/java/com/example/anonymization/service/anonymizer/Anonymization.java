@@ -16,6 +16,7 @@ public interface Anonymization {
     void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes);
 
     static void anonymization(Configuration config, Model model, Property property, Map<Resource, Literal> data, int nrAnonymizeAttributes) {
+        data.entrySet().removeIf(entry -> entry.getValue() == null);
         System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
         Anonymization anonymization = anonymizationFactoryFunction(config);
         anonymization.applyAnonymization(model, property, data, nrAnonymizeAttributes);
