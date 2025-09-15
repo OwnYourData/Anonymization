@@ -31,38 +31,17 @@ public class KpiService {
     }
 
     private static int calculateKAnonymity(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
-
-        List<Resource> allResources = getAllResources(model, anonymizationObject);
         Map<Resource, Set<Resource>> similarValues = new HashMap<>();
         List<Set<Resource>> groups = getGroups(model, anonymizationObject, attributes, configurations);
-        groups.forEach(group -> group.forEach(resource -> similarValues.put(resource, group)));
+        groups.forEach(group -> group.forEach(resource -> similarValues.put(resource, new HashSet<>(group))));
 
-        configurations.entrySet().stream()
-                .filter(e -> e.getValue().getAnonymization().equals("randomization"))
-                .map(Map.Entry::getKey)
+        // TODO handling for randomization if value is null
+        attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
                 .forEach(randomization -> {
                     Map<Resource, Set<Resource>> similarity = getSimilarValues(model, anonymizationObject, randomization);
-                    similarValues.forEach((resource, resources) -> resources.retainAll(similarity.get(resource)));
+                    similarValues.keySet().forEach(resource -> similarValues.get(resource).retainAll(similarity.get(resource)));
                 });
         return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
-    }
-
-    private static List<Resource> getAllResources(Model model, Resource anonymizationObject) {
-        StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT ?object\n")
-                .append("WHERE { \n?object a <")
-                .append(anonymizationObject)
-                .append("> . \n }");
-        Query query = QueryFactory.create(queryString.toString());
-        List<Resource> objects = new ArrayList<>();
-        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
-            ResultSet resultSet = qexec.execSelect();
-            while(resultSet.hasNext()) {
-                QuerySolution solution = resultSet.nextSolution();
-                objects.add(solution.getResource("object"));
-            }
-        }
-        return objects;
     }
 
     private static List<Set<Resource>> getGroups(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
@@ -113,6 +92,7 @@ public class KpiService {
             Resource object = objects.get(i).getKey();
             double randomizedValue = objects.get(i).getValue();
             Set<Resource> similarValues = new HashSet<>();
+            similarValues.add(object);
 
             for (int j = i + 1; j < objects.size(); j++) {
                 if (objects.get(j).getValue() - randomizedValue > benchmark) break;
@@ -151,13 +131,13 @@ public class KpiService {
 
     private static String createAnoymizationDataQuery(Resource anonymizationObject, Property property) {
         StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT (?object ?anonymized ABS(?original - ?anonymized)) AS ?distance)\n")
+        queryString.append("SELECT ?object ?randomized (ABS(?original - ?randomized) AS ?distance)\n")
                 .append("WHERE {\n")
                 .append("?object a <")
                 .append(anonymizationObject)
                 .append("> .\n")
-                .append("?object <").append(property).append("> ?original .")
-                .append("?object <").append(property.getURI()).append("_randomized> ?anonymized .")
+                .append("?object <").append(property).append("> ?original .\n")
+                .append("?object <").append(property.getURI()).append("_randomized> ?randomized .\n")
                 .append("}");
         return queryString.toString();
     }
