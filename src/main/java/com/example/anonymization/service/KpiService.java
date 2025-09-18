@@ -35,7 +35,6 @@ public class KpiService {
         List<Set<Resource>> groups = getGroups(model, anonymizationObject, attributes, configurations);
         groups.forEach(group -> group.forEach(resource -> similarValues.put(resource, new HashSet<>(group))));
 
-        // TODO handling for randomization if value is null
         attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
                 .forEach(randomization -> {
                     Map<Resource, Set<Resource>> similarity = getSimilarValues(model, anonymizationObject, randomization);
@@ -68,25 +67,33 @@ public class KpiService {
         Query query = QueryFactory.create(createAnoymizationDataQuery(resource, property));
         List<Double> distances = new ArrayList<>();
         Map<Resource, Double> randomizedData = new HashMap<>();
+        Set<Resource> nullValues = new HashSet<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
-                distances.add(solution.getLiteral("distance").getDouble());
-                randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
+                if (solution.get("distance") != null) {
+                    distances.add(solution.getLiteral("distance").getDouble());
+                    randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
+                } else {
+                    nullValues.add(solution.getResource("object"));
+                }
             }
         }
-        Collections.sort(distances);
-        int index = (int) Math.ceil(0.95 * distances.size()) - 1;
-        double q95 = distances.get(Math.max(0, index));
-        return findSimilarValues(randomizedData, q95);
+        Map<Resource, Set<Resource>> similarity = new HashMap<>();
+        if (!distances.isEmpty()) {
+            Collections.sort(distances);
+            int index = (int) Math.ceil(0.95 * distances.size()) - 1;
+            double q95 = distances.get(Math.max(0, index));
+            findSimilarValues(similarity, randomizedData, q95);
+        }
+        nullValues.forEach(obj -> similarity.put(obj, nullValues));
+        return similarity;
     }
 
-    private static Map<Resource, Set<Resource>> findSimilarValues(Map<Resource, Double> randomizedData, double benchmark) {
+    private static void findSimilarValues(Map<Resource, Set<Resource>> similarity, Map<Resource, Double> randomizedData, double benchmark) {
         List<Map.Entry<Resource, Double>> objects = new ArrayList<>(randomizedData.entrySet());
         objects.sort(Map.Entry.comparingByValue());
-
-        Map<Resource, Set<Resource>> similarityRepresentation = new HashMap<>();
 
         for (int i = 0; i < objects.size(); i++) {
             Resource object = objects.get(i).getKey();
@@ -104,9 +111,8 @@ public class KpiService {
                 similarValues.add(objects.get(j).getKey());
             }
 
-            similarityRepresentation.put(object, similarValues);
+            similarity.put(object, similarValues);
         }
-        return similarityRepresentation;
     }
 
     private static String createGroupQuery(Resource anonymizationObject, List<Property> generalizingAttributes) {
@@ -130,15 +136,13 @@ public class KpiService {
     }
 
     private static String createAnoymizationDataQuery(Resource anonymizationObject, Property property) {
-        StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT ?object ?randomized (ABS(?original - ?randomized) AS ?distance)\n")
-                .append("WHERE {\n")
-                .append("?object a <")
-                .append(anonymizationObject)
-                .append("> .\n")
-                .append("?object <").append(property).append("> ?original .\n")
-                .append("?object <").append(property.getURI()).append("_randomized> ?randomized .\n")
-                .append("}");
-        return queryString.toString();
+        return "SELECT ?object ?randomized (ABS(?original - ?randomized) AS ?distance)\n" +
+                "WHERE {\n" +
+                "?object a <" +
+                anonymizationObject +
+                "> .\n" +
+                "OPTIONAL { ?object <" + property + "> ?original . }\n" +
+                "OPTIONAL { ?object <" + property.getURI() + "_randomized> ?randomized . }\n" +
+                "}";
     }
 }
