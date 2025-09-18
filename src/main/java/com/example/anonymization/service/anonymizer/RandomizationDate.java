@@ -1,8 +1,10 @@
 package com.example.anonymization.service.anonymizer;
 
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.vocabulary.XSD;
 
 import java.util.Calendar;
 import java.util.Comparator;
@@ -33,12 +35,11 @@ public class RandomizationDate extends Randomization {
     }
 
     private static Calendar toDate(Literal literal) {
-        Object value = literal.getValue();
-        if (value instanceof XSDDateTime xsdDateTime) {
+        try {
+            XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(literal.getString());
             return xsdDateTime.asCalendar();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Literal is not a valid xsd:date or xsd:dateTime: " + literal);
         }
-        throw new IllegalArgumentException(
-                "Literal is not a valid xsd:date or xsd:dateTime: " + literal
-        );
     }
 }
