@@ -28,7 +28,7 @@ public class AnonymizationRestController {
     })
     @Operation(summary = "Anonymization of input data")
     @PutMapping("/api/anonymization")
-    public ResponseEntity<String> reasoning(@RequestBody AnonymizationRequestDto anonymizationRequest) {
+    public ResponseEntity<String> anonymization(@RequestBody AnonymizationRequestDto anonymizationRequest) {
 
         logger.info("Received request. Body: \n" + anonymizationRequest);
 
