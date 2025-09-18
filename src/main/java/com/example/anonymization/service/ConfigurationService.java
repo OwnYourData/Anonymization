@@ -86,9 +86,9 @@ public class ConfigurationService {
                 );
                 logger.info(
                         "New Config: {}, {}, {}",
+                        extractValueFromURL(String.valueOf(solution.get("attribute"))),
                         extractValueFromURL(String.valueOf(solution.get("datatype"))),
-                        extractValueFromURL(String.valueOf(solution.get("datatype"))),
-                        extractValueFromURL(String.valueOf(solution.get("datatype")))
+                        extractValueFromURL(String.valueOf(solution.get("anonymization")))
                 );
             }
         }
