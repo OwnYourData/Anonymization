@@ -135,6 +135,7 @@ public class KpiService {
         return queryString.toString();
     }
 
+    // TODO adapt query to also return the difference between dates
     private static String createAnoymizationDataQuery(Resource anonymizationObject, Property property) {
         return "SELECT ?object ?randomized (ABS(?original - ?randomized) AS ?distance)\n" +
                 "WHERE {\n" +
