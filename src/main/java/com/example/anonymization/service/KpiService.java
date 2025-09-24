@@ -1,7 +1,9 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
+import com.example.anonymization.service.anonymizer.Randomization;
 import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
@@ -37,7 +39,8 @@ public class KpiService {
 
         attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
                 .forEach(randomization -> {
-                    Map<Resource, Set<Resource>> similarity = getSimilarValues(model, anonymizationObject, randomization);
+                    Map<Resource, Set<Resource>> similarity =
+                            getSimilarValues(model, anonymizationObject, randomization, configurations.get(randomization).getDataType().equals("date"));
                     similarValues.keySet().forEach(resource -> similarValues.get(resource).retainAll(similarity.get(resource)));
                 });
         return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
@@ -63,7 +66,7 @@ public class KpiService {
         return groups;
     }
 
-    private static Map<Resource, Set<Resource>> getSimilarValues(Model model, Resource resource, Property property) {
+    private static Map<Resource, Set<Resource>> getSimilarValues(Model model, Resource resource, Property property, boolean date) {
         Query query = QueryFactory.create(createAnoymizationDataQuery(resource, property));
         List<Double> distances = new ArrayList<>();
         Map<Resource, Double> randomizedData = new HashMap<>();
@@ -72,9 +75,16 @@ public class KpiService {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
-                if (solution.get("distance") != null) {
-                    distances.add(solution.getLiteral("distance").getDouble());
-                    randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
+                if (solution.get("original") != null) {
+                    if (date) {
+                        distances.add(Math.abs(Randomization.toNumeric(solution.getLiteral("original")) -
+                                Randomization.toNumeric(solution.getLiteral("randomized"))));
+                        randomizedData.put(solution.getResource("object"), Randomization.toNumeric(solution.getLiteral("randomized")));
+                    } else {
+                        distances.add(Math.abs(solution.getLiteral("orignal").getDouble() -
+                                solution.getLiteral("randomized").getDouble()));
+                        randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
+                    }
                 } else {
                     nullValues.add(solution.getResource("object"));
                 }
@@ -137,7 +147,7 @@ public class KpiService {
 
     // TODO adapt query to also return the difference between dates
     private static String createAnoymizationDataQuery(Resource anonymizationObject, Property property) {
-        return "SELECT ?object ?randomized (ABS(?original - ?randomized) AS ?distance)\n" +
+        return "SELECT ?object ?randomized ?original\n" +
                 "WHERE {\n" +
                 "?object a <" +
                 anonymizationObject +

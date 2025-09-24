@@ -33,13 +33,4 @@ public class RandomizationDate extends Randomization {
     Comparator<Literal> getComparator() {
         return Comparator.comparingLong(literal -> toDate(literal).getTimeInMillis());
     }
-
-    private static Calendar toDate(Literal literal) {
-        try {
-            XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(literal.getString());
-            return xsdDateTime.asCalendar();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Literal is not a valid xsd:date or xsd:dateTime: " + literal);
-        }
-    }
 }
