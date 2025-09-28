@@ -62,7 +62,7 @@ public class AnonymizationService {
                         nrAnonymizeAttributes
                 )));
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-        OntologyService.deleteOldValues(model, attributes, anonymizationObject);
+        // OntologyService.deleteOldValues(model, attributes, anonymizationObject);
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(

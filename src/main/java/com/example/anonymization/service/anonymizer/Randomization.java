@@ -6,10 +6,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Randomization implements Anonymization {
 
@@ -55,7 +52,7 @@ public abstract class Randomization implements Anonymization {
             randomized.put(
                     entry.getKey(),
                     createRandomizedLiteral(
-                            entry.getValue(), dist, sorted.get(0).getValue(), sorted.get(sorted.size()-1).getValue()
+                            entry.getValue(), dist, sorted.getFirst().getValue(), sorted.getLast().getValue()
                     )
             );
         }

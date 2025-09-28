@@ -1,6 +1,8 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
+import com.example.anonymization.service.anonymizer.Randomization;
+import com.example.anonymization.service.anonymizer.RandomizationDate;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -12,8 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class KpiService {
-
-    // TODO implement Randomization KPI calculation for Dates
 
     public static void addKpiObject(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
         Resource kpiObject = model.createResource(OntologyService.SOYA_URL + "kpiObject");
@@ -37,7 +37,8 @@ public class KpiService {
 
         attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
                 .forEach(randomization -> {
-                    Map<Resource, Set<Resource>> similarity = getSimilarValues(model, anonymizationObject, randomization);
+                    Map<Resource, Set<Resource>> similarity =
+                            getSimilarValues(model, anonymizationObject, randomization, configurations.get(randomization).getDataType().equals("date"));
                     similarValues.keySet().forEach(resource -> similarValues.get(resource).retainAll(similarity.get(resource)));
                 });
         return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
@@ -63,7 +64,7 @@ public class KpiService {
         return groups;
     }
 
-    private static Map<Resource, Set<Resource>> getSimilarValues(Model model, Resource resource, Property property) {
+    private static Map<Resource, Set<Resource>> getSimilarValues(Model model, Resource resource, Property property, boolean date) {
         Query query = QueryFactory.create(createAnoymizationDataQuery(resource, property));
         List<Double> distances = new ArrayList<>();
         Map<Resource, Double> randomizedData = new HashMap<>();
@@ -72,9 +73,18 @@ public class KpiService {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
-                if (solution.get("distance") != null) {
-                    distances.add(solution.getLiteral("distance").getDouble());
-                    randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
+                if (solution.get("original") != null) {
+                    if (date) {
+                        double test = RandomizationDate.literalToNumericDate(solution.getLiteral("original"));
+                        double test2 = RandomizationDate.literalToNumericDate(solution.getLiteral("randomized"));
+                        distances.add(Math.abs(RandomizationDate.literalToNumericDate(solution.getLiteral("original")) -
+                                RandomizationDate.literalToNumericDate(solution.getLiteral("randomized"))));
+                        randomizedData.put(solution.getResource("object"), RandomizationDate.literalToNumericDate(solution.getLiteral("randomized")));
+                    } else {
+                        distances.add(Math.abs(solution.getLiteral("original").getDouble() -
+                                solution.getLiteral("randomized").getDouble()));
+                        randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
+                    }
                 } else {
                     nullValues.add(solution.getResource("object"));
                 }
@@ -137,7 +147,7 @@ public class KpiService {
 
     // TODO adapt query to also return the difference between dates
     private static String createAnoymizationDataQuery(Resource anonymizationObject, Property property) {
-        return "SELECT ?object ?randomized (ABS(?original - ?randomized) AS ?distance)\n" +
+        return "SELECT ?object ?randomized ?original\n" +
                 "WHERE {\n" +
                 "?object a <" +
                 anonymizationObject +

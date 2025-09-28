@@ -1,10 +1,10 @@
 package com.example.anonymization.service.anonymizer;
 
+import org.apache.jena.base.Sys;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.vocabulary.XSD;
 
 import java.util.Calendar;
 import java.util.Comparator;
@@ -14,32 +14,42 @@ public class RandomizationDate extends Randomization {
 
     @Override
     double distance(Literal a, Literal b) {
-        return toDate(a).getTimeInMillis() - toDate(b).getTimeInMillis();
+        System.out.println(literalToDate(a).getTimeInMillis() / 1_000d - literalToDate(b).getTimeInMillis() / 1_000d);
+        return literalToDate(a).getTimeInMillis() / 1_000d - literalToDate(b).getTimeInMillis() / 1_000d;
     }
 
     @Override
     Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
         int noise = (int) (new Random().nextGaussian() * distance);
-        if (toDate(value).getTimeInMillis() + noise > toDate(max).getTimeInMillis() ||
-                toDate(value).getTimeInMillis() + noise < toDate(min).getTimeInMillis()) {
+        if (literalToDate(value).getTimeInMillis() / 1_000d + noise > literalToDate(max).getTimeInMillis() / 1_000d ||
+                literalToDate(value).getTimeInMillis() / 1_000d + noise < literalToDate(min).getTimeInMillis() / 1_000d) {
             noise *= -1;
         }
-        Calendar noisyDate = toDate(value);
-        noisyDate.add(Calendar.MILLISECOND, noise);
+        Calendar noisyDate = literalToDate(value);
+        noisyDate.add(Calendar.SECOND, noise);
         return ResourceFactory.createTypedLiteral(noisyDate);
     }
 
     @Override
     Comparator<Literal> getComparator() {
-        return Comparator.comparingLong(literal -> toDate(literal).getTimeInMillis());
+        return Comparator.comparingLong(literal -> literalToDate(literal).getTimeInMillis() / 1_000);
     }
 
-    private static Calendar toDate(Literal literal) {
+    public static Calendar literalToDate(Literal literal) {
         try {
             XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(literal.getString());
             return xsdDateTime.asCalendar();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Literal is not a valid xsd:date or xsd:dateTime: " + literal);
+        } catch (Exception noDateTime) {
+            try {
+                XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdateTime.parse(literal.getString());
+                return xsdDateTime.asCalendar();
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Literal is not a valid xsd:date or xsd:dateTime: " + literal);
+            }
         }
+    }
+
+    public static double literalToNumericDate(Literal literal) {
+        return literalToDate(literal).getTimeInMillis() / 1_000d;
     }
 }
