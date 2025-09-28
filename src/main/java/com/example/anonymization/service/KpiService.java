@@ -2,8 +2,8 @@ package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.anonymizer.Randomization;
+import com.example.anonymization.service.anonymizer.RandomizationDate;
 import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class KpiService {
-
-    // TODO implement Randomization KPI calculation for Dates
 
     public static void addKpiObject(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
         Resource kpiObject = model.createResource(OntologyService.SOYA_URL + "kpiObject");
@@ -77,11 +75,13 @@ public class KpiService {
                 QuerySolution solution = resultSet.nextSolution();
                 if (solution.get("original") != null) {
                     if (date) {
-                        distances.add(Math.abs(Randomization.toNumeric(solution.getLiteral("original")) -
-                                Randomization.toNumeric(solution.getLiteral("randomized"))));
-                        randomizedData.put(solution.getResource("object"), Randomization.toNumeric(solution.getLiteral("randomized")));
+                        double test = RandomizationDate.literalToNumericDate(solution.getLiteral("original"));
+                        double test2 = RandomizationDate.literalToNumericDate(solution.getLiteral("randomized"));
+                        distances.add(Math.abs(RandomizationDate.literalToNumericDate(solution.getLiteral("original")) -
+                                RandomizationDate.literalToNumericDate(solution.getLiteral("randomized"))));
+                        randomizedData.put(solution.getResource("object"), RandomizationDate.literalToNumericDate(solution.getLiteral("randomized")));
                     } else {
-                        distances.add(Math.abs(solution.getLiteral("orignal").getDouble() -
+                        distances.add(Math.abs(solution.getLiteral("original").getDouble() -
                                 solution.getLiteral("randomized").getDouble()));
                         randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
                     }

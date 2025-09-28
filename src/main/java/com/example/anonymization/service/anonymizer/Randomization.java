@@ -1,8 +1,6 @@
 package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.service.KpiService;
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -54,7 +52,7 @@ public abstract class Randomization implements Anonymization {
             randomized.put(
                     entry.getKey(),
                     createRandomizedLiteral(
-                            entry.getValue(), dist, sorted.get(0).getValue(), sorted.get(sorted.size()-1).getValue()
+                            entry.getValue(), dist, sorted.getFirst().getValue(), sorted.getLast().getValue()
                     )
             );
         }
@@ -64,18 +62,5 @@ public abstract class Randomization implements Anonymization {
     private void writeToModel(Model model, Map<Resource, Literal> randomizedValues, Property originalProperty) {
         Property randomized = model.createProperty(originalProperty.getURI(), "_randomized");
         randomizedValues.forEach((key, value) -> key.addLiteral(randomized, value));
-    }
-
-    public static Calendar toDate(Literal literal) {
-        try {
-            XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(literal.getString());
-            return xsdDateTime.asCalendar();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Literal is not a valid xsd:date or xsd:dateTime: " + literal);
-        }
-    }
-
-    public static double toNumeric(Literal literal) {
-        return (double) toDate(literal).toInstant().getNano() / 1_000_000d;
     }
 }
