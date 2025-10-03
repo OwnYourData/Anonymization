@@ -2,7 +2,6 @@ package com.example.anonymization.service.anonymizer;
 
 
 import com.example.anonymization.service.KpiService;
-import com.example.anonymization.service.OntologyService;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;

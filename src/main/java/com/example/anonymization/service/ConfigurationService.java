@@ -1,6 +1,7 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
+import com.example.anonymization.service.data.QueryService;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -56,42 +57,26 @@ public class ConfigurationService {
     }
 
     private static Map<Resource, Map<Property, Configuration>> extractConfig(Model model) {
-        String query = """
-                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                    PREFIX soya: <https://w3id.org/soya/ns#>
-                    SELECT ?anonymizationObject ?attribute ?datatype ?anonymization WHERE {
-                      ?overlay a soya:OverlayClassification .
-                      ?overlay soya:onBase ?anonymizationObject .
-                      ?attribute rdfs:domain ?anonymizationObject .
-                      ?attribute rdfs:range ?datatype .
-                      ?attribute <https://w3id.org/soya/ns#classification> ?anonymization .
-                    }
-                """;
         Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
         logger.info("Extracting configuration from server response");
-        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
-            ResultSet resultSet = qexec.execSelect();
-            while(resultSet.hasNext()) {
-                QuerySolution solution = resultSet.nextSolution();
-                Resource anonymizationObject = solution.get("anonymizationObject").asResource();
-                if (!configs.containsKey(anonymizationObject)) {
-                    configs.put(anonymizationObject, new HashMap<>());
-                }
-                configs.get(anonymizationObject).put(
-                        ResourceFactory.createProperty(solution.get("attribute").asResource().getURI()),
-                        new Configuration(
-                            extractValueFromURL(solution.get("datatype").toString()),
-                            extractValueFromURL(solution.get("anonymization").toString())
-                        )
-                );
-                logger.info(
-                        "New Config: {}, {}, {}",
-                        extractValueFromURL(String.valueOf(solution.get("attribute"))),
-                        extractValueFromURL(String.valueOf(solution.get("datatype"))),
-                        extractValueFromURL(String.valueOf(solution.get("anonymization")))
-                );
+        QueryService.getConfigurations(model).forEach(entry -> {
+            if (!configs.containsKey(entry.object())) {
+                configs.put(entry.object(), new HashMap<>());
             }
-        }
+            configs.get(entry.object()).put(
+                    entry.attribute(),
+                    new Configuration(
+                            extractValueFromURL(entry.datatype().toString()),
+                            extractValueFromURL(entry.anonymization().toString())
+                    )
+            );
+            logger.info(
+                    "New Config: {}, {}, {}",
+                    extractValueFromURL(entry.attribute().toString()),
+                    extractValueFromURL(entry.datatype().toString()),
+                    extractValueFromURL(entry.anonymization().toString())
+            );
+        });
         logger.info("Configuration successfully converted");
         return configs;
     }

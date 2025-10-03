@@ -3,6 +3,7 @@ package com.example.anonymization.service;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.anonymizer.Randomization;
 import com.example.anonymization.service.anonymizer.RandomizationDate;
+import com.example.anonymization.service.data.QueryService;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -16,23 +17,23 @@ import java.util.stream.Collectors;
 public class KpiService {
 
     public static void addKpiObject(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
-        Resource kpiObject = model.createResource(OntologyService.SOYA_URL + "kpiObject");
-        Property property = model.createProperty(OntologyService.SOYA_URL + "kpis");
+        Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
+        Property property = model.createProperty(QueryService.SOYA_URL + "kpis");
         anonymizationObject.addProperty(property, kpiObject);
 
-        Property kAnonymity = model.createProperty(OntologyService.SOYA_URL, "kAnonymity");
+        Property kAnonymity = model.createProperty(QueryService.SOYA_URL, "kAnonymity");
         kpiObject.addLiteral(kAnonymity, calculateKAnonymity(model, anonymizationObject, attributes, configurations));
     }
 
     public static void addNrBuckets(Model model, Property property, int numberAttributes) {
-        Resource kpiObject = model.createResource(OntologyService.SOYA_URL + "kpiObject");
-        Property numberAttrProperty = model.createProperty(OntologyService.SOYA_URL + property.getLocalName() + "NumberAttributes");
+        Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
+        Property numberAttrProperty = model.createProperty(QueryService.SOYA_URL + property.getLocalName() + "NumberAttributes");
         kpiObject.addLiteral(numberAttrProperty, numberAttributes);
     }
 
     private static int calculateKAnonymity(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
         Map<Resource, Set<Resource>> similarValues = new HashMap<>();
-        List<Set<Resource>> groups = getGroups(model, anonymizationObject, attributes, configurations);
+        List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
         groups.forEach(group -> group.forEach(resource -> similarValues.put(resource, new HashSet<>(group))));
 
         attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
@@ -44,52 +45,26 @@ public class KpiService {
         return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
     }
 
-    private static List<Set<Resource>> getGroups(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
-        List<Property> generalizingAttributes = attributes.stream()
-                .filter(attr -> configurations.get(attr).getAnonymization().equals("generalization"))
-                .toList();
-        Query query = QueryFactory.create(createGroupQuery(anonymizationObject, generalizingAttributes));
-        List<Set<Resource>> groups = new LinkedList<>();
-        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
-            ResultSet resultSet = qexec.execSelect();
-            while(resultSet.hasNext()) {
-                QuerySolution solution = resultSet.nextSolution();
-                groups.add(
-                        Arrays.stream(String.valueOf(solution.get("values"))
-                                .split(",")).map(uri -> model.createResource(uri.trim()))
-                                .collect(Collectors.toSet())
-                );
-            }
-        }
-        return groups;
-    }
-
     private static Map<Resource, Set<Resource>> getSimilarValues(Model model, Resource resource, Property property, boolean date) {
-        Query query = QueryFactory.create(createAnoymizationDataQuery(resource, property));
+        List<QueryService.RandomizationResult> randomizationResults = QueryService.getRandomizationResults(model, resource, property);
+
         List<Double> distances = new ArrayList<>();
         Map<Resource, Double> randomizedData = new HashMap<>();
         Set<Resource> nullValues = new HashSet<>();
-        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
-            ResultSet resultSet = qexec.execSelect();
-            while(resultSet.hasNext()) {
-                QuerySolution solution = resultSet.nextSolution();
-                if (solution.get("original") != null) {
-                    if (date) {
-                        double test = RandomizationDate.literalToNumericDate(solution.getLiteral("original"));
-                        double test2 = RandomizationDate.literalToNumericDate(solution.getLiteral("randomized"));
-                        distances.add(Math.abs(RandomizationDate.literalToNumericDate(solution.getLiteral("original")) -
-                                RandomizationDate.literalToNumericDate(solution.getLiteral("randomized"))));
-                        randomizedData.put(solution.getResource("object"), RandomizationDate.literalToNumericDate(solution.getLiteral("randomized")));
-                    } else {
-                        distances.add(Math.abs(solution.getLiteral("original").getDouble() -
-                                solution.getLiteral("randomized").getDouble()));
-                        randomizedData.put(solution.getResource("object"), solution.getLiteral("randomized").getDouble());
-                    }
+        randomizationResults.forEach(randomization -> {
+            if (randomization.original() != null) {
+                if (date) {
+                    distances.add(Math.abs(RandomizationDate.literalToNumericDate(randomization.original()) -
+                            RandomizationDate.literalToNumericDate(randomization.randomized())));
+                    randomizedData.put(randomization.object(), RandomizationDate.literalToNumericDate(randomization.randomized()));
                 } else {
-                    nullValues.add(solution.getResource("object"));
+                    distances.add(Math.abs(randomization.original().getDouble() - randomization.randomized().getDouble()));
+                    randomizedData.put(randomization.object(), randomization.randomized().getDouble());
                 }
+            } else {
+                nullValues.add(randomization.object());
             }
-        }
+        });
         Map<Resource, Set<Resource>> similarity = new HashMap<>();
         if (!distances.isEmpty()) {
             Collections.sort(distances);
@@ -123,37 +98,5 @@ public class KpiService {
 
             similarity.put(object, similarValues);
         }
-    }
-
-    private static String createGroupQuery(Resource anonymizationObject, List<Property> generalizingAttributes) {
-        StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT (GROUP_CONCAT(?object; SEPARATOR=\", \") AS ?values)\n")
-                .append("WHERE {\n")
-                .append("?object a <")
-                .append(anonymizationObject)
-                .append("> .\n");
-        generalizingAttributes.forEach(attr ->
-        queryString.append("OPTIONAL { ?object <")
-                        .append(attr.getURI())
-                        .append("_generalized> ?")
-                        .append(attr.getLocalName())
-                        .append(" . } \n")
-        );
-        queryString.append("}\n")
-                .append("GROUP BY");
-        generalizingAttributes.forEach(attr -> queryString.append(" ?").append(attr.getLocalName()));
-        return queryString.toString();
-    }
-
-    // TODO adapt query to also return the difference between dates
-    private static String createAnoymizationDataQuery(Resource anonymizationObject, Property property) {
-        return "SELECT ?object ?randomized ?original\n" +
-                "WHERE {\n" +
-                "?object a <" +
-                anonymizationObject +
-                "> .\n" +
-                "OPTIONAL { ?object <" + property + "> ?original . }\n" +
-                "OPTIONAL { ?object <" + property.getURI() + "_randomized> ?randomized . }\n" +
-                "}";
     }
 }
