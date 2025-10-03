@@ -3,6 +3,7 @@ package com.example.anonymization.service;
 import com.example.anonymization.dto.AnonymizationRequestDto;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.anonymizer.Anonymization;
+import com.example.anonymization.service.data.QueryService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
@@ -20,16 +21,11 @@ import java.util.*;
 @Service
 public class AnonymizationService {
 
-    /*
-    TODO: separate data layer
-     */
-
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
 
         // TODO Exception handling in whole service
-        // TODO prohibit query injection
 
         try {
             Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());
@@ -49,8 +45,8 @@ public class AnonymizationService {
     }
 
     private static void applyAnonymizationForObject(Resource anonymizationObject, Map<Property, Configuration> configurations, Model model) {
-        List<Property> attributes = OntologyService.extractAttributesForAnonymization(model, configurations.keySet(), anonymizationObject);
-        Map<Resource, Map<Property, Literal>> data = OntologyService.extractDataFromModel(model, attributes, anonymizationObject);
+        List<Property> attributes = QueryService.getAttributes(model, configurations.keySet(), anonymizationObject);
+        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.forEach(((property, resourceLiteralMap) ->
@@ -62,7 +58,7 @@ public class AnonymizationService {
                         nrAnonymizeAttributes
                 )));
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-        // OntologyService.deleteOldValues(model, attributes, anonymizationObject);
+        QueryService.deleteOriginalAttributes(model, attributes, anonymizationObject);
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(

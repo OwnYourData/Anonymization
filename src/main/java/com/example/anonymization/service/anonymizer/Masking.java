@@ -1,6 +1,5 @@
 package com.example.anonymization.service.anonymizer;
 
-import com.example.anonymization.service.OntologyService;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
