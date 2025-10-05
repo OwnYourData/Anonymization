@@ -2,7 +2,7 @@ package com.example.anonymization.service.anonymizer;
 
 
 import com.example.anonymization.service.KpiService;
-import com.example.anonymization.service.OntologyService;
+import com.example.anonymization.service.data.QueryService;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -58,7 +58,7 @@ public abstract class Generalization<T> implements Anonymization {
                 .mapToObj(position -> {
                     List<T> range = getBucketRange(sortedValues, position, nrOfBuckets);
                     Resource generalizationResource = model.createResource(property.getURI() + "_" + position);
-                    generalizationResource.addProperty(RDF.type, OntologyService.SOYA_URL + "generalization");
+                    generalizationResource.addProperty(RDF.type, QueryService.SOYA_URL + "generalization");
                     generalizationResource.addLiteral(min, range.get(0));
                     generalizationResource.addLiteral(max, range.get(1));
                     return generalizationResource;
