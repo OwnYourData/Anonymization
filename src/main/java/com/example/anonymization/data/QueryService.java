@@ -1,4 +1,4 @@
-package com.example.anonymization.service.data;
+package com.example.anonymization.data;
 
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static com.example.anonymization.service.ConfigurationService.extractValueFromURL;
 
 @Service
 public class QueryService {

@@ -1,11 +1,7 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
-import com.example.anonymization.service.data.QueryService;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
+import com.example.anonymization.data.QueryService;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
@@ -28,7 +24,25 @@ public class ConfigurationService {
 
     private static final Logger logger = LogManager.getLogger(Configuration.class);
 
-    public static Map<Resource, Map<Property, Configuration>> fetchConfig(String url) {
+    public static Map<Resource, Map<Property, Configuration>> fetchConfigForObjects(String url) {
+        return extractConfig(getModel(url));
+    }
+
+    public static Map<Property, Configuration> fetchFlatConfig(String url) {
+         Map<Resource, Map<Property, Configuration>> configs = fetchConfigForObjects(url);
+         Map<Property, Configuration> flatConfig = new HashMap<>();
+         for (Map<Property, Configuration> configMap : configs.values()) {
+             for (Map.Entry<Property, Configuration> entry : configMap.entrySet()) {
+                 if (flatConfig.containsKey(entry.getKey())) {
+                     throw new IllegalStateException("Duplicate Property key found: " + entry.getKey());
+                 }
+                 flatConfig.put(entry.getKey(), entry.getValue());
+             }
+         }
+         return flatConfig;
+    }
+
+    private static Model getModel(String url) {
         logger.info("Fetching config from url: {}", url);
         String configString = fetchStringContent(url);
         logger.info("Config successfully fetched");
@@ -37,7 +51,7 @@ public class ConfigurationService {
                 .source(new StringReader(configString))
                 .lang(Lang.JSONLD)
                 .parse(configModel);
-        return extractConfig(configModel);
+        return configModel;
     }
 
     private static String fetchStringContent(String url) {
