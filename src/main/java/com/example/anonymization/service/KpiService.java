@@ -13,7 +13,7 @@ import java.util.*;
 @Service
 public class KpiService {
 
-    public static void addKpiObject(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
+    public static void addKpiObject(Model model, Resource anonymizationObject, Set<Property> attributes, Map<Property, Configuration> configurations) {
         Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
         Property property = model.createProperty(QueryService.SOYA_URL + "kpis");
         anonymizationObject.addProperty(property, kpiObject);
@@ -28,7 +28,7 @@ public class KpiService {
         kpiObject.addLiteral(numberAttrProperty, numberAttributes);
     }
 
-    private static int calculateKAnonymity(Model model, Resource anonymizationObject, List<Property> attributes, Map<Property, Configuration> configurations) {
+    private static int calculateKAnonymity(Model model, Resource anonymizationObject, Set<Property> attributes, Map<Property, Configuration> configurations) {
         Map<Resource, Set<Resource>> similarValues = new HashMap<>();
         List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
         groups.forEach(group -> group.forEach(resource -> similarValues.put(resource, new HashSet<>(group))));

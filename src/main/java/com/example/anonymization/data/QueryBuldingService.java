@@ -24,14 +24,15 @@ public class QueryBuldingService {
                 """;
     }
 
-    static ParameterizedSparqlString createDataModelQuery(List<Property> attributes, Resource anonymizationObject) {
+    static ParameterizedSparqlString createDataModelQuery(Set<Property> attributes, Resource anonymizationObject) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("SELECT ?object");
         attributes.forEach(attribute -> queryString.append(" ?_" + attribute.getLocalName()));
         queryString.append("\nWHERE {\n");
         queryString.append("  ?object a ?objectType .\n");
         attributes.forEach(attribute -> {
-            queryString.append("  OPTIONAL { ?object ?" + attribute.getLocalName() + " ?_" + attribute.getLocalName() + " }\n");
+            queryString.append("  OPTIONAL { ?object ?" + attribute.getLocalName() + " ?_" + attribute.getLocalName() + " ");
+            queryString.append("FILTER(isLiteral(?_" + attribute.getLocalName() + ")) }\n");
             queryString.setParam(attribute.getLocalName(), attribute);
         });
         queryString.append("}");
@@ -56,17 +57,19 @@ public class QueryBuldingService {
         return queryString;
     }
 
-    static ParameterizedSparqlString deleteOriginalAttributeQuery(List<Property> attributes, Resource objectType) {
+    static ParameterizedSparqlString deleteOriginalAttributeQuery(Set<Property> properties, Resource objectType) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("DELETE {\n");
-        for (int i = 0; i < attributes.size(); i++) {
+        for (int i = 0; i < properties.size(); i++) {
             queryString.append("  ?object ?p" + i + " ?v" + i + " .\n");
         }
         queryString.append("}\nWHERE {\n");
         queryString.append("  ?object a ?type .\n");
-        for (int i = 0; i < attributes.size(); i++) {
+        int i = 0;
+        for (Property property : properties) {
             queryString.append("  OPTIONAL { ?object ?p" + i + " ?v" + i + " . }\n");
-            queryString.setParam("p" + i, attributes.get(i));
+            queryString.setParam("p" + i, property);
+            i++;
         }
         queryString.append("}");
         queryString.setParam("type", objectType);
@@ -89,20 +92,22 @@ public class QueryBuldingService {
         return  queryString;
     }
 
-    static ParameterizedSparqlString createGroupsQuery(List<Property> properties, Resource anonymizationObject) {
+    static ParameterizedSparqlString createGroupsQuery(Set<Property> properties, Resource anonymizationObject) {
         ParameterizedSparqlString queryString =  new ParameterizedSparqlString();
         queryString.append("SELECT (GROUP_CONCAT(?object; SEPARATOR=\", \") AS ?values)\n");
         queryString.append("WHERE {\n");
         queryString.append("  ?object a ?objectType .\n");
-        for (int i = 0; i < properties.size(); i++) {
+        int i = 0;
+        for (Property property : properties) {
             queryString.append("  OPTIONAL { ?object ?p" + i + " ?v" + i + " . }\n");
-            queryString.setIri("p" + i, properties.get(i).getURI() + "_generalized");
+            queryString.setIri("p" + i, property.getURI() + "_generalized");
+            i++;
         }
         queryString.append("}\n");
         if (!properties.isEmpty()) {
             queryString.append("GROUP BY");
-            for (int i = 0; i < properties.size(); i++) {
-                queryString.append(" ?v" + i);
+            for (int j = 0; j < i; j++) {
+                queryString.append(" ?v" + j);
             }
             queryString.append("\n");
         }

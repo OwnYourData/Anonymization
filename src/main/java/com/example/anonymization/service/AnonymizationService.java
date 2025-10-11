@@ -51,11 +51,11 @@ public class AnonymizationService {
             Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
             Model model = ModelFactory.createDefaultModel();
             Resource anonymizationObject = model.createResource(request.getPrefix() + "anonymizationObject");
-            addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
+            FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
             applyAnonymizationForObject(anonymizationObject, configs, model);
             StringWriter out = new StringWriter();
-            model.write(out, "JSON-LD");
             logger.info(out.toString());
+            FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
             return new ResponseEntity<>(
                     out.toString(),
                     HttpStatus.ACCEPTED
@@ -67,7 +67,7 @@ public class AnonymizationService {
     }
 
     private static void applyAnonymizationForObject(Resource anonymizationObject, Map<Property, Configuration> configurations, Model model) {
-        List<Property> attributes = QueryService.getAttributes(model, configurations.keySet(), anonymizationObject);
+        Set<Property> attributes = QueryService.getAttributes(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
@@ -85,7 +85,7 @@ public class AnonymizationService {
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
             Map<Resource, Map<Property, Literal>> data,
-            List<Property> properties
+            Set<Property> properties
     ) {
         Map<Property, Map<Resource, Literal>> propertyMap = new HashMap<>();
         properties.forEach(property -> propertyMap.put(property, new HashMap<>()));
@@ -94,7 +94,7 @@ public class AnonymizationService {
         return propertyMap;
     }
 
-    private static int getNumberOfAnonymizingAttributes(Map<Property, Configuration> configs, List<Property> attributes) {
+    private static int getNumberOfAnonymizingAttributes(Map<Property, Configuration> configs, Set<Property> attributes) {
         return (int) attributes.stream()
                 .map(configs::get)
                 .map(Configuration::getAnonymization)
@@ -107,28 +107,5 @@ public class AnonymizationService {
         Model model = ModelFactory.createDefaultModel();
         RDFDataMgr.read(model, new StringReader(jsonLdString), null, RDFLanguages.JSONLD);
         return model;
-    }
-
-    private static void addDataToFlatModel(Model model, Resource objectType, List<Map<String, Object>> data, String prefix) {
-        int counter = 0;
-        for (Map<String, Object> entry : data) {
-            Resource object = model.createResource(prefix + "object" + counter);
-            object.addProperty(RDF.type, objectType);
-
-            // Add counter property
-            Property counterProperty = model.createProperty(prefix, "counter");
-            object.addLiteral(counterProperty, counter);
-
-            for (Map.Entry<String, Object> kv : entry.entrySet()) {
-                String key = kv.getKey();
-                Object value = kv.getValue();
-                Property property = model.createProperty(prefix, key);
-
-                if (value != null) {
-                    object.addProperty(property, value.toString());
-                }
-            }
-            counter++;
-        }
     }
 }
