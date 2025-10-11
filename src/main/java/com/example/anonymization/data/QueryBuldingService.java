@@ -1,4 +1,4 @@
-package com.example.anonymization.service.data;
+package com.example.anonymization.data;
 
 import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.rdf.model.Model;

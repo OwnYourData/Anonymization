@@ -1,13 +1,15 @@
 package com.example.anonymization.service;
 
-import com.example.anonymization.dto.AnonymizationRequestDto;
+import com.example.anonymization.dto.AnonymizationFlatJsonRequestDto;
+import com.example.anonymization.dto.AnonymizationJsonLDRequestDto;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.anonymizer.Anonymization;
-import com.example.anonymization.service.data.QueryService;
+import com.example.anonymization.data.QueryService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
+import org.apache.jena.vocabulary.RDF;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -23,14 +25,34 @@ public class AnonymizationService {
 
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
 
-    public static ResponseEntity<String> applyAnonymization(AnonymizationRequestDto request) {
+    public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
 
         // TODO Exception handling in whole service
 
         try {
-            Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfig(request.getConfigurationUrl());
+            Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
             Model model = getModel(request.getData());
             anonymizationObjects.forEach((object, config) -> applyAnonymizationForObject(object, config, model));
+            StringWriter out = new StringWriter();
+            model.write(out, "JSON-LD");
+            logger.info(out.toString());
+            return new ResponseEntity<>(
+                    out.toString(),
+                    HttpStatus.ACCEPTED
+            );
+        } catch(Exception e) {
+            logger.error(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
+        try {
+            Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
+            Model model = ModelFactory.createDefaultModel();
+            Resource anonymizationObject = model.createResource(request.getPrefix() + "anonymizationObject");
+            addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
+            applyAnonymizationForObject(anonymizationObject, configs, model);
             StringWriter out = new StringWriter();
             model.write(out, "JSON-LD");
             logger.info(out.toString());
@@ -85,5 +107,28 @@ public class AnonymizationService {
         Model model = ModelFactory.createDefaultModel();
         RDFDataMgr.read(model, new StringReader(jsonLdString), null, RDFLanguages.JSONLD);
         return model;
+    }
+
+    private static void addDataToFlatModel(Model model, Resource objectType, List<Map<String, Object>> data, String prefix) {
+        int counter = 0;
+        for (Map<String, Object> entry : data) {
+            Resource object = model.createResource(prefix + "object" + counter);
+            object.addProperty(RDF.type, objectType);
+
+            // Add counter property
+            Property counterProperty = model.createProperty(prefix, "counter");
+            object.addLiteral(counterProperty, counter);
+
+            for (Map.Entry<String, Object> kv : entry.entrySet()) {
+                String key = kv.getKey();
+                Object value = kv.getValue();
+                Property property = model.createProperty(prefix, key);
+
+                if (value != null) {
+                    object.addProperty(property, value.toString());
+                }
+            }
+            counter++;
+        }
     }
 }

@@ -1,17 +1,14 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
-import com.example.anonymization.service.anonymizer.Randomization;
 import com.example.anonymization.service.anonymizer.RandomizationDate;
-import com.example.anonymization.service.data.QueryService;
-import org.apache.jena.query.*;
+import com.example.anonymization.data.QueryService;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class KpiService {

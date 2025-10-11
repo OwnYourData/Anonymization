@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class AnonymizationRequestDto {
+public class AnonymizationJsonLDRequestDto {
 
     private String configurationUrl;
     private JsonNode data;
