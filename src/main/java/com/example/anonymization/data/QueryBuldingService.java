@@ -1,5 +1,6 @@
 package com.example.anonymization.data;
 
+import com.example.anonymization.service.anonymizer.Generalization;
 import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -112,6 +113,24 @@ public class QueryBuldingService {
             queryString.append("\n");
         }
         queryString.setParam("objectType", anonymizationObject);
+        return queryString;
+    }
+
+    static ParameterizedSparqlString creatGeneralizationData(Set<Property> properties, Resource anonymizationObject) {
+        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
+        queryString.append("SELECT ?object");
+        properties.forEach(property -> queryString.append(" ?_min_" + property.getLocalName() + " ?_max_" + property.getLocalName()));
+        queryString.append("\nWHERE {\n");
+        queryString.append("  ?object a ?objectType .\n");
+        properties.forEach(property -> {
+            queryString.append("  OPTIONAL { ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
+            queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MAX + "> ?_max_" + property.getLocalName() + ".\n");
+            queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MIN + "> ?_min_" + property.getLocalName() + ".\n");
+            queryString.append("}\n");
+            queryString.setParam(property.getLocalName(), property);
+        });
+        queryString.append("}");
+        queryString.setParam("objectType",  anonymizationObject);
         return queryString;
     }
 

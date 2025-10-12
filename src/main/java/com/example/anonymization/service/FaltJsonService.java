@@ -2,7 +2,10 @@ package com.example.anonymization.service;
 
 import com.example.anonymization.data.QueryService;
 import com.example.anonymization.entities.Configuration;
-import org.apache.jena.atlas.lib.Pair;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -41,13 +44,85 @@ public class FaltJsonService {
         }
     }
 
-    static String createFlatJsonOutput(Model model, Resource objectType, Map<Property, Configuration> configs) {
+    static String createFlatJsonOutput(
+            Model model,
+            Resource objectType, Map<Property, Configuration> configs
+    ) throws JsonProcessingException {
         Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, objectType);
         Set<Property> classificationProperties = configs.entrySet().stream()
-                .filter(e -> "classification".equals(e.getValue().getAnonymization()))
+                .filter(e -> "generalization".equals(e.getValue().getAnonymization()))
                 .map(Map.Entry::getKey)
+                .map(p -> model.getProperty(p.getURI() + "_generalized"))
                 .collect(Collectors.toSet());
-        Map<Resource, Map<Property, List<Literal>>> generalizatoinData = QueryService.getAllRandomizationData(model, objectType, classificationProperties);
-        return "";
+        Map<Resource, Map<Property, List<Literal>>> generalizatoinData =
+                QueryService.getGeneralizationData(model, objectType, classificationProperties);
+        return createFlatJsonString(data, generalizatoinData);
     }
+
+    private static String createFlatJsonString(
+            Map<Resource, Map<Property, Literal>> data,
+            Map<Resource, Map<Property, List<Literal>>> generalizationData
+    ) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode dataArray = mapper.createArrayNode();
+
+        List<Resource> sortedResources = data.keySet().stream()
+                .sorted((r1, r2) -> {
+                    int c1 = getCounterValue(data.get(r1));
+                    int c2 = getCounterValue(data.get(r2));
+                    return Integer.compare(c1, c2);
+                })
+                .toList();
+
+        for (Resource resource : sortedResources) {
+            ObjectNode entryNode = mapper.createObjectNode();
+
+            // Add regular attributes
+            Map<Property, Literal> attrs = data.get(resource);
+            if (attrs != null) {
+                for (Map.Entry<Property, Literal> attr : attrs.entrySet()) {
+                    if (!"counter".equals(attr.getKey().getLocalName())) {
+                        entryNode.put(attr.getKey().getLocalName(), attr.getValue().getValue().toString());
+                    }
+                }
+            }
+
+            // Add generalization attributes
+            Map<Property, List<Literal>> genAttrs = generalizationData.get(resource);
+            if (genAttrs != null) {
+                for (Map.Entry<Property, List<Literal>> genAttr : genAttrs.entrySet()) {
+                    List<Literal> values = genAttr.getValue();
+                    if (values.size() == 2) {
+                        ObjectNode genNode = mapper.createObjectNode();
+                        genNode.put("min", values.get(0).getValue().toString());
+                        genNode.put("max", values.get(1).getValue().toString());
+                        entryNode.set(genAttr.getKey().getLocalName(), genNode);
+                    }
+                }
+            }
+
+            dataArray.add(entryNode);
+        }
+
+        ObjectNode root = mapper.createObjectNode();
+        root.set("data", dataArray);
+        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+    }
+
+    private static int getCounterValue(Map<Property, Literal> attrs) {
+        if (attrs == null) return Integer.MAX_VALUE;
+        for (Map.Entry<Property, Literal> attr : attrs.entrySet()) {
+            if ("counter".equals(attr.getKey().getLocalName())) {
+                Object val = attr.getValue().getValue();
+                if (val instanceof Number) {
+                    return ((Number) val).intValue();
+                }
+                try {
+                    return Integer.parseInt(val.toString());
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+
 }

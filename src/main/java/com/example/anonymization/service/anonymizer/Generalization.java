@@ -14,9 +14,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.apache.jena.rdfs.assembler.VocabRDFS.NS;
-
 public abstract class Generalization<T> implements Anonymization {
+
+    public static final String RDF_MAX = "http://www.w3.org/2000/01/rdf-schema#max";
+    public static final String RDF_MIN = "http://www.w3.org/2000/01/rdf-schema#min";
 
     @Override
     public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
@@ -52,8 +53,8 @@ public abstract class Generalization<T> implements Anonymization {
     }
 
     protected List<Resource> createBuckets(Model model, int nrOfBuckets, List<Pair<Resource, T>> sortedValues, Property property) {
-        Property min = model.createProperty(NS, "min");
-        Property max = model.createProperty(NS, "max");
+        Property min = model.createProperty(RDF_MIN);
+        Property max = model.createProperty(RDF_MAX);
         return IntStream.range(0, nrOfBuckets)
                 .mapToObj(position -> {
                     List<T> range = getBucketRange(sortedValues, position, nrOfBuckets);

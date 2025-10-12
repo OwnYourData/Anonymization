@@ -150,11 +150,25 @@ public class QueryService {
         return getData(model, attributes, objectType);
     }
 
-    public static Map<Resource, Map<Property, List<Literal>>> getAllRandomizationData(Model model, Resource objectType, Set<Property> properties) {
-        Set<Property> attributes = getAllAttributes(model, objectType);
+    public static Map<Resource, Map<Property, List<Literal>>> getGeneralizationData(Model model, Resource objectType, Set<Property> properties) {
+        model.write(System.out);
+        ParameterizedSparqlString queryString = QueryBuldingService.creatGeneralizationData(properties, objectType);
+        Query query = queryString.asQuery();
         Map<Resource, Map<Property, List<Literal>>> results = new HashMap<>();
-        for (Property property : attributes) {
-            List<RandomizationResult> randomizationResults = getRandomizationResults(model, objectType, property);
+        try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution sol = rs.next();
+                Map<Property, List<Literal>> values = new HashMap<>();
+                properties.forEach(property -> {
+                    Literal minValue = sol.getLiteral("_min_" + property.getLocalName());
+                    Literal maxValue = sol.getLiteral("_max_" + property.getLocalName());
+                    if (minValue != null  && maxValue != null) {
+                        values.put(property, List.of(minValue, maxValue));
+                    }
+                });
+                results.put(sol.getResource("object"), values);
+            }
         }
         return results;
     }
