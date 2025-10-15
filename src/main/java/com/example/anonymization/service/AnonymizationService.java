@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
-import org.apache.jena.vocabulary.RDF;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -69,7 +68,7 @@ public class AnonymizationService {
             Resource anonymizationObject, Map<Property, Configuration> configurations,
             Model model
     ) {
-        Set<Property> attributes = QueryService.getAttributes(model, configurations.keySet(), anonymizationObject);
+        Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
@@ -82,7 +81,7 @@ public class AnonymizationService {
                         nrAnonymizeAttributes
                 )));
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-        QueryService.deleteOriginalAttributes(model, attributes, anonymizationObject);
+        QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(

@@ -56,16 +56,31 @@ public class FaltJsonService {
                 .collect(Collectors.toSet());
         Map<Resource, Map<Property, List<Literal>>> generalizatoinData =
                 QueryService.getGeneralizationData(model, objectType, classificationProperties);
-        return createFlatJsonString(data, generalizatoinData);
+        Map<Property, Literal> kpiData = QueryService.getKpiData(model);
+        return createFlatJsonString(data, generalizatoinData , kpiData);
     }
 
     private static String createFlatJsonString(
             Map<Resource, Map<Property, Literal>> data,
-            Map<Resource, Map<Property, List<Literal>>> generalizationData
+            Map<Resource, Map<Property, List<Literal>>> generalizationData,
+            Map<Property, Literal> kpiData
     ) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        ArrayNode dataArray = mapper.createArrayNode();
+        ArrayNode dataArray = addDataToArrayNode(mapper, data, generalizationData);
+        ObjectNode kpiNode = addKpisToObjectNode(mapper, kpiData);
 
+        ObjectNode root = mapper.createObjectNode();
+        root.set("data", dataArray);
+        root.set("kpis", kpiNode);
+        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+    }
+
+    private static ArrayNode addDataToArrayNode(
+            ObjectMapper mapper,
+            Map<Resource, Map<Property, Literal>> data,
+            Map<Resource, Map<Property, List<Literal>>> generalizationData
+    ) {
+        ArrayNode dataArray = mapper.createArrayNode();
         List<Resource> sortedResources = data.keySet().stream()
                 .sorted((r1, r2) -> {
                     int c1 = getCounterValue(data.get(r1));
@@ -77,7 +92,6 @@ public class FaltJsonService {
         for (Resource resource : sortedResources) {
             ObjectNode entryNode = mapper.createObjectNode();
 
-            // Add regular attributes
             Map<Property, Literal> attrs = data.get(resource);
             if (attrs != null) {
                 for (Map.Entry<Property, Literal> attr : attrs.entrySet()) {
@@ -87,7 +101,6 @@ public class FaltJsonService {
                 }
             }
 
-            // Add generalization attributes
             Map<Property, List<Literal>> genAttrs = generalizationData.get(resource);
             if (genAttrs != null) {
                 for (Map.Entry<Property, List<Literal>> genAttr : genAttrs.entrySet()) {
@@ -103,11 +116,20 @@ public class FaltJsonService {
 
             dataArray.add(entryNode);
         }
-
-        ObjectNode root = mapper.createObjectNode();
-        root.set("data", dataArray);
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+        return dataArray;
     }
+
+    private static ObjectNode addKpisToObjectNode(
+            ObjectMapper mapper,
+            Map<Property, Literal> kpiData
+    ) {
+        ObjectNode kpiNode = mapper.createObjectNode();
+        kpiData.forEach((kpi, value) -> {
+            kpiNode.put(kpi.getLocalName(), value.getValue().toString());
+        });
+        return kpiNode;
+    }
+
 
     private static int getCounterValue(Map<Property, Literal> attrs) {
         if (attrs == null) return Integer.MAX_VALUE;
