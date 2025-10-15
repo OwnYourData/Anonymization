@@ -78,7 +78,7 @@ public class ConfigurationService {
                 configs.put(entry.object(), new HashMap<>());
             }
             configs.get(entry.object()).put(
-                    entry.attribute(),
+                    entry.property(),
                     new Configuration(
                             extractValueFromURL(entry.datatype().toString()),
                             extractValueFromURL(entry.anonymization().toString())
@@ -86,7 +86,7 @@ public class ConfigurationService {
             );
             logger.info(
                     "New Config: {}, {}, {}",
-                    extractValueFromURL(entry.attribute().toString()),
+                    extractValueFromURL(entry.property().toString()),
                     extractValueFromURL(entry.datatype().toString()),
                     extractValueFromURL(entry.anonymization().toString())
             );

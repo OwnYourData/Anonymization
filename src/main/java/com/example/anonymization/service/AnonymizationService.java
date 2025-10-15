@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
-import org.apache.jena.vocabulary.RDF;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -30,9 +29,12 @@ public class AnonymizationService {
         // TODO Exception handling in whole service
 
         try {
-            Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
+            Map<Resource, Map<Property, Configuration>> anonymizationObjects =
+                    ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
             Model model = getModel(request.getData());
-            anonymizationObjects.forEach((object, config) -> applyAnonymizationForObject(object, config, model));
+            anonymizationObjects.forEach(
+                    (o, c) -> applyAnonymizationForObject(o, c, model)
+            );
             StringWriter out = new StringWriter();
             model.write(out, "JSON-LD");
             logger.info(out.toString());
@@ -53,21 +55,20 @@ public class AnonymizationService {
             Resource anonymizationObject = model.createResource(request.getPrefix() + "anonymizationObject");
             FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
             applyAnonymizationForObject(anonymizationObject, configs, model);
-            StringWriter out = new StringWriter();
-            logger.info(out.toString());
-            FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
-            return new ResponseEntity<>(
-                    out.toString(),
-                    HttpStatus.ACCEPTED
-            );
+            String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
+            logger.info(out);
+            return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
         } catch(Exception e) {
             logger.error(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    private static void applyAnonymizationForObject(Resource anonymizationObject, Map<Property, Configuration> configurations, Model model) {
-        Set<Property> attributes = QueryService.getAttributes(model, configurations.keySet(), anonymizationObject);
+    private static void applyAnonymizationForObject(
+            Resource anonymizationObject, Map<Property, Configuration> configurations,
+            Model model
+    ) {
+        Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
@@ -80,7 +81,7 @@ public class AnonymizationService {
                         nrAnonymizeAttributes
                 )));
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-        QueryService.deleteOriginalAttributes(model, attributes, anonymizationObject);
+        QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
     }
 
     private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
@@ -89,12 +90,16 @@ public class AnonymizationService {
     ) {
         Map<Property, Map<Resource, Literal>> propertyMap = new HashMap<>();
         properties.forEach(property -> propertyMap.put(property, new HashMap<>()));
-        data.forEach((resource, value) -> value.forEach((property, literal) ->
-                propertyMap.get(property).put(resource, literal)));
+        data.forEach((resource, value) -> value.forEach(
+                (property, literal) -> propertyMap.get(property).put(resource, literal)
+        ));
         return propertyMap;
     }
 
-    private static int getNumberOfAnonymizingAttributes(Map<Property, Configuration> configs, Set<Property> attributes) {
+    private static int getNumberOfAnonymizingAttributes(
+            Map<Property, Configuration> configs,
+            Set<Property> attributes
+    ) {
         return (int) attributes.stream()
                 .map(configs::get)
                 .map(Configuration::getAnonymization)

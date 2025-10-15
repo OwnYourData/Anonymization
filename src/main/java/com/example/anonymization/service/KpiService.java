@@ -13,7 +13,12 @@ import java.util.*;
 @Service
 public class KpiService {
 
-    public static void addKpiObject(Model model, Resource anonymizationObject, Set<Property> attributes, Map<Property, Configuration> configurations) {
+    public static void addKpiObject(
+            Model model,
+            Resource anonymizationObject,
+            Set<Property> attributes,
+            Map<Property, Configuration> configurations
+    ) {
         Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
         Property property = model.createProperty(QueryService.SOYA_URL + "kpis");
         anonymizationObject.addProperty(property, kpiObject);
@@ -24,26 +29,46 @@ public class KpiService {
 
     public static void addNrBuckets(Model model, Property property, int numberAttributes) {
         Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
-        Property numberAttrProperty = model.createProperty(QueryService.SOYA_URL + property.getLocalName() + "NumberAttributes");
+        Property numberAttrProperty = model.createProperty(
+                QueryService.SOYA_URL + property.getLocalName() + "NumberAttributes"
+        );
         kpiObject.addLiteral(numberAttrProperty, numberAttributes);
     }
 
-    private static int calculateKAnonymity(Model model, Resource anonymizationObject, Set<Property> attributes, Map<Property, Configuration> configurations) {
+    private static int calculateKAnonymity(
+            Model model,
+            Resource anonymizationObject,
+            Set<Property> attributes, Map<Property, Configuration> configurations
+    ) {
         Map<Resource, Set<Resource>> similarValues = new HashMap<>();
         List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
-        groups.forEach(group -> group.forEach(resource -> similarValues.put(resource, new HashSet<>(group))));
+        groups.forEach(group -> group.forEach(
+                resource -> similarValues.put(resource, new HashSet<>(group))
+        ));
 
         attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
                 .forEach(randomization -> {
-                    Map<Resource, Set<Resource>> similarity =
-                            getSimilarValues(model, anonymizationObject, randomization, configurations.get(randomization).getDataType().equals("date"));
-                    similarValues.keySet().forEach(resource -> similarValues.get(resource).retainAll(similarity.get(resource)));
+                    Map<Resource, Set<Resource>> similarity = getSimilarValues(
+                            model,
+                            anonymizationObject,
+                            randomization,
+                            configurations.get(randomization).getDataType().equals("date")
+                    );
+                    similarValues.keySet().forEach(
+                            resource -> similarValues.get(resource).retainAll(similarity.get(resource))
+                    );
                 });
         return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
     }
 
-    private static Map<Resource, Set<Resource>> getSimilarValues(Model model, Resource resource, Property property, boolean date) {
-        List<QueryService.RandomizationResult> randomizationResults = QueryService.getRandomizationResults(model, resource, property);
+    private static Map<Resource, Set<Resource>> getSimilarValues(
+            Model model,
+            Resource resource,
+            Property property,
+            boolean date
+    ) {
+        List<QueryService.RandomizationResult> randomizationResults =
+                    QueryService.getRandomizationResults(model, resource, property);
 
         List<Double> distances = new ArrayList<>();
         Map<Resource, Double> randomizedData = new HashMap<>();
@@ -51,11 +76,17 @@ public class KpiService {
         randomizationResults.forEach(randomization -> {
             if (randomization.original() != null) {
                 if (date) {
-                    distances.add(Math.abs(RandomizationDate.literalToNumericDate(randomization.original()) -
-                            RandomizationDate.literalToNumericDate(randomization.randomized())));
-                    randomizedData.put(randomization.object(), RandomizationDate.literalToNumericDate(randomization.randomized()));
+                    distances.add(Math.abs(
+                            RandomizationDate.literalToNumericDate(randomization.original()) -
+                            RandomizationDate.literalToNumericDate(randomization.randomized())
+                    ));
+                    randomizedData.put(
+                            randomization.object(), RandomizationDate.literalToNumericDate(randomization.randomized())
+                    );
                 } else {
-                    distances.add(Math.abs(randomization.original().getDouble() - randomization.randomized().getDouble()));
+                    distances.add(Math.abs(
+                            randomization.original().getDouble() - randomization.randomized().getDouble()
+                    ));
                     randomizedData.put(randomization.object(), randomization.randomized().getDouble());
                 }
             } else {
@@ -73,7 +104,11 @@ public class KpiService {
         return similarity;
     }
 
-    private static void findSimilarValues(Map<Resource, Set<Resource>> similarity, Map<Resource, Double> randomizedData, double benchmark) {
+    private static void findSimilarValues(
+            Map<Resource, Set<Resource>> similarity,
+            Map<Resource, Double> randomizedData,
+            double benchmark
+    ) {
         List<Map.Entry<Resource, Double>> objects = new ArrayList<>(randomizedData.entrySet());
         objects.sort(Map.Entry.comparingByValue());
 

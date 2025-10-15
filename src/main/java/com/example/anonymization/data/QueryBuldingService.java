@@ -1,11 +1,11 @@
 package com.example.anonymization.data;
 
+import com.example.anonymization.service.anonymizer.Generalization;
 import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
-import java.util.List;
 import java.util.Set;
 
 public class QueryBuldingService {
@@ -14,33 +14,48 @@ public class QueryBuldingService {
         return """
                     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                     PREFIX soya: <https://w3id.org/soya/ns#>
-                    SELECT ?anonymizationObject ?attribute ?datatype ?anonymization WHERE {
+                    SELECT ?anonymizationObject ?property ?datatype ?anonymization WHERE {
                       ?overlay a soya:OverlayClassification .
                       ?overlay soya:onBase ?anonymizationObject .
-                      ?attribute rdfs:domain ?anonymizationObject .
-                      ?attribute rdfs:range ?datatype .
-                      ?attribute <https://w3id.org/soya/ns#classification> ?anonymization .
+                      ?property rdfs:domain ?anonymizationObject .
+                      ?property rdfs:range ?datatype .
+                      ?property <https://w3id.org/soya/ns#classification> ?anonymization .
                     }
                 """;
     }
 
-    static ParameterizedSparqlString createDataModelQuery(Set<Property> attributes, Resource anonymizationObject) {
+    static ParameterizedSparqlString createDataModelQuery(Set<Property> properties, Resource anonymizationObject) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("SELECT ?object");
-        attributes.forEach(attribute -> queryString.append(" ?_" + attribute.getLocalName()));
+        properties.forEach(property -> queryString.append(" ?_" + property.getLocalName()));
         queryString.append("\nWHERE {\n");
         queryString.append("  ?object a ?objectType .\n");
-        attributes.forEach(attribute -> {
-            queryString.append("  OPTIONAL { ?object ?" + attribute.getLocalName() + " ?_" + attribute.getLocalName() + " ");
-            queryString.append("FILTER(isLiteral(?_" + attribute.getLocalName() + ")) }\n");
-            queryString.setParam(attribute.getLocalName(), attribute);
+        properties.forEach(property -> {
+            queryString.append("  OPTIONAL { ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + " ");
+            queryString.append("FILTER(isLiteral(?_" + property.getLocalName() + ")) }\n");
+            queryString.setParam(property.getLocalName(), property);
         });
         queryString.append("}");
         queryString.setParam("objectType",  anonymizationObject);
         return queryString;
     }
 
-    static ParameterizedSparqlString createAttributeQuery(Set<Property> configs, Resource anonymizationObject) {
+    static ParameterizedSparqlString createKpiDataQuery(Set<Property> properties, Resource kpiObject) {
+        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
+        queryString.append("SELECT");
+        properties.forEach(property -> queryString.append(" ?_" + property.getLocalName()));
+        queryString.append("\nWHERE {\n");
+        properties.forEach(property -> {
+            queryString.append("  OPTIONAL { ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + " ");
+            queryString.append("FILTER(isLiteral(?_" + property.getLocalName() + ")) }\n");
+            queryString.setParam(property.getLocalName(), property);
+        });
+        queryString.append("}");
+        queryString.setParam("object", kpiObject);
+        return queryString;
+    }
+
+    static ParameterizedSparqlString createPropertyQuery(Set<Property> configs, Resource anonymizationObject) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("SELECT ?predicate (EXISTS {\n");
         queryString.append("  ?s a ?objectType ; ?predicate ?o .\n");
@@ -57,7 +72,7 @@ public class QueryBuldingService {
         return queryString;
     }
 
-    static ParameterizedSparqlString deleteOriginalAttributeQuery(Set<Property> properties, Resource objectType) {
+    static ParameterizedSparqlString deleteOriginalPropertyQuery(Set<Property> properties, Resource objectType) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("DELETE {\n");
         for (int i = 0; i < properties.size(); i++) {
@@ -112,6 +127,24 @@ public class QueryBuldingService {
             queryString.append("\n");
         }
         queryString.setParam("objectType", anonymizationObject);
+        return queryString;
+    }
+
+    static ParameterizedSparqlString creatGeneralizationData(Set<Property> properties, Resource anonymizationObject) {
+        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
+        queryString.append("SELECT ?object");
+        properties.forEach(property -> queryString.append(" ?_min_" + property.getLocalName() + " ?_max_" + property.getLocalName()));
+        queryString.append("\nWHERE {\n");
+        queryString.append("  ?object a ?objectType .\n");
+        properties.forEach(property -> {
+            queryString.append("  OPTIONAL { ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
+            queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MAX + "> ?_max_" + property.getLocalName() + ".\n");
+            queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MIN + "> ?_min_" + property.getLocalName() + ".\n");
+            queryString.append("}\n");
+            queryString.setParam(property.getLocalName(), property);
+        });
+        queryString.append("}");
+        queryString.setParam("objectType",  anonymizationObject);
         return queryString;
     }
 
