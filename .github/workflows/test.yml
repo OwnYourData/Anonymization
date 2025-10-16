@@ -10,19 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '24'
-
-      - name: Build application
-        run: |
-          mvn clean package
-
       - name: Set new tag
         id: set-tag
         run: |
