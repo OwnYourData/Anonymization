@@ -1,0 +1,47 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '24'
+
+      - name: Build application
+        run: |
+          mvn clean package
+
+      - name: Set new tag
+        id: set-tag
+        run: |
+          latest_tag=$(curl -s https://hub.docker.com/v2/repositories/oydeu/anonymizer/tags | jq -r '.results[0].name')
+          date_part=$(echo "$latest_tag" | grep -oE '^[0-9]{6}')
+          letter_part=$(echo "$latest_tag" | grep -oE '[a-z]$')
+          current_date=$(date +'%y%m%d')
+          if [ "$current_date" == "$date_part" ]; then
+            new_letter=$(echo "$letter_part" | tr "a-z" "b-za")
+          else
+            new_letter="a"
+          fi
+          
+          new_tag="$current_date$new_letter"
+          echo "New Tag: $new_tag"
+          echo "::set-output name=tag::$new_tag"
+      - name: Build the docker image
+        run: |
+          docker build -t oydeu/anonymizer:${{ steps.set-tag.outputs.tag }} .
+      - name: Push the docker image
+        run: |
+          docker push oydeu/anonymizer:${{ steps.set-tag.outputs.tag }}
