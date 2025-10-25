@@ -1,0 +1,27 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+  "data": [
+    {
+      "latitude": 1234,
+      "longitude": 1234,
+      "test_attribute_not_anonymized": "test"
+    },
+    {
+      "latitude": 123,
+      "longitude": 12334
+    },
+    {
+      "latitude": 1221,
+      "longitude": 1234
+    },
+    {
+      "latitude": 123,
+      "longitude": 12534
+    },
+    {
+      "latitude": 1,
+      "longitude": 34
+    }
+  ]
+}

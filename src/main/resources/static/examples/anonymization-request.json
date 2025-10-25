@@ -1,0 +1,79 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:test1",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1234,
+        "oyd:longitude": 1234,
+        "oyd:geburtsdatum": {
+          "@value": "2023-10-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:test2",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:geburtsdatum":  "1999-10-01"
+      },
+      {
+        "@id": "oyd:test3",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 12,
+        "oyd:longitude": 125,
+        "oyd:geburtsdatum": {
+          "@value": "2020-10-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:test4",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 123,
+        "oyd:longitude": 12,
+        "oyd:geburtsdatum": {
+          "@value": "2027-10-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:test5",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1234,
+        "oyd:longitude": 1234,
+        "oyd:geburtsdatum": {
+          "@value": "2021-10-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:test6",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 1,
+        "oyd:longitude": 3213
+      },
+      {
+        "@id": "oyd:test7",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 12,
+        "oyd:longitude": 534
+      },
+      {
+        "@id": "oyd:test8",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 123,
+        "oyd:longitude": 124
+      },
+      {
+        "@id": "oyd:test9",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 123,
+        "oyd:longitude": 213
+      }
+    ]
+  }
+}
