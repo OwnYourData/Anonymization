@@ -24,7 +24,6 @@ public interface Anonymization {
 
     private static Anonymization anonymizationFactoryFunction(Configuration configuration) {
         return switch (configuration.getAnonymization()) {
-            // TODO evaluate if this should be handled as strings
             case "generalization" -> switch (configuration.getDataType()) {
                 case "integer", "double" -> new GeneralizationNumeric();
                 case "date" -> new GeneralizationDate();
