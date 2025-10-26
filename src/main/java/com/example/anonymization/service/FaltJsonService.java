@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 @Service
 public class FaltJsonService {
 
+    // TODO exception handling
+
     static void addDataToFlatModel(Model model, Resource objectType, List<Map<String, Object>> data, String prefix) {
         int counter = 0;
         for (Map<String, Object> entry : data) {

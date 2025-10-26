@@ -1,6 +1,7 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
+import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.service.anonymizer.RandomizationDate;
 import com.example.anonymization.data.QueryService;
 import org.apache.jena.rdf.model.Model;
@@ -13,13 +14,23 @@ import java.util.*;
 @Service
 public class KpiService {
 
+    // TODO different KPIs for different anonymization objects
+    private static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpiObject";
+
+    /**
+     * Adds a KPI object to the model containing the k-anonymity value for the given anonymization object.
+     * @param model Model to which the KPI object is added
+     * @param anonymizationObject Anonymization object for which the KPI object is created
+     * @param attributes Attributes involved in the anonymization
+     * @param configurations Configurations for the attributes
+     */
     public static void addKpiObject(
             Model model,
             Resource anonymizationObject,
             Set<Property> attributes,
             Map<Property, Configuration> configurations
     ) {
-        Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
+        Resource kpiObject = model.createResource(KPI_OBJECT_URI);
         Property property = model.createProperty(QueryService.SOYA_URL + "kpis");
         anonymizationObject.addProperty(property, kpiObject);
 
@@ -27,8 +38,14 @@ public class KpiService {
         kpiObject.addLiteral(kAnonymity, calculateKAnonymity(model, anonymizationObject, attributes, configurations));
     }
 
+    /**
+     * Adds the number of buckets used in the anonymization for an attribute to the KPI object in the model.
+     * @param model Model to which the KPI object is added
+     * @param property Property for which the number of buckets is added
+     * @param numberAttributes Number of buckets used in the anonymization
+     */
     public static void addNrBuckets(Model model, Property property, int numberAttributes) {
-        Resource kpiObject = model.createResource(QueryService.SOYA_URL + "kpiObject");
+        Resource kpiObject = model.createResource(KPI_OBJECT_URI);
         Property numberAttrProperty = model.createProperty(
                 QueryService.SOYA_URL + property.getLocalName() + "NumberAttributes"
         );
@@ -40,25 +57,29 @@ public class KpiService {
             Resource anonymizationObject,
             Set<Property> attributes, Map<Property, Configuration> configurations
     ) {
-        Map<Resource, Set<Resource>> similarValues = new HashMap<>();
-        List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
-        groups.forEach(group -> group.forEach(
-                resource -> similarValues.put(resource, new HashSet<>(group))
-        ));
+        try {
+            Map<Resource, Set<Resource>> similarValues = new HashMap<>();
+            List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
+            groups.forEach(group -> group.forEach(
+                    resource -> similarValues.put(resource, new HashSet<>(group))
+            ));
 
-        attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
-                .forEach(randomization -> {
-                    Map<Resource, Set<Resource>> similarity = getSimilarValues(
-                            model,
-                            anonymizationObject,
-                            randomization,
-                            configurations.get(randomization).getDataType().equals("date")
-                    );
-                    similarValues.keySet().forEach(
-                            resource -> similarValues.get(resource).retainAll(similarity.get(resource))
-                    );
-                });
-        return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
+            attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
+                    .forEach(randomization -> {
+                        Map<Resource, Set<Resource>> similarity = getSimilarValues(
+                                model,
+                                anonymizationObject,
+                                randomization,
+                                configurations.get(randomization).getDataType().equals("date")
+                        );
+                        similarValues.keySet().forEach(
+                                resource -> similarValues.get(resource).retainAll(similarity.get(resource))
+                        );
+                    });
+            return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
+        } catch (Exception ex) {
+            throw new AnonymizationException("Error calculating k-anonymity: " + ex.getMessage());
+        }
     }
 
     private static Map<Resource, Set<Resource>> getSimilarValues(

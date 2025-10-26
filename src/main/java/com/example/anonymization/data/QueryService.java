@@ -1,5 +1,7 @@
 package com.example.anonymization.data;
 
+import com.example.anonymization.exceptions.AnonymizationException;
+import com.example.anonymization.exceptions.RequestModelException;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateAction;
@@ -59,6 +61,8 @@ public class QueryService {
                 });
                 results.put(solution.getResource("object"), propertyValues);
             }
+        } catch (Exception ex) {
+            throw new RequestModelException("Error during fetching data for anonymization: " + ex.getMessage());
         }
         return results;
     }
@@ -84,6 +88,8 @@ public class QueryService {
                     results.put(property, value);
                 }
             });
+        } catch (Exception ex) {
+            throw new AnonymizationException("Error during fetching KPI data: " + ex.getMessage());
         }
         return results;
     }
@@ -107,6 +113,8 @@ public class QueryService {
                     properties.add(model.getProperty(solution.getResource("predicate").getURI()));
                 }
             }
+        } catch (Exception e) {
+            throw new RequestModelException("Error during fetching properties for anonymization: " + e.getMessage());
         }
         return properties;
     }
@@ -118,8 +126,12 @@ public class QueryService {
      * @param objectType the object type for which the data is removed
      */
     public static void deleteOriginalProperties(Model model, Set<Property> properties, Resource objectType) {
-        UpdateRequest updateRequest = QueryBuldingService.deleteOriginalPropertyQuery(properties, objectType).asUpdate();
-        UpdateAction.execute(updateRequest, model);
+        try {
+            UpdateRequest updateRequest = QueryBuldingService.deleteOriginalPropertyQuery(properties, objectType).asUpdate();
+            UpdateAction.execute(updateRequest, model);
+        } catch (Exception ex) {
+            throw new AnonymizationException("Error during deleting original properties: " + ex.getMessage());
+        }
     }
 
     /**
@@ -142,6 +154,8 @@ public class QueryService {
                         sol.getLiteral("randomized")
                 ));
             }
+        } catch (Exception ex) {
+            throw new AnonymizationException("Error during fetching randomization results: " + ex.getMessage());
         }
         return results;
     }
@@ -167,6 +181,8 @@ public class QueryService {
                                 .collect(Collectors.toSet())
                 );
             }
+        } catch (Exception ex) {
+            throw new AnonymizationException("Error during fetching generalization groups: " + ex.getMessage());
         }
         return results;
     }
@@ -195,6 +211,8 @@ public class QueryService {
                 });
                 results.put(sol.getResource("object"), values);
             }
+        } catch (Exception ex) {
+            throw new AnonymizationException("Error during fetching generalization data: " + ex.getMessage());
         }
         return results;
     }
