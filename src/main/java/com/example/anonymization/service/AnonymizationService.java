@@ -3,6 +3,7 @@ package com.example.anonymization.service;
 import com.example.anonymization.dto.AnonymizationFlatJsonRequestDto;
 import com.example.anonymization.dto.AnonymizationJsonLDRequestDto;
 import com.example.anonymization.entities.Configuration;
+import com.example.anonymization.exceptions.RequestModelException;
 import com.example.anonymization.service.anonymizer.Anonymization;
 import com.example.anonymization.data.QueryService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,27 +26,19 @@ public class AnonymizationService {
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
-
-        // TODO Exception handling in whole service
-
-        try {
-            Map<Resource, Map<Property, Configuration>> anonymizationObjects =
-                    ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
-            Model model = getModel(request.getData());
-            anonymizationObjects.forEach(
-                    (o, c) -> applyAnonymizationForObject(o, c, model)
-            );
-            StringWriter out = new StringWriter();
-            model.write(out, "JSON-LD");
-            logger.info(out.toString());
-            return new ResponseEntity<>(
-                    out.toString(),
-                    HttpStatus.ACCEPTED
-            );
-        } catch(Exception e) {
-            logger.error(e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Map<Resource, Map<Property, Configuration>> anonymizationObjects =
+                ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
+        Model model = getModel(request.getData());
+        anonymizationObjects.forEach(
+                (o, c) -> applyAnonymizationForObject(o, c, model)
+        );
+        StringWriter out = new StringWriter();
+        model.write(out, "JSON-LD");
+        logger.info(out.toString());
+        return new ResponseEntity<>(
+                out.toString(),
+                HttpStatus.ACCEPTED
+        );
     }
 
     public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
@@ -108,9 +101,13 @@ public class AnonymizationService {
     }
 
     private static Model getModel(JsonNode data) {
-        String jsonLdString = data.toString();
-        Model model = ModelFactory.createDefaultModel();
-        RDFDataMgr.read(model, new StringReader(jsonLdString), null, RDFLanguages.JSONLD);
-        return model;
+        try {
+            String jsonLdString = data.toString();
+            Model model = ModelFactory.createDefaultModel();
+            RDFDataMgr.read(model, new StringReader(jsonLdString), null, RDFLanguages.JSONLD);
+            return model;
+        } catch (Exception e) {
+            throw new RequestModelException("The Request Data coudl not be converted ot a model: " + e.getMessage());
+        }
     }
 }
