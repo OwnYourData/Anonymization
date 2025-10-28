@@ -94,10 +94,11 @@ Example: Addresses
 Randomization adds noise to each data point. The noise follows a normal distribution, with its scale depending on the number of instances, the data distribution, and the bucket count. Specifically, the added “salt” is a draw from a normal distribution multiplied by the distance to the i-th nearest value, where i is the number of instances per bucket. This scales the noise to the local density of the data while preserving anonymization strength.
 https://anonymizer.go-data.at/swagger-ui/index.html#/
 
-<details><summary>Anonymization</summary>
+<details><summary>Anonymization Json-LD</summary>
 
-* PUT /api/anonymise
+### PUT /api/anonymise
 
+* Input
 ```json
 {
   "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
@@ -333,9 +334,11 @@ https://anonymizer.go-data.at/swagger-ui/index.html#/
   }
 }
 ```
-
-* PUT /api/anonymise/flatjson
-
+</details>
+<details><summary>Anonymization Flat Json</summary>
+### PUT /api/anonymise/flatjson
+  
+* Input
 ```json
 {
   "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
@@ -414,3 +417,4 @@ https://anonymizer.go-data.at/swagger-ui/index.html#/
   }
 }
 ```
+</detail>
