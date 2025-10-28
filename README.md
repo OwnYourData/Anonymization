@@ -96,7 +96,7 @@ https://anonymizer.go-data.at/swagger-ui/index.html#/
 
 <details><summary>Anonymization Json-LD</summary>
 
-### PUT /api/anonymise
+PUT /api/anonymise
 
 * Input
 ```json
@@ -336,7 +336,7 @@ https://anonymizer.go-data.at/swagger-ui/index.html#/
 ```
 </details>
 <details><summary>Anonymization Flat Json</summary>
-### PUT /api/anonymise/flatjson
+PUT /api/anonymise/flatjson
   
 * Input
 ```json
