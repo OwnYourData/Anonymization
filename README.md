@@ -1,94 +1,97 @@
 # Anonymization Service
 
 ### General Idea
-* Anonymizes personal data to ensure GDPR compliance
-* Input: Data to be anonymized along with the anonymization configuration
-  - json-ld input data or flat json
-  - output is in the same former (json-ld input -> json-ld output, flat-json input -> flat-json output)
-* The hosted ontology defines the allowed operations for each attribute
-  - anonamyization of objects of differnt types is supported (for each type a anonymization strategy must be defined)
-* During the anonymization process, an optimizer is created for each attribute individually
-* The allowed anonymization operations depend on the attribute type and datatype, as defined in the ontology
-* The implemented anonymization methods are described below
-* The swagger documentation of the service is accessible via https://anonymizer.go-data.at/swagger-ui/index.html#/
+- Service that anonymizes personal data in JSON and JSON-LD using a configuration-driven approach.
+- Purpose: Reduce re-identification risk and support GDPR compliance.
+- Input: Source data plus an anonymization configuration.
+  - Supported formats: JSON-LD or flat JSON.
+  - Output mirrors the input format (JSON-LD in → JSON-LD out; flat JSON in → flat JSON out).
+- Ontology-backed: A hosted ontology defines which anonymization operations are permitted for each attribute based on its type and datatype.
+  - Supports heterogeneous object types; each type must have a corresponding anonymization strategy.
+- Attribute oritented anonymization: During processing, the service builds an anonymizer for each attribute to select the most suitable operations under the defined constraints.
+- Implemented anonymization methods are described below.
+- API documentation (Swagger UI): https://anonymizer.go-data.at/swagger-ui/index.html#/
 
 ### Anonymization Process
-In general, the anonymization process takes place in three steps:
-* Fetching of the configuration
-* Extracting the configuration form the knowledge graph
-* Creation of anonymization operators for each attribute
-* Creating anonymized values and adding them to the input model
-* Removing the original values for which anonymization was defined
-* Constructing output
+The anonymization workflow comprises the following steps:
+- Fetch the configuration
+- Extract the configuration from the knowledge graph
+- Create anonymizers for each attribute
+- Generate anonymized values and add them to the input model
+- Remove original values for attributes with defined anonymization
+- Construct the output
 
-#### Fetching of the Configuration
-At the beginning, the configuration is fetched from the provided URL. The configuration must be stored as a knowledge graph in JSON-LD format. Once the input is fetched, it is validated to ensure that it is valid JSON-LD.
+#### Fetch Configuration
+The service fetches the configuration from the provided URL. The configuration must be a JSON-LD knowledge graph. After retrieval, the payload is validated to ensure it is well-formed JSON-LD.
 
-#### Extraction of Configuration
-From the knowledge graph, the specific configuration set up for each attribute must be extracted. For each attribute, two pieces of information are important: the expected data type and the intended anonymization type. A SPARQL query is used to find all entities that have AnonymisationDemo as their domain. For those entities, the range attribute defines the data type, and the classification attribute defines the anonymization type.
+#### Extract Configuration
+From the knowledge graph, the service identifies the object types defined in the ontology and extracts the attribute-specific settings for each type. Each attribute is characterized by:
+- Its datatype
+- The anonymization strategy to apply
 
-#### Anonymizer Creation
-If the configuration is valid, an anonymizer is instantiated for each attribute. If no implementation is available for the requested anonymization type and the attribute's data type, an exception is returned. The result of this step is a list of anonymizers that can be applied in a loop to anonymize each attribute.
+#### Create Anonymizers
+If the configuration is valid, an anonymizer is instantiated for each attribute with a supported combination of strategy and datatype. If the requested combination is not implemented, the attribute is skipped and no anonymization is applied to it. This step yields a list (or per-type map) of anonymizers that can be applied to anonymize each attribute.
 
-#### Anonymization
-To make the anonymizer list applicable, the input data must be restructured. The anonymizer processes data grouped by instance rather than by attribute. Therefore, a list of values is created for each attribute. The corresponding anonymizer is then applied to each list.
+#### Apply Anonymizers
+To apply the anonymizers, the input data is normalized. For each object type, the service collects values for every attribute across all instances and applies the corresponding anonymizer to these value lists. The anonymized values are then written back to the respective instances.
 
-#### Removal of original values
-For the attribute for which anonymization was applied the original values are removed from the knowledge graph
+#### Remove Original Values
+For attributes that are anonymized, the original values are removed from the knowledge graph.
 
-#### Creation of output
-If the output is returend in a knowledge graph format the model is returned as json-ld. If a flat json return value is requested, a flat json represention is created
+#### Construct Output
+If the output is requested as a knowledge graph, the model is returned as JSON-LD. If a flat JSON output is requested, a flat JSON representation is produced.
 
-An anonymizer takes a list of attribute values as input and returns the anonymized values in the same order. Finally, the anonymized attribute lists are transformed back into an instance-oriented schema.The process is visualized below.
 ![Anonymization_Process](figures/Anonymization_Process.png)
 
 ### Anonymization Operations
 
-The service is implemented in a way to enable easy intergration of new anonymization operation.
+The service is designed for easy integration of new anonymization operations. To integrate new anonymizer, the interface must be implemented
 
 #### Number of Buckets
 
-For both generalization and randomization, a bucket count (denoted as g) is required. This value is derived from the number of instances k in the dataset and the number of anonymized attributes n. The formula is shown below.
+Generalization and randomization require a bucket count (g). This value is derived from the number of instances (k) in the dataset and the number of anonymized attributes (n). The calculation ensures at least a 99% probability that no individual in the dataset is uniquely identifiable.
 
-The number of buckets is calculated to ensure at least a 99% probability that no individual in the dataset is uniquely identifiable.
+- Line 1: Probability that two individuals share the same anonymized values across all attributes.
+- Line 2: Probability that a given individual is not unique (at least one other individual has the same anonymized attribute values).
+- Line 3: Probability that no individual in the dataset is unique.
+- Line 4: Bucket count g computed by rearranging the formula from Line 3 to ensure, with ≥99% probability, that all individuals are non-unique.
 
-* Line 1 defines the probability that two individuals share the same anonymized values across all attributes.
-* Line 2 defines the probability that a given individual is not unique—i.e., at least one other individual has the same anonymized attribute values.
-* Line 3 defines the probability that no individual in the dataset is unique.
-* In Line 4, the number of buckets is computed by rearranging the formula from Line 3 to determine the required group count that ensures, with at least 99% probability, that all individuals in the dataset are non-unique.
 ![Bucket_Calculation](figures/Bucket_Calculation.png)
 
 #### Masking
 
-In maksing the attributes is completly hidden. The original value is replaces with the maksing string "****\*". While this ensures full anonymization, no information of the underlying data is kept in the data. This type of anonymization can be applied to every data type. 
-Name: "Peter Parker" --> Name: "*****"
+Masking fully hides attribute values. The original value is replaced with the masking string "*****". This guarantees complete anonymization, but removes all information about the underlying data. Masking can be applied to any datatype.
 
+Example: Name: "Peter Parker" → Name: "*****"
 
 #### Generalization
 
-In the generalization the attributes are classified into buckets and the class label is written to the anonymized data set. The number of buckets is defined by the number of instances in the data set:
-$$ nrBuckets = \sqrt( numberInstances )$$
-Afterwards, the individuals are assigned to buckets based on their value. An approach was chosen in which each bucket constains the same number of values. Thereby, no single buckets are created for outliers making them easily distinguishable from other instances in the anonymized data set. The instances are sorted and then assigned to a bucket based on their position. Based on the values in each a bucket a label for the bucket is created. 
+Generalization groups attribute values into buckets and writes the bucket label to the anonymized dataset. The number of buckets is defined by the dataset size:
 
- ![Generalization](figures/Generalization.png)
+nrBuckets = sqrt(numberInstances)
 
-##### Generalization for Object
+Values are sorted and assigned to buckets so that each bucket contains the same number of values. This avoids creating singleton buckets for outliers, which would make those records easily distinguishable. Bucket labels are then derived from the values within each bucket.
 
-eneralization was also implemented for object data, provided that a hierarchical relationship exists between the attributes. These object attributes must be defined in the configuration. The process then iteratively reduces each data point to its corresponding attribute value, starting from the lowest level in the hierarchy.
+![Generalization](figures/Generalization.png)
+
+##### Generalization for Objects
+
+Generalization is also supported for object data when a hierarchical relationship exists between attributes. These object attributes must be defined in the configuration. The process iteratively reduces each data point to its corresponding attribute value, starting from the lowest level in the hierarchy.
 
 If the mapping at the current level achieves sufficient anonymization, those attribute values are returned as the anonymized output. Otherwise, the process continues to the next level in the hierarchy. If anonymization still cannot be achieved at the highest level, masking is applied as a fallback.
 
-Currently, the criterion for "sufficient anonymization" at any level is that each group must contain at least three data points.
+Currently, “sufficient anonymization” at any level means each group contains at least three data points.
 
-A common example where this type of anonymization can be applied is addresses. The process is illustrated in the figure below. It first checks whether using the city-level attribute provides enough anonymization. Since there are six groups with only one value each, this level is not sufficient. The process then evaluates the state level, where three groups are formed—but two of them still contain fewer than three values. Finally, the country level is assessed, and since each group contains at least three values, it is used for output.
+Example: Addresses
+- City level: Six groups with only one value each → insufficient.
+- State level: Three groups formed, but two have fewer than three values → insufficient.
+- Country level: Each group contains at least three values → used for output.
 
 ![address_generalization](figures/address_generalization.png)
 
-
 #### Randomization
 
-In randomization, a random value is added to each data point. The added value follows a normal distribution, with its spread depending on the number of instances, the distribution of the data, and the number of buckets used. The salt is then the normal distribution multiplied by the distance to the ith closest values, where i is the number of instances per bucket.
-
+Randomization adds noise to each data point. The noise follows a normal distribution, with its scale depending on the number of instances, the data distribution, and the bucket count. Specifically, the added “salt” is a draw from a normal distribution multiplied by the distance to the i-th nearest value, where i is the number of instances per bucket. This scales the noise to the local density of the data while preserving anonymization strength.
 https://anonymizer.go-data.at/swagger-ui/index.html#/
 
 <details><summary>Anonymization</summary>
