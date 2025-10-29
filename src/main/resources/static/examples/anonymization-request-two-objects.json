@@ -1,0 +1,354 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo2",
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo2/"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:object1-test1",
+        "@type": "oyd:Object1",
+        "oyd:name" : "object1test1 name",
+        "oyd:gehalt" : 42000,
+        "oyd:geburtsdatum": {
+          "@value": "2000-10-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test2",
+        "@type": "oyd:Object1",
+        "oyd:name" : "object1test2 name",
+        "oyd:gehalt" : 65000,
+        "oyd:geburtsdatum": {
+          "@value": "1987-03-02",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test3",
+        "@type": "oyd:Object1",
+        "oyd:gehalt": 54000,
+        "oyd:geburtsdatum": {
+          "@value": "1995-05-15",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test4",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test4 name"
+      },
+      {
+        "@id": "oyd:object1-test5",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test5 name",
+        "oyd:gehalt": 38000
+      },
+      {
+        "@id": "oyd:object1-test6",
+        "@type": "oyd:Object1",
+        "oyd:geburtsdatum": {
+          "@value": "1990-08-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test7",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test7 name",
+        "oyd:geburtsdatum": {
+          "@value": "1982-09-24",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test8",
+        "@type": "oyd:Object1",
+        "oyd:gehalt": 59000
+      },
+      {
+        "@id": "oyd:object1-test9",
+        "@type": "oyd:Object1"
+      },
+      {
+        "@id": "oyd:object1-test10",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test10 name",
+        "oyd:gehalt": 71000,
+        "oyd:geburtsdatum": {
+          "@value": "1973-12-05",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test11",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test11 name"
+      },
+      {
+        "@id": "oyd:object1-test12",
+        "@type": "oyd:Object1",
+        "oyd:gehalt": 43000
+      },
+      {
+        "@id": "oyd:object1-test13",
+        "@type": "oyd:Object1",
+        "oyd:geburtsdatum": {
+          "@value": "1980-07-16",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test14",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test14 name",
+        "oyd:gehalt": 68000
+      },
+      {
+        "@id": "oyd:object1-test15",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test15 name",
+        "oyd:geburtsdatum": {
+          "@value": "1998-06-23",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test16",
+        "@type": "oyd:Object1"
+      },
+      {
+        "@id": "oyd:object1-test17",
+        "@type": "oyd:Object1",
+        "oyd:gehalt": 32000,
+        "oyd:geburtsdatum": {
+          "@value": "2001-11-29",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object1-test18",
+        "@type": "oyd:Object1",
+        "oyd:gehalt": 78000
+      },
+      {
+        "@id": "oyd:object1-test19",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test19 name"
+      },
+      {
+        "@id": "oyd:object1-test20",
+        "@type": "oyd:Object1",
+        "oyd:name": "object1test20 name",
+        "oyd:gehalt": 47000,
+        "oyd:geburtsdatum": {
+          "@value": "1992-04-13",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:object2-test1",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 13.404954,
+        "oyd:latitude": 52.520008
+      },
+      {
+        "@id": "oyd:object2-test2",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 2.352222,
+        "oyd:latitude": 48.856613
+      },
+      {
+        "@id": "oyd:object2-test3",
+        "@type": "oyd:Object2",
+        "oyd:longitude": -0.127758,
+        "oyd:latitude": 51.507351
+      },
+      {
+        "@id": "oyd:object2-test4",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 12.496366,
+        "oyd:latitude": 41.902782
+      },
+      {
+        "@id": "oyd:object2-test5",
+        "@type": "oyd:Object2",
+        "oyd:longitude": -3.70379,
+        "oyd:latitude": 40.416775
+      },
+      {
+        "@id": "oyd:object2-test6",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 151.2099,
+        "oyd:latitude": -33.865143
+      },
+      {
+        "@id": "oyd:object2-test7",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 139.691711,
+        "oyd:latitude": 35.689487
+      },
+      {
+        "@id": "oyd:object2-test8",
+        "@type": "oyd:Object2",
+        "oyd:longitude": -58.381592,
+        "oyd:latitude": -34.603722
+      },
+      {
+        "@id": "oyd:object2-test9",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 37.617298,
+        "oyd:latitude": 55.755825
+      },
+      {
+        "@id": "oyd:object2-test10",
+        "@type": "oyd:Object2",
+        "oyd:longitude": -74.005974,
+        "oyd:latitude": 40.712776
+      },
+      {
+        "@id": "oyd:object2-test11",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 4.904139,
+        "oyd:latitude": 52.367573
+      },
+      {
+        "@id": "oyd:object2-test12",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 18.424055,
+        "oyd:latitude": -33.92487
+      },
+      {
+        "@id": "oyd:object2-test13",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 28.047306,
+        "oyd:latitude": -26.204103
+      },
+      {
+        "@id": "oyd:object2-test14",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 144.963058,
+        "oyd:latitude": -37.813629
+      },
+      {
+        "@id": "oyd:object2-test15",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 103.819836,
+        "oyd:latitude": 1.352083
+      },
+      {
+        "@id": "oyd:object2-test16",
+        "@type": "oyd:Object2",
+        "oyd:longitude": -46.62529,
+        "oyd:latitude": -23.533773
+      },
+      {
+        "@id": "oyd:object2-test17",
+        "@type": "oyd:Object2",
+        "oyd:longitude": -99.133209,
+        "oyd:latitude": 19.432608
+      },
+      {
+        "@id": "oyd:object2-test18",
+        "@type": "oyd:Object2",
+        "oyd:longitude": 30.335098,
+        "oyd:latitude": 59.93428
+      },
+      {
+        "@id": "oyd:object2-test19",
+        "@type": "oyd:Object2"
+      },
+      {
+        "@id": "oyd:object2-test20",
+        "@type": "oyd:Object2"
+      },
+      {
+        "@id": "oyd:mixed-objects1",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 10.75,
+        "oyd:latitude": 59.91,
+        "oyd:name": "mixed1 name",
+        "oyd:gehalt": 54000,
+        "oyd:no-anonymization-attribute": 17
+      },
+      {
+        "@id": "oyd:mixed-objects2",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 139.69,
+        "oyd:latitude": 35.68,
+        "oyd:name": "mixed2 name"
+      },
+      {
+        "@id": "oyd:mixed-objects3",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": -0.13,
+        "oyd:latitude": 51.51,
+        "oyd:gehalt": 32000,
+        "oyd:geburtsdatum": {
+          "@value": "1996-11-04",
+          "@type": "xsd:date"
+        },
+        "oyd:no-anonymization-attribute": 5
+      },
+      {
+        "@id": "oyd:mixed-objects4",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 2.35,
+        "oyd:latitude": 48.86
+      },
+      {
+        "@id": "oyd:mixed-objects5",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 151.21,
+        "oyd:latitude": -33.87,
+        "oyd:name": "mixed5 value",
+        "oyd:geburtsdatum": {
+          "@value": "1981-06-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:mixed-objects6",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": -43.17,
+        "oyd:latitude": -22.90,
+        "oyd:gehalt": 75000,
+        "oyd:no-anonymization-attribute": 22
+      },
+      {
+        "@id": "oyd:mixed-objects7",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 18.07,
+        "oyd:latitude": 59.33
+      },
+      {
+        "@id": "oyd:mixed-objects8",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 12.49,
+        "oyd:latitude": 41.90,
+        "oyd:name": "mixed8 object",
+        "oyd:gehalt": 61000,
+        "oyd:geburtsdatum": {
+          "@value": "2002-05-21",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:mixed-objects9",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": -74.00,
+        "oyd:latitude": 40.71,
+        "oyd:no-anonymization-attribute": 3
+      },
+      {
+        "@id": "oyd:mixed-objects10",
+        "@type": ["oyd:Object1", "oyd:Object2"],
+        "oyd:longitude": 4.90,
+        "oyd:latitude": 52.37,
+        "oyd:name": "last mixed object",
+        "oyd:no-anonymization-attribute": 11
+      }
+    ]
+  }
+}
