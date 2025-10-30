@@ -42,19 +42,14 @@ public class AnonymizationService {
     }
 
     public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
-        try {
-            Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
-            Model model = ModelFactory.createDefaultModel();
-            Resource anonymizationObject = model.createResource(request.getPrefix() + "anonymizationObject");
-            FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
-            applyAnonymizationForObject(anonymizationObject, configs, model);
-            String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
-            logger.info(out);
-            return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
-        } catch(Exception e) {
-            logger.error(e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
+        Model model = ModelFactory.createDefaultModel();
+        Resource anonymizationObject = model.createResource(request.getPrefix() + "anonymizationObject");
+        FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
+        applyAnonymizationForObject(anonymizationObject, configs, model);
+        String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
+        logger.info(out);
+        return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }
 
     private static void applyAnonymizationForObject(
