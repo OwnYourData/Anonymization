@@ -38,9 +38,14 @@ public class AnonymizationRestController {
                             schema = @Schema(implementation = AnonymizationJsonLDRequestDto.class),
                             examples = {
                                     @ExampleObject(
-                                            name = "flatjson-full",
-                                            summary = "Full flat JSON request",
+                                            name = "Simple JSON-LD example",
+                                            summary = "Simple JSON-LD request with one anonymization object",
                                             externalValue = "/examples/anonymization-request.json"
+                                    ),
+                                    @ExampleObject(
+                                            name = "JSON-LD with two anonymization objects",
+                                            summary = "JSON-LD request with two anonymization objects",
+                                            externalValue = "/examples/anonymization-request-two-objects.json"
                                     )
                             }
                     )
@@ -70,9 +75,14 @@ public class AnonymizationRestController {
                             schema = @Schema(implementation = AnonymizationFlatJsonRequestDto.class),
                             examples = {
                                     @ExampleObject(
-                                            name = "flatjson-full",
-                                            summary = "Full flat JSON request",
+                                            name = "Simple flat JSON example",
+                                            summary = "Simple example with flat json input",
                                             externalValue = "/examples/anonymization-request-flat.json"
+                                    ),
+                                    @ExampleObject(
+                                            name = "Flat JSON based on objects",
+                                            summary = "Example with flat json input based on two anonymization objects",
+                                            externalValue = "/examples/anonymization-request-flat-two-objects.json"
                                     )
                             }
                     )
