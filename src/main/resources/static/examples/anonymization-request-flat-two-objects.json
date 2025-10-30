@@ -151,7 +151,7 @@
       "latitude": 59.91,
       "name": "mixed1 name",
       "gehalt": 54000,
-      "no-anonymization-attribute": 17
+      "no_anonymization_attribute": 17
     },
     {
       "longitude": 139.69,
@@ -163,7 +163,7 @@
       "latitude": 51.51,
       "gehalt": 32000,
       "geburtsdatum": "1996-11-04",
-      "no-anonymization-attribute": 5
+      "no_anonymization_attribute": 5
     },
     {
       "longitude": 2.35,
@@ -179,7 +179,7 @@
       "longitude": -43.17,
       "latitude": -22.90,
       "gehalt": 75000,
-      "no-anonymization-attribute": 22
+      "no_anonymization_attribute": 22
     },
     {
       "longitude": 18.07,
@@ -195,13 +195,13 @@
     {
       "longitude": -74.00,
       "latitude": 40.71,
-      "no-anonymization-attribute": 3
+      "no_anonymization_attribute": 3
     },
     {
       "longitude": 4.90,
       "latitude": 52.37,
       "name": "last mixed object",
-      "no-anonymization-attribute": 11
+      "no_anonymization_attribute": 11
     }
   ]
 }

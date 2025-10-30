@@ -3,6 +3,7 @@ package com.example.anonymization.service;
 import com.example.anonymization.data.QueryService;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.exceptions.AnonymizationException;
+import com.example.anonymization.exceptions.RequestModelException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -42,6 +43,7 @@ public class FaltJsonService {
 
                 for (Map.Entry<String, Object> kv : entry.entrySet()) {
                     String key = kv.getKey();
+                    validateKey(key);
                     Object value = kv.getValue();
                     Property property = model.createProperty(prefix, key);
 
@@ -50,7 +52,7 @@ public class FaltJsonService {
                     }
                 }
             } catch (Exception ex) {
-                throw new AnonymizationException("Error adding data to flat model: " + ex.getMessage());
+                throw new RequestModelException("Error adding data to flat model: " + ex.getMessage());
             }
             counter++;
         }
@@ -165,6 +167,16 @@ public class FaltJsonService {
             }
         }
         return Integer.MAX_VALUE;
+    }
+
+    private static void validateKey(String key) {
+        if (key == null || key.isEmpty()) {
+            throw new RequestModelException("Property key cannot be null or empty");
+        }
+        if (!key.matches("^[a-zA-Z_][a-zA-Z0-9_]*$")) {
+            throw new RequestModelException("Invalid property key: " + key +
+                    ". It must start with a letter or underscore and contain only letters, digits, or underscores.");
+        }
     }
 
 }
