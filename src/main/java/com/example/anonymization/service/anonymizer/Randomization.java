@@ -1,5 +1,6 @@
 package com.example.anonymization.service.anonymizer;
 
+import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.KpiService;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -8,7 +9,18 @@ import org.apache.jena.rdf.model.Resource;
 
 import java.util.*;
 
-public abstract class Randomization implements Anonymization {
+public abstract class Randomization extends Anonymization {
+
+    public Randomization(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            long numberAttributes,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
+        super(model, property, data, numberAttributes, config, anonymizationObject);
+    }
 
     abstract double distance(Literal a, Literal b);
 
@@ -17,10 +29,10 @@ public abstract class Randomization implements Anonymization {
     abstract Comparator<Literal> getComparator();
 
     @Override
-    public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+    public void applyAnonymization() {
         int nrBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         int randomizationValue = data.size() / nrBuckets;
-        KpiService.addNrBuckets(model, property, nrBuckets);
+        KpiService.addNrBuckets(model, property, nrBuckets, anonymizationObject);
         Map<Resource, Literal> randomizedValues = getRandomizedValues(data, randomizationValue);
         writeToModel(model, randomizedValues, property);
     }

@@ -14,8 +14,7 @@ import java.util.*;
 @Service
 public class KpiService {
 
-    // TODO different KPIs for different anonymization objects
-    private static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpiObject";
+    private static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpi";
 
     /**
      * Adds a KPI object to the model containing the k-anonymity value for the given anonymization object.
@@ -30,7 +29,7 @@ public class KpiService {
             Set<Property> attributes,
             Map<Property, Configuration> configurations
     ) {
-        Resource kpiObject = model.createResource(KPI_OBJECT_URI);
+        Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject.getLocalName());
         Property property = model.createProperty(QueryService.SOYA_URL + "kpis");
         anonymizationObject.addProperty(property, kpiObject);
 
@@ -44,8 +43,8 @@ public class KpiService {
      * @param property Property for which the number of buckets is added
      * @param numberAttributes Number of buckets used in the anonymization
      */
-    public static void addNrBuckets(Model model, Property property, int numberAttributes) {
-        Resource kpiObject = model.createResource(KPI_OBJECT_URI);
+    public static void addNrBuckets(Model model, Property property, int numberAttributes, Resource anonymizationObject) {
+        Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject.getLocalName());
         Property numberAttrProperty = model.createProperty(
                 QueryService.SOYA_URL + property.getLocalName() + "NumberAttributes"
         );

@@ -1,8 +1,10 @@
 package com.example.anonymization.service.anonymizer;
 
 
+import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.KpiService;
 import com.example.anonymization.data.QueryService;
+import lombok.AllArgsConstructor;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -14,15 +16,26 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class Generalization<T> implements Anonymization {
+public abstract class Generalization<T> extends Anonymization {
 
     public static final String RDF_MAX = "http://www.w3.org/2000/01/rdf-schema#max";
     public static final String RDF_MIN = "http://www.w3.org/2000/01/rdf-schema#min";
 
+    public Generalization(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            long numberAttributes,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
+        super(model, property, data, numberAttributes, config, anonymizationObject);
+    }
+
     @Override
-    public void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes) {
+    public void applyAnonymization() {
         int numberBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
-        KpiService.addNrBuckets(model, property, numberBuckets);
+        KpiService.addNrBuckets(model, property, numberBuckets, anonymizationObject);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
         List<Resource> buckets = createBuckets(model, numberBuckets, sortedValues, property);
         Map<Resource, Resource> ranges = getRanges(sortedValues, numberBuckets, buckets);

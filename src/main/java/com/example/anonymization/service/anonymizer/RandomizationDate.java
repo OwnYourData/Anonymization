@@ -1,16 +1,28 @@
 package com.example.anonymization.service.anonymizer;
 
+import com.example.anonymization.entities.Configuration;
 import org.apache.jena.base.Sys;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.*;
 
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Random;
 
 public class RandomizationDate extends Randomization {
+
+    public RandomizationDate(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            long numberAttributes,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
+        super(model, property, data, numberAttributes, config, anonymizationObject);
+    }
 
     @Override
     double distance(Literal a, Literal b) {
