@@ -1,10 +1,22 @@
 package com.example.anonymization.service.anonymizer;
 
+import com.example.anonymization.entities.Configuration;
 import org.apache.jena.rdf.model.*;
 
 import java.util.*;
 
 public class RandomizationNumeric extends Randomization {
+
+    public RandomizationNumeric(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            long numberAttributes,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
+        super(model, property, data, numberAttributes, config, anonymizationObject);
+    }
 
     @Override
     protected double distance(Literal a, Literal b) {

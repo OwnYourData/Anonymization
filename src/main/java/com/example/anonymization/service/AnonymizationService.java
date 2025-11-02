@@ -53,21 +53,22 @@ public class AnonymizationService {
     }
 
     private static void applyAnonymizationForObject(
-            Resource anonymizationObject, Map<Property, Configuration> configurations,
+            Resource anonymizationObject,
+            Map<Property, Configuration> configurations,
             Model model
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
-        horizontalData.forEach(((property, resourceLiteralMap) ->
-                Anonymization.anonymization(
-                        configurations.get(property),
-                        model,
-                        property,
-                        resourceLiteralMap,
-                        nrAnonymizeAttributes
-                )));
+        horizontalData.entrySet().stream().map(e -> Anonymization.anonymizationFactoryFunction(
+                configurations.get(e.getKey()),
+                model,
+                e.getKey(),
+                e.getValue(),
+                nrAnonymizeAttributes,
+                anonymizationObject
+        )).forEach(Anonymization::anonymization);
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
         QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
     }

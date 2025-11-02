@@ -1,6 +1,7 @@
 package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
+import lombok.AllArgsConstructor;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
@@ -11,34 +12,55 @@ import java.util.Map;
 import static java.lang.StrictMath.floor;
 import static java.lang.StrictMath.pow;
 
-public interface Anonymization {
+@AllArgsConstructor
+public abstract class Anonymization {
 
-    void applyAnonymization(Model model, Property property, Map<Resource, Literal> data, long numberAttributes);
+    Model model;
+    Property property;
+    Map<Resource, Literal> data;
+    long numberAttributes;
+    Configuration config;
+    Resource anonymizationObject;
 
-    static void anonymization(Configuration config, Model model, Property property, Map<Resource, Literal> data, int nrAnonymizeAttributes) {
-        data.entrySet().removeIf(entry -> entry.getValue() == null);
-        System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
-        Anonymization anonymization = anonymizationFactoryFunction(config);
-        anonymization.applyAnonymization(model, property, data, nrAnonymizeAttributes);
+    Anonymization(Model model, Property property, Map<Resource, Literal> data, Configuration config) {
+        this.model = model;
+        this.property = property;
+        this.data = data;
+        this.config = config;
     }
 
-    private static Anonymization anonymizationFactoryFunction(Configuration configuration) {
-        return switch (configuration.getAnonymization()) {
-            case "generalization" -> switch (configuration.getDataType()) {
-                case "integer", "double" -> new GeneralizationNumeric();
-                case "date" -> new GeneralizationDate();
+    abstract void applyAnonymization();
+
+    public void anonymization() {
+        data.entrySet().removeIf(entry -> entry.getValue() == null);
+        System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
+        applyAnonymization();
+    }
+
+    public static Anonymization anonymizationFactoryFunction(
+            Configuration config,
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            int nrAttr,
+            Resource anonymizationObject
+    ) {
+        return switch (config.getAnonymization()) {
+            case "generalization" -> switch (config.getDataType()) {
+                case "integer", "double" -> new GeneralizationNumeric(model, property, data, nrAttr, config, anonymizationObject);
+                case "date" -> new GeneralizationDate(model, property, data, nrAttr, config, anonymizationObject);
                 case "string" -> throw new IllegalArgumentException("No Generalization possible for type string");
-                default -> new GeneralizationObject();
+                default -> new GeneralizationObject(model, property, data, nrAttr, config, anonymizationObject);
             };
-            case "randomization" -> switch (configuration.getDataType()) {
-                case "integer", "double" -> new RandomizationNumeric();
-                case "date" -> new RandomizationDate();
+            case "randomization" -> switch (config.getDataType()) {
+                case "integer", "double" -> new RandomizationNumeric(model, property, data, nrAttr, config, anonymizationObject);
+                case "date" -> new RandomizationDate(model, property, data, nrAttr, config, anonymizationObject);
                 default ->
-                        throw new IllegalArgumentException("No Randomization possible for type " + configuration.getDataType());
+                        throw new IllegalArgumentException("No Randomization possible for type " + config.getDataType());
             };
-            case "masking" -> new Masking();
+            case "masking" -> new Masking(model, property, data, config);
             default ->
-                    throw new IllegalArgumentException("No Anonymization implementation for " + configuration.getAnonymization() + ": " + configuration.getDataType());
+                    throw new IllegalArgumentException("No Anonymization implementation for " + config.getAnonymization() + ": " + config.getDataType());
         };
     }
 
