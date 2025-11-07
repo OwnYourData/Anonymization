@@ -15,6 +15,9 @@ import java.util.*;
 public class KpiService {
 
     private static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpi";
+    private static final String HAS_ATTRIBUTE_URI = QueryService.SOYA_URL + "hasAttribute";
+    private static final String ANONYMIZATION_TYP_URI = QueryService.SOYA_URL + "anonymizationTyp";
+    private static final String NR_ATTRIBUTES_URI = QueryService.SOYA_URL + "nrAttributes";
 
     /**
      * Adds a KPI object to the model containing the k-anonymity value for the given anonymization object.
@@ -41,14 +44,21 @@ public class KpiService {
      * Adds the number of buckets used in the anonymization for an attribute to the KPI object in the model.
      * @param model Model to which the KPI object is added
      * @param property Property for which the number of buckets is added
-     * @param numberAttributes Number of buckets used in the anonymization
+     * @param nrBucketsUsed Number of buckets used in the anonymization
+     * @param anonymizationType Anonymization Implementation applied
+     * @param anonymizationObject Object for which the value should be added
      */
-    public static void addNrBuckets(Model model, Property property, int numberAttributes, Resource anonymizationObject) {
-        Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject.getLocalName());
-        Property numberAttrProperty = model.createProperty(
-                QueryService.SOYA_URL + property.getLocalName() + "NumberAttributes"
-        );
-        kpiObject.addLiteral(numberAttrProperty, numberAttributes);
+    public static void addAttributeInformation(
+            Model model,
+            Property property,
+            long nrBucketsUsed,
+            String anonymizationType,
+            Resource anonymizationObject
+    ) {
+        Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject);
+        model.add(kpiObject, model.createProperty(HAS_ATTRIBUTE_URI), property);
+        model.add(property, model.createProperty(ANONYMIZATION_TYP_URI), anonymizationType);
+        model.addLiteral(property, model.createProperty(NR_ATTRIBUTES_URI), nrBucketsUsed);
     }
 
     private static int calculateKAnonymity(

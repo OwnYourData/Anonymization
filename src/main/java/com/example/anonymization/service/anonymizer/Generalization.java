@@ -35,7 +35,6 @@ public abstract class Generalization<T> extends Anonymization {
     @Override
     public void applyAnonymization() {
         int numberBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
-        KpiService.addNrBuckets(model, property, numberBuckets, anonymizationObject);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
         List<Resource> buckets = createBuckets(model, numberBuckets, sortedValues, property);
         Map<Resource, Resource> ranges = getRanges(sortedValues, numberBuckets, buckets);

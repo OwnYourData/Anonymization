@@ -32,7 +32,6 @@ public abstract class Randomization extends Anonymization {
     public void applyAnonymization() {
         int nrBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         int randomizationValue = data.size() / nrBuckets;
-        KpiService.addNrBuckets(model, property, nrBuckets, anonymizationObject);
         Map<Resource, Literal> randomizedValues = getRandomizedValues(data, randomizationValue);
         writeToModel(model, randomizedValues, property);
     }

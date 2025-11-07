@@ -1,6 +1,7 @@
 package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
+import com.example.anonymization.service.KpiService;
 import lombok.AllArgsConstructor;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -34,6 +35,7 @@ public abstract class Anonymization {
     public void anonymization() {
         data.entrySet().removeIf(entry -> entry.getValue() == null);
         System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
+        KpiService.addAttributeInformation(model, property, numberAttributes, config.getAnonymization(), anonymizationObject);
         applyAnonymization();
     }
 
