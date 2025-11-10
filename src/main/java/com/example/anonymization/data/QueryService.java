@@ -2,6 +2,7 @@ package com.example.anonymization.data;
 
 import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.exceptions.RequestModelException;
+import com.example.anonymization.service.KpiService;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateAction;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.example.anonymization.service.AnonymizationService.FLAT_OBJECT_NAME;
+import static com.example.anonymization.service.KpiService.*;
 
 @Service
 public class QueryService {
@@ -76,7 +80,7 @@ public class QueryService {
     public static Map<Property, Literal> getDataKpi(Model model, Set<Property> properties) {
         Query query = QueryBuldingService.createKpiDataQuery(
                 properties,
-                model.getResource(SOYA_URL + "kpiObject")
+                model.getResource(SOYA_URL + "kpiObjectAnonymizationDemo2") // TODO query for the right url (kpiObject + local url of resource)
         ).asQuery();
         Map<Property, Literal> results = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
@@ -188,7 +192,21 @@ public class QueryService {
     }
 
     public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Resource objectType) {
-        Set<Property> properties = getProperties(model, objectType);
+        Set<Property> properties = new HashSet<>();
+        ParameterizedSparqlString pss = new ParameterizedSparqlString("""
+                SELECT ?predicate
+                WHERE {
+                  ?s a ?objectType ; ?predicate ?o .
+                }
+                """);
+        pss.setParam("objectType", objectType);
+        try (QueryExecution qexec = QueryExecutionFactory.create(pss.asQuery(), model)) {
+            ResultSet rs = qexec.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution solution = rs.nextSolution();
+                properties.add(ResourceFactory.createProperty(solution.getResource("?predicate").getURI()));
+            }
+        }
         return getData(model, properties, objectType);
     }
 
@@ -217,43 +235,47 @@ public class QueryService {
         return results;
     }
 
-    public static Map<Property, Literal> getKpiData(Model model) {
-        Set<Property> properties = getKpiProperties(model);
-        return getDataKpi(model, properties);
-    }
-
-    private static Set<Property> getKpiProperties(Model model) {
-        return executeGetProperties(model, model.getResource(SOYA_URL + "kpiObject"), """
-                SELECT ?predicate
-                WHERE {
-                    ?objectType ?predicate ?o .
-                }
-                """);
-    }
-
-    private static Set<Property> getProperties(Model model, Resource objectType) {
-        return executeGetProperties(model, objectType, """
-                SELECT ?predicate
-                WHERE {
-                  ?s a ?objectType ; ?predicate ?o .
-                }
-                """);
-    }
-
-    private static Set<Property> executeGetProperties(Model model, Resource objectType, String queryString) {
-        Set<Property> properties = new HashSet<>();
-        ParameterizedSparqlString pss = new ParameterizedSparqlString(queryString);
-        pss.setParam("objectType", objectType);
-        try (QueryExecution qexec = QueryExecutionFactory.create(pss.asQuery(), model)) {
-            ResultSet rs = qexec.execSelect();
-            while (rs.hasNext()) {
-                QuerySolution solution = rs.nextSolution();
-                properties.add(ResourceFactory.createProperty(solution.getResource("?predicate").getURI()));
+    public static Long getKAnonymity(Model model) {
+        ParameterizedSparqlString queryString = QueryBuldingService.createKAnonymityQuery(
+                model.createResource(KPI_OBJECT_URI + FLAT_OBJECT_NAME),
+                model.createProperty(K_ANONYMITY)
+        );
+        Query query = queryString.asQuery();
+        try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
+            ResultSet rs = qe.execSelect();
+            if (rs.hasNext()) {
+                QuerySolution sol = rs.next();
+                return sol.getLiteral("value").getLong();
             }
         }
-        return properties;
+        return null;
     }
+
+    public static List<AttributeInformation> getAttributeInformation(Model model) {
+        ParameterizedSparqlString queryString = QueryBuldingService.createAttributeInformationQuery(
+                model.createResource(KPI_OBJECT_URI + FLAT_OBJECT_NAME),
+                model.createProperty(HAS_ATTRIBUTE_URI),
+                model.createProperty(NR_ATTRIBUTES_URI),
+                model.createProperty(ANONYMIZATION_TYP_URI)
+        );
+        Query query = queryString.asQuery();
+        List<AttributeInformation> results = new ArrayList<>();
+        try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution sol = rs.next();
+                results.add(new AttributeInformation(
+                        sol.getResource("attribute"),
+                        sol.getLiteral("anonymization").toString(),
+                        sol.getLiteral("nrBuckets").getLong()
+                ));
+            }
+        }
+        return results;
+    }
+
 
     public record ConfigurationResult(Resource object, Property property, Resource datatype, Literal anonymization) {}
     public record RandomizationResult(Resource object, Literal original, Literal randomized) {}
+    public record AttributeInformation(Resource attribute, String anonymization, Long nrBuckets) {}
 }

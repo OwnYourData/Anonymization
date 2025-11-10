@@ -66,27 +66,34 @@ public class FaltJsonService {
      * @return String representing the flat JSON output in Json format
      */
     public static String createFlatJsonOutput(Model model, Resource objectType, Map<Property, Configuration> configs) {
-        Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, objectType);
-        Set<Property> classificationProperties = configs.entrySet().stream()
-                .filter(e -> "generalization".equals(e.getValue().getAnonymization()))
-                .map(Map.Entry::getKey)
-                .map(p -> model.getProperty(p.getURI() + "_generalized"))
-                .collect(Collectors.toSet());
-        Map<Resource, Map<Property, List<Literal>>> generalizationData =
-                QueryService.getGeneralizationData(model, objectType, classificationProperties);
-        Map<Property, Literal> kpiData = QueryService.getKpiData(model);
-        return createFlatJsonString(data, generalizationData , kpiData);
+        try {
+            Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, objectType);
+
+            Set<Property> classificationProperties = configs.entrySet().stream()
+                    .filter(e -> "generalization".equals(e.getValue().getAnonymization()))
+                    .map(Map.Entry::getKey)
+                    .map(p -> model.getProperty(p.getURI() + "_generalized"))
+                    .collect(Collectors.toSet());
+            Map<Resource, Map<Property, List<Literal>>> generalizationData =
+                    QueryService.getGeneralizationData(model, objectType, classificationProperties);
+            Long kAnonymity = QueryService.getKAnonymity(model);
+            List<QueryService.AttributeInformation> attributeInformation = QueryService.getAttributeInformation(model);
+            return createFlatJsonString(data, generalizationData , kAnonymity, attributeInformation);
+        } catch (Exception e) {
+            throw new AnonymizationException("Error creating flat model: " + e.getMessage());
+        }
     }
 
     private static String createFlatJsonString(
             Map<Resource, Map<Property, Literal>> data,
             Map<Resource, Map<Property, List<Literal>>> generalizationData,
-            Map<Property, Literal> kpiData
+            Long kAnonymity,
+            List<QueryService.AttributeInformation> attributeInformation
     ) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             ArrayNode dataArray = addDataToArrayNode(mapper, data, generalizationData);
-            ObjectNode kpiNode = addKpisToObjectNode(mapper, kpiData);
+            ObjectNode kpiNode = addKpisToObjectNode(mapper, kAnonymity, attributeInformation);
 
             ObjectNode root = mapper.createObjectNode();
             root.set("data", dataArray);
@@ -143,11 +150,16 @@ public class FaltJsonService {
 
     private static ObjectNode addKpisToObjectNode(
             ObjectMapper mapper,
-            Map<Property, Literal> kpiData
+            Long kAnonymity,
+            List<QueryService.AttributeInformation> attributeInformation
     ) {
         ObjectNode kpiNode = mapper.createObjectNode();
-        kpiData.forEach((kpi, value) -> {
-            kpiNode.put(kpi.getLocalName(), value.getValue().toString());
+        kpiNode.put("k-Anonymity", kAnonymity);
+        attributeInformation.forEach(attr -> {
+            ObjectNode attrNode = mapper.createObjectNode();
+            attrNode.put("anonymization", attr.anonymization());
+            attrNode.put("nrBuckets",  attr.nrBuckets());
+            kpiNode.set(attr.attribute().getLocalName(), attrNode);
         });
         return kpiNode;
     }

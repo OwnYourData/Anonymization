@@ -9,8 +9,16 @@ import org.apache.jena.rdf.model.Resource;
 import java.util.Map;
 
 public class GeneralizationObject extends Anonymization {
-    public GeneralizationObject(Model model, Property property, Map<Resource, Literal> data, long numberAttributes, Configuration config, Resource anonymizationObject) {
-        super(model, property, data, numberAttributes, config, anonymizationObject);
+
+    public GeneralizationObject(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            long numberAttributes,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
+        super(model, property, data, config, anonymizationObject, numberAttributes);
     }
 
     @Override

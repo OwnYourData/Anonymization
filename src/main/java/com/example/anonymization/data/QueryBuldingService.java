@@ -1,5 +1,6 @@
 package com.example.anonymization.data;
 
+import com.example.anonymization.service.KpiService;
 import com.example.anonymization.service.anonymizer.Generalization;
 import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.rdf.model.Model;
@@ -7,6 +8,8 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
 import java.util.Set;
+
+import static com.example.anonymization.data.QueryService.SOYA_URL;
 
 public class QueryBuldingService {
 
@@ -145,6 +148,34 @@ public class QueryBuldingService {
         });
         queryString.append("}");
         queryString.setParam("objectType",  anonymizationObject);
+        return queryString;
+    }
+
+    static ParameterizedSparqlString createKAnonymityQuery(Resource kpiObject, Property kAnonymity) {
+        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
+        queryString.append("SELECT ?value WHERE {\n");
+        queryString.append("?kpiObject ?kAnonymity ?value .\n}");
+        queryString.setParam("kpiObject", kpiObject);
+        queryString.setParam("kAnonymity", kAnonymity);
+        return queryString;
+    }
+
+    static ParameterizedSparqlString createAttributeInformationQuery(
+            Resource kpiObject,
+            Property hasAttribute,
+            Property nrBuckets,
+            Property anonymization
+    ) {
+        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
+        queryString.append("SELECT ?attribute ?anonymization ?nrBuckets WHERE {\n");
+        queryString.append("?kpiObject ?hasAttribute ?attribute .\n");
+        queryString.append("?attribute ?nrBucketsAttribute ?nrBuckets .\n");
+        queryString.append("?attribute ?anonymizationAttribute ?anonymization .\n");
+        queryString.append("}\n");
+        queryString.setParam("kpiObject", kpiObject);
+        queryString.setParam("hasAttribute", hasAttribute);
+        queryString.setParam("nrBucketsAttribute", nrBuckets);
+        queryString.setParam("anonymizationAttribute", anonymization);
         return queryString;
     }
 

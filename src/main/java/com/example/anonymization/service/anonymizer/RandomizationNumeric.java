@@ -15,7 +15,7 @@ public class RandomizationNumeric extends Randomization {
             Configuration config,
             Resource anonymizationObject
     ) {
-        super(model, property, data, numberAttributes, config, anonymizationObject);
+        super(model, property, data, config, anonymizationObject, numberAttributes);
     }
 
     @Override

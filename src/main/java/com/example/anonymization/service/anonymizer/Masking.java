@@ -10,8 +10,15 @@ import java.util.Map;
 
 public class Masking extends Anonymization {
 
-    public Masking(Model model, Property property, Map<Resource, Literal> data, Configuration config) {
-        super(model, property, data, config);
+
+    public Masking(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
+        super(model, property, data, config, anonymizationObject);
     }
 
     @Override
