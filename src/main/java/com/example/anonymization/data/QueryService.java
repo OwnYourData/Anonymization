@@ -264,10 +264,12 @@ public class QueryService {
             ResultSet rs = qe.execSelect();
             while (rs.hasNext()) {
                 QuerySolution sol = rs.next();
+                Long nrBuckets = sol.getLiteral("nrBuckets") == null ?
+                        null : sol.getLiteral("nrBuckets").getLong();
                 results.add(new AttributeInformation(
                         sol.getResource("attribute"),
                         sol.getLiteral("anonymization").toString(),
-                        sol.getLiteral("nrBuckets").getLong()
+                        nrBuckets
                 ));
             }
         }

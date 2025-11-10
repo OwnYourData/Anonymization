@@ -59,7 +59,9 @@ public class KpiService {
         Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject.getLocalName());
         model.add(kpiObject, model.createProperty(HAS_ATTRIBUTE_URI), property);
         model.add(property, model.createProperty(ANONYMIZATION_TYP_URI), anonymizationType);
-        model.addLiteral(property, model.createProperty(NR_ATTRIBUTES_URI), nrBucketsUsed);
+        if (!anonymizationType.equals("masking")) {
+            model.addLiteral(property, model.createProperty(NR_ATTRIBUTES_URI), nrBucketsUsed);
+        }
     }
 
     private static int calculateKAnonymity(

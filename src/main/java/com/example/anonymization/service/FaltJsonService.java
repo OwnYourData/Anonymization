@@ -158,7 +158,9 @@ public class FaltJsonService {
         attributeInformation.forEach(attr -> {
             ObjectNode attrNode = mapper.createObjectNode();
             attrNode.put("anonymization", attr.anonymization());
-            attrNode.put("nrBuckets",  attr.nrBuckets());
+            if (attr.nrBuckets() != null) {
+                attrNode.put("nrBuckets",  attr.nrBuckets());
+            }
             kpiNode.set(attr.attribute().getLocalName(), attrNode);
         });
         return kpiNode;
