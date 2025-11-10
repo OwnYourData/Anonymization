@@ -1,4 +1,4 @@
-FROM openjdk:24
+FROM eclipse-temurin:24-jdk
 LABEL maintainer="Paul Feichtenshlager <feichtenschlager10@gmail.com>"
 
 RUN mkdir -p /usr/src/app
