@@ -15,11 +15,11 @@ public abstract class Randomization extends Anonymization {
             Model model,
             Property property,
             Map<Resource, Literal> data,
-            long numberAttributes,
             Configuration config,
-            Resource anonymizationObject
+            Resource anonymizationObject,
+            long numberAttributes
     ) {
-        super(model, property, data, numberAttributes, config, anonymizationObject);
+        super(model, property, data, config, anonymizationObject, numberAttributes);
     }
 
     abstract double distance(Literal a, Literal b);

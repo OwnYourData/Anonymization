@@ -25,11 +25,11 @@ public abstract class Generalization<T> extends Anonymization {
             Model model,
             Property property,
             Map<Resource, Literal> data,
-            long numberAttributes,
             Configuration config,
-            Resource anonymizationObject
-    ) {
-        super(model, property, data, numberAttributes, config, anonymizationObject);
+            Resource anonymizationObject,
+            long numberAttributes
+            ) {
+        super(model, property, data, config, anonymizationObject, numberAttributes);
     }
 
     @Override

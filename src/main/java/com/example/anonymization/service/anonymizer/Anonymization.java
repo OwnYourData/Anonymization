@@ -2,6 +2,8 @@ package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.KpiService;
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -16,18 +18,25 @@ import static java.lang.StrictMath.pow;
 @AllArgsConstructor
 public abstract class Anonymization {
 
-    Model model;
-    Property property;
-    Map<Resource, Literal> data;
+    @NotNull Model model;
+    @NotNull Property property;
+    @NotNull Map<Resource, Literal> data;
+    @NotNull Configuration config;
+    @NotNull Resource anonymizationObject;
     long numberAttributes;
-    Configuration config;
-    Resource anonymizationObject;
 
-    Anonymization(Model model, Property property, Map<Resource, Literal> data, Configuration config) {
+    Anonymization(
+            Model model,
+            Property property,
+            Map<Resource, Literal> data,
+            Configuration config,
+            Resource anonymizationObject
+    ) {
         this.model = model;
         this.property = property;
         this.data = data;
         this.config = config;
+        this.anonymizationObject = anonymizationObject;
     }
 
     abstract void applyAnonymization();
@@ -60,7 +69,7 @@ public abstract class Anonymization {
                 default ->
                         throw new IllegalArgumentException("No Randomization possible for type " + config.getDataType());
             };
-            case "masking" -> new Masking(model, property, data, config);
+            case "masking" -> new Masking(model, property, data, config, anonymizationObject);
             default ->
                     throw new IllegalArgumentException("No Anonymization implementation for " + config.getAnonymization() + ": " + config.getDataType());
         };

@@ -14,10 +14,11 @@ import java.util.*;
 @Service
 public class KpiService {
 
-    private static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpi";
-    private static final String HAS_ATTRIBUTE_URI = QueryService.SOYA_URL + "hasAttribute";
-    private static final String ANONYMIZATION_TYP_URI = QueryService.SOYA_URL + "anonymizationTyp";
-    private static final String NR_ATTRIBUTES_URI = QueryService.SOYA_URL + "nrAttributes";
+    public static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpi";
+    public static final String K_ANONYMITY = QueryService.SOYA_URL + "kanonymity";
+    public static final String HAS_ATTRIBUTE_URI = QueryService.SOYA_URL + "hasAttribute";
+    public static final String ANONYMIZATION_TYP_URI = QueryService.SOYA_URL + "anonymizationTyp";
+    public static final String NR_ATTRIBUTES_URI = QueryService.SOYA_URL + "nrAttributes";
 
     /**
      * Adds a KPI object to the model containing the k-anonymity value for the given anonymization object.
@@ -36,7 +37,7 @@ public class KpiService {
         Property property = model.createProperty(QueryService.SOYA_URL + "kpis");
         anonymizationObject.addProperty(property, kpiObject);
 
-        Property kAnonymity = model.createProperty(QueryService.SOYA_URL, "kAnonymity");
+        Property kAnonymity = model.createProperty(K_ANONYMITY);
         kpiObject.addLiteral(kAnonymity, calculateKAnonymity(model, anonymizationObject, attributes, configurations));
     }
 
@@ -55,7 +56,7 @@ public class KpiService {
             String anonymizationType,
             Resource anonymizationObject
     ) {
-        Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject);
+        Resource kpiObject = model.createResource(KPI_OBJECT_URI + anonymizationObject.getLocalName());
         model.add(kpiObject, model.createProperty(HAS_ATTRIBUTE_URI), property);
         model.add(property, model.createProperty(ANONYMIZATION_TYP_URI), anonymizationType);
         model.addLiteral(property, model.createProperty(NR_ATTRIBUTES_URI), nrBucketsUsed);
