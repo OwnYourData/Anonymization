@@ -14,7 +14,7 @@ import java.util.*;
 public class GeneralizationDate extends Generalization<Calendar> {
 
     public GeneralizationDate(Model model, Property property, Map<Resource, Literal> data, long numberAttributes, Configuration config, Resource anonymizationObject) {
-        super(model, property, data, numberAttributes, config, anonymizationObject);
+        super(model, property, data, config, anonymizationObject, numberAttributes);
     }
 
     @Override
