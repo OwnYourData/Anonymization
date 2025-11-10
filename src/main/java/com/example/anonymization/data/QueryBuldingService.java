@@ -169,7 +169,7 @@ public class QueryBuldingService {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("SELECT ?attribute ?anonymization ?nrBuckets WHERE {\n");
         queryString.append("?kpiObject ?hasAttribute ?attribute .\n");
-        queryString.append("?attribute ?nrBucketsAttribute ?nrBuckets .\n");
+        queryString.append("OPTIONAL { ?attribute ?nrBucketsAttribute ?nrBuckets . }\n");
         queryString.append("?attribute ?anonymizationAttribute ?anonymization .\n");
         queryString.append("}\n");
         queryString.setParam("kpiObject", kpiObject);
