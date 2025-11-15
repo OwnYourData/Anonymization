@@ -7,6 +7,7 @@ import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateAction;
 import org.apache.jena.update.UpdateRequest;
+import org.apache.jena.vocabulary.RDF;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -35,7 +36,8 @@ public class QueryService {
                         solution.getResource("?anonymizationObject"),
                         ResourceFactory.createProperty(solution.getResource("?property").getURI()),
                         solution.getResource("?datatype"),
-                        solution.getLiteral("?anonymization")
+                        solution.getLiteral("?anonymization"),
+                        solution.getLiteral("?rank")
                 ));
             }
         }
@@ -191,6 +193,22 @@ public class QueryService {
         return results;
     }
 
+    public static Set<Resource> getTypes(Model model, Resource r) {
+        Set<Resource> types = new HashSet<>();
+        StmtIterator it = model.listStatements(r, RDF.type, (RDFNode) null);
+        try {
+            while (it.hasNext()) {
+                RDFNode o = it.next().getObject();
+                if (o.isResource()) {
+                    types.add(o.asResource());
+                }
+            }
+        } finally {
+            it.close();
+        }
+        return types;
+    }
+
     public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Resource objectType) {
         Set<Property> properties = new HashSet<>();
         ParameterizedSparqlString pss = new ParameterizedSparqlString("""
@@ -276,8 +294,7 @@ public class QueryService {
         return results;
     }
 
-
-    public record ConfigurationResult(Resource object, Property property, Resource datatype, Literal anonymization) {}
+    public record ConfigurationResult(Resource object, Property property, Resource datatype, Literal anonymization, Literal rank) {}
     public record RandomizationResult(Resource object, Literal original, Literal randomized) {}
     public record AttributeInformation(Resource attribute, String anonymization, Long nrBuckets) {}
 }

@@ -7,6 +7,7 @@ import com.example.anonymization.exceptions.RequestModelException;
 import com.example.anonymization.service.anonymizer.Anonymization;
 import com.example.anonymization.data.QueryService;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.andrewoma.dexx.collection.Pair;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AnonymizationService {
@@ -27,12 +29,13 @@ public class AnonymizationService {
     public static final String FLAT_OBJECT_NAME = "anonymizationObject";
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
-        Map<Resource, Map<Property, Configuration>> anonymizationObjects =
+        Map<Resource, Pair<Map<Property, Configuration>, Integer>> anonymizationObjects =
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
+        Map<Pair<Resource, Property>, Integer> ranks = getRanksFromConfig(anonymizationObjects);
         Model model = getModel(request.getData());
-        anonymizationObjects.forEach(
-                (o, c) -> applyAnonymizationForObject(o, c, model)
-        );
+        anonymizationObjects.entrySet().stream()
+                .sorted(Comparator.comparingInt(o -> o.getValue().component2()))
+                .forEach(o -> applyAnonymizationForObject(o.getKey(), o.getValue().component1(), ranks, model));
         StringWriter out = new StringWriter();
         model.write(out, "JSON-LD");
         logger.info(out.toString());
@@ -42,12 +45,13 @@ public class AnonymizationService {
         );
     }
 
+    // TODO adapt to match changes
     public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
         Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
         Model model = ModelFactory.createDefaultModel();
         Resource anonymizationObject = model.createResource(request.getPrefix() + FLAT_OBJECT_NAME);
         FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
-        applyAnonymizationForObject(anonymizationObject, configs, model);
+        applyAnonymizationForObject(anonymizationObject, configs, null, model);
         String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
         logger.info(out);
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
@@ -56,6 +60,7 @@ public class AnonymizationService {
     private static void applyAnonymizationForObject(
             Resource anonymizationObject,
             Map<Property, Configuration> configurations,
+            Map<Pair<Resource, Property>, Integer> ranks,
             Model model
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
@@ -106,5 +111,33 @@ public class AnonymizationService {
         } catch (Exception e) {
             throw new RequestModelException("The Request Data coudl not be converted ot a model: " + e.getMessage());
         }
+    }
+
+    private static Map<Pair<Resource, Property>, Integer> getRanksFromConfig(
+            Map<Resource, Pair<Map<Property, Configuration>, Integer>> configData
+    ) {
+        Map<Pair<Resource, Property>, Integer> ranks = new HashMap<>();
+        configData.forEach((resource, configurationPair) -> {
+            configurationPair.component1().keySet().forEach(property -> {
+                ranks.put(new Pair<>(resource, property), configurationPair.component2());
+            });
+        });
+        return ranks;
+    }
+
+    private static boolean noHigherLevelAnonymization(
+            Property property,
+            Resource anonymizationObject,
+            Set<Resource> classes,
+            Map<Pair<Resource, Property>, Integer> ranks
+    ) {
+        Integer currentRank = ranks.get(new Pair<>(anonymizationObject, property));
+        for  (Resource resource : classes) {
+            Integer rank = ranks.get(new Pair<>(resource, property));
+            if (rank != null && rank < currentRank) {
+                return false;
+            }
+        };
+        return true;
     }
 }

@@ -3,6 +3,7 @@ package com.example.anonymization.service;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.data.QueryService;
 import com.example.anonymization.exceptions.OntologyException;
+import com.github.andrewoma.dexx.collection.Pair;
 import jakarta.validation.constraints.NotNull;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.Lang;
@@ -33,7 +34,7 @@ public class ConfigurationService {
      * mapping Properties to their Configurations.
      */
     @NotNull
-    public static Map<Resource, Map<Property, Configuration>> fetchConfigForObjects(String url) {
+    public static Map<Resource, Pair<Map<Property, Configuration>, Integer>> fetchConfigForObjects(String url) {
         return extractConfig(getModel(url));
     }
 
@@ -44,17 +45,17 @@ public class ConfigurationService {
      */
     @NotNull
     public static Map<Property, Configuration> fetchFlatConfig(String url) {
-         Map<Resource, Map<Property, Configuration>> configs = fetchConfigForObjects(url);
-         Map<Property, Configuration> flatConfig = new HashMap<>();
-         for (Map<Property, Configuration> configMap : configs.values()) {
-             for (Map.Entry<Property, Configuration> entry : configMap.entrySet()) {
-                 if (flatConfig.containsKey(entry.getKey())) {
-                     throw new OntologyException("Duplicate Property key found in Flat Ontology: " + entry.getKey());
-                 }
-                 flatConfig.put(entry.getKey(), entry.getValue());
-             }
-         }
-         return flatConfig;
+        Map<Resource, Pair<Map<Property, Configuration>, Integer>> configs = fetchConfigForObjects(url);
+        Map<Property, Configuration> flatConfig = new HashMap<>();
+        for (Map<Property, Configuration> configMap : configs.values().stream().map(Pair::component1).toList()) {
+            for (Map.Entry<Property, Configuration> entry : configMap.entrySet()) {
+                if (flatConfig.containsKey(entry.getKey())) {
+                    throw new OntologyException("Duplicate Property key found in Flat Ontology: " + entry.getKey());
+                }
+                flatConfig.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return flatConfig;
     }
 
     @NotNull
@@ -91,15 +92,17 @@ public class ConfigurationService {
     }
 
     @NotNull
-    private static Map<Resource, Map<Property, Configuration>> extractConfig(Model model) {
-        Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
+    private static Map<Resource, Pair<Map<Property, Configuration>, Integer>> extractConfig(Model model) {
+        Map<Resource, Pair<Map<Property, Configuration>, Integer>> configs = new HashMap<>();
         logger.info("Extracting configuration from server response");
         try {
             QueryService.getConfigurations(model).forEach(entry -> {
                 if (!configs.containsKey(entry.object())) {
-                    configs.put(entry.object(), new HashMap<>());
+                    String anonymizationStr = extractValueFromURL(entry.object().toString());
+                    int rank = anonymizationStr.charAt(anonymizationStr.length() - 1); // TODO entry.rank() != null ? entry.rank().getInt() : Integer.MAX_VALUE;
+                    configs.put(entry.object(), new Pair<>(new HashMap<>(), rank));
                 }
-                configs.get(entry.object()).put(
+                configs.get(entry.object()).component1().put(
                         entry.property(),
                         new Configuration(
                                 extractValueFromURL(entry.datatype().toString()),
