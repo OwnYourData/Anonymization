@@ -41,14 +41,17 @@ public class AnonymizationService {
                 HttpStatus.ACCEPTED
         );
     }
-
+    // TODO include the original type to also find objects without a type set --> combination with new type implementation
     public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
         Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
         Model model = ModelFactory.createDefaultModel();
-        Resource anonymizationObject = model.createResource(request.getPrefix() + FLAT_OBJECT_NAME);
-        FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
-        applyAnonymizationForObject(anonymizationObject, configs, model);
-        String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
+        FaltJsonService.addDataToFlatModel(model, request.getData(), request.getPrefix());
+        Map<Resource, Map<Property, Configuration>> anonymizationObjects =
+                ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
+        anonymizationObjects.forEach(
+                (o, c) -> applyAnonymizationForObject(o, c, model)
+        );
+        String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObjects.keySet(), configs);
         logger.info(out);
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }
@@ -59,7 +62,7 @@ public class AnonymizationService {
             Model model
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
-        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
+        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, Set.of(anonymizationObject));
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.entrySet().stream().map(e -> Anonymization.anonymizationFactoryFunction(

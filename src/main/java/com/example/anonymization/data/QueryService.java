@@ -2,7 +2,6 @@ package com.example.anonymization.data;
 
 import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.exceptions.RequestModelException;
-import com.example.anonymization.service.KpiService;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateAction;
@@ -27,7 +26,7 @@ public class QueryService {
      */
     public static List<ConfigurationResult> getConfigurations(Model model) {
         List<ConfigurationResult> configurations = new ArrayList<>();
-        try (QueryExecution qexec = QueryExecutionFactory.create(QueryBuldingService.createConfigQuery(), model)) {
+        try (QueryExecution qexec = QueryExecutionFactory.create(QueryBuildingService.createConfigQuery(), model)) {
             ResultSet rs = qexec.execSelect();
             while (rs.hasNext()) {
                 QuerySolution solution = rs.nextSolution();
@@ -49,8 +48,12 @@ public class QueryService {
      * @param objectType the type for which data should be fetched
      * @return mapping of resources of the object type with their property data
      */
-    public static Map<Resource, Map<Property, Literal>> getData(Model model, Set<Property> properties, Resource objectType) {
-        Query query = QueryBuldingService.createDataModelQuery(properties, objectType).asQuery();
+    public static Map<Resource, Map<Property, Literal>> getData(
+            Model model,
+            Collection<Property> properties,
+            Collection<Resource> objectType
+    ) {
+        Query query = QueryBuildingService.createDataModelQuery(properties, objectType).asQuery();
         Map<Resource, Map<Property, Literal>> results = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
@@ -78,7 +81,7 @@ public class QueryService {
      * @return mapping of resources of the object type with their property data
      */
     public static Map<Property, Literal> getDataKpi(Model model, Set<Property> properties) {
-        Query query = QueryBuldingService.createKpiDataQuery(
+        Query query = QueryBuildingService.createKpiDataQuery(
                 properties,
                 model.getResource(SOYA_URL + "kpiObjectAnonymizationDemo2") // TODO query for the right url (kpiObject + local url of resource)
         ).asQuery();
@@ -107,7 +110,7 @@ public class QueryService {
      * @param objectType definition of the object type to which anonymization is applied
      */
     public static Set<Property> getProperties(Model model, Set<Property> configs, Resource objectType) {
-        Query query = QueryBuldingService.createPropertyQuery(configs, objectType).asQuery();
+        Query query = QueryBuildingService.createPropertyQuery(configs, objectType).asQuery();
         Set<Property> properties = new HashSet<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
@@ -131,7 +134,7 @@ public class QueryService {
      */
     public static void deleteOriginalProperties(Model model, Set<Property> properties, Resource objectType) {
         try {
-            UpdateRequest updateRequest = QueryBuldingService.deleteOriginalPropertyQuery(properties, objectType).asUpdate();
+            UpdateRequest updateRequest = QueryBuildingService.deleteOriginalPropertyQuery(properties, objectType).asUpdate();
             UpdateAction.execute(updateRequest, model);
         } catch (Exception ex) {
             throw new AnonymizationException("Error during deleting original properties: " + ex.getMessage());
@@ -146,7 +149,7 @@ public class QueryService {
      * @return randomization representation as a list of objects with their randomized and original properties
      */
     public static List<RandomizationResult> getRandomizationResults(Model model, Resource anonymizationObject, Property property) {
-        Query query = QueryBuldingService.createRandomizationQuery(model, anonymizationObject, property).asQuery();
+        Query query = QueryBuildingService.createRandomizationQuery(model, anonymizationObject, property).asQuery();
         List<RandomizationResult> results = new ArrayList<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
             ResultSet rs = qe.execSelect();
@@ -172,7 +175,7 @@ public class QueryService {
      * @return groups of resources with the same property values
      */
     public static List<Set<Resource>> getGeneralizationGroups(Model model, Resource anonymizationObject, Set<Property> properties) {
-        ParameterizedSparqlString queryString = QueryBuldingService.createGroupsQuery(properties, anonymizationObject);
+        ParameterizedSparqlString queryString = QueryBuildingService.createGroupsQuery(properties, anonymizationObject);
         Query query = queryString.asQuery();
         List<Set<Resource>> results = new ArrayList<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
@@ -191,15 +194,9 @@ public class QueryService {
         return results;
     }
 
-    public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Resource objectType) {
+    public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Collection<Resource> objectType) {
         Set<Property> properties = new HashSet<>();
-        ParameterizedSparqlString pss = new ParameterizedSparqlString("""
-                SELECT ?predicate
-                WHERE {
-                  ?s a ?objectType ; ?predicate ?o .
-                }
-                """);
-        pss.setParam("objectType", objectType);
+        ParameterizedSparqlString pss = QueryBuildingService.createPropertyQuery(objectType);
         try (QueryExecution qexec = QueryExecutionFactory.create(pss.asQuery(), model)) {
             ResultSet rs = qexec.execSelect();
             while (rs.hasNext()) {
@@ -210,9 +207,13 @@ public class QueryService {
         return getData(model, properties, objectType);
     }
 
-    public static Map<Resource, Map<Property, List<Literal>>> getGeneralizationData(Model model, Resource objectType, Set<Property> properties) {
+    public static Map<Resource, Map<Property, List<Literal>>> getGeneralizationData(
+            Model model,
+            Collection<Resource> objectType,
+            Set<Property> properties
+    ) {
         model.write(System.out);
-        ParameterizedSparqlString queryString = QueryBuldingService.creatGeneralizationData(properties, objectType);
+        ParameterizedSparqlString queryString = QueryBuildingService.createGeneralizationData(properties, objectType);
         Query query = queryString.asQuery();
         Map<Resource, Map<Property, List<Literal>>> results = new HashMap<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
@@ -236,7 +237,7 @@ public class QueryService {
     }
 
     public static Long getKAnonymity(Model model) {
-        ParameterizedSparqlString queryString = QueryBuldingService.createKAnonymityQuery(
+        ParameterizedSparqlString queryString = QueryBuildingService.createKAnonymityQuery(
                 model.createResource(KPI_OBJECT_URI + FLAT_OBJECT_NAME),
                 model.createProperty(K_ANONYMITY)
         );
@@ -252,7 +253,7 @@ public class QueryService {
     }
 
     public static List<AttributeInformation> getAttributeInformation(Model model) {
-        ParameterizedSparqlString queryString = QueryBuldingService.createAttributeInformationQuery(
+        ParameterizedSparqlString queryString = QueryBuildingService.createAttributeInformationQuery(
                 model.createResource(KPI_OBJECT_URI + FLAT_OBJECT_NAME),
                 model.createProperty(HAS_ATTRIBUTE_URI),
                 model.createProperty(NR_ATTRIBUTES_URI),
