@@ -15,7 +15,6 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +22,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class FaltJsonService {
+
+    public static final String FLAT_OBJECT_NAME = "anonymizationObject";
 
     /**
      * Adds data to a flat model with the given object type and prefix.
@@ -32,9 +33,11 @@ public class FaltJsonService {
      */
     public static void addDataToFlatModel(Model model, List<Map<String, Object>> data, String prefix) {
         int counter = 0;
+        Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         for (Map<String, Object> entry : data) {
             try {
                 Resource object = model.createResource(prefix + "object" + counter);
+                object.addProperty(RDF.type, flatObject);
 
                 // Add counter property
                 Property counterProperty = model.createProperty(prefix, "counter");
@@ -44,9 +47,11 @@ public class FaltJsonService {
                     String key = kv.getKey();
                     validateKey(key);
                     Object value = kv.getValue();
-                    Property property = key.equals("type") ? RDF.type : model.createProperty(prefix, key);
-                    if (value != null) {
-                        object.addProperty(property, value.toString());
+                    if (value != null && key.equals("type")) {
+                        object.addProperty(RDF.type, model.createResource(prefix + value));
+                    }
+                    if (value != null && !key.equals("type")) {
+                        object.addProperty(model.createProperty(prefix, key), value.toString());
                     }
                 }
             } catch (Exception ex) {
@@ -59,17 +64,18 @@ public class FaltJsonService {
     /**
      * Creates a flat JSON output from the given model, object type, and configurations.
      * @param model model containing the data
-     * @param objectTypes list of object types to be processed
      * @param configs configurations for the properties
      * @return String representing the flat JSON output in Json format
      */
     public static String createFlatJsonOutput(
             Model model,
-            Collection<Resource> objectTypes,
-            Map<Property, Configuration> configs
+            Map<Property, Configuration> configs,
+            String prefix
     ) {
+        Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         try {
-            Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, objectTypes);
+            Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, Set.of(flatObject));
+            Map<Resource, List<Resource>> types = QueryService.getTypesForResources(model, flatObject);
 
             Set<Property> classificationProperties = configs.entrySet().stream()
                     .filter(e -> "generalization".equals(e.getValue().getAnonymization()))
@@ -77,10 +83,10 @@ public class FaltJsonService {
                     .map(p -> model.getProperty(p.getURI() + "_generalized"))
                     .collect(Collectors.toSet());
             Map<Resource, Map<Property, List<Literal>>> generalizationData =
-                    QueryService.getGeneralizationData(model, objectTypes, classificationProperties);
+                    QueryService.getGeneralizationData(model, Set.of(flatObject), classificationProperties);
             Long kAnonymity = QueryService.getKAnonymity(model);
             List<QueryService.AttributeInformation> attributeInformation = QueryService.getAttributeInformation(model);
-            return createFlatJsonString(data, generalizationData , kAnonymity, attributeInformation);
+            return createFlatJsonString(data, types, generalizationData , kAnonymity, attributeInformation);
         } catch (Exception e) {
             throw new AnonymizationException("Error creating flat model: " + e.getMessage());
         }
@@ -88,13 +94,14 @@ public class FaltJsonService {
 
     private static String createFlatJsonString(
             Map<Resource, Map<Property, Literal>> data,
+            Map<Resource, List<Resource>> types,
             Map<Resource, Map<Property, List<Literal>>> generalizationData,
             Long kAnonymity,
             List<QueryService.AttributeInformation> attributeInformation
     ) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            ArrayNode dataArray = addDataToArrayNode(mapper, data, generalizationData);
+            ArrayNode dataArray = addDataToArrayNode(mapper, data, types, generalizationData);
             ObjectNode kpiNode = addKpisToObjectNode(mapper, kAnonymity, attributeInformation);
 
             ObjectNode root = mapper.createObjectNode();
@@ -109,6 +116,7 @@ public class FaltJsonService {
     private static ArrayNode addDataToArrayNode(
             ObjectMapper mapper,
             Map<Resource, Map<Property, Literal>> data,
+            Map<Resource, List<Resource>> types,
             Map<Resource, Map<Property, List<Literal>>> generalizationData
     ) {
         ArrayNode dataArray = mapper.createArrayNode();
@@ -130,6 +138,15 @@ public class FaltJsonService {
                         entryNode.put(attr.getKey().getLocalName(), attr.getValue().getValue().toString());
                     }
                 }
+            }
+
+            List<Resource> resourceTypes = types.get(resource);
+            if (resourceTypes != null && !resourceTypes.isEmpty()) {
+                ArrayNode typesArray = mapper.createArrayNode();
+                for (Resource type : resourceTypes) {
+                    typesArray.add(type.getLocalName());
+                }
+                entryNode.set("types", typesArray);
             }
 
             Map<Property, List<Literal>> genAttrs = generalizationData.get(resource);

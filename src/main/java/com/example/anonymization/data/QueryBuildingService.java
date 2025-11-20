@@ -197,6 +197,25 @@ public class QueryBuildingService {
         return queryString;
     }
 
+    /**
+     * Builds a SPARQL query that returns, for a flat json object type, all resources of that type
+     */
+    public static ParameterizedSparqlString createTypesForResourcesQuery(Resource resource) {
+        String query =
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "SELECT DISTINCT ?resource ?type\n" +
+                        "WHERE {\n" +
+                        "  ?resource rdf:type ?flatJson .\n" +
+                        "  ?resource rdf:type ?type .\n" +
+                        "  FILTER(?type != ?flatJson)\n" +
+                        "}";
+
+        ParameterizedSparqlString pss = new ParameterizedSparqlString(query);
+        // Safe parameter insertion; will render as <IRI> in the query
+        pss.setParam("flatJson", resource);
+        return pss;
+    }
+
     static ParameterizedSparqlString createAttributeInformationQuery(
             Resource kpiObject,
             Property hasAttribute,

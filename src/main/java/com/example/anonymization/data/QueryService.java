@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.anonymization.service.AnonymizationService.FLAT_OBJECT_NAME;
+import static com.example.anonymization.service.FaltJsonService.FLAT_OBJECT_NAME;
 import static com.example.anonymization.service.KpiService.*;
 
 @Service
@@ -250,6 +250,23 @@ public class QueryService {
             }
         }
         return null;
+    }
+
+    public static Map<Resource, List<Resource>> getTypesForResources(Model model, Resource objectType) {
+        ParameterizedSparqlString queryString = QueryBuildingService.createTypesForResourcesQuery(objectType);
+        Query query = queryString.asQuery();
+        Map<Resource, List<Resource>> results = new HashMap<>();
+        try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution sol = rs.next();
+                Resource object = sol.getResource("resource");
+                Resource type = sol.getResource("type");
+                results.putIfAbsent(object, new ArrayList<>());
+                results.get(object).add(type);
+            }
+        }
+        return results;
     }
 
     public static List<AttributeInformation> getAttributeInformation(Model model) {

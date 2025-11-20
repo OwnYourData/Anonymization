@@ -24,7 +24,6 @@ import java.util.*;
 public class AnonymizationService {
 
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
-    public static final String FLAT_OBJECT_NAME = "anonymizationObject";
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
@@ -41,7 +40,7 @@ public class AnonymizationService {
                 HttpStatus.ACCEPTED
         );
     }
-    // TODO include the original type to also find objects without a type set --> combination with new type implementation
+
     public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
         Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
         Model model = ModelFactory.createDefaultModel();
@@ -51,7 +50,7 @@ public class AnonymizationService {
         anonymizationObjects.forEach(
                 (o, c) -> applyAnonymizationForObject(o, c, model)
         );
-        String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObjects.keySet(), configs);
+        String out = FaltJsonService.createFlatJsonOutput(model, configs, request.getPrefix());
         logger.info(out);
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }
