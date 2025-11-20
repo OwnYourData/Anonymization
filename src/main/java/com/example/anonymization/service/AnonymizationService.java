@@ -50,7 +50,7 @@ public class AnonymizationService {
         anonymizationObjects.forEach(
                 (o, c) -> applyAnonymizationForObject(o, c, model)
         );
-        String out = FaltJsonService.createFlatJsonOutput(model, configs, request.getPrefix());
+        String out = FaltJsonService.createFlatJsonOutput(model, configs, anonymizationObjects.keySet(), request.getPrefix());
         logger.info(out);
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }
@@ -61,7 +61,7 @@ public class AnonymizationService {
             Model model
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
-        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, Set.of(anonymizationObject));
+        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.entrySet().stream().map(e -> Anonymization.anonymizationFactoryFunction(

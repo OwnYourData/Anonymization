@@ -5,203 +5,255 @@
     {
       "name": "object1test1 name",
       "gehalt": 42000,
-      "geburtsdatum": "2000-10-01"
+      "geburtsdatum": "2000-10-01",
+      "type": "Object1"
     },
     {
       "name": "object1test2 name",
       "gehalt": 65000,
-      "geburtsdatum": "1987-03-02"
+      "geburtsdatum": "1987-03-02",
+      "type": "Object1"
     },
     {
       "gehalt": 54000,
-      "geburtsdatum": "1995-05-15"
+      "geburtsdatum": "1995-05-15",
+      "type": "Object1"
     },
     {
-      "name": "object1test4 name"
+      "name": "object1test4 name",
+      "type": "Object1"
     },
     {
       "name": "object1test5 name",
-      "gehalt": 38000
+      "gehalt": 38000,
+      "type": "Object1"
     },
     {
-      "geburtsdatum": "1990-08-20"
+      "geburtsdatum": "1990-08-20",
+      "type": "Object1"
     },
     {
       "name": "object1test7 name",
-      "geburtsdatum": "1982-09-24"
+      "geburtsdatum": "1982-09-24",
+      "type": "Object1"
     },
     {
-      "gehalt": 59000
+      "gehalt": 59000,
+      "type": "Object1"
     },
     {},
     {
       "name": "object1test10 name",
       "gehalt": 71000,
-      "geburtsdatum": "1973-12-05"
+      "geburtsdatum": "1973-12-05",
+      "type": "Object1"
     },
     {
-      "name": "object1test11 name"
+      "name": "object1test11 name",
+      "type": "Object1"
     },
     {
-      "gehalt": 43000
+      "gehalt": 43000,
+      "type": "Object1"
     },
     {
-      "geburtsdatum": "1980-07-16"
+      "geburtsdatum": "1980-07-16",
+      "type": "Object1"
     },
     {
       "name": "object1test14 name",
-      "gehalt": 68000
+      "gehalt": 68000,
+      "type": "Object1"
     },
     {
       "name": "object1test15 name",
-      "geburtsdatum": "1998-06-23"
+      "geburtsdatum": "1998-06-23",
+      "type": "Object1"
     },
-    {},
+    {
+      "type": "Object1"
+    },
     {
       "gehalt": 32000,
-      "geburtsdatum": "2001-11-29"
+      "geburtsdatum": "2001-11-29",
+      "type": "Object1"
     },
     {
-      "gehalt": 78000
+      "gehalt": 78000,
+      "type": "Object1"
     },
     {
-      "name": "object1test19 name"
+      "name": "object1test19 name",
+      "type": "Object1"
     },
     {
       "name": "object1test20 name",
       "gehalt": 47000,
-      "geburtsdatum": "1992-04-13"
+      "geburtsdatum": "1992-04-13",
+      "type": "Object1"
     },
     {
       "longitude": 13.404954,
-      "latitude": 52.520008
+      "latitude": 52.520008,
+      "type": "Object2"
     },
     {
       "longitude": 2.352222,
-      "latitude": 48.856613
+      "latitude": 48.856613,
+      "type": "Object2"
     },
     {
       "longitude": -0.127758,
-      "latitude": 51.507351
+      "latitude": 51.507351,
+      "type": "Object2"
     },
     {
       "longitude": 12.496366,
-      "latitude": 41.902782
+      "latitude": 41.902782,
+      "type": "Object2"
     },
     {
       "longitude": -3.70379,
-      "latitude": 40.416775
+      "latitude": 40.416775,
+      "type": "Object2"
     },
     {
       "longitude": 151.2099,
-      "latitude": -33.865143
+      "latitude": -33.865143,
+      "type": "Object2"
     },
     {
       "longitude": 139.691711,
-      "latitude": 35.689487
+      "latitude": 35.689487,
+      "type": "Object2"
     },
     {
       "longitude": -58.381592,
-      "latitude": -34.603722
+      "latitude": -34.603722,
+      "type": "Object2"
     },
     {
       "longitude": 37.617298,
-      "latitude": 55.755825
+      "latitude": 55.755825,
+      "type": "Object2"
     },
     {
       "longitude": -74.005974,
-      "latitude": 40.712776
+      "latitude": 40.712776,
+      "type": "Object2"
     },
     {
       "longitude": 4.904139,
-      "latitude": 52.367573
+      "latitude": 52.367573,
+      "type": "Object2"
     },
     {
       "longitude": 18.424055,
-      "latitude": -33.92487
+      "latitude": -33.92487,
+      "type": "Object2"
     },
     {
       "longitude": 28.047306,
-      "latitude": -26.204103
+      "latitude": -26.204103,
+      "type": "Object2"
     },
     {
       "longitude": 144.963058,
-      "latitude": -37.813629
+      "latitude": -37.813629,
+      "type": "Object2"
     },
     {
       "longitude": 103.819836,
-      "latitude": 1.352083
+      "latitude": 1.352083,
+      "type": "Object2"
     },
     {
       "longitude": -46.62529,
-      "latitude": -23.533773
+      "latitude": -23.533773,
+      "type": "Object2"
     },
     {
       "longitude": -99.133209,
-      "latitude": 19.432608
+      "latitude": 19.432608,
+      "type": "Object2"
     },
     {
       "longitude": 30.335098,
-      "latitude": 59.93428
+      "latitude": 59.93428,
+      "type": "Object2"
     },
-    {},
-    {},
+    {
+      "type": "Object2"
+    },
+    {
+      "type": "Object2"
+    },
     {
       "longitude": 10.75,
       "latitude": 59.91,
       "name": "mixed1 name",
       "gehalt": 54000,
-      "no_anonymization_attribute": 17
+      "no_anonymization_attribute": 17,
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": 139.69,
       "latitude": 35.68,
-      "name": "mixed2 name"
+      "name": "mixed2 name",
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": -0.13,
       "latitude": 51.51,
       "gehalt": 32000,
       "geburtsdatum": "1996-11-04",
-      "no_anonymization_attribute": 5
+      "no_anonymization_attribute": 5,
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": 2.35,
-      "latitude": 48.86
+      "latitude": 48.86,
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": 151.21,
       "latitude": -33.87,
       "name": "mixed5 value",
-      "geburtsdatum": "1981-06-11"
+      "geburtsdatum": "1981-06-11",
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": -43.17,
       "latitude": -22.90,
       "gehalt": 75000,
-      "no_anonymization_attribute": 22
+      "no_anonymization_attribute": 22,
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": 18.07,
-      "latitude": 59.33
+      "latitude": 59.33,
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": 12.49,
       "latitude": 41.90,
       "name": "mixed8 object",
       "gehalt": 61000,
-      "geburtsdatum": "2002-05-21"
+      "geburtsdatum": "2002-05-21",
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": -74.00,
       "latitude": 40.71,
-      "no_anonymization_attribute": 3
+      "no_anonymization_attribute": 3,
+      "type": ["Object1", "Object2"]
     },
     {
       "longitude": 4.90,
       "latitude": 52.37,
       "name": "last mixed object",
-      "no_anonymization_attribute": 11
+      "no_anonymization_attribute": 11,
+      "type": []
     }
   ]
 }

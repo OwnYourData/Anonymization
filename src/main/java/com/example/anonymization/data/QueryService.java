@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.anonymization.service.FaltJsonService.FLAT_OBJECT_NAME;
 import static com.example.anonymization.service.KpiService.*;
 
 @Service
@@ -51,7 +50,7 @@ public class QueryService {
     public static Map<Resource, Map<Property, Literal>> getData(
             Model model,
             Collection<Property> properties,
-            Collection<Resource> objectType
+            Resource objectType
     ) {
         Query query = QueryBuildingService.createDataModelQuery(properties, objectType).asQuery();
         Map<Resource, Map<Property, Literal>> results = new HashMap<>();
@@ -194,7 +193,13 @@ public class QueryService {
         return results;
     }
 
-    public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Collection<Resource> objectType) {
+    /**
+     * Extracts all data for a list of object types
+     * @param model the input model
+     * @param objectType the object type for which the data is returned
+     * @return mapping of resources of the object type with their property data
+     */
+    public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Resource objectType) {
         Set<Property> properties = new HashSet<>();
         ParameterizedSparqlString pss = QueryBuildingService.createPropertyQuery(objectType);
         try (QueryExecution qexec = QueryExecutionFactory.create(pss.asQuery(), model)) {
@@ -207,9 +212,16 @@ public class QueryService {
         return getData(model, properties, objectType);
     }
 
+    /**
+     * Extracts the generalization data (min and max values) for a set of properties and object types
+     * @param model the input model
+     * @param objectType the object type for which the data is returned
+     * @param properties set of properties for which the generalization data is fetched
+     * @return mapping of resources of the object type with their min and max property values
+     */
     public static Map<Resource, Map<Property, List<Literal>>> getGeneralizationData(
             Model model,
-            Collection<Resource> objectType,
+            Resource objectType,
             Set<Property> properties
     ) {
         model.write(System.out);
@@ -236,22 +248,35 @@ public class QueryService {
         return results;
     }
 
-    public static Long getKAnonymity(Model model) {
+    /**
+     * Extracts the k-anonymity value for a set of object types
+     * @param model the input model
+     * @param objectTypes the object types for which the k-anonymity is returned
+     * @return mapping of object types with their k-anonymity value
+     */
+    public static Map<Resource, Long> getKAnonymity(Model model, Collection<Resource> objectTypes) {
         ParameterizedSparqlString queryString = QueryBuildingService.createKAnonymityQuery(
-                model.createResource(KPI_OBJECT_URI + FLAT_OBJECT_NAME),
+                objectTypes.stream().map(o -> model.getResource(KPI_OBJECT_URI + o.getLocalName())).toList(),
                 model.createProperty(K_ANONYMITY)
         );
         Query query = queryString.asQuery();
+        Map<Resource, Long> results = new HashMap<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
             ResultSet rs = qe.execSelect();
-            if (rs.hasNext()) {
+            while (rs.hasNext()) {
                 QuerySolution sol = rs.next();
-                return sol.getLiteral("value").getLong();
+                results.put(sol.getResource("object"), sol.getLiteral("value").getLong());
             }
         }
-        return null;
+        return results;
     }
 
+    /**
+     * Extracts the other types of resources of a given object type
+     * @param model the input model
+     * @param objectType the object type for which the data is returned
+     * @return mapping of resources with their types
+     */
     public static Map<Resource, List<Resource>> getTypesForResources(Model model, Resource objectType) {
         ParameterizedSparqlString queryString = QueryBuildingService.createTypesForResourcesQuery(objectType);
         Query query = queryString.asQuery();
@@ -269,29 +294,38 @@ public class QueryService {
         return results;
     }
 
-    public static List<AttributeInformation> getAttributeInformation(Model model) {
+    /**
+     * Extracts the attribute information for a set of object types
+     * @param model the input model
+     * @param objectTypes the object types for which the attribute information is returned
+     * @return mapping of object types with their attribute information
+     */
+    public static Map<Resource, List<QueryService.AttributeInformation>> getAttributeInformation(
+            Model model, Collection<Resource> objectTypes
+    ) {
         ParameterizedSparqlString queryString = QueryBuildingService.createAttributeInformationQuery(
-                model.createResource(KPI_OBJECT_URI + FLAT_OBJECT_NAME),
+                objectTypes.stream().map(o -> model.getResource(KPI_OBJECT_URI + o.getLocalName())).toList(),
                 model.createProperty(HAS_ATTRIBUTE_URI),
                 model.createProperty(NR_ATTRIBUTES_URI),
                 model.createProperty(ANONYMIZATION_TYP_URI)
         );
         Query query = queryString.asQuery();
-        List<AttributeInformation> results = new ArrayList<>();
+        Map<Resource, List<QueryService.AttributeInformation>> result = new HashMap<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
             ResultSet rs = qe.execSelect();
             while (rs.hasNext()) {
                 QuerySolution sol = rs.next();
                 Long nrBuckets = sol.getLiteral("nrBuckets") == null ?
                         null : sol.getLiteral("nrBuckets").getLong();
-                results.add(new AttributeInformation(
+                result.putIfAbsent(sol.getResource("kpiObject"), new ArrayList<>());
+                result.get(sol.getResource("kpiObject")).add(new AttributeInformation(
                         sol.getResource("attribute"),
                         sol.getLiteral("anonymization").toString(),
                         nrBuckets
                 ));
             }
         }
-        return results;
+        return result;
     }
 
 

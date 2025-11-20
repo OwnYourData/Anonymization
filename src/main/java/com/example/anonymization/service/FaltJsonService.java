@@ -15,6 +15,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,7 +49,14 @@ public class FaltJsonService {
                     validateKey(key);
                     Object value = kv.getValue();
                     if (value != null && key.equals("type")) {
-                        object.addProperty(RDF.type, model.createResource(prefix + value));
+                        if (value instanceof List<?>) {
+                            for (Object v : (List<?>) value) {
+                                object.addProperty(RDF.type, model.createResource(prefix + v.toString()));
+                            }
+                            continue;
+                        } else {
+                            object.addProperty(RDF.type, model.createResource(prefix + value));
+                        }
                     }
                     if (value != null && !key.equals("type")) {
                         object.addProperty(model.createProperty(prefix, key), value.toString());
@@ -70,11 +78,12 @@ public class FaltJsonService {
     public static String createFlatJsonOutput(
             Model model,
             Map<Property, Configuration> configs,
+            Collection<Resource> objectTypes,
             String prefix
     ) {
         Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         try {
-            Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, Set.of(flatObject));
+            Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, flatObject);
             Map<Resource, List<Resource>> types = QueryService.getTypesForResources(model, flatObject);
 
             Set<Property> classificationProperties = configs.entrySet().stream()
@@ -83,9 +92,10 @@ public class FaltJsonService {
                     .map(p -> model.getProperty(p.getURI() + "_generalized"))
                     .collect(Collectors.toSet());
             Map<Resource, Map<Property, List<Literal>>> generalizationData =
-                    QueryService.getGeneralizationData(model, Set.of(flatObject), classificationProperties);
-            Long kAnonymity = QueryService.getKAnonymity(model);
-            List<QueryService.AttributeInformation> attributeInformation = QueryService.getAttributeInformation(model);
+                    QueryService.getGeneralizationData(model, flatObject, classificationProperties);
+            Map<Resource, Long> kAnonymity = QueryService.getKAnonymity(model, objectTypes);
+            Map<Resource, List<QueryService.AttributeInformation>> attributeInformation =
+                    QueryService.getAttributeInformation(model, objectTypes);
             return createFlatJsonString(data, types, generalizationData , kAnonymity, attributeInformation);
         } catch (Exception e) {
             throw new AnonymizationException("Error creating flat model: " + e.getMessage());
@@ -96,8 +106,8 @@ public class FaltJsonService {
             Map<Resource, Map<Property, Literal>> data,
             Map<Resource, List<Resource>> types,
             Map<Resource, Map<Property, List<Literal>>> generalizationData,
-            Long kAnonymity,
-            List<QueryService.AttributeInformation> attributeInformation
+            Map<Resource, Long> kAnonymity,
+            Map<Resource, List<QueryService.AttributeInformation>> attributeInformation
     ) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -169,18 +179,25 @@ public class FaltJsonService {
 
     private static ObjectNode addKpisToObjectNode(
             ObjectMapper mapper,
-            Long kAnonymity,
-            List<QueryService.AttributeInformation> attributeInformation
+            Map<Resource, Long> kAnonymity,
+            Map<Resource, List<QueryService.AttributeInformation>> attributeInformation
     ) {
         ObjectNode kpiNode = mapper.createObjectNode();
-        kpiNode.put("k-Anonymity", kAnonymity);
-        attributeInformation.forEach(attr -> {
-            ObjectNode attrNode = mapper.createObjectNode();
-            attrNode.put("anonymization", attr.anonymization());
-            if (attr.nrBuckets() != null) {
-                attrNode.put("nrBuckets",  attr.nrBuckets());
+        kAnonymity.forEach((res, kAnonymityValue) -> {
+            ObjectNode objNode = mapper.createObjectNode();
+            objNode.put("k-Anonymity", kAnonymityValue);
+            List<QueryService.AttributeInformation> attrs = attributeInformation.get(res);
+            if (attrs != null) {
+                attrs.forEach(attr -> {
+                    ObjectNode attrNode = mapper.createObjectNode();
+                    attrNode.put("anonymization", attr.anonymization());
+                    if (attr.nrBuckets() != null) {
+                        attrNode.put("nrBuckets",  attr.nrBuckets());
+                    }
+                    objNode.set(attr.attribute().getLocalName(), attrNode);
+                });
             }
-            kpiNode.set(attr.attribute().getLocalName(), attrNode);
+            kpiNode.set(res.getLocalName(), objNode);
         });
         return kpiNode;
     }

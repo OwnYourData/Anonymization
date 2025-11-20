@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.Resource;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class QueryBuildingService {
 
@@ -27,22 +28,13 @@ public class QueryBuildingService {
 
     static ParameterizedSparqlString createDataModelQuery(
             Collection<Property> properties,
-            Collection<Resource> anonymizationObjects
+            Resource anonymizationObject
     ) {
         ParameterizedSparqlString q = new ParameterizedSparqlString();
         q.append("SELECT ?object");
         properties.forEach(prop -> q.append(" ?_" + prop.getLocalName()));
         q.append("\nWHERE {\n");
-        q.append("  VALUES ?objectType { \n");
-        if (anonymizationObjects != null) {
-            for (Resource t : anonymizationObjects) {
-                if (t != null && t.isURIResource()) {
-                    q.append("<" + t.getURI() + "> \n");
-                }
-            }
-        }
-        q.append("  }\n");
-        q.append("  ?object a ?objectType .\n");
+        q.append("  ?object a <" + anonymizationObject.getURI()+ ">.\n");
         for (Property p : properties) {
             String local = p.getLocalName();
             q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ".\n");
@@ -144,39 +136,23 @@ public class QueryBuildingService {
         return queryString;
     }
 
-    static ParameterizedSparqlString createPropertyQuery(Collection<Resource> objectTypes) {
-        StringBuilder values = new StringBuilder("VALUES ?type { ");
-        if (objectTypes != null) {
-            for (Resource r : objectTypes) {
-                if (r != null && r.isURIResource()) {
-                    values.append("<").append(r.getURI()).append("> ");
-                }
-            }
-        }
-        values.append("}");
-
+    static ParameterizedSparqlString createPropertyQuery(Resource objectType) {
         String queryStr =
                 "SELECT ?predicate\n" +
                         "WHERE {\n" +
-                        "  " + values + "\n" +
-                        "  ?s a ?type ; ?predicate ?o .\n" +
+                        "  ?s a <" + objectType.getURI() + "> ; ?predicate ?o .\n" +
                         "  FILTER(isLiteral(?o))\n" +
                         "}";
 
         return new ParameterizedSparqlString(queryStr);
     }
 
-    static ParameterizedSparqlString createGeneralizationData(
-            Set<Property> properties,
-            Collection<Resource> anonymizationObject
-    ) {
+    static ParameterizedSparqlString createGeneralizationData(Set<Property> properties, Resource anonymizationObject) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("SELECT ?object");
         properties.forEach(property -> queryString.append(" ?_min_" + property.getLocalName() + " ?_max_" + property.getLocalName()));
         queryString.append("\nWHERE {\n");
-        queryString.append("  VALUES ?objectType { ");
-        anonymizationObject.forEach(t -> queryString.append("<" + t.getURI() + "> "));
-        queryString.append("}\n");
+        queryString.append("  ?object a <" + anonymizationObject.getURI()+ ">.\n");
         properties.forEach(property -> {
             queryString.append("  OPTIONAL { ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
             queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MAX + "> ?_max_" + property.getLocalName() + ".\n");
@@ -188,13 +164,22 @@ public class QueryBuildingService {
         return queryString;
     }
 
-    static ParameterizedSparqlString createKAnonymityQuery(Resource kpiObject, Property kAnonymity) {
-        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
-        queryString.append("SELECT ?value WHERE {\n");
-        queryString.append("?kpiObject ?kAnonymity ?value .\n}");
-        queryString.setParam("kpiObject", kpiObject);
-        queryString.setParam("kAnonymity", kAnonymity);
-        return queryString;
+    static ParameterizedSparqlString createKAnonymityQuery(Collection<Resource> objects, Property property) {
+        String valuesBlock = objects.stream().map(res -> "?" + res.getLocalName()).collect(Collectors.joining(" "));
+
+        String query =
+                "SELECT ?object ?value\n" +
+                "WHERE {\n" +
+                "  VALUES ?object {" + valuesBlock + " }\n" +
+                "  ?object ?property ?value .\n" +
+                "}";
+
+        ParameterizedSparqlString pss = new ParameterizedSparqlString(query);
+
+        pss.setParam("property", property.asNode());
+        objects.forEach(obj -> pss.setParam(obj.getLocalName(), obj));
+
+        return pss;
     }
 
     /**
@@ -211,24 +196,27 @@ public class QueryBuildingService {
                         "}";
 
         ParameterizedSparqlString pss = new ParameterizedSparqlString(query);
-        // Safe parameter insertion; will render as <IRI> in the query
         pss.setParam("flatJson", resource);
         return pss;
     }
 
     static ParameterizedSparqlString createAttributeInformationQuery(
-            Resource kpiObject,
+            Collection<Resource> objects,
             Property hasAttribute,
             Property nrBuckets,
             Property anonymization
     ) {
-        ParameterizedSparqlString queryString = new ParameterizedSparqlString();
-        queryString.append("SELECT ?attribute ?anonymization ?nrBuckets WHERE {\n");
-        queryString.append("?kpiObject ?hasAttribute ?attribute .\n");
-        queryString.append("OPTIONAL { ?attribute ?nrBucketsAttribute ?nrBuckets . }\n");
-        queryString.append("?attribute ?anonymizationAttribute ?anonymization .\n");
-        queryString.append("}\n");
-        queryString.setParam("kpiObject", kpiObject);
+        String valuesBlock = objects.stream().map(res -> "?" + res.getLocalName()).collect(Collectors.joining(" "));
+        String query =
+                "SELECT ?kpiObject ?attribute ?anonymization ?nrBuckets\n" +
+                "WHERE {\n" +
+                "  VALUES ?kpiObject { " + valuesBlock + " }\n" +
+                "  ?kpiObject ?hasAttribute ?attribute .\n" +
+                "  OPTIONAL {?attribute ?nrBucketsAttribute ?nrBuckets . }\n" +
+                "  ?attribute ?anonymizationAttribute ?anonymization .\n" +
+                "}";
+        ParameterizedSparqlString queryString = new ParameterizedSparqlString(query);
+        objects.forEach(obj -> queryString.setParam(obj.getLocalName(), obj));
         queryString.setParam("hasAttribute", hasAttribute);
         queryString.setParam("nrBucketsAttribute", nrBuckets);
         queryString.setParam("anonymizationAttribute", anonymization);
