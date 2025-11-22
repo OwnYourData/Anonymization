@@ -34,10 +34,10 @@ public abstract class Generalization<T> extends Anonymization {
 
     @Override
     public void applyAnonymization() {
-        int numberBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
+        int nrBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
-        List<Resource> buckets = createBuckets(model, numberBuckets, sortedValues, property);
-        Map<Resource, Resource> ranges = getRanges(sortedValues, numberBuckets, buckets);
+        List<Resource> buckets = createBuckets(model, nrBuckets, sortedValues, property);
+        Map<Resource, Resource> ranges = getRanges(sortedValues, nrBuckets, buckets);
         writeToModel(model, ranges, property);
     }
 
