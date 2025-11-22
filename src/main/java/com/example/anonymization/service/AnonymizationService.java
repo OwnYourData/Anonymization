@@ -24,7 +24,6 @@ import java.util.*;
 public class AnonymizationService {
 
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
-    public static final String FLAT_OBJECT_NAME = "anonymizationObject";
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
@@ -45,10 +44,13 @@ public class AnonymizationService {
     public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
         Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
         Model model = ModelFactory.createDefaultModel();
-        Resource anonymizationObject = model.createResource(request.getPrefix() + FLAT_OBJECT_NAME);
-        FaltJsonService.addDataToFlatModel(model, anonymizationObject, request.getData(), request.getPrefix());
-        applyAnonymizationForObject(anonymizationObject, configs, model);
-        String out = FaltJsonService.createFlatJsonOutput(model, anonymizationObject, configs);
+        FaltJsonService.addDataToFlatModel(model, request.getData(), request.getPrefix());
+        Map<Resource, Map<Property, Configuration>> anonymizationObjects =
+                ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
+        anonymizationObjects.forEach(
+                (o, c) -> applyAnonymizationForObject(o, c, model)
+        );
+        String out = FaltJsonService.createFlatJsonOutput(model, configs, anonymizationObjects.keySet(), request.getPrefix());
         logger.info(out);
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }

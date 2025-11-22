@@ -5,23 +5,28 @@
     {
       "latitude": 1234,
       "longitude": 1234,
-      "test_attribute_not_anonymized": "test"
+      "test_attribute_not_anonymized": "test",
+      "type": "AnonymisationDemo"
     },
     {
       "latitude": 123,
-      "longitude": 12334
+      "longitude": 12334,
+      "type": "AnonymisationDemo"
     },
     {
       "latitude": 1221,
-      "longitude": 1234
+      "longitude": 1234,
+      "type": "AnonymisationDemo"
     },
     {
       "latitude": 123,
-      "longitude": 12534
+      "longitude": 12534,
+      "type": "AnonymisationDemo"
     },
     {
       "latitude": 1,
-      "longitude": 34
+      "longitude": 34,
+      "type": "AnonymisationDemo"
     }
   ]
 }
