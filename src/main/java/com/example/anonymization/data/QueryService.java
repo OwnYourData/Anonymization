@@ -219,25 +219,24 @@ public class QueryService {
      * @param properties set of properties for which the generalization data is fetched
      * @return mapping of resources of the object type with their min and max property values
      */
-    public static Map<Resource, Map<Property, List<Literal>>> getGeneralizationData(
+    public static Map<Resource, Map<Property, Literal[]>> getGeneralizationData(
             Model model,
             Resource objectType,
             Set<Property> properties
     ) {
-        model.write(System.out);
         ParameterizedSparqlString queryString = QueryBuildingService.createGeneralizationData(properties, objectType);
         Query query = queryString.asQuery();
-        Map<Resource, Map<Property, List<Literal>>> results = new HashMap<>();
+        Map<Resource, Map<Property, Literal[]>> results = new HashMap<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
             ResultSet rs = qe.execSelect();
             while (rs.hasNext()) {
                 QuerySolution sol = rs.next();
-                Map<Property, List<Literal>> values = new HashMap<>();
+                Map<Property, Literal[]> values = new HashMap<>();
                 properties.forEach(property -> {
-                    Literal minValue = sol.getLiteral("_min_" + property.getLocalName());
-                    Literal maxValue = sol.getLiteral("_max_" + property.getLocalName());
-                    if (minValue != null  && maxValue != null) {
-                        values.put(property, List.of(minValue, maxValue));
+                    if (sol.getResource("_" + property.getLocalName()) != null) {
+                        Literal minValue = sol.getLiteral("_min_" + property.getLocalName());
+                        Literal maxValue = sol.getLiteral("_max_" + property.getLocalName());
+                        values.put(property, new Literal[]{minValue, maxValue});
                     }
                 });
                 results.put(sol.getResource("object"), values);

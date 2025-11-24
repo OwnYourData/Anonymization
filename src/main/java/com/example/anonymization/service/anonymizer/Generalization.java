@@ -2,15 +2,14 @@ package com.example.anonymization.service.anonymizer;
 
 
 import com.example.anonymization.entities.Configuration;
-import com.example.anonymization.service.KpiService;
 import com.example.anonymization.data.QueryService;
-import lombok.AllArgsConstructor;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDFS;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -72,8 +71,16 @@ public abstract class Generalization<T> extends Anonymization {
                     List<T> range = getBucketRange(sortedValues, position, nrOfBuckets);
                     Resource generalizationResource = model.createResource(property.getURI() + "_" + position);
                     generalizationResource.addProperty(RDF.type, QueryService.SOYA_URL + "generalization");
-                    generalizationResource.addLiteral(min, range.get(0));
-                    generalizationResource.addLiteral(max, range.get(1));
+                    if (position != 0) {
+                        generalizationResource.addLiteral(min, range.get(0));
+                    } else {
+                        generalizationResource.addProperty(RDFS.comment, "For the lower bound the minimum value is obfuscated");
+                    }
+                    if (position != nrOfBuckets - 1) {
+                        generalizationResource.addLiteral(max, range.get(1));
+                    } else {
+                        generalizationResource.addProperty(RDFS.comment, "For the higher bound the maximum value is obfuscated");
+                    }
                     return generalizationResource;
                 }).toList();
     }
