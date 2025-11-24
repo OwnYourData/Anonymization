@@ -150,14 +150,22 @@ public class QueryBuildingService {
     static ParameterizedSparqlString createGeneralizationData(Set<Property> properties, Resource anonymizationObject) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
         queryString.append("SELECT ?object");
-        properties.forEach(property -> queryString.append(" ?_min_" + property.getLocalName() + " ?_max_" + property.getLocalName()));
+        properties.forEach(property -> {
+            queryString.append(" ?_" + property.getLocalName());
+            queryString.append(" ?_min_" + property.getLocalName());
+            queryString.append(" ?_max_" + property.getLocalName());
+        });
         queryString.append("\nWHERE {\n");
         queryString.append("  ?object a <" + anonymizationObject.getURI()+ ">.\n");
         properties.forEach(property -> {
-            queryString.append("  OPTIONAL { ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
-            queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MAX + "> ?_max_" + property.getLocalName() + ".\n");
-            queryString.append(" ?_" + property.getLocalName() + " <" + Generalization.RDF_MIN + "> ?_min_" + property.getLocalName() + ".\n");
-            queryString.append("}\n");
+            queryString.append("  OPTIONAL { \n");
+            queryString.append("    ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
+            queryString.append("    ?_" + property.getLocalName() + " <" + Generalization.RDF_MAX + "> ?_max_" + property.getLocalName() + ".\n");
+            queryString.append("  }\n");
+            queryString.append("  OPTIONAL { \n");
+            queryString.append("    ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
+            queryString.append("    ?_" + property.getLocalName() + " <" + Generalization.RDF_MIN + "> ?_min_" + property.getLocalName() + ".\n");
+            queryString.append("  }\n");
             queryString.setParam(property.getLocalName(), property);
         });
         queryString.append("}");

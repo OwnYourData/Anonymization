@@ -91,7 +91,7 @@ public class FaltJsonService {
                     .map(Map.Entry::getKey)
                     .map(p -> model.getProperty(p.getURI() + "_generalized"))
                     .collect(Collectors.toSet());
-            Map<Resource, Map<Property, List<Literal>>> generalizationData =
+            Map<Resource, Map<Property, Literal[]>> generalizationData =
                     QueryService.getGeneralizationData(model, flatObject, classificationProperties);
             Map<Resource, Long> kAnonymity = QueryService.getKAnonymity(model, objectTypes);
             Map<Resource, List<QueryService.AttributeInformation>> attributeInformation =
@@ -105,7 +105,7 @@ public class FaltJsonService {
     private static String createFlatJsonString(
             Map<Resource, Map<Property, Literal>> data,
             Map<Resource, List<Resource>> types,
-            Map<Resource, Map<Property, List<Literal>>> generalizationData,
+            Map<Resource, Map<Property, Literal[]>> generalizationData,
             Map<Resource, Long> kAnonymity,
             Map<Resource, List<QueryService.AttributeInformation>> attributeInformation
     ) {
@@ -127,7 +127,7 @@ public class FaltJsonService {
             ObjectMapper mapper,
             Map<Resource, Map<Property, Literal>> data,
             Map<Resource, List<Resource>> types,
-            Map<Resource, Map<Property, List<Literal>>> generalizationData
+            Map<Resource, Map<Property, Literal[]>> generalizationData
     ) {
         ArrayNode dataArray = mapper.createArrayNode();
         List<Resource> sortedResources = data.keySet().stream()
@@ -159,14 +159,22 @@ public class FaltJsonService {
                 entryNode.set("types", typesArray);
             }
 
-            Map<Property, List<Literal>> genAttrs = generalizationData.get(resource);
+            Map<Property, Literal[]> genAttrs = generalizationData.get(resource);
             if (genAttrs != null) {
-                for (Map.Entry<Property, List<Literal>> genAttr : genAttrs.entrySet()) {
-                    List<Literal> values = genAttr.getValue();
-                    if (values.size() == 2) {
+                for (Map.Entry<Property, Literal[]> genAttr : genAttrs.entrySet()) {
+                    Literal[] values = genAttr.getValue();
+                    if (values.length == 2) {
                         ObjectNode genNode = mapper.createObjectNode();
-                        genNode.put("min", values.get(0).getValue().toString());
-                        genNode.put("max", values.get(1).getValue().toString());
+                        if (values[0] == null) {
+                            genNode.put("min", "obfuscated");
+                        } else {
+                            genNode.put("min", values[0].getValue().toString());
+                        }
+                        if (values[1] == null) {
+                            genNode.put("max", "obfuscated");
+                        } else {
+                            genNode.put("max", values[1].getValue().toString());
+                        }
                         entryNode.set(genAttr.getKey().getLocalName(), genNode);
                     }
                 }
