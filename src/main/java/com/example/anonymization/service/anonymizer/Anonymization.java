@@ -44,7 +44,13 @@ public abstract class Anonymization {
     public void anonymization() {
         data.entrySet().removeIf(entry -> entry.getValue() == null);
         System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
-        KpiService.addAttributeInformation(model, property, numberAttributes, config.getAnonymization(), anonymizationObject);
+        KpiService.addAttributeInformation(
+                model,
+                property,
+                calculateNumberOfBuckets(data.size(), numberAttributes),
+                config.getAnonymization(),
+                anonymizationObject
+        );
         applyAnonymization();
     }
 
