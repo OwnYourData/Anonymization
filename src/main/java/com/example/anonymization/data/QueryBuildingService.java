@@ -160,6 +160,9 @@ public class QueryBuildingService {
         properties.forEach(property -> {
             queryString.append("  OPTIONAL { \n");
             queryString.append("    ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
+            queryString.append("  }\n");
+            queryString.append("  OPTIONAL { \n");
+            queryString.append("    ?object ?" + property.getLocalName() + " ?_" + property.getLocalName() + ".\n");
             queryString.append("    ?_" + property.getLocalName() + " <" + Generalization.RDF_MAX + "> ?_max_" + property.getLocalName() + ".\n");
             queryString.append("  }\n");
             queryString.append("  OPTIONAL { \n");
