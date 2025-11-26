@@ -2,6 +2,7 @@ package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.data.QueryService;
+import com.example.anonymization.entities.ObjectGeneralizationConfig;
 import com.example.anonymization.exceptions.OntologyException;
 import jakarta.validation.constraints.NotNull;
 import org.apache.jena.rdf.model.*;
@@ -20,6 +21,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class ConfigurationService {
@@ -101,10 +103,7 @@ public class ConfigurationService {
                 }
                 configs.get(entry.object()).put(
                         entry.property(),
-                        new Configuration(
-                                extractValueFromURL(entry.datatype().toString()),
-                                extractValueFromURL(entry.anonymization().toString())
-                        )
+                        createConfiguration(entry.datatype(), entry.anonymization(), entry.property(), model)
                 );
                 logger.info(
                         "New Config: {}, {}, {}",
@@ -117,6 +116,24 @@ public class ConfigurationService {
             return configs;
         } catch (Exception e) {
             throw new OntologyException("Exception when extracting configuration from the fetched ontology");
+        }
+    }
+
+    private static Configuration createConfiguration(
+            Resource datatype,
+            Literal anonymization,
+            Property property,
+            Model model
+    ) {
+        String datatypeString = extractValueFromURL(datatype.toString());
+        String anonymizationString = extractValueFromURL(anonymization.toString());
+        if (anonymizationString.equals("generalization") && !Set.of("integer", "double", "date").contains(datatypeString)) {
+            return new ObjectGeneralizationConfig(
+                    datatypeString,
+                    QueryService.getAttributeOrder(model, property)
+            );
+        } else {
+            return new Configuration(datatypeString, anonymizationString);
         }
     }
 

@@ -22,6 +22,7 @@ public class QueryBuildingService {
                       ?property rdfs:domain ?anonymizationObject .
                       ?property rdfs:range ?datatype .
                       ?property <https://w3id.org/soya/ns#classification> ?anonymization .
+                      FILTER(isLiteral(?anonymization))
                     }
                 """;
     }
@@ -37,11 +38,27 @@ public class QueryBuildingService {
         q.append("  ?object a <" + anonymizationObject.getURI()+ ">.\n");
         for (Property p : properties) {
             String local = p.getLocalName();
-            q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ".\n");
-            q.append("FILTER(isLiteral(?_" + local + ")) }\n");
+            q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ". }\n");
             q.setParam(local, p);
         }
         q.append("}");
+        return q;
+    }
+
+    static ParameterizedSparqlString createAttributeOrderQuery(Resource attribute) {
+        String queryString = """
+                PREFIX soya: <https://w3id.org/soya/ns#>
+                PREFIX list: <http://jena.apache.org/ARQ/list#>
+                SELECT ?attr
+                WHERE {
+                    ?attribute soya:classification ?o .
+                    ?o soya:attributeOrder ?list .
+                    ?list list:member ?attr .
+                    ?list list:index (?attr ?idx) .
+                } ORDER BY ?idx
+                """;
+        ParameterizedSparqlString q = new ParameterizedSparqlString(queryString);
+        q.setParam("attribute", attribute);
         return q;
     }
 

@@ -2,10 +2,7 @@ package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
 import org.apache.jena.atlas.lib.Pair;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +12,7 @@ public class GeneralizationNumeric extends Generalization<Double> {
     public GeneralizationNumeric(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject
@@ -24,10 +21,14 @@ public class GeneralizationNumeric extends Generalization<Double> {
     }
 
     @Override
-    protected List<Pair<Resource, Double>> getSortedValues(Map<Resource, Literal> data) {
-        return data.entrySet().stream()
-                .map(e -> new Pair<>(e.getKey(), e.getValue().getDouble()))
-                .sorted((e1, e2) -> (int) (e1.getRight() - e2.getRight()))
-                .toList();
+    protected List<Pair<Resource, Double>> getSortedValues(Map<Resource, RDFNode> data) {
+        try {
+            return data.entrySet().stream()
+                    .map(e -> new Pair<>(e.getKey(), e.getValue().asLiteral().getDouble()))
+                    .sorted((e1, e2) -> (int) (e1.getRight() - e2.getRight()))
+                    .toList();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error while parsing numeric values for generalization.", e);
+        }
     }
 }

@@ -46,6 +46,11 @@ public class AnonymizationRestController {
                                             name = "JSON-LD with two anonymization objects",
                                             summary = "JSON-LD request with two anonymization objects",
                                             externalValue = "/examples/anonymization-request-two-objects.json"
+                                    ),
+                                    @ExampleObject(
+                                            name = "JSON-LD of object anonymization (address)",
+                                            summary = "JSON-LD request for the anonymization of address objects",
+                                            externalValue = "/examples/anonymization-request-object.json"
                                     )
                             }
                     )

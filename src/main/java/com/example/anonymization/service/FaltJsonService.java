@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toMap;
+
 @Service
 public class FaltJsonService {
 
@@ -83,7 +85,7 @@ public class FaltJsonService {
     ) {
         Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         try {
-            Map<Resource, Map<Property, Literal>> data = QueryService.getAllData(model, flatObject);
+            Map<Resource, Map<Property, Literal>> data = getLiteralData(model, flatObject);
             Map<Resource, List<Resource>> types = QueryService.getTypesForResources(model, flatObject);
 
             Set<Property> classificationProperties = configs.entrySet().stream()
@@ -100,6 +102,24 @@ public class FaltJsonService {
         } catch (Exception e) {
             throw new AnonymizationException("Error creating flat model: " + e.getMessage());
         }
+    }
+
+    private static Map<Resource, Map<Property, Literal>> getLiteralData(
+            Model model,
+            Resource flatObject
+    ) {
+        return QueryService.getAllData(model, flatObject).entrySet().stream()
+                        .map(e -> Map.entry(
+                                e.getKey(),
+                                e.getValue().entrySet().stream()
+                                        .filter(inner -> inner.getValue().isLiteral())
+                                        .collect(toMap(
+                                                Map.Entry::getKey,
+                                                inner -> inner.getValue().asLiteral()
+                                        ))
+                        ))
+                        .filter(e -> !e.getValue().isEmpty())
+                        .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     private static String createFlatJsonString(
