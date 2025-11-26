@@ -10,7 +10,7 @@ public class RandomizationNumeric extends Randomization {
     public RandomizationNumeric(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject

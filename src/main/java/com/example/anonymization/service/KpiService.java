@@ -18,7 +18,7 @@ public class KpiService {
     public static final String K_ANONYMITY = QueryService.SOYA_URL + "kanonymity";
     public static final String HAS_ATTRIBUTE_URI = QueryService.SOYA_URL + "hasAttribute";
     public static final String ANONYMIZATION_TYP_URI = QueryService.SOYA_URL + "anonymizationTyp";
-    public static final String NR_ATTRIBUTES_URI = QueryService.SOYA_URL + "nrAttributes";
+    public static final String NR_BUCKETS_URI = QueryService.SOYA_URL + "nrBucketsUsed";
 
     /**
      * Adds a KPI object to the model containing the k-anonymity value for the given anonymization object.
@@ -60,7 +60,7 @@ public class KpiService {
         model.add(kpiObject, model.createProperty(HAS_ATTRIBUTE_URI), property);
         model.add(property, model.createProperty(ANONYMIZATION_TYP_URI), anonymizationType);
         if (!anonymizationType.equals("masking")) {
-            model.addLiteral(property, model.createProperty(NR_ATTRIBUTES_URI), nrBucketsUsed);
+            model.addLiteral(property, model.createProperty(NR_BUCKETS_URI), nrBucketsUsed);
         }
     }
 

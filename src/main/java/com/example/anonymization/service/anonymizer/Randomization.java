@@ -1,11 +1,7 @@
 package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
-import com.example.anonymization.service.KpiService;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 
 import java.util.*;
 
@@ -14,7 +10,7 @@ public abstract class Randomization extends Anonymization {
     public Randomization(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             Configuration config,
             Resource anonymizationObject,
             long numberAttributes
@@ -36,10 +32,8 @@ public abstract class Randomization extends Anonymization {
         writeToModel(model, randomizedValues, property);
     }
 
-    private Map<Resource, Literal> getRandomizedValues(Map<Resource, Literal> data, int randomizationValue) {
-        List<Map.Entry<Resource, Literal>> sorted = data.entrySet().stream()
-                .sorted((e1, e2) -> getComparator().compare(e1.getValue(), e2.getValue()))
-                .toList();
+    private Map<Resource, Literal> getRandomizedValues(Map<Resource, RDFNode> data, int randomizationValue) {
+        List<Map.Entry<Resource, Literal>> sorted = getSortedLiteralEntries(data);
         Map<Resource, Literal> randomized = HashMap.newHashMap(data.size());
         randomizationValue = randomizationValue == data.size() ? randomizationValue - 1 : randomizationValue;
         int lowerBound = 0;
@@ -68,6 +62,17 @@ public abstract class Randomization extends Anonymization {
             );
         }
         return randomized;
+    }
+
+    private List<Map.Entry<Resource, Literal>> getSortedLiteralEntries(Map<Resource, RDFNode> data) {
+        try {
+            return data.entrySet().stream()
+                    .map(entry -> Map.entry(entry.getKey(), entry.getValue().asLiteral()))
+                    .sorted((e1, e2) -> getComparator().compare(e1.getValue(), e2.getValue()))
+                    .toList();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Randomization can only be applied to literal values.");
+        }
     }
 
     private void writeToModel(Model model, Map<Resource, Literal> randomizedValues, Property originalProperty) {

@@ -4,10 +4,7 @@ package com.example.anonymization.service.anonymizer;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.data.QueryService;
 import org.apache.jena.atlas.lib.Pair;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 
@@ -23,7 +20,7 @@ public abstract class Generalization<T> extends Anonymization {
     public Generalization(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             Configuration config,
             Resource anonymizationObject,
             long numberAttributes
@@ -40,7 +37,7 @@ public abstract class Generalization<T> extends Anonymization {
         writeToModel(model, ranges, property);
     }
 
-    protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, Literal> data);
+    protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, RDFNode> data);
 
     protected Map<Resource, Resource> getRanges(List<Pair<Resource, T>> sortedValues, int numberBuckets, List<Resource> buckets) {
         List<Pair<Resource, Integer>> positionValues = new LinkedList<>();

@@ -2,13 +2,9 @@ package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.KpiService;
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 
 import java.util.Map;
 
@@ -20,7 +16,7 @@ public abstract class Anonymization {
 
     @NotNull Model model;
     @NotNull Property property;
-    @NotNull Map<Resource, Literal> data;
+    @NotNull Map<Resource, RDFNode> data;
     @NotNull Configuration config;
     @NotNull Resource anonymizationObject;
     long numberAttributes;
@@ -28,7 +24,7 @@ public abstract class Anonymization {
     Anonymization(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             Configuration config,
             Resource anonymizationObject
     ) {
@@ -58,7 +54,7 @@ public abstract class Anonymization {
             Configuration config,
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             int nrAttr,
             Resource anonymizationObject
     ) {

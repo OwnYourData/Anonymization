@@ -61,8 +61,8 @@ public class AnonymizationService {
             Model model
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
-        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
-        Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
+        Map<Resource, Map<Property, RDFNode>> data = QueryService.getData(model, attributes, anonymizationObject);
+        Map<Property, Map<Resource, RDFNode>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
         horizontalData.entrySet().stream().map(e -> Anonymization.anonymizationFactoryFunction(
                 configurations.get(e.getKey()),
@@ -76,14 +76,14 @@ public class AnonymizationService {
         QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
     }
 
-    private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
-            Map<Resource, Map<Property, Literal>> data,
+    private static Map<Property, Map<Resource, RDFNode>> convertToHorizontalSchema(
+            Map<Resource, Map<Property, RDFNode>> data,
             Set<Property> properties
     ) {
-        Map<Property, Map<Resource, Literal>> propertyMap = new HashMap<>();
+        Map<Property, Map<Resource, RDFNode>> propertyMap = new HashMap<>();
         properties.forEach(property -> propertyMap.put(property, new HashMap<>()));
         data.forEach((resource, value) -> value.forEach(
-                (property, literal) -> propertyMap.get(property).put(resource, literal)
+                (property, node) -> propertyMap.get(property).put(resource, node)
         ));
         return propertyMap;
     }

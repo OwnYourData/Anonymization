@@ -37,8 +37,7 @@ public class QueryBuildingService {
         q.append("  ?object a <" + anonymizationObject.getURI()+ ">.\n");
         for (Property p : properties) {
             String local = p.getLocalName();
-            q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ".\n");
-            q.append("FILTER(isLiteral(?_" + local + ")) }\n");
+            q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ". }\n");
             q.setParam(local, p);
         }
         q.append("}");
