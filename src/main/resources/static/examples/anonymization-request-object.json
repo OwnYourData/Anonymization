@@ -1,0 +1,90 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:test1",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:adresse": {
+          "@id": "oyd:address1"
+        }
+      },
+      {
+        "@id": "oyd:address1",
+        "@type": "oyd:Address",
+        "oyd:detail": "Musterstrasse 1",
+        "oyd:city": "Vienna",
+        "oyd:zip": "1010",
+        "oyd:state": "Vienna",
+        "oyd:country": "Austria"
+      },
+      {
+        "@id": "oyd:test2",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:adresse": {
+          "@id": "oyd:address2"
+        }
+      },
+      {
+        "@id": "oyd:address2",
+        "@type": "oyd:Address",
+        "oyd:detail": "Anderestrasse 1",
+        "oyd:city": "Vienna",
+        "oyd:zip": "1010",
+        "oyd:state": "Vienna",
+        "oyd:country": "Austria"
+      },
+      {
+        "@id": "oyd:test3",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:adresse": {
+          "@id": "oyd:address3"
+        }
+      },
+      {
+        "@id": "oyd:address3",
+        "@type": "oyd:Address",
+        "oyd:detail": "Vogerlweg 5",
+        "oyd:city": "Krems",
+        "oyd:zip": "2020",
+        "oyd:state": "Krems",
+        "oyd:country": "Austria"
+      },
+      {
+        "@id": "oyd:test4",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:adresse": {
+          "@id": "oyd:address4"
+        }
+      },
+      {
+        "@id": "oyd:address4",
+        "@type": "oyd:Address",
+        "oyd:detail": "Hauptstrasse 10",
+        "oyd:city": "Salzburg",
+        "oyd:zip": "5020",
+        "oyd:state": "Salzburg",
+        "oyd:country": "Austria"
+      },
+      {
+        "@id": "oyd:test5",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:adresse": {
+          "@id": "oyd:address5"
+        }
+      },
+      {
+        "@id": "oyd:address5",
+        "@type": "oyd:Address",
+        "oyd:detail": "Bahnhofstrasse 3",
+        "oyd:city": "Innsbruck",
+        "oyd:zip": "6020",
+        "oyd:state": "Innsbruck",
+        "oyd:country": "Austria"
+      }
+    ]
+  }
+}

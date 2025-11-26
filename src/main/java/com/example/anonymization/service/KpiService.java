@@ -18,7 +18,7 @@ public class KpiService {
     public static final String K_ANONYMITY = QueryService.SOYA_URL + "kanonymity";
     public static final String HAS_ATTRIBUTE_URI = QueryService.SOYA_URL + "hasAttribute";
     public static final String ANONYMIZATION_TYP_URI = QueryService.SOYA_URL + "anonymizationTyp";
-    public static final String NR_ATTRIBUTES_URI = QueryService.SOYA_URL + "nrAttributes";
+    public static final String NR_BUCKETS_URI = QueryService.SOYA_URL + "nrBucketsUsed";
 
     /**
      * Adds a KPI object to the model containing the k-anonymity value for the given anonymization object.
@@ -60,7 +60,7 @@ public class KpiService {
         model.add(kpiObject, model.createProperty(HAS_ATTRIBUTE_URI), property);
         model.add(property, model.createProperty(ANONYMIZATION_TYP_URI), anonymizationType);
         if (!anonymizationType.equals("masking")) {
-            model.addLiteral(property, model.createProperty(NR_ATTRIBUTES_URI), nrBucketsUsed);
+            model.addLiteral(property, model.createProperty(NR_BUCKETS_URI), nrBucketsUsed);
         }
     }
 
@@ -69,29 +69,25 @@ public class KpiService {
             Resource anonymizationObject,
             Set<Property> attributes, Map<Property, Configuration> configurations
     ) {
-        try {
-            Map<Resource, Set<Resource>> similarValues = new HashMap<>();
-            List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
-            groups.forEach(group -> group.forEach(
-                    resource -> similarValues.put(resource, new HashSet<>(group))
-            ));
+        Map<Resource, Set<Resource>> similarValues = new HashMap<>();
+        List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
+        groups.forEach(group -> group.forEach(
+                resource -> similarValues.put(resource, new HashSet<>(group))
+        ));
 
-            attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
-                    .forEach(randomization -> {
-                        Map<Resource, Set<Resource>> similarity = getSimilarValues(
-                                model,
-                                anonymizationObject,
-                                randomization,
-                                configurations.get(randomization).getDataType().equals("date")
-                        );
-                        similarValues.keySet().forEach(
-                                resource -> similarValues.get(resource).retainAll(similarity.get(resource))
-                        );
-                    });
-            return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
-        } catch (Exception ex) {
-            throw new AnonymizationException("Error calculating k-anonymity: " + ex.getMessage());
-        }
+        attributes.stream().filter(attr -> configurations.get(attr).getAnonymization().equals("randomization"))
+                .forEach(randomization -> {
+                    Map<Resource, Set<Resource>> similarity = getSimilarValues(
+                            model,
+                            anonymizationObject,
+                            randomization,
+                            configurations.get(randomization).getDataType().equals("date")
+                    );
+                    similarValues.keySet().forEach(
+                            resource -> similarValues.get(resource).retainAll(similarity.get(resource))
+                    );
+                });
+        return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
     }
 
     private static Map<Resource, Set<Resource>> getSimilarValues(

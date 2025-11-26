@@ -2,6 +2,7 @@ package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.data.QueryService;
+import com.example.anonymization.entities.ObjectGeneralizationConfig;
 import com.example.anonymization.exceptions.OntologyException;
 import jakarta.validation.constraints.NotNull;
 import org.apache.jena.rdf.model.*;
@@ -20,6 +21,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class ConfigurationService {
@@ -80,13 +82,26 @@ public class ConfigurationService {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(new URI(url)).GET().build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() < 300 || response.body().isEmpty()) {
-                return response.body();
+
+            int status = response.statusCode();
+            if (status >= 200 && status < 300) {
+                String body = response.body();
+                if (body == null || body.isEmpty()) {
+                    throw new OntologyException(
+                            "Successful request but empty response body for fetching ontology from: " + url
+                    );
+                }
+                return body;
             } else {
-                throw new OntologyException("Exception when fetching the URL content from the provided URL: " + url);
+                throw new OntologyException(
+                        String.format("Failed to fetch ontology from URL: %s. HTTP status: %d", url, status)
+                );
             }
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new IllegalArgumentException("Exception when fetching the URL content from the provided URL: " + url);
+        } catch (URISyntaxException | IOException e) {
+            throw new OntologyException("Failed to fetch ontology from URL: " + url);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore thread interruption status
+            throw new OntologyException("Thread was interrupted while fetching ontology from URL: " + url);
         }
     }
 
@@ -94,29 +109,40 @@ public class ConfigurationService {
     private static Map<Resource, Map<Property, Configuration>> extractConfig(Model model) {
         Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
         logger.info("Extracting configuration from server response");
-        try {
-            QueryService.getConfigurations(model).forEach(entry -> {
-                if (!configs.containsKey(entry.object())) {
-                    configs.put(entry.object(), new HashMap<>());
-                }
-                configs.get(entry.object()).put(
-                        entry.property(),
-                        new Configuration(
-                                extractValueFromURL(entry.datatype().toString()),
-                                extractValueFromURL(entry.anonymization().toString())
-                        )
-                );
-                logger.info(
-                        "New Config: {}, {}, {}",
-                        extractValueFromURL(entry.property().toString()),
-                        extractValueFromURL(entry.datatype().toString()),
-                        extractValueFromURL(entry.anonymization().toString())
-                );
-            });
-            logger.info("Configuration successfully converted");
-            return configs;
-        } catch (Exception e) {
-            throw new OntologyException("Exception when extracting configuration from the fetched ontology");
+        QueryService.getConfigurations(model).forEach(entry -> {
+            if (!configs.containsKey(entry.object())) {
+                configs.put(entry.object(), new HashMap<>());
+            }
+            configs.get(entry.object()).put(
+                    entry.property(),
+                    createConfiguration(entry.datatype(), entry.anonymization(), entry.property(), model)
+            );
+            logger.info(
+                    "New Config: {}, {}, {}",
+                    extractValueFromURL(entry.property().toString()),
+                    extractValueFromURL(entry.datatype().toString()),
+                    extractValueFromURL(entry.anonymization().toString())
+            );
+        });
+        logger.info("Configuration successfully converted");
+        return configs;
+    }
+
+    private static Configuration createConfiguration(
+            Resource datatype,
+            Literal anonymization,
+            Property property,
+            Model model
+    ) {
+        String datatypeString = extractValueFromURL(datatype.toString());
+        String anonymizationString = extractValueFromURL(anonymization.toString());
+        if (anonymizationString.equals("generalization") && !Set.of("integer", "double", "date").contains(datatypeString)) {
+            return new ObjectGeneralizationConfig(
+                    datatypeString,
+                    QueryService.getAttributeOrder(model, property)
+            );
+        } else {
+            return new Configuration(datatypeString, anonymizationString);
         }
     }
 

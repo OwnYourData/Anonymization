@@ -4,10 +4,7 @@ package com.example.anonymization.service.anonymizer;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.data.QueryService;
 import org.apache.jena.atlas.lib.Pair;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 
@@ -15,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class Generalization<T> extends Anonymization {
+public abstract class Generalization<T> extends Anonymization<Configuration> {
 
     public static final String RDF_MAX = "http://www.w3.org/2000/01/rdf-schema#max";
     public static final String RDF_MIN = "http://www.w3.org/2000/01/rdf-schema#min";
@@ -23,7 +20,7 @@ public abstract class Generalization<T> extends Anonymization {
     public Generalization(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             Configuration config,
             Resource anonymizationObject,
             long numberAttributes
@@ -33,16 +30,19 @@ public abstract class Generalization<T> extends Anonymization {
 
     @Override
     public void applyAnonymization() {
-        int nrBuckets = Anonymization.calculateNumberOfBuckets(data.size(), numberAttributes);
         List<Pair<Resource, T>> sortedValues = getSortedValues(data);
-        List<Resource> buckets = createBuckets(model, nrBuckets, sortedValues, property);
-        Map<Resource, Resource> ranges = getRanges(sortedValues, nrBuckets, buckets);
+        List<Resource> buckets = createBuckets(model, numberBuckets, sortedValues, property);
+        Map<Resource, Resource> ranges = getRanges(sortedValues, numberBuckets, buckets);
         writeToModel(model, ranges, property);
     }
 
-    protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, Literal> data);
+    protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, RDFNode> data);
 
-    protected Map<Resource, Resource> getRanges(List<Pair<Resource, T>> sortedValues, int numberBuckets, List<Resource> buckets) {
+    protected Map<Resource, Resource> getRanges(
+            List<Pair<Resource, T>> sortedValues,
+            int numberBuckets,
+            List<Resource> buckets
+    ) {
         List<Pair<Resource, Integer>> positionValues = new LinkedList<>();
         for (int i = 0; i < sortedValues.size(); i++) {
             positionValues.add(new Pair<>(
@@ -63,7 +63,12 @@ public abstract class Generalization<T> extends Anonymization {
         data.forEach((key, value) -> key.addProperty(generalized, value));
     }
 
-    protected List<Resource> createBuckets(Model model, int nrOfBuckets, List<Pair<Resource, T>> sortedValues, Property property) {
+    protected List<Resource> createBuckets(
+            Model model,
+            int nrOfBuckets,
+            List<Pair<Resource, T>> sortedValues,
+            Property property
+    ) {
         Property min = model.createProperty(RDF_MIN);
         Property max = model.createProperty(RDF_MAX);
         return IntStream.range(0, nrOfBuckets)
@@ -74,12 +79,18 @@ public abstract class Generalization<T> extends Anonymization {
                     if (position != 0) {
                         generalizationResource.addLiteral(min, range.get(0));
                     } else {
-                        generalizationResource.addProperty(RDFS.comment, "For the lower bound the minimum value is obfuscated");
+                        generalizationResource.addProperty(
+                                RDFS.comment,
+                                "For the lower bound the minimum value is obfuscated"
+                        );
                     }
                     if (position != nrOfBuckets - 1) {
                         generalizationResource.addLiteral(max, range.get(1));
                     } else {
-                        generalizationResource.addProperty(RDFS.comment, "For the higher bound the maximum value is obfuscated");
+                        generalizationResource.addProperty(
+                                RDFS.comment,
+                                "For the higher bound the maximum value is obfuscated"
+                        );
                     }
                     return generalizationResource;
                 }).toList();

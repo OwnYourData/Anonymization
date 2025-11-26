@@ -6,6 +6,7 @@ import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.exceptions.RequestModelException;
 import com.example.anonymization.service.anonymizer.Anonymization;
 import com.example.anonymization.data.QueryService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
@@ -41,7 +42,9 @@ public class AnonymizationService {
         );
     }
 
-    public static ResponseEntity<String> applyAnonymizationFlatJson(AnonymizationFlatJsonRequestDto request) {
+    public static ResponseEntity<String> applyAnonymizationFlatJson(
+            AnonymizationFlatJsonRequestDto request
+    ) throws JsonProcessingException {
         Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
         Model model = ModelFactory.createDefaultModel();
         FaltJsonService.addDataToFlatModel(model, request.getData(), request.getPrefix());
@@ -50,7 +53,12 @@ public class AnonymizationService {
         anonymizationObjects.forEach(
                 (o, c) -> applyAnonymizationForObject(o, c, model)
         );
-        String out = FaltJsonService.createFlatJsonOutput(model, configs, anonymizationObjects.keySet(), request.getPrefix());
+        String out = FaltJsonService.createFlatJsonOutput(
+                model,
+                configs,
+                anonymizationObjects.keySet(),
+                request.getPrefix()
+        );
         logger.info(out);
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }
@@ -61,29 +69,29 @@ public class AnonymizationService {
             Model model
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
-        Map<Resource, Map<Property, Literal>> data = QueryService.getData(model, attributes, anonymizationObject);
-        Map<Property, Map<Resource, Literal>> horizontalData = convertToHorizontalSchema(data, attributes);
+        Map<Resource, Map<Property, RDFNode>> data = QueryService.getData(model, attributes, anonymizationObject);
+        Map<Property, Map<Resource, RDFNode>> horizontalData = convertToHorizontalSchema(data, attributes);
         int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
-        horizontalData.entrySet().stream().map(e -> Anonymization.anonymizationFactoryFunction(
-                configurations.get(e.getKey()),
-                model,
-                e.getKey(),
-                e.getValue(),
-                nrAnonymizeAttributes,
-                anonymizationObject
+        horizontalData.entrySet().stream().map(e ->
+                configurations.get(e.getKey()).createAnonymization(
+                        model,
+                        e.getKey(),
+                        e.getValue(),
+                        nrAnonymizeAttributes,
+                        anonymizationObject
         )).forEach(Anonymization::anonymization);
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
         QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
     }
 
-    private static Map<Property, Map<Resource, Literal>> convertToHorizontalSchema(
-            Map<Resource, Map<Property, Literal>> data,
+    private static Map<Property, Map<Resource, RDFNode>> convertToHorizontalSchema(
+            Map<Resource, Map<Property, RDFNode>> data,
             Set<Property> properties
     ) {
-        Map<Property, Map<Resource, Literal>> propertyMap = new HashMap<>();
+        Map<Property, Map<Resource, RDFNode>> propertyMap = new HashMap<>();
         properties.forEach(property -> propertyMap.put(property, new HashMap<>()));
         data.forEach((resource, value) -> value.forEach(
-                (property, literal) -> propertyMap.get(property).put(resource, literal)
+                (property, node) -> propertyMap.get(property).put(resource, node)
         ));
         return propertyMap;
     }
@@ -106,7 +114,7 @@ public class AnonymizationService {
             RDFDataMgr.read(model, new StringReader(jsonLdString), null, RDFLanguages.JSONLD);
             return model;
         } catch (Exception e) {
-            throw new RequestModelException("The Request Data coudl not be converted ot a model: " + e.getMessage());
+            throw new RequestModelException("The Request Data could not be converted ot a model: " + e.getMessage());
         }
     }
 }
