@@ -22,6 +22,7 @@ public class QueryBuildingService {
                       ?property rdfs:domain ?anonymizationObject .
                       ?property rdfs:range ?datatype .
                       ?property <https://w3id.org/soya/ns#classification> ?anonymization .
+                      FILTER(isLiteral(?anonymization))
                     }
                 """;
     }
@@ -37,11 +38,50 @@ public class QueryBuildingService {
         q.append("  ?object a <" + anonymizationObject.getURI()+ ">.\n");
         for (Property p : properties) {
             String local = p.getLocalName();
-            q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ".\n");
-            q.append("FILTER(isLiteral(?_" + local + ")) }\n");
+            q.append("  OPTIONAL { ?object ?" + local + " ?_" + local + ". }\n");
             q.setParam(local, p);
         }
         q.append("}");
+        return q;
+    }
+
+    static ParameterizedSparqlString createAttributeOrderQuery(Resource attribute) {
+        /*
+        SELECT ?pos ?value
+WHERE {
+  # You know this subject (replace _:b0 with your actual subject IRI/variable)
+  _:b0 soya:attributeOrder ?head .
+
+  # Each cell of the RDF list and its value
+  ?head rdf:rest* ?cell .
+  ?cell rdf:first ?value .
+
+  # Compute the position of each cell in the list
+  {
+    SELECT ?cell (COUNT(?mid) AS ?pos)
+    WHERE {
+      # ?head is taken from the outer query (correlated subquery)
+      ?head rdf:rest* ?mid .
+      ?mid  rdf:rest* ?cell .
+    }
+    GROUP BY ?cell
+  }
+}
+ORDER BY ?pos
+         */
+        String queryString = """
+                PREFIX soya: <https://w3id.org/soya/ns#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                SELECT ?value
+                WHERE {
+                    ?attribute soya:classification ?o .
+                    ?o soya:attributeOrder ?head .
+                    ?head rdf:rest* ?cell .
+                    ?cell rdf:first ?value .
+                }
+                """;
+        ParameterizedSparqlString q = new ParameterizedSparqlString(queryString);
+        q.setParam("attribute", attribute);
         return q;
     }
 
@@ -83,12 +123,14 @@ public class QueryBuildingService {
         queryString.append("DELETE {\n");
         for (int i = 0; i < properties.size(); i++) {
             queryString.append("  ?object ?p" + i + " ?v" + i + " .\n");
+            queryString.append("  ?v" + i + " ?p ?o . \n");
         }
         queryString.append("}\nWHERE {\n");
         queryString.append("  ?object a ?type .\n");
         int i = 0;
         for (Property property : properties) {
-            queryString.append("  OPTIONAL { ?object ?p" + i + " ?v" + i + " . }\n");
+            queryString.append("  OPTIONAL { ?object ?p" + i + " ?v" + i + " .\n");
+            queryString.append("  ?v" + i + " ?p ?o . } \n");
             queryString.setParam("p" + i, property);
             i++;
         }

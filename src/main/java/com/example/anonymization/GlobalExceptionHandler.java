@@ -3,6 +3,7 @@ package com.example.anonymization;
 import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.exceptions.OntologyException;
 import com.example.anonymization.exceptions.RequestModelException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class GlobalExceptionHandler {
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         pd.setTitle("Error in ontology fetching or parsing");
         pd.setDetail(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pd);
+        return ResponseEntity.status(pd.getStatus()).body(pd);
     }
 
     @ExceptionHandler(AnonymizationException.class)
@@ -29,7 +30,7 @@ public class GlobalExceptionHandler {
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         pd.setTitle("Error during anonymization process");
         pd.setDetail(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(pd);
+        return ResponseEntity.status(pd.getStatus()).body(pd);
     }
 
     @ExceptionHandler(RequestModelException.class)
@@ -38,6 +39,15 @@ public class GlobalExceptionHandler {
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         pd.setTitle("Invalid request model");
         pd.setDetail(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pd);
+        return ResponseEntity.status(pd.getStatus()).body(pd);
+    }
+
+    @ExceptionHandler(JsonProcessingException.class)
+    public ResponseEntity<ProblemDetail> handleJsonException(JsonProcessingException ex) {
+        log.error("JsonProcessingException: {}", ex.getMessage());
+        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        pd.setTitle("Error creation Json output");
+        pd.setDetail(ex.getMessage());
+        return ResponseEntity.status(pd.getStatus()).body(pd);
     }
 }

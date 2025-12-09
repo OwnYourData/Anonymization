@@ -2,34 +2,40 @@ package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.KpiService;
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 
 import java.util.Map;
 
 import static java.lang.StrictMath.floor;
 import static java.lang.StrictMath.pow;
 
-@AllArgsConstructor
-public abstract class Anonymization {
+public abstract class Anonymization<T extends Configuration> {
 
     @NotNull Model model;
     @NotNull Property property;
-    @NotNull Map<Resource, Literal> data;
-    @NotNull Configuration config;
+    @NotNull Map<Resource, RDFNode> data;
+    @NotNull T config;
     @NotNull Resource anonymizationObject;
-    long numberAttributes;
+    int numberBuckets;
 
     Anonymization(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
-            Configuration config,
+            Map<Resource, RDFNode> data,
+            T config,
+            Resource anonymizationObject,
+            long numberAttributes
+    ) {
+        this(model, property, data, config, anonymizationObject);
+        this.numberBuckets = calculateNumberOfBuckets(data.size(), numberAttributes);
+    }
+
+    Anonymization(
+            Model model,
+            Property property,
+            Map<Resource, RDFNode> data,
+            T config,
             Resource anonymizationObject
     ) {
         this.model = model;
@@ -47,38 +53,11 @@ public abstract class Anonymization {
         KpiService.addAttributeInformation(
                 model,
                 property,
-                calculateNumberOfBuckets(data.size(), numberAttributes),
+                numberBuckets,
                 config.getAnonymization(),
                 anonymizationObject
         );
         applyAnonymization();
-    }
-
-    public static Anonymization anonymizationFactoryFunction(
-            Configuration config,
-            Model model,
-            Property property,
-            Map<Resource, Literal> data,
-            int nrAttr,
-            Resource anonymizationObject
-    ) {
-        return switch (config.getAnonymization()) {
-            case "generalization" -> switch (config.getDataType()) {
-                case "integer", "double" -> new GeneralizationNumeric(model, property, data, nrAttr, config, anonymizationObject);
-                case "date" -> new GeneralizationDate(model, property, data, nrAttr, config, anonymizationObject);
-                case "string" -> throw new IllegalArgumentException("No Generalization possible for type string");
-                default -> new GeneralizationObject(model, property, data, nrAttr, config, anonymizationObject);
-            };
-            case "randomization" -> switch (config.getDataType()) {
-                case "integer", "double" -> new RandomizationNumeric(model, property, data, nrAttr, config, anonymizationObject);
-                case "date" -> new RandomizationDate(model, property, data, nrAttr, config, anonymizationObject);
-                default ->
-                        throw new IllegalArgumentException("No Randomization possible for type " + config.getDataType());
-            };
-            case "masking" -> new Masking(model, property, data, config, anonymizationObject);
-            default ->
-                    throw new IllegalArgumentException("No Anonymization implementation for " + config.getAnonymization() + ": " + config.getDataType());
-        };
     }
 
     static int calculateNumberOfBuckets(long dataSize, long numberAttributes) {

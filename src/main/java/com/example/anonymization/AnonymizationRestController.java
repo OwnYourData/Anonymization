@@ -4,6 +4,7 @@ import com.example.anonymization.dto.AnonymizationFlatJsonRequestDto;
 import com.example.anonymization.dto.AnonymizationJsonLDRequestDto;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.AnonymizationService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -46,6 +47,11 @@ public class AnonymizationRestController {
                                             name = "JSON-LD with two anonymization objects",
                                             summary = "JSON-LD request with two anonymization objects",
                                             externalValue = "/examples/anonymization-request-two-objects.json"
+                                    ),
+                                    @ExampleObject(
+                                            name = "JSON-LD of object anonymization (address)",
+                                            summary = "JSON-LD request for the anonymization of address objects",
+                                            externalValue = "/examples/anonymization-request-object.json"
                                     )
                             }
                     )
@@ -55,7 +61,6 @@ public class AnonymizationRestController {
             consumes = {"application/json", "application/ld+json"},
             produces = "application/json")
     public ResponseEntity<String> anonymization(@RequestBody AnonymizationJsonLDRequestDto anonymizationRequest) {
-        // logger and service call as in your code
         return AnonymizationService.applyAnonymization(anonymizationRequest);
     }
 
@@ -89,10 +94,10 @@ public class AnonymizationRestController {
             )
     )
     @PutMapping("/api/anonymization/flatjson")
-    public ResponseEntity<String> anonymizationFlat(@RequestBody AnonymizationFlatJsonRequestDto anonymizationRequest) {
-
-        logger.info("Received flat JSON anonymization request. Body: \n" + anonymizationRequest);
-
+    public ResponseEntity<String> anonymizationFlat(
+            @RequestBody AnonymizationFlatJsonRequestDto anonymizationRequest
+    ) throws JsonProcessingException {
+        logger.info("Received flat JSON anonymization request. Body: \n{}", anonymizationRequest);
         return AnonymizationService.applyAnonymizationFlatJson(anonymizationRequest);
     }
 

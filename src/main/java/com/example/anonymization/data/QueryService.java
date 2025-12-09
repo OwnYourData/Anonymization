@@ -28,6 +28,7 @@ public class QueryService {
         try (QueryExecution qexec = QueryExecutionFactory.create(QueryBuildingService.createConfigQuery(), model)) {
             ResultSet rs = qexec.execSelect();
             while (rs.hasNext()) {
+                // TODO maybe include check for Literal in query
                 QuerySolution solution = rs.nextSolution();
                 configurations.add(new  ConfigurationResult(
                         solution.getResource("?anonymizationObject"),
@@ -40,6 +41,19 @@ public class QueryService {
         return  configurations;
     }
 
+    public static List<String> getAttributeOrder(Model model, Resource attribute) {
+        List<String> attributes = new ArrayList<>();
+        try (QueryExecution qexec = QueryExecutionFactory
+                .create(QueryBuildingService.createAttributeOrderQuery(attribute).asQuery(), model)) {
+            ResultSet rs = qexec.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution solution = rs.nextSolution();
+                attributes.add(solution.get("?value").toString());
+            }
+        }
+        return attributes;
+    }
+
     /**
      * Extracts the data for a given set of attributes and an object type
      * @param model the input model
@@ -47,20 +61,20 @@ public class QueryService {
      * @param objectType the type for which data should be fetched
      * @return mapping of resources of the object type with their property data
      */
-    public static Map<Resource, Map<Property, Literal>> getData(
+    public static Map<Resource, Map<Property, RDFNode>> getData(
             Model model,
             Collection<Property> properties,
             Resource objectType
     ) {
         Query query = QueryBuildingService.createDataModelQuery(properties, objectType).asQuery();
-        Map<Resource, Map<Property, Literal>> results = new HashMap<>();
+        Map<Resource, Map<Property, RDFNode>> results = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
             while(resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
-                Map<Property, Literal> propertyValues = new HashMap<>();
+                Map<Property, RDFNode> propertyValues = new HashMap<>();
                 properties.forEach(property -> {
-                    Literal value = solution.getLiteral("_" + property.getLocalName());
+                    RDFNode value = solution.get("_" + property.getLocalName());
                     if (value != null) {
                         propertyValues.put(property, value);
                     }
@@ -199,7 +213,7 @@ public class QueryService {
      * @param objectType the object type for which the data is returned
      * @return mapping of resources of the object type with their property data
      */
-    public static Map<Resource, Map<Property, Literal>> getAllData(Model model, Resource objectType) {
+    public static Map<Resource, Map<Property, RDFNode>> getAllData(Model model, Resource objectType) {
         Set<Property> properties = new HashSet<>();
         ParameterizedSparqlString pss = QueryBuildingService.createPropertyQuery(objectType);
         try (QueryExecution qexec = QueryExecutionFactory.create(pss.asQuery(), model)) {
@@ -305,7 +319,7 @@ public class QueryService {
         ParameterizedSparqlString queryString = QueryBuildingService.createAttributeInformationQuery(
                 objectTypes.stream().map(o -> model.getResource(KPI_OBJECT_URI + o.getLocalName())).toList(),
                 model.createProperty(HAS_ATTRIBUTE_URI),
-                model.createProperty(NR_ATTRIBUTES_URI),
+                model.createProperty(NR_BUCKETS_URI),
                 model.createProperty(ANONYMIZATION_TYP_URI)
         );
         Query query = queryString.asQuery();

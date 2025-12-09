@@ -1,7 +1,6 @@
 package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
-import org.apache.jena.base.Sys;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.*;
@@ -16,7 +15,7 @@ public class RandomizationDate extends Randomization {
     public RandomizationDate(
             Model model,
             Property property,
-            Map<Resource, Literal> data,
+            Map<Resource, RDFNode> data,
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject
