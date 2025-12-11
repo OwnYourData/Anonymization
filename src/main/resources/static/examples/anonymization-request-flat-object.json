@@ -24,17 +24,77 @@
     },
     {
       "adresse": {
-        "detail": "Vogerlweg 5",
-        "city": "Krems",
-        "zip": "2020",
-        "state": "Lower Austria",
+        "detail": "Hauptplatz 1",
+        "city": "Vienna",
+        "zip": "1050",
+        "state": "Vienna",
         "country": "Austria"
       },
       "type": "AnonymisationDemo"
     },
     {
       "adresse": {
-        "detail": "Hauptstrasse 1",
+        "detail": "Meidlingergasse 7",
+        "city": "Vienna",
+        "zip": "1140",
+        "state": "Vienna",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Musterstrasse 6",
+        "city": "Vienna",
+        "zip": "1110",
+        "state": "Vienna",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Willhelmweg 1",
+        "city": "Vienna",
+        "zip": "1220",
+        "state": "Vienna",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Hauptplatz 11",
+        "city": "Vienna",
+        "zip": "1050",
+        "state": "Vienna",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Bahnhofstrasse 3",
+        "city": "Saalfelden",
+        "zip": "5050",
+        "state": "Salzburg",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Vogerlweg 5",
+        "city": "St Johann im Pongau",
+        "zip": "5031",
+        "state": "Salzburg",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Hauptstrasse 10",
         "city": "Salzburg",
         "zip": "5020",
         "state": "Salzburg",
@@ -44,10 +104,10 @@
     },
     {
       "adresse": {
-        "detail": "Bahnhofstrasse 3",
-        "city": "Innsbruck",
+        "detail": "Hauptstrasse 9",
+        "city": "Salzburg",
         "zip": "5020",
-        "state": "Tyrol",
+        "state": "Salzburg",
         "country": "Austria"
       },
       "type": "AnonymisationDemo"
