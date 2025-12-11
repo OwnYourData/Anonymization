@@ -1,0 +1,56 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+  "data": [
+    {
+      "adresse": {
+        "detail": "Musterstrasse 1",
+        "city": "Vienna",
+        "zip": "1010",
+        "state": "Vienna",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Anderestrasse 1",
+        "city": "Vienna",
+        "zip": "1010",
+        "state": "Vienna",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Vogerlweg 5",
+        "city": "Krems",
+        "zip": "2020",
+        "state": "Lower Austria",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Hauptstrasse 1",
+        "city": "Salzburg",
+        "zip": "5020",
+        "state": "Salzburg",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    },
+    {
+      "adresse": {
+        "detail": "Bahnhofstrasse 3",
+        "city": "Innsbruck",
+        "zip": "5020",
+        "state": "Tyrol",
+        "country": "Austria"
+      },
+      "type": "AnonymisationDemo"
+    }
+  ]
+}

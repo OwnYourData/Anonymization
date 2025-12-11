@@ -49,21 +49,41 @@ public class FaltJsonService {
                 String key = kv.getKey();
                 validateKey(key);
                 Object value = kv.getValue();
-                if (value != null && key.equals("type")) {
-                    if (value instanceof List<?>) {
-                        for (Object v : (List<?>) value) {
-                            object.addProperty(RDF.type, model.createResource(prefix + v.toString()));
-                        }
-                        continue;
-                    } else {
-                        object.addProperty(RDF.type, model.createResource(prefix + value));
-                    }
-                }
-                if (value != null && !key.equals("type")) {
-                    object.addProperty(model.createProperty(prefix, key), value.toString());
+                if (key.equals("type")) {
+                    addTypeProperty(value, object, model, prefix);
+                } else {
+                    setDataAttribute(object, model, prefix,key, value);
                 }
             }
             counter++;
+        }
+    }
+
+    private static void addTypeProperty(Object value, Resource object, Model model, String prefix) {
+        if (value instanceof List<?>) {
+            for (Object v : (List<?>) value) {
+                object.addProperty(RDF.type, model.createResource(prefix + v.toString()));
+            }
+        } else if (value != null) {
+            object.addProperty(RDF.type, model.createResource(prefix + value));
+        }
+    }
+
+    private static void setDataAttribute(
+            Resource object,
+            Model model,
+            String prefix,
+            String key,
+            Object value
+    ) {
+        if (value instanceof Map<?, ?>) {
+            Resource dataObject = model.createResource();
+            object.addProperty(model.createProperty(prefix, key), dataObject);
+            for (Map.Entry<?, ?> entry : ((Map<?, ?>) value).entrySet()) {
+                dataObject.addProperty(model.createProperty(prefix, entry.getKey().toString()), entry.getValue().toString());
+            }
+        } else if (value != null) {
+            object.addProperty(model.createProperty(prefix, key), value.toString());
         }
     }
 
@@ -84,7 +104,8 @@ public class FaltJsonService {
         Map<Resource, List<Resource>> types = QueryService.getTypesForResources(model, flatObject);
 
         Set<Property> classificationProperties = configs.entrySet().stream()
-                .filter(e -> "generalization".equals(e.getValue().getAnonymization()))
+                .filter(e -> "generalization".equals(e.getValue().getAnonymization()) &&
+                        List.of("integer", "float", "date").contains(e.getValue().getDataType()))
                 .map(Map.Entry::getKey)
                 .map(p -> model.getProperty(p.getURI() + "_generalized"))
                 .collect(Collectors.toSet());
