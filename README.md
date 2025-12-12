@@ -11,6 +11,7 @@
 - Attribute oritented anonymization: During processing, the service builds an anonymizer for each attribute to select the most suitable operations under the defined constraints.
 - Implemented anonymization methods are described below.
 - API documentation (Swagger UI): https://anonymizer.go-data.at/swagger-ui/index.html#/
+![General Architecture](figures/ComponentDiagramm.png)
 
 ### Anonymization Process
 The anonymization workflow comprises the following steps:
