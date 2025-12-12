@@ -46,29 +46,6 @@ public class QueryBuildingService {
     }
 
     static ParameterizedSparqlString createAttributeOrderQuery(Resource attribute) {
-        /*
-        SELECT ?pos ?value
-WHERE {
-  # You know this subject (replace _:b0 with your actual subject IRI/variable)
-  _:b0 soya:attributeOrder ?head .
-
-  # Each cell of the RDF list and its value
-  ?head rdf:rest* ?cell .
-  ?cell rdf:first ?value .
-
-  # Compute the position of each cell in the list
-  {
-    SELECT ?cell (COUNT(?mid) AS ?pos)
-    WHERE {
-      # ?head is taken from the outer query (correlated subquery)
-      ?head rdf:rest* ?mid .
-      ?mid  rdf:rest* ?cell .
-    }
-    GROUP BY ?cell
-  }
-}
-ORDER BY ?pos
-         */
         String queryString = """
                 PREFIX soya: <https://w3id.org/soya/ns#>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -120,22 +97,28 @@ ORDER BY ?pos
 
     static ParameterizedSparqlString deleteOriginalPropertyQuery(Set<Property> properties, Resource objectType) {
         ParameterizedSparqlString queryString = new ParameterizedSparqlString();
+
         queryString.append("DELETE {\n");
-        for (int i = 0; i < properties.size(); i++) {
-            queryString.append("  ?object ?p" + i + " ?v" + i + " .\n");
-            queryString.append("  ?v" + i + " ?p ?o . \n");
-        }
-        queryString.append("}\nWHERE {\n");
+        queryString.append("  ?object ?prop ?value .\n");
+        queryString.append("  ?value ?p ?o .\n");
+        queryString.append("}\n");
+        queryString.append("WHERE {\n");
         queryString.append("  ?object a ?type .\n");
-        int i = 0;
+        queryString.append("  ?object ?prop ?value .\n");
+
+        // Restrict ?prop to the given properties
+        queryString.append("  VALUES ?prop {\n");
         for (Property property : properties) {
-            queryString.append("  OPTIONAL { ?object ?p" + i + " ?v" + i + " .\n");
-            queryString.append("  ?v" + i + " ?p ?o . } \n");
-            queryString.setParam("p" + i, property);
-            i++;
+            queryString.append("    <"+property.getURI()+">\n");
         }
-        queryString.append("}");
+        queryString.append("  }\n");
+
+        // Optionally delete triples where the value is a subject
+        queryString.append("  OPTIONAL { ?value ?p ?o . }\n");
+        queryString.append("}\n");
+
         queryString.setParam("type", objectType);
+
         return queryString;
     }
 
