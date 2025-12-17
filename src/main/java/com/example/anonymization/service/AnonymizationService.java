@@ -31,7 +31,7 @@ public class AnonymizationService {
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
         Model model = getModel(request.getData());
         anonymizationObjects.forEach(
-                (o, c) -> applyAnonymizationForObject(o, c, model)
+                (o, c) -> applyAnonymizationForObject(o, c, model, request.isIncludeOriginalData())
         );
         StringWriter out = new StringWriter();
         model.write(out, "JSON-LD");
@@ -50,7 +50,7 @@ public class AnonymizationService {
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
         anonymizationObjects.forEach(
-                (o, c) -> applyAnonymizationForObject(o, c, model)
+                (o, c) -> applyAnonymizationForObject(o, c, model, request.isIncludeOriginalData())
         );
         String out = FaltJsonService.createFlatJsonOutput(
                 model,
@@ -65,7 +65,8 @@ public class AnonymizationService {
     private static void applyAnonymizationForObject(
             Resource anonymizationObject,
             Map<Property, Configuration> configurations,
-            Model model
+            Model model,
+            boolean includeOriginalData
     ) {
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, RDFNode>> data = QueryService.getData(model, attributes, anonymizationObject);
@@ -80,7 +81,9 @@ public class AnonymizationService {
                         anonymizationObject
         )).forEach(Anonymization::anonymization);
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-        QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
+        if (!includeOriginalData) {
+            QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
+        }
     }
 
     private static Map<Property, Map<Resource, RDFNode>> convertToHorizontalSchema(
