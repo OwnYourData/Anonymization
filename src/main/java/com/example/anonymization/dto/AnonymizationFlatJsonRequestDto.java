@@ -18,4 +18,11 @@ public class AnonymizationFlatJsonRequestDto {
 
     @Schema(description = "Data to be anonymized")
     private List<Map<String, Object>> data;
+
+    @Schema(
+            description = "If true, the original (non-anonymized) input data is also included in the response " +
+                    "for analysis/verification purposes. Use with care.",
+            defaultValue = "false"
+    )
+    private boolean includeOriginalData = false;
 }
