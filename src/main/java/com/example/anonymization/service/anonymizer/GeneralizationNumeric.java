@@ -4,6 +4,7 @@ import com.example.anonymization.entities.Configuration;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.rdf.model.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class GeneralizationNumeric extends Generalization<Double> {
         try {
             return data.entrySet().stream()
                     .map(e -> new Pair<>(e.getKey(), e.getValue().asLiteral().getDouble()))
-                    .sorted((e1, e2) -> (int) (e1.getRight() - e2.getRight()))
+                    .sorted(Comparator.comparingDouble(Pair::getRight))
                     .toList();
         } catch (Exception e) {
             throw new IllegalArgumentException("Error while parsing numeric values for generalization.", e);

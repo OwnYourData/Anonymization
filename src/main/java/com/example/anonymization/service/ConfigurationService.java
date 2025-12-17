@@ -40,13 +40,12 @@ public class ConfigurationService {
     }
 
     /**
-     * Fetches the configuration from the given URL and extracts it into a flat map.
-     * @param url The URL to fetch the configuration from.
+     * Creates a flat configuration from anonymization objects
+     * @param configs The map of anonymization objects to their configurations
      * @return A flat map where the key is the Property and the value is its Configuration.
      */
     @NotNull
-    public static Map<Property, Configuration> fetchFlatConfig(String url) {
-         Map<Resource, Map<Property, Configuration>> configs = fetchConfigForObjects(url);
+    public static Map<Property, Configuration> createFlatConfig(Map<Resource, Map<Property, Configuration>> configs) {
          Map<Property, Configuration> flatConfig = new HashMap<>();
          for (Map<Property, Configuration> configMap : configs.values()) {
              for (Map.Entry<Property, Configuration> entry : configMap.entrySet()) {

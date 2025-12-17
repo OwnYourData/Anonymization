@@ -45,7 +45,6 @@ public class AnonymizationService {
     public static ResponseEntity<String> applyAnonymizationFlatJson(
             AnonymizationFlatJsonRequestDto request
     ) throws JsonProcessingException {
-        Map<Property, Configuration> configs = ConfigurationService.fetchFlatConfig(request.getConfigurationUrl());
         Model model = ModelFactory.createDefaultModel();
         FaltJsonService.addDataToFlatModel(model, request.getData(), request.getPrefix());
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
@@ -55,7 +54,7 @@ public class AnonymizationService {
         );
         String out = FaltJsonService.createFlatJsonOutput(
                 model,
-                configs,
+                ConfigurationService.createFlatConfig(anonymizationObjects),
                 anonymizationObjects.keySet(),
                 request.getPrefix()
         );
