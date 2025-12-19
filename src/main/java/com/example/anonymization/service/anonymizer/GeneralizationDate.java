@@ -30,6 +30,22 @@ public class GeneralizationDate extends Generalization<Calendar> {
                 .toList();
     }
 
+    @Override
+    protected Calendar getMedianValue(Calendar value1, Calendar value2) {
+        if (value1 == null) {
+            return value2;
+        }
+        if (value2 == null) {
+            return value1;
+        }
+        long time1 = value1.getTimeInMillis();
+        long time2 = value2.getTimeInMillis();
+        long medianTime = (time1 + time2) / 2;
+        Calendar medianCalendar = Calendar.getInstance();
+        medianCalendar.setTimeInMillis(medianTime);
+        return medianCalendar;
+    }
+
     private static Calendar toDate(RDFNode node) {
         try {
             XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(node.asLiteral().getString());

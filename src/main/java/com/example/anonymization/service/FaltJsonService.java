@@ -2,7 +2,6 @@ package com.example.anonymization.service;
 
 import com.example.anonymization.data.QueryService;
 import com.example.anonymization.entities.Configuration;
-import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.exceptions.RequestModelException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
