@@ -1,18 +1,21 @@
 package com.example.anonymization.service;
 
 import com.example.anonymization.entities.Configuration;
-import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.service.anonymizer.RandomizationDate;
 import com.example.anonymization.data.QueryService;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class KpiService {
+
+    private static final Logger logger = LoggerFactory.getLogger(KpiService.class);
 
     public static final String KPI_OBJECT_URI = QueryService.SOYA_URL + "kpi";
     public static final String K_ANONYMITY = QueryService.SOYA_URL + "kanonymity";
@@ -69,6 +72,8 @@ public class KpiService {
             Resource anonymizationObject,
             Set<Property> attributes, Map<Property, Configuration> configurations
     ) {
+        long start = System.nanoTime();
+        logger.info("Calculating k-anonymity for object: {}", anonymizationObject.getURI());
         Map<Resource, Set<Resource>> similarValues = new HashMap<>();
         List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
         groups.forEach(group -> group.forEach(

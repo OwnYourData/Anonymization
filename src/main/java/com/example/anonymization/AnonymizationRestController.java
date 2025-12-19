@@ -102,7 +102,6 @@ public class AnonymizationRestController {
     public ResponseEntity<String> anonymizationFlat(
             @RequestBody AnonymizationFlatJsonRequestDto anonymizationRequest
     ) throws JsonProcessingException {
-        logger.info("Received flat JSON anonymization request. Body: \n{}", anonymizationRequest);
         return AnonymizationService.applyAnonymizationFlatJson(anonymizationRequest);
     }
 

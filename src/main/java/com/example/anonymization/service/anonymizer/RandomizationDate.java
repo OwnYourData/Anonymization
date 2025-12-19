@@ -25,7 +25,6 @@ public class RandomizationDate extends Randomization {
 
     @Override
     double distance(Literal a, Literal b) {
-        System.out.println(literalToDate(a).getTimeInMillis() / 1_000d - literalToDate(b).getTimeInMillis() / 1_000d);
         return literalToDate(a).getTimeInMillis() / 1_000d - literalToDate(b).getTimeInMillis() / 1_000d;
     }
 

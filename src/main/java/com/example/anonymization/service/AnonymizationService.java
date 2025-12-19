@@ -27,12 +27,14 @@ public class AnonymizationService {
     private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
 
     public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
+        logger.info("Starting json-ld anonymization process");
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
         Model model = getModel(request.getData());
         anonymizationObjects.forEach(
                 (o, c) -> applyAnonymizationForObject(o, c, model, request.isIncludeOriginalData())
         );
+        logger.info("Finished json-ld anonymization process");
         StringWriter out = new StringWriter();
         model.write(out, "JSON-LD");
         logger.info(out.toString());
@@ -45,6 +47,7 @@ public class AnonymizationService {
     public static ResponseEntity<String> applyAnonymizationFlatJson(
             AnonymizationFlatJsonRequestDto request
     ) throws JsonProcessingException {
+        logger.info("Starting flat-json anonymization process");
         Model model = ModelFactory.createDefaultModel();
         FaltJsonService.addDataToFlatModel(model, request.getData(), request.getPrefix());
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
@@ -58,7 +61,7 @@ public class AnonymizationService {
                 anonymizationObjects.keySet(),
                 request.getPrefix()
         );
-        logger.info(out);
+        logger.info("Finished flat-json anonymization process");
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
     }
 
@@ -68,6 +71,7 @@ public class AnonymizationService {
             Model model,
             boolean includeOriginalData
     ) {
+        logger.info("Applying anonymization for object: {}", anonymizationObject.getURI());
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
         Map<Resource, Map<Property, RDFNode>> data = QueryService.getData(model, attributes, anonymizationObject);
         Map<Property, Map<Resource, RDFNode>> horizontalData = convertToHorizontalSchema(data, attributes);
@@ -80,10 +84,13 @@ public class AnonymizationService {
                         nrAnonymizeAttributes,
                         anonymizationObject
         )).forEach(Anonymization::anonymization);
+        logger.info("Anonymization applied for object: {}", anonymizationObject.getURI());
         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
+        logger.info("Kpi added for object: {}", anonymizationObject.getURI());
         if (!includeOriginalData) {
             QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
         }
+        logger.info("Original data removed for object: {}", anonymizationObject.getURI());
     }
 
     private static Map<Property, Map<Resource, RDFNode>> convertToHorizontalSchema(
