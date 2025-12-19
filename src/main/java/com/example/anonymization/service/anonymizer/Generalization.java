@@ -38,6 +38,7 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
     }
 
     protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, RDFNode> data);
+    protected abstract T getMedianValue(T value1, T value2);
 
     protected Map<Resource, Resource> getRanges(
             List<Pair<Resource, T>> sortedValues,
@@ -98,9 +99,16 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
     }
 
     protected List<T> getBucketRange(List<Pair<Resource, T>> sortedValues, int bucketNumber, int nrOfBuckets) {
-        return List.of(
-            sortedValues.get(bucketNumber * sortedValues.size() / nrOfBuckets).getRight(),
-            sortedValues.get(((bucketNumber + 1) * sortedValues.size() / nrOfBuckets) - 1).getRight()
+        int lowerBoundIndex = bucketNumber * sortedValues.size() / nrOfBuckets;
+        T lowerBound = getMedianValue(
+                lowerBoundIndex > 0 ? sortedValues.get(lowerBoundIndex - 1).getRight() : null,
+                sortedValues.get(lowerBoundIndex).getRight()
         );
+        int upperBoundIndex = ((bucketNumber + 1) * sortedValues.size() / nrOfBuckets) - 1;
+        T upperBound = getMedianValue(
+                sortedValues.get(upperBoundIndex).getRight(),
+                upperBoundIndex + 1 < sortedValues.size() ? sortedValues.get(upperBoundIndex + 1).getRight() : null
+        );
+        return List.of(lowerBound, upperBound);
     }
 }

@@ -33,4 +33,15 @@ public class GeneralizationNumeric extends Generalization<Double> {
             throw new IllegalArgumentException("Error while parsing numeric values for generalization.", e);
         }
     }
+
+    @Override
+    protected Double getMedianValue(Double value1, Double value2) {
+        if (value1 == null) {
+            return value2;
+        }
+        if (value2 == null) {
+            return value1;
+        }
+        return (value1 + value2) / 2.0;
+    }
 }
