@@ -4,6 +4,8 @@ import com.example.anonymization.exceptions.AnonymizationException;
 import com.example.anonymization.exceptions.OntologyException;
 import com.example.anonymization.exceptions.RequestModelException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +15,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(OntologyException.class)
     public ResponseEntity<ProblemDetail> handleNotFound(OntologyException ex) {
-        log.error("OntologyException: {}", ex.getMessage());
+        logger.error("OntologyException: {}", ex.getMessage());
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         pd.setTitle("Error in ontology fetching or parsing");
         pd.setDetail(ex.getMessage());
@@ -26,7 +28,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AnonymizationException.class)
     public ResponseEntity<ProblemDetail> handleAnonymizationException(AnonymizationException ex) {
-        log.error("AnonymizationException: {}", ex.getMessage());
+        logger.error("AnonymizationException: {}", ex.getMessage());
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         pd.setTitle("Error during anonymization process");
         pd.setDetail(ex.getMessage());
@@ -35,7 +37,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RequestModelException.class)
     public ResponseEntity<ProblemDetail> handleRequestModelException(RequestModelException ex) {
-        log.error("RequestModelException: {}", ex.getMessage());
+        logger.error("RequestModelException: {}", ex.getMessage());
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         pd.setTitle("Invalid request model");
         pd.setDetail(ex.getMessage());
@@ -44,7 +46,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(JsonProcessingException.class)
     public ResponseEntity<ProblemDetail> handleJsonException(JsonProcessingException ex) {
-        log.error("JsonProcessingException: {}", ex.getMessage());
+        logger.error("JsonProcessingException: {}", ex.getMessage());
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         pd.setTitle("Error creation Json output");
         pd.setDetail(ex.getMessage());

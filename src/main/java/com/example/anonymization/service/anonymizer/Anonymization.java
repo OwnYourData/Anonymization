@@ -4,6 +4,8 @@ import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.KpiService;
 import jakarta.validation.constraints.NotNull;
 import org.apache.jena.rdf.model.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
@@ -11,6 +13,8 @@ import static java.lang.StrictMath.floor;
 import static java.lang.StrictMath.pow;
 
 public abstract class Anonymization<T extends Configuration> {
+
+    private static final Logger logger = LogManager.getLogger(Anonymization.class);
 
     @NotNull Model model;
     @NotNull Property property;
@@ -48,8 +52,8 @@ public abstract class Anonymization<T extends Configuration> {
     abstract void applyAnonymization();
 
     public void anonymization() {
+        logger.info("Starting anonymization of attribute: {}", property.getLocalName());
         data.entrySet().removeIf(entry -> entry.getValue() == null);
-        System.out.println("Anonymization for : "+ config.getAnonymization() + " " + property);
         KpiService.addAttributeInformation(
                 model,
                 property,
