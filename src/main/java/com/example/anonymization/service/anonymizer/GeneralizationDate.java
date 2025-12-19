@@ -10,8 +10,16 @@ import java.util.*;
 
 public class GeneralizationDate extends Generalization<Calendar> {
 
-    public GeneralizationDate(Model model, Property property, Map<Resource, RDFNode> data, long numberAttributes, Configuration config, Resource anonymizationObject) {
-        super(model, property, data, config, anonymizationObject, numberAttributes);
+    public GeneralizationDate(
+            Model model,
+            Property property,
+            Map<Resource, RDFNode> data,
+            long numberAttributes,
+            Configuration config,
+            Resource anonymizationObject,
+            boolean calculateKpi
+    ) {
+        super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
     @Override

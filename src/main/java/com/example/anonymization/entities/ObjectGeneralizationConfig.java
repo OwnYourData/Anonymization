@@ -26,8 +26,9 @@ public class ObjectGeneralizationConfig extends Configuration {
             Property property,
             Map<Resource, RDFNode> data,
             int nrAttr,
-            Resource anonymizationObject
+            Resource anonymizationObject,
+            boolean calculateKpi
     ) {
-        return new GeneralizationObject(model, property, data, nrAttr, this, anonymizationObject);
+        return new GeneralizationObject(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
     }
 }

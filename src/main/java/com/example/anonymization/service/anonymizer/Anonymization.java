@@ -22,6 +22,7 @@ public abstract class Anonymization<T extends Configuration> {
     @NotNull T config;
     @NotNull Resource anonymizationObject;
     int numberBuckets;
+    boolean calculateKpi;
 
     Anonymization(
             Model model,
@@ -29,10 +30,12 @@ public abstract class Anonymization<T extends Configuration> {
             Map<Resource, RDFNode> data,
             T config,
             Resource anonymizationObject,
-            long numberAttributes
+            long numberAttributes,
+            boolean calculateKpi
     ) {
         this(model, property, data, config, anonymizationObject);
         this.numberBuckets = calculateNumberOfBuckets(data.size(), numberAttributes);
+        this.calculateKpi = calculateKpi;
     }
 
     Anonymization(
@@ -54,13 +57,15 @@ public abstract class Anonymization<T extends Configuration> {
     public void anonymization() {
         logger.info("Starting anonymization of attribute: {}", property.getLocalName());
         data.entrySet().removeIf(entry -> entry.getValue() == null);
-        KpiService.addAttributeInformation(
-                model,
-                property,
-                numberBuckets,
-                config.getAnonymization(),
-                anonymizationObject
-        );
+        if (calculateKpi) {
+            KpiService.addAttributeInformation(
+                    model,
+                    property,
+                    numberBuckets,
+                    config.getAnonymization(),
+                    anonymizationObject
+            );
+        }
         applyAnonymization();
     }
 

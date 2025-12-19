@@ -17,6 +17,12 @@ public class AnonymizationJsonLDRequestDto {
     private JsonNode data;
 
     @Schema(
+            description = "If true, KPIs will be calculated and included in the response.",
+            defaultValue = "true"
+    )
+    private boolean calculateKpi = true;
+
+    @Schema(
             description = "If true, the original (non-anonymized) input data is also included in the response " +
                     "for analysis/verification purposes. Use with care.",
             defaultValue = "false"

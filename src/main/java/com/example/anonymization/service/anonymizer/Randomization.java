@@ -13,9 +13,10 @@ public abstract class Randomization extends Anonymization<Configuration> {
             Map<Resource, RDFNode> data,
             Configuration config,
             Resource anonymizationObject,
-            long numberAttributes
+            long numberAttributes,
+            boolean calculateKpi
     ) {
-        super(model, property, data, config, anonymizationObject, numberAttributes);
+        super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
     abstract double distance(Literal a, Literal b);

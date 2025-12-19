@@ -13,9 +13,10 @@ public class RandomizationNumeric extends Randomization {
             Map<Resource, RDFNode> data,
             long numberAttributes,
             Configuration config,
-            Resource anonymizationObject
+            Resource anonymizationObject,
+            boolean calculateKpi
     ) {
-        super(model, property, data, config, anonymizationObject, numberAttributes);
+        super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
     @Override
