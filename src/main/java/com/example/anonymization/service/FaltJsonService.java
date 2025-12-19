@@ -97,7 +97,8 @@ public class FaltJsonService {
             Model model,
             Map<Property, Configuration> configs,
             Collection<Resource> objectTypes,
-            String prefix
+            String prefix,
+            boolean calculateKpi
     ) throws JsonProcessingException {
         Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         Map<Resource, Map<Property, Literal>> data = getLiteralData(model, flatObject);
@@ -111,6 +112,7 @@ public class FaltJsonService {
                 .collect(Collectors.toSet());
         Map<Resource, Map<Property, Literal[]>> generalizationData =
                 QueryService.getGeneralizationData(model, flatObject, classificationProperties);
+        // TODO remove kpi object if not calculateKpi
         Map<Resource, Long> kAnonymity = QueryService.getKAnonymity(model, objectTypes);
         Map<Resource, List<QueryService.AttributeInformation>> attributeInformation =
                 QueryService.getAttributeInformation(model, objectTypes);

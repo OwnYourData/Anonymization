@@ -32,7 +32,9 @@ public class AnonymizationService {
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
         Model model = getModel(request.getData());
         anonymizationObjects.forEach(
-                (o, c) -> applyAnonymizationForObject(o, c, model, request.isIncludeOriginalData())
+                (o, c) -> applyAnonymizationForObject(
+                        o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData()
+                )
         );
         logger.info("Finished json-ld anonymization process");
         StringWriter out = new StringWriter();
@@ -53,13 +55,16 @@ public class AnonymizationService {
         Map<Resource, Map<Property, Configuration>> anonymizationObjects =
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
         anonymizationObjects.forEach(
-                (o, c) -> applyAnonymizationForObject(o, c, model, request.isIncludeOriginalData())
+                (o, c) -> applyAnonymizationForObject(
+                        o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData()
+                )
         );
         String out = FaltJsonService.createFlatJsonOutput(
                 model,
                 ConfigurationService.createFlatConfig(anonymizationObjects),
                 anonymizationObjects.keySet(),
-                request.getPrefix()
+                request.getPrefix(),
+                request.isCalculateKpi()
         );
         logger.info("Finished flat-json anonymization process");
         return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
@@ -69,6 +74,7 @@ public class AnonymizationService {
             Resource anonymizationObject,
             Map<Property, Configuration> configurations,
             Model model,
+            boolean calculateKpi,
             boolean includeOriginalData
     ) {
         logger.info("Applying anonymization for object: {}", anonymizationObject.getURI());
@@ -82,15 +88,18 @@ public class AnonymizationService {
                         e.getKey(),
                         e.getValue(),
                         nrAnonymizeAttributes,
-                        anonymizationObject
+                        anonymizationObject,
+                        calculateKpi
         )).forEach(Anonymization::anonymization);
         logger.info("Anonymization applied for object: {}", anonymizationObject.getURI());
-        KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-        logger.info("Kpi added for object: {}", anonymizationObject.getURI());
+        if (calculateKpi) {
+            KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
+            logger.info("Kpi added for object: {}", anonymizationObject.getURI());
+        }
         if (!includeOriginalData) {
             QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
+            logger.info("Original data removed for object: {}", anonymizationObject.getURI());
         }
-        logger.info("Original data removed for object: {}", anonymizationObject.getURI());
     }
 
     private static Map<Property, Map<Resource, RDFNode>> convertToHorizontalSchema(

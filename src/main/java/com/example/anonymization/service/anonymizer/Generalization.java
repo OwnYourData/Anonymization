@@ -23,9 +23,10 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
             Map<Resource, RDFNode> data,
             Configuration config,
             Resource anonymizationObject,
-            long numberAttributes
+            long numberAttributes,
+            boolean calculateKpi
             ) {
-        super(model, property, data, config, anonymizationObject, numberAttributes);
+        super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
     @Override
