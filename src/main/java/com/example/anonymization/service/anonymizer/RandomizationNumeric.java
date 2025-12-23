@@ -26,10 +26,14 @@ public class RandomizationNumeric extends Randomization {
 
     @Override
     protected Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
-        double noise = new Random().nextGaussian() * distance;
-        double randomizedValue = value.getDouble() + noise > max.getDouble() ||
-                value.getDouble() - noise < min.getDouble() ?
-                value.getDouble() - noise : value.getDouble() + noise;
+        double noise;
+        double randomizedValue = Double.MAX_VALUE;
+        while(randomizedValue > max.getDouble() || randomizedValue < min.getDouble()) {
+            noise = new Random().nextDouble() * distance;
+            randomizedValue = value.getDouble() + noise > max.getDouble() ||
+                    value.getDouble() + noise < min.getDouble() ?
+                    value.getDouble() - noise : value.getDouble() + noise;
+        }
         return ResourceFactory.createTypedLiteral(randomizedValue);
     }
 

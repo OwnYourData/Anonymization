@@ -31,11 +31,16 @@ public class RandomizationDate extends Randomization {
 
     @Override
     Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
-        int noise = (int) (new Random().nextGaussian() * distance);
-        if (literalToDate(value).getTimeInMillis() / 1_000d + noise > literalToDate(max).getTimeInMillis() / 1_000d ||
+        int noise = Integer.MAX_VALUE;
+        while(literalToDate(value).getTimeInMillis() / 1_000d + noise > literalToDate(max).getTimeInMillis() / 1_000d ||
                 literalToDate(value).getTimeInMillis() / 1_000d + noise < literalToDate(min).getTimeInMillis() / 1_000d) {
-            noise *= -1;
+            noise = (int) (new Random().nextGaussian() * distance);
+            if (literalToDate(value).getTimeInMillis() / 1_000d + noise > literalToDate(max).getTimeInMillis() / 1_000d ||
+                    literalToDate(value).getTimeInMillis() / 1_000d + noise < literalToDate(min).getTimeInMillis() / 1_000d) {
+                noise *= -1;
+            }
         }
+
         Calendar noisyDate = literalToDate(value);
         noisyDate.add(Calendar.SECOND, noise);
         return ResourceFactory.createTypedLiteral(noisyDate);
