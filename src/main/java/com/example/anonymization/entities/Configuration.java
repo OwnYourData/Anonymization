@@ -31,6 +31,7 @@ public class Configuration {
             case "generalization" -> switch (dataType) {
                 case "integer", "double" -> new GeneralizationNumeric(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
                 case "date" -> new GeneralizationDate(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
+                case "dateTime" -> new GeneralizationDateTime(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
                 case "string" -> throw new IllegalArgumentException("No Generalization possible for type string");
                 default ->
                     throw new IllegalArgumentException("Invalid configuration type for object anonymization");
@@ -38,6 +39,7 @@ public class Configuration {
             case "randomization" -> switch (dataType) {
                 case "integer", "double" -> new RandomizationNumeric(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
                 case "date" -> new RandomizationDate(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
+                case "dateTime" -> new RandomizationDateTime(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
                 default ->
                         throw new IllegalArgumentException("No Randomization possible for type " + dataType);
             };

@@ -7,6 +7,8 @@ import java.util.*;
 
 public class RandomizationNumeric extends Randomization {
 
+    private final Random random = new Random();
+
     public RandomizationNumeric(
             Model model,
             Property property,
@@ -29,7 +31,7 @@ public class RandomizationNumeric extends Randomization {
         double noise;
         double randomizedValue = Double.MAX_VALUE;
         while(randomizedValue > max.getDouble() || randomizedValue < min.getDouble()) {
-            noise = new Random().nextDouble() * distance;
+            noise = random.nextDouble() * distance;
             randomizedValue = value.getDouble() + noise > max.getDouble() ||
                     value.getDouble() + noise < min.getDouble() ?
                     value.getDouble() - noise : value.getDouble() + noise;

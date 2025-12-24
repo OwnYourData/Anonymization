@@ -3,6 +3,7 @@ package com.example.anonymization.service;
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.anonymizer.RandomizationDate;
 import com.example.anonymization.data.QueryService;
+import com.example.anonymization.service.anonymizer.RandomizationDateTime;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
@@ -112,14 +113,14 @@ public class KpiService {
             if (randomization.original() != null) {
                 if (date) {
                     distances.add(Math.abs(
-                            RandomizationDate.literalToNumericDate(randomization.original()) -
-                            RandomizationDate.literalToNumericDate(randomization.randomized())
+                            RandomizationDateTime.literalToNumericDate(randomization.original()) -
+                            RandomizationDateTime.literalToNumericDate(randomization.randomized())
                     ));
                     randomizedData.put(
-                            randomization.object(), RandomizationDate.literalToNumericDate(randomization.randomized())
+                            randomization.object(), RandomizationDateTime.literalToNumericDate(randomization.randomized())
                     );
                     originalValuesMap.computeIfAbsent(
-                            RandomizationDate.literalToNumericDate(randomization.original()), _ -> new HashSet<>()
+                            RandomizationDateTime.literalToNumericDate(randomization.original()), _ -> new HashSet<>()
                     ).add(randomization.object());
                 } else {
                     distances.add(Math.abs(
@@ -135,7 +136,6 @@ public class KpiService {
             }
         });
         Map<Resource, Set<Resource>> similarity = new HashMap<>();
-        // TODO similary map bei Date passt nicht
         if (!distances.isEmpty()) {
             double benchmark = distances.stream().mapToDouble(Double::doubleValue).sum() * 2 / distances.size();
             randomizedData.forEach((key, value) ->
