@@ -72,7 +72,6 @@ public class KpiService {
             Resource anonymizationObject,
             Set<Property> attributes, Map<Property, Configuration> configurations
     ) {
-        long start = System.nanoTime();
         logger.info("Calculating k-anonymity for object: {}", anonymizationObject.getURI());
         Map<Resource, Set<Resource>> similarValues = new HashMap<>();
         List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject, attributes);
@@ -107,6 +106,8 @@ public class KpiService {
         List<Double> distances = new ArrayList<>();
         Map<Resource, Double> randomizedData = new HashMap<>();
         Set<Resource> nullValues = new HashSet<>();
+        NavigableMap<Double, Set<Resource>> originalValuesMap = new TreeMap<>();
+
         randomizationResults.forEach(randomization -> {
             if (randomization.original() != null) {
                 if (date) {
@@ -117,52 +118,46 @@ public class KpiService {
                     randomizedData.put(
                             randomization.object(), RandomizationDate.literalToNumericDate(randomization.randomized())
                     );
+                    originalValuesMap.computeIfAbsent(
+                            RandomizationDate.literalToNumericDate(randomization.original()), _ -> new HashSet<>()
+                    ).add(randomization.object());
                 } else {
                     distances.add(Math.abs(
                             randomization.original().getDouble() - randomization.randomized().getDouble()
                     ));
                     randomizedData.put(randomization.object(), randomization.randomized().getDouble());
+                    originalValuesMap.computeIfAbsent(
+                            randomization.original().getDouble(), _ -> new HashSet<>()
+                    ).add(randomization.object());
                 }
             } else {
                 nullValues.add(randomization.object());
             }
         });
         Map<Resource, Set<Resource>> similarity = new HashMap<>();
+        // TODO similary map bei Date passt nicht
         if (!distances.isEmpty()) {
-            Collections.sort(distances);
-            int index = (int) Math.ceil(0.95 * distances.size()) - 1;
-            double q95 = distances.get(Math.max(0, index));
-            findSimilarValues(similarity, randomizedData, q95);
+            double benchmark = distances.stream().mapToDouble(Double::doubleValue).sum() * 2 / distances.size();
+            randomizedData.forEach((key, value) ->
+                    similarity.put(key, findInRange(value, benchmark, originalValuesMap)));
         }
         nullValues.forEach(obj -> similarity.put(obj, nullValues));
         return similarity;
     }
 
-    private static void findSimilarValues(
-            Map<Resource, Set<Resource>> similarity,
-            Map<Resource, Double> randomizedData,
-            double benchmark
+    public static Set<Resource> findInRange(
+            double randomizedValue,
+            double benchmark,
+            NavigableMap<Double, Set<Resource>> originalValuesMap
     ) {
-        List<Map.Entry<Resource, Double>> objects = new ArrayList<>(randomizedData.entrySet());
-        objects.sort(Map.Entry.comparingByValue());
+        double minInclusive = randomizedValue - benchmark;
+        double maxInclusive = randomizedValue + benchmark;
+        NavigableMap<Double, Set<Resource>> sub = originalValuesMap.subMap(minInclusive, true, maxInclusive, true);
 
-        for (int i = 0; i < objects.size(); i++) {
-            Resource object = objects.get(i).getKey();
-            double randomizedValue = objects.get(i).getValue();
-            Set<Resource> similarValues = new HashSet<>();
-            similarValues.add(object);
-
-            for (int j = i + 1; j < objects.size(); j++) {
-                if (objects.get(j).getValue() - randomizedValue > benchmark) break;
-                similarValues.add(objects.get(j).getKey());
-            }
-
-            for (int j = i - 1; j >= 0; j--) {
-                if (randomizedValue - objects.get(j).getValue() > benchmark) break;
-                similarValues.add(objects.get(j).getKey());
-            }
-
-            similarity.put(object, similarValues);
+        Set<Resource> result = new HashSet<>();
+        for (Set<Resource> set : sub.values()) {
+            result.addAll(set);
         }
+        return result;
     }
 }
