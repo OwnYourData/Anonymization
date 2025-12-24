@@ -2,15 +2,19 @@ package com.example.anonymization.service.anonymizer;
 
 import com.example.anonymization.entities.Configuration;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.datatypes.xsd.XSDDateTime;
 import org.apache.jena.rdf.model.*;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 
 public class RandomizationDate extends Randomization {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+    private final Random random = new Random();
 
     public RandomizationDate(
             Model model,
@@ -26,46 +30,42 @@ public class RandomizationDate extends Randomization {
 
     @Override
     double distance(Literal a, Literal b) {
-        return literalToDate(a).getTimeInMillis() / 1_000d - literalToDate(b).getTimeInMillis() / 1_000d;
+        LocalDate dateA = literalToLocalDate(a);
+        LocalDate dateB = literalToLocalDate(b);
+        return ChronoUnit.DAYS.between(dateA, dateB);
     }
 
     @Override
     Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
-        int noise = Integer.MAX_VALUE;
-        while(literalToDate(value).getTimeInMillis() / 1_000d + noise > literalToDate(max).getTimeInMillis() / 1_000d ||
-                literalToDate(value).getTimeInMillis() / 1_000d + noise < literalToDate(min).getTimeInMillis() / 1_000d) {
-            noise = (int) (new Random().nextGaussian() * distance);
-            if (literalToDate(value).getTimeInMillis() / 1_000d + noise > literalToDate(max).getTimeInMillis() / 1_000d ||
-                    literalToDate(value).getTimeInMillis() / 1_000d + noise < literalToDate(min).getTimeInMillis() / 1_000d) {
-                noise *= -1;
+        int noiseDays = Integer.MAX_VALUE;
+
+        long valueDay = literalToLocalDate(value).toEpochDay();
+        long minDay   = literalToLocalDate(min).toEpochDay();
+        long maxDay   = literalToLocalDate(max).toEpochDay();
+
+        while (valueDay + noiseDays > maxDay || valueDay + noiseDays < minDay) {
+            noiseDays = (int) Math.round(random.nextGaussian() * distance);
+            if (valueDay + noiseDays > maxDay || valueDay + noiseDays < minDay) {
+                noiseDays *= -1;
             }
         }
 
-        Calendar noisyDate = literalToDate(value);
-        noisyDate.add(Calendar.SECOND, noise);
-        return ResourceFactory.createTypedLiteral(noisyDate);
+        LocalDate noisyDate = literalToLocalDate(value).plusDays(noiseDays);
+        String lexical = noisyDate.format(DATE_FORMATTER);
+
+        return ResourceFactory.createTypedLiteral(lexical, XSDDatatype.XSDdate);
     }
 
     @Override
     Comparator<Literal> getComparator() {
-        return Comparator.comparingLong(literal -> literalToDate(literal).getTimeInMillis() / 1_000);
+        return Comparator.comparingLong(literal -> literalToLocalDate(literal).toEpochDay());
     }
 
-    public static Calendar literalToDate(Literal literal) {
+    private static LocalDate literalToLocalDate(Literal literal) {
         try {
-            XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(literal.getString());
-            return xsdDateTime.asCalendar();
-        } catch (Exception noDateTime) {
-            try {
-                XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdateTime.parse(literal.getString());
-                return xsdDateTime.asCalendar();
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Literal is not a valid xsd:date or xsd:dateTime: " + literal);
-            }
+            return LocalDate.parse(literal.getLexicalForm(), DATE_FORMATTER);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Literal lexical form is not a valid xsd:date: " + literal, e);
         }
-    }
-
-    public static double literalToNumericDate(Literal literal) {
-        return literalToDate(literal).getTimeInMillis() / 1_000d;
     }
 }
