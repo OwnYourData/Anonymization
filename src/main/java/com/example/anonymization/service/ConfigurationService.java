@@ -19,9 +19,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ConfigurationService {
@@ -48,12 +46,7 @@ public class ConfigurationService {
     public static Map<Property, Configuration> createFlatConfig(Map<Resource, Map<Property, Configuration>> configs) {
          Map<Property, Configuration> flatConfig = new HashMap<>();
          for (Map<Property, Configuration> configMap : configs.values()) {
-             for (Map.Entry<Property, Configuration> entry : configMap.entrySet()) {
-                 if (flatConfig.containsKey(entry.getKey())) {
-                     throw new OntologyException("Duplicate Property key found in Flat Ontology: " + entry.getKey());
-                 }
-                 flatConfig.put(entry.getKey(), entry.getValue());
-             }
+             flatConfig.putAll(configMap);
          }
          return flatConfig;
     }
@@ -107,8 +100,15 @@ public class ConfigurationService {
     @NotNull
     private static Map<Resource, Map<Property, Configuration>> extractConfig(Model model) {
         Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
+        Set<Property> properties = new HashSet<>();
         logger.info("Extracting configuration from server response");
         QueryService.getConfigurations(model).forEach(entry -> {
+            if (properties.contains(entry.property())) {
+                throw new OntologyException(
+                        "Duplicate Property key found in Ontology: " + entry.property().toString()
+                );
+            }
+            properties.add(entry.property());
             if (!configs.containsKey(entry.object())) {
                 configs.put(entry.object(), new HashMap<>());
             }
