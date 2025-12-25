@@ -29,7 +29,7 @@ public class AnonymizationRestController {
                     content = @Content(mediaType = "application/json"))
     })
     @Operation(
-            summary = "Anonymization of input data (flat JSON)",
+            summary = "Anonymization of input data (JSON-LD)",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = @Content(
