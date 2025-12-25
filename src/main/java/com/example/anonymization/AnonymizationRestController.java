@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AnonymizationRestController {
 
-    private static final Logger logger = LogManager.getLogger(Configuration.class);
-
     @ApiResponses({
             @ApiResponse(responseCode = "202", description = "Accepted",
                     content = @Content(mediaType = "application/json")),
