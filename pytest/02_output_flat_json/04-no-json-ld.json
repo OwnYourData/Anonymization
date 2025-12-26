@@ -1,0 +1,7 @@
+{
+  "type": "about:blank",
+  "title": "Error creation Json output",
+  "status": 500,
+  "detail": "Cannot deserialize value of type `java.util.ArrayList<java.util.Map<java.lang.String,java.lang.Object>>` from Object value (token `JsonToken.START_OBJECT`)\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 169] (through reference chain: com.example.anonymization.dto.AnonymizationFlatJsonRequestDto[\"data\"])",
+  "instance": "/api/anonymization/flatjson"
+}

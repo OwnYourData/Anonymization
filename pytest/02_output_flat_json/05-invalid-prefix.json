@@ -1,0 +1,8 @@
+{
+  "data": [],
+  "kpis": {
+    "kpiAnonymisationDemo": {
+      "k-Anonymity": 1
+    }
+  }
+}

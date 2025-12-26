@@ -2,7 +2,6 @@ package com.example.anonymization;
 
 import com.example.anonymization.dto.AnonymizationFlatJsonRequestDto;
 import com.example.anonymization.dto.AnonymizationJsonLDRequestDto;
-import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.service.AnonymizationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,8 +10,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +56,9 @@ public class AnonymizationRestController {
     @PutMapping(value = "/api/anonymization",
             consumes = {"application/json", "application/ld+json"},
             produces = "application/json")
-    public ResponseEntity<String> anonymization(@RequestBody AnonymizationJsonLDRequestDto anonymizationRequest) {
+    public ResponseEntity<String> anonymization(
+            @Valid @RequestBody AnonymizationJsonLDRequestDto anonymizationRequest
+    ) {
         return AnonymizationService.applyAnonymization(anonymizationRequest);
     }
 
@@ -98,7 +98,7 @@ public class AnonymizationRestController {
     )
     @PutMapping("/api/anonymization/flatjson")
     public ResponseEntity<String> anonymizationFlat(
-            @RequestBody AnonymizationFlatJsonRequestDto anonymizationRequest
+            @Valid @RequestBody AnonymizationFlatJsonRequestDto anonymizationRequest
     ) throws JsonProcessingException {
         return AnonymizationService.applyAnonymizationFlatJson(anonymizationRequest);
     }

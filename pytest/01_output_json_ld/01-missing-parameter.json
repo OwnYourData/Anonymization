@@ -1,0 +1,7 @@
+{
+  "messages": {
+    "configurationUrl": "configurationUrl is mandatory"
+  },
+  "error": "Validation failed",
+  "status": 400
+}
