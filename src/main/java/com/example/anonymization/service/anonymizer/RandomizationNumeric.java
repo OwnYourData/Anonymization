@@ -7,7 +7,7 @@ import java.util.*;
 
 public class RandomizationNumeric extends Randomization {
 
-    private final Random random = new Random();
+    private final Random random;
 
     public RandomizationNumeric(
             Model model,
@@ -16,9 +16,11 @@ public class RandomizationNumeric extends Randomization {
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject,
-            boolean calculateKpi
+            boolean calculateKpi,
+            long seed
     ) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
+        this.random = new Random(seed);
     }
 
     @Override

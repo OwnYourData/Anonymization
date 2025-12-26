@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class RandomizationDateTime extends Randomization {
 
-    private final Random random = new Random();
+    private final Random random;
 
     public RandomizationDateTime(
             Model model,
@@ -21,9 +21,11 @@ public class RandomizationDateTime extends Randomization {
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject,
-            boolean calculateKpi
+            boolean calculateKpi,
+            long seed
     ) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
+        this.random = new Random(seed);
     }
 
     @Override

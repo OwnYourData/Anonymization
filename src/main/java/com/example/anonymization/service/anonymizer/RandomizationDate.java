@@ -14,7 +14,7 @@ import java.util.Random;
 public class RandomizationDate extends Randomization {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
-    private final Random random = new Random();
+    private final Random random;
 
     public RandomizationDate(
             Model model,
@@ -23,9 +23,11 @@ public class RandomizationDate extends Randomization {
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject,
-            boolean calculateKpi
+            boolean calculateKpi,
+            long seed
     ) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
+        this.random = new Random(seed);
     }
 
     @Override
