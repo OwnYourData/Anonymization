@@ -25,7 +25,8 @@ public class Configuration {
             Map<Resource, RDFNode> data,
             int nrAttr,
             Resource anonymizationObject,
-            boolean calculateKpi
+            boolean calculateKpi,
+            long seed
     ) {
         return switch (anonymization) {
             case "generalization" -> switch (dataType) {
@@ -37,9 +38,9 @@ public class Configuration {
                     throw new IllegalArgumentException("Invalid configuration type for object anonymization");
             };
             case "randomization" -> switch (dataType) {
-                case "integer", "double" -> new RandomizationNumeric(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
-                case "date" -> new RandomizationDate(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
-                case "dateTime" -> new RandomizationDateTime(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
+                case "integer", "double" -> new RandomizationNumeric(model, property, data, nrAttr, this, anonymizationObject, calculateKpi, seed);
+                case "date" -> new RandomizationDate(model, property, data, nrAttr, this, anonymizationObject, calculateKpi, seed);
+                case "dateTime" -> new RandomizationDateTime(model, property, data, nrAttr, this, anonymizationObject, calculateKpi, seed);
                 default ->
                         throw new IllegalArgumentException("No Randomization possible for type " + dataType);
             };

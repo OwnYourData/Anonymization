@@ -31,4 +31,10 @@ public class AnonymizationFlatJsonRequestDto {
             defaultValue = "false"
     )
     private boolean includeOriginalData = false;
+
+    @Schema(
+            description = "Random seed for anonymization processes to ensure reproducibility.",
+            defaultValue = "current system time in milliseconds"
+    )
+    private long randomSeed = System.currentTimeMillis();
 }

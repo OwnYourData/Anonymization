@@ -33,7 +33,7 @@ public class AnonymizationService {
         Model model = getModel(request.getData());
         anonymizationObjects.forEach(
                 (o, c) -> applyAnonymizationForObject(
-                        o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData()
+                        o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData(), request.getRandomSeed()
                 )
         );
         logger.info("Finished json-ld anonymization process");
@@ -56,7 +56,7 @@ public class AnonymizationService {
                 ConfigurationService.fetchConfigForObjects(request.getConfigurationUrl());
         anonymizationObjects.forEach(
                 (o, c) -> applyAnonymizationForObject(
-                        o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData()
+                        o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData(), request.getRandomSeed()
                 )
         );
         String out = FaltJsonService.createFlatJsonOutput(
@@ -75,7 +75,8 @@ public class AnonymizationService {
             Map<Property, Configuration> configurations,
             Model model,
             boolean calculateKpi,
-            boolean includeOriginalData
+            boolean includeOriginalData,
+            long seed
     ) {
         logger.info("Applying anonymization for object: {}", anonymizationObject.getURI());
         Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(), anonymizationObject);
@@ -89,7 +90,8 @@ public class AnonymizationService {
                         e.getValue(),
                         nrAnonymizeAttributes,
                         anonymizationObject,
-                        calculateKpi
+                        calculateKpi,
+                        seed
         )).forEach(Anonymization::anonymization);
         logger.info("Anonymization applied for object: {}", anonymizationObject.getURI());
         if (calculateKpi) {
