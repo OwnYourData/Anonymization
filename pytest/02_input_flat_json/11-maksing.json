@@ -1,0 +1,56 @@
+{
+    "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+    "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+    "data": [
+        {
+            "type": "AnonymisationDemo",
+            "ID": "1",
+            "name": "Benedikt Oberndorfer-Freitag"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "2",
+            "name": "Herr Benedikt Hofstetter"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "3",
+            "name": "Nico Beck"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "4",
+            "name": "Univ.Prof. Anna-Lena Grabner"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "5",
+            "name": "Hubert Schrittwieser"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "6",
+            "name": "Jovana Angerer"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "7",
+            "name": "Elsa Hammer"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "8",
+            "name": "Mathias Kössler-Reiner"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "9",
+            "name": "Herr Eduard Schachinger"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "10",
+            "name": "Ing. Marijana Ringhofer"
+        }
+    ]
+}

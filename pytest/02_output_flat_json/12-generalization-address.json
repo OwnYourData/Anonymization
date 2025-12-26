@@ -1,0 +1,713 @@
+{
+  "data": [
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "1",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "2",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "3",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "4",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "5",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "6",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "7",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "8",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "9",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "10",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "11",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "12",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "13",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "14",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "15",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "16",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "17",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "18",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "19",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "20",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "21",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "22",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "23",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "24",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "25",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "26",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "27",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "28",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "29",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "30",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "31",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "32",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "33",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "34",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "35",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "36",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "37",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "38",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "39",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "40",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "41",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "42",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "43",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "44",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "45",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "46",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "47",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "48",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "49",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "50",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "51",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "52",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "53",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "54",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "55",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "56",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "57",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "58",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "59",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "60",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "61",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "62",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "63",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "64",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "65",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "66",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "67",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "68",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "69",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "70",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "71",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "72",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Salzburg",
+      "ID": "73",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "74",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "75",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "76",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "77",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "78",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "79",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Tirol",
+      "ID": "80",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "81",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "82",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "83",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "84",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "85",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "86",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "87",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "88",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Niederösterreich",
+      "ID": "89",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "90",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "91",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "92",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "93",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Burgenland",
+      "ID": "94",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "95",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Steiermark",
+      "ID": "96",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Wien",
+      "ID": "97",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Kärnten",
+      "ID": "98",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Oberösterreich",
+      "ID": "99",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "adresse_generalized": "Vorarlberg",
+      "ID": "100",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    }
+  ],
+  "kpis": {
+    "kpiAnonymisationDemo": {
+      "k-Anonymity": 7,
+      "adresse": {
+        "anonymization": "generalization",
+        "nrBuckets": 11
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "@graph": [
+    {
+      "@id": "oyd:7",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:9",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:2",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:10",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:4",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:6",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiAnonymisationDemo",
+      "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+        "@value": "10",
+        "@type": "xsd:long"
+      }
+    },
+    {
+      "@id": "oyd:8",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:1",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:3",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:5",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    }
+  ],
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+  }
+}

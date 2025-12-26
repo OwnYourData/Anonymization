@@ -1,0 +1,1107 @@
+{
+    "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+    "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+    "includeOriginalData": true,
+    "data": [
+        {
+            "type": "AnonymisationDemo",
+            "ID": "1",
+            "adresse": {
+                "detail": "Dünserring 0",
+                "zip": "8765",
+                "state": "Oberösterreich",
+                "city": "Allentsteig",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "2",
+            "adresse": {
+                "detail": "Leticia-Griesser-Straße 2",
+                "zip": "4148",
+                "state": "Steiermark",
+                "city": "Dornbirn",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "3",
+            "adresse": {
+                "detail": "Pachlergasse 7",
+                "zip": "7038",
+                "state": "Burgenland",
+                "city": "Gmünd",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "4",
+            "adresse": {
+                "detail": "Sofia-Nagel-Ring 34",
+                "zip": "8306",
+                "state": "Burgenland",
+                "city": "Weiz",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "5",
+            "adresse": {
+                "detail": "Kalina-Sammer-Straße 3",
+                "zip": "1178",
+                "state": "Steiermark",
+                "city": "Gföhl",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "6",
+            "adresse": {
+                "detail": "Neuholdstraße 61",
+                "zip": "1117",
+                "state": "Wien",
+                "city": "Sankt Veit an der Glan",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "7",
+            "adresse": {
+                "detail": "Eichhorngasse 51",
+                "zip": "2324",
+                "state": "Burgenland",
+                "city": "Herzogenburg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "8",
+            "adresse": {
+                "detail": "Elvira-Pammer-Ring 36",
+                "zip": "3764",
+                "state": "Tirol",
+                "city": "Marchtrenk",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "9",
+            "adresse": {
+                "detail": "Stockhammerstr. 29",
+                "zip": "8886",
+                "state": "Burgenland",
+                "city": "Saalfelden am Steinernen Meer",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "10",
+            "adresse": {
+                "detail": "Ludwigring 163",
+                "zip": "6342",
+                "state": "Tirol",
+                "city": "Dornbirn",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "11",
+            "adresse": {
+                "detail": "Leticia-Schönauer-Weg 988",
+                "zip": "5157",
+                "state": "Steiermark",
+                "city": "Gmünd",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "12",
+            "adresse": {
+                "detail": "Linnea-Schwarzinger-Platz 3/7",
+                "zip": "9202",
+                "state": "Tirol",
+                "city": "Dornbirn",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "13",
+            "adresse": {
+                "detail": "Michael-Erber-Weg 74",
+                "zip": "9783",
+                "state": "Tirol",
+                "city": "Enns",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "14",
+            "adresse": {
+                "detail": "Leibetsederstr. 91",
+                "zip": "2052",
+                "state": "Kärnten",
+                "city": "Gmunden",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "15",
+            "adresse": {
+                "detail": "Angela-Hödl-Straße 871",
+                "zip": "5203",
+                "state": "Wien",
+                "city": "Hainburg an der Donau",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "16",
+            "adresse": {
+                "detail": "Maderweg 12",
+                "zip": "9873",
+                "state": "Niederösterreich",
+                "city": "Gleisdorf",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "17",
+            "adresse": {
+                "detail": "Nora-Bacher-Gasse 694",
+                "zip": "2015",
+                "state": "Salzburg",
+                "city": "Poysdorf",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "18",
+            "adresse": {
+                "detail": "Rachel-Felder-Gasse 143",
+                "zip": "3238",
+                "state": "Wien",
+                "city": "Gmunden",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "19",
+            "adresse": {
+                "detail": "Anton-Schön-Ring 660",
+                "zip": "5236",
+                "state": "Wien",
+                "city": "Bischofshofen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "20",
+            "adresse": {
+                "detail": "Jöbstlstraße 762",
+                "zip": "9460",
+                "state": "Wien",
+                "city": "Neunkirchen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "21",
+            "adresse": {
+                "detail": "Pfeifferstraße 50",
+                "zip": "1530",
+                "state": "Wien",
+                "city": "Bad Ischl",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "22",
+            "adresse": {
+                "detail": "Reitingerstr. 8",
+                "zip": "6077",
+                "state": "Oberösterreich",
+                "city": "Wolfsberg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "23",
+            "adresse": {
+                "detail": "Schulerstr. 68",
+                "zip": "4343",
+                "state": "Vorarlberg",
+                "city": "Mürzzuschlag",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "24",
+            "adresse": {
+                "detail": "Stockerstr. 4/5",
+                "zip": "4707",
+                "state": "Wien",
+                "city": "Freistadt",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "25",
+            "adresse": {
+                "detail": "Grafring 73",
+                "zip": "7813",
+                "state": "Burgenland",
+                "city": "Ternitz",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "26",
+            "adresse": {
+                "detail": "Arda-Friedl-Gasse 9",
+                "zip": "3707",
+                "state": "Niederösterreich",
+                "city": "Klagenfurt",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "27",
+            "adresse": {
+                "detail": "Weinbergerweg 9",
+                "zip": "3441",
+                "state": "Vorarlberg",
+                "city": "Zwettl",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "28",
+            "adresse": {
+                "detail": "Grafring 1",
+                "zip": "2133",
+                "state": "Steiermark",
+                "city": "Imst",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "29",
+            "adresse": {
+                "detail": "Franziska-Hebenstreit-Platz 09",
+                "zip": "2272",
+                "state": "Wien",
+                "city": "Jennersdorf",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "30",
+            "adresse": {
+                "detail": "Griesserplatz 44",
+                "zip": "1152",
+                "state": "Niederösterreich",
+                "city": "Eisenerz",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "31",
+            "adresse": {
+                "detail": "Widhalmring 369",
+                "zip": "1354",
+                "state": "Niederösterreich",
+                "city": "Mannersdorf am Leithagebirge",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "32",
+            "adresse": {
+                "detail": "Ricardo-Linder-Platz 7/7",
+                "zip": "4234",
+                "state": "Burgenland",
+                "city": "Liezen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "33",
+            "adresse": {
+                "detail": "Hämmerlering 1/2",
+                "zip": "3648",
+                "state": "Niederösterreich",
+                "city": "Gallneukirchen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "34",
+            "adresse": {
+                "detail": "Mike-Nowak-Gasse 6/7",
+                "zip": "8074",
+                "state": "Kärnten",
+                "city": "Sankt Andrä im Lavanttal",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "35",
+            "adresse": {
+                "detail": "Erlacherstraße 502",
+                "zip": "6826",
+                "state": "Oberösterreich",
+                "city": "Liezen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "36",
+            "adresse": {
+                "detail": "Kopfstraße 207",
+                "zip": "1483",
+                "state": "Wien",
+                "city": "Oberwart",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "37",
+            "adresse": {
+                "detail": "Matheo-Guggenberger-Platz 5",
+                "zip": "2162",
+                "state": "Oberösterreich",
+                "city": "Neunkirchen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "38",
+            "adresse": {
+                "detail": "Daniel-Glatz-Platz 33",
+                "zip": "9227",
+                "state": "Wien",
+                "city": "Hall in Tirol",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "39",
+            "adresse": {
+                "detail": "Beatrice-Nemeth-Platz 9/8",
+                "zip": "8611",
+                "state": "Niederösterreich",
+                "city": "Mariazell",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "40",
+            "adresse": {
+                "detail": "Arda-Siller-Ring 5",
+                "zip": "6863",
+                "state": "Vorarlberg",
+                "city": "Oberpullendorf",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "41",
+            "adresse": {
+                "detail": "Kilian-Waltl-Ring 7",
+                "zip": "1860",
+                "state": "Salzburg",
+                "city": "Klosterneuburg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "42",
+            "adresse": {
+                "detail": "Valentino-Ludwig-Straße 692",
+                "zip": "1777",
+                "state": "Salzburg",
+                "city": "Laakirchen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "43",
+            "adresse": {
+                "detail": "Thallerweg 89",
+                "zip": "9756",
+                "state": "Steiermark",
+                "city": "Gmünd",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "44",
+            "adresse": {
+                "detail": "Lugergasse 372",
+                "zip": "9996",
+                "state": "Burgenland",
+                "city": "Allentsteig",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "45",
+            "adresse": {
+                "detail": "Redlgasse 508",
+                "zip": "7149",
+                "state": "Niederösterreich",
+                "city": "Leoben",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "46",
+            "adresse": {
+                "detail": "Marie-Louise-Gamsjäger-Straße 9",
+                "zip": "4157",
+                "state": "Kärnten",
+                "city": "Schrems",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "47",
+            "adresse": {
+                "detail": "Augustinring 6/0",
+                "zip": "8248",
+                "state": "Oberösterreich",
+                "city": "Friesach",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "48",
+            "adresse": {
+                "detail": "Gollnergasse 369",
+                "zip": "6855",
+                "state": "Niederösterreich",
+                "city": "Mürzzuschlag",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "49",
+            "adresse": {
+                "detail": "Lora-Schmied-Straße 894",
+                "zip": "7153",
+                "state": "Salzburg",
+                "city": "Zwettl",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "50",
+            "adresse": {
+                "detail": "Antonella-Burgstaller-Weg 5/6",
+                "zip": "1253",
+                "state": "Tirol",
+                "city": "Villach",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "51",
+            "adresse": {
+                "detail": "Engelplatz 0/7",
+                "zip": "8786",
+                "state": "Oberösterreich",
+                "city": "Tulln an der Donau",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "52",
+            "adresse": {
+                "detail": "Ronya-Reinisch-Gasse 2",
+                "zip": "7320",
+                "state": "Wien",
+                "city": "Stadtschlaining",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "53",
+            "adresse": {
+                "detail": "Hofstettergasse 2",
+                "zip": "8307",
+                "state": "Burgenland",
+                "city": "Friedberg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "54",
+            "adresse": {
+                "detail": "Reinergasse 38",
+                "zip": "3711",
+                "state": "Wien",
+                "city": "Mannersdorf am Leithagebirge",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "55",
+            "adresse": {
+                "detail": "Jonathan-Markl-Gasse 16",
+                "zip": "4330",
+                "state": "Wien",
+                "city": "Völkermarkt",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "56",
+            "adresse": {
+                "detail": "Nussbaumerstraße 4",
+                "zip": "7627",
+                "state": "Niederösterreich",
+                "city": "Waidhofen an der Thaya",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "57",
+            "adresse": {
+                "detail": "Carla-Holl-Straße 69",
+                "zip": "2323",
+                "state": "Oberösterreich",
+                "city": "Marchtrenk",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "58",
+            "adresse": {
+                "detail": "Philipp-Knoll-Straße 94",
+                "zip": "8427",
+                "state": "Oberösterreich",
+                "city": "Steyregg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "59",
+            "adresse": {
+                "detail": "Stefanring 3",
+                "zip": "1134",
+                "state": "Steiermark",
+                "city": "Lilienfeld",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "60",
+            "adresse": {
+                "detail": "Salma-Denk-Weg 403",
+                "zip": "7105",
+                "state": "Oberösterreich",
+                "city": "Wieselburg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "61",
+            "adresse": {
+                "detail": "Schönauergasse 23",
+                "zip": "9388",
+                "state": "Steiermark",
+                "city": "Korneuburg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "62",
+            "adresse": {
+                "detail": "Fiona-Holzinger-Weg 514",
+                "zip": "7223",
+                "state": "Vorarlberg",
+                "city": "Groß-Gerungs",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "63",
+            "adresse": {
+                "detail": "Rablplatz 90",
+                "zip": "4040",
+                "state": "Tirol",
+                "city": "Raabs an der Thaya",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "64",
+            "adresse": {
+                "detail": "Holzergasse 3",
+                "zip": "5647",
+                "state": "Steiermark",
+                "city": "Amstetten",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "65",
+            "adresse": {
+                "detail": "Liam-Mayrhofer-Platz 815",
+                "zip": "9072",
+                "state": "Tirol",
+                "city": "Hardegg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "66",
+            "adresse": {
+                "detail": "Simonweg 2/6",
+                "zip": "2974",
+                "state": "Salzburg",
+                "city": "Zeltweg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "67",
+            "adresse": {
+                "detail": "Walterstr. 79",
+                "zip": "8928",
+                "state": "Niederösterreich",
+                "city": "Fehring",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "68",
+            "adresse": {
+                "detail": "Henry-Thurner-Ring 666",
+                "zip": "7074",
+                "state": "Burgenland",
+                "city": "Marchtrenk",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "69",
+            "adresse": {
+                "detail": "Mayerhoferstr. 8",
+                "zip": "8629",
+                "state": "Oberösterreich",
+                "city": "Schladming",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "70",
+            "adresse": {
+                "detail": "Lotte-Gschwandtner-Straße 388",
+                "zip": "5190",
+                "state": "Salzburg",
+                "city": "Leibnitz",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "71",
+            "adresse": {
+                "detail": "Adriano-Hechenberger-Straße 0",
+                "zip": "3200",
+                "state": "Wien",
+                "city": "Tulln an der Donau",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "72",
+            "adresse": {
+                "detail": "Valentino-Lehner-Platz 600",
+                "zip": "6995",
+                "state": "Tirol",
+                "city": "Bad Vöslau",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "73",
+            "adresse": {
+                "detail": "Geyerplatz 0",
+                "zip": "8294",
+                "state": "Salzburg",
+                "city": "Pinkafeld",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "74",
+            "adresse": {
+                "detail": "Clarissa-Schilcher-Straße 25",
+                "zip": "2635",
+                "state": "Kärnten",
+                "city": "Waidhofen an der Thaya",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "75",
+            "adresse": {
+                "detail": "Ludwiggasse 9/6",
+                "zip": "3433",
+                "state": "Burgenland",
+                "city": "Dürnstein",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "76",
+            "adresse": {
+                "detail": "Vogelplatz 18",
+                "zip": "6569",
+                "state": "Burgenland",
+                "city": "Jennersdorf",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "77",
+            "adresse": {
+                "detail": "Fridolin-Rinner-Ring 593",
+                "zip": "5388",
+                "state": "Kärnten",
+                "city": "Steyr",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "78",
+            "adresse": {
+                "detail": "Ruben-Fercher-Weg 1",
+                "zip": "2128",
+                "state": "Kärnten",
+                "city": "Eisenerz",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "79",
+            "adresse": {
+                "detail": "Ramsauerstraße 4/1",
+                "zip": "8045",
+                "state": "Tirol",
+                "city": "Bad Leonfelden",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "80",
+            "adresse": {
+                "detail": "Vincent-Varga-Gasse 725",
+                "zip": "8407",
+                "state": "Tirol",
+                "city": "Feldkirch",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "81",
+            "adresse": {
+                "detail": "Müllnergasse 4/8",
+                "zip": "6285",
+                "state": "Kärnten",
+                "city": "Schrattenthal",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "82",
+            "adresse": {
+                "detail": "Ricardo-Neumayr-Straße 1",
+                "zip": "5143",
+                "state": "Vorarlberg",
+                "city": "Freistadt",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "83",
+            "adresse": {
+                "detail": "Spindlerstraße 267",
+                "zip": "5157",
+                "state": "Oberösterreich",
+                "city": "Althofen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "84",
+            "adresse": {
+                "detail": "Neubacherplatz 8",
+                "zip": "6387",
+                "state": "Steiermark",
+                "city": "Lilienfeld",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "85",
+            "adresse": {
+                "detail": "Julian-Leithner-Platz 9/2",
+                "zip": "1472",
+                "state": "Steiermark",
+                "city": "Stockerau",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "86",
+            "adresse": {
+                "detail": "Marlene-Bachmann-Ring 41",
+                "zip": "7247",
+                "state": "Vorarlberg",
+                "city": "Vöcklabruck",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "87",
+            "adresse": {
+                "detail": "Linda-Hofstätter-Straße 8/3",
+                "zip": "8274",
+                "state": "Niederösterreich",
+                "city": "Allentsteig",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "88",
+            "adresse": {
+                "detail": "Sam-Steindl-Platz 2/2",
+                "zip": "7566",
+                "state": "Steiermark",
+                "city": "Braunau am Inn",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "89",
+            "adresse": {
+                "detail": "Sam-Fink-Straße 6",
+                "zip": "3490",
+                "state": "Niederösterreich",
+                "city": "Grieskirchen",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "90",
+            "adresse": {
+                "detail": "Haasring 102",
+                "zip": "4599",
+                "state": "Oberösterreich",
+                "city": "Raabs an der Thaya",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "91",
+            "adresse": {
+                "detail": "Hattingerplatz 6/1",
+                "zip": "4644",
+                "state": "Burgenland",
+                "city": "Hartberg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "92",
+            "adresse": {
+                "detail": "Anabella-Göschl-Ring 4",
+                "zip": "2799",
+                "state": "Kärnten",
+                "city": "Zeltweg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "93",
+            "adresse": {
+                "detail": "Anna-Maria-Fleck-Gasse 188",
+                "zip": "9691",
+                "state": "Kärnten",
+                "city": "Bad Hall",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "94",
+            "adresse": {
+                "detail": "Gratzlplatz 736",
+                "zip": "6178",
+                "state": "Burgenland",
+                "city": "Völkermarkt",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "95",
+            "adresse": {
+                "detail": "Walserring 12",
+                "zip": "5927",
+                "state": "Vorarlberg",
+                "city": "Sankt Veit an der Glan",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "96",
+            "adresse": {
+                "detail": "Alexandar-Pendl-Platz 11",
+                "zip": "8920",
+                "state": "Steiermark",
+                "city": "Oberpullendorf",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "97",
+            "adresse": {
+                "detail": "Grabnerstraße 44",
+                "zip": "3704",
+                "state": "Wien",
+                "city": "Rust",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "98",
+            "adresse": {
+                "detail": "Hochreiterstraße 8",
+                "zip": "3685",
+                "state": "Kärnten",
+                "city": "Zeltweg",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "99",
+            "adresse": {
+                "detail": "Seidlstr. 3/8",
+                "zip": "3268",
+                "state": "Oberösterreich",
+                "city": "Sankt Valentin",
+                "country": "Austria"
+            }
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "100",
+            "adresse": {
+                "detail": "Mühlböckring 75",
+                "zip": "4998",
+                "state": "Vorarlberg",
+                "city": "Zell am See",
+                "country": "Austria"
+            }
+        }
+    ]
+}
