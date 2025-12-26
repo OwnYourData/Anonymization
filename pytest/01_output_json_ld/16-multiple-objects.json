@@ -1,0 +1,659 @@
+{
+  "@graph": [
+    {
+      "@id": "oyd:object2-test15",
+      "oyd:latitude_randomized": {
+        "@value": "38.621132016106124",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "55.37153182884326",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test4",
+      "oyd:latitude_randomized": {
+        "@value": "45.96444816567511",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "17.18208818987693",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:latitude",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "2",
+        "@type": "http://www.w3.org/2001/XMLSchema#long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "randomization"
+    },
+    {
+      "@id": "oyd:mixed-objects8",
+      "oyd:longitude_randomized": {
+        "@value": "26.03245086560785",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": [
+        "oyd:Object1",
+        "oyd:Object2"
+      ],
+      "oyd:latitude_randomized": {
+        "@value": "45.53952699449442",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:name_masked": "*****",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      }
+    },
+    {
+      "@id": "oyd:gehalt_0",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "For the higher bound the maximum value is obfuscated",
+        "For the lower bound the minimum value is obfuscated"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:geburtsdatum_0",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "For the higher bound the maximum value is obfuscated",
+        "For the lower bound the minimum value is obfuscated"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:object2-test10",
+      "oyd:latitude_randomized": {
+        "@value": "52.12878234255028",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "8.28263782838323",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:mixed-objects3",
+      "oyd:no-anonymization-attribute": {
+        "@value": "5",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+      },
+      "oyd:latitude_randomized": {
+        "@value": "55.515307822707115",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "18.676533700176893",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test18",
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiObject1",
+      "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+        "@value": "5",
+        "@type": "http://www.w3.org/2001/XMLSchema#long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/hasAttribute": [
+        {
+          "@id": "oyd:geburtsdatum"
+        },
+        {
+          "@id": "oyd:gehalt"
+        }
+      ]
+    },
+    {
+      "@id": "oyd:geburtsdatum",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "1",
+        "@type": "http://www.w3.org/2001/XMLSchema#long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:gehalt",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "1",
+        "@type": "http://www.w3.org/2001/XMLSchema#long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:object1-test6",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test17",
+      "oyd:latitude_randomized": {
+        "@value": "19.95631120985216",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-26.959633386174502",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object1-test13",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test6",
+      "oyd:latitude_randomized": {
+        "@value": "-8.81051193539016",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "128.18766372708453",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object1-test1",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test12",
+      "oyd:latitude_randomized": {
+        "@value": "30.08351387674766",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "31.995462990932253",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test1",
+      "oyd:latitude_randomized": {
+        "@value": "41.923663907594594",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "18.42118087823874",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test20",
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:mixed-objects5",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:latitude_randomized": {
+        "@value": "0.3063119472288278",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "53.39505265092366",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:name_masked": "*****",
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test8",
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object1-test15",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test19",
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test8",
+      "oyd:latitude_randomized": {
+        "@value": "37.04920913174495",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-25.90586816278688",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object1-test3",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object1-test10",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test14",
+      "oyd:latitude_randomized": {
+        "@value": "12.960143584780141",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "92.67756493316746",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test3",
+      "oyd:latitude_randomized": {
+        "@value": "53.09009909664637",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "28.716288862553522",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:mixed-objects7",
+      "oyd:latitude_randomized": {
+        "@value": "52.076191053150566",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "25.748765485799346",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:mixed-objects2",
+      "oyd:name_masked": "*****",
+      "oyd:latitude_randomized": {
+        "@value": "42.52608162381674",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "24.00061119732071",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test17",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object1-test5",
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object1-test12",
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test16",
+      "oyd:latitude_randomized": {
+        "@value": "-1.2461678810123438",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-26.765366297551026",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object1-test20",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test5",
+      "oyd:latitude_randomized": {
+        "@value": "41.1771560837357",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "8.104553113237841",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:mixed-objects9",
+      "oyd:no-anonymization-attribute": {
+        "@value": "3",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+      },
+      "oyd:latitude_randomized": {
+        "@value": "44.32841043272504",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "0.17282588869301208",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object2-test11",
+      "oyd:latitude_randomized": {
+        "@value": "52.81593753249105",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "6.16479204988628",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:mixed-objects4",
+      "oyd:latitude_randomized": {
+        "@value": "56.67337777569957",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "2.794961934163679",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test19",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiObject2",
+      "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+        "@value": "2",
+        "@type": "http://www.w3.org/2001/XMLSchema#long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/hasAttribute": [
+        {
+          "@id": "oyd:longitude"
+        },
+        {
+          "@id": "oyd:latitude"
+        }
+      ]
+    },
+    {
+      "@id": "oyd:longitude",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "2",
+        "@type": "http://www.w3.org/2001/XMLSchema#long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "randomization"
+    },
+    {
+      "@id": "oyd:object1-test7",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:mixed-objects10",
+      "oyd:no-anonymization-attribute": {
+        "@value": "11",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+      },
+      "oyd:name_masked": "*****",
+      "oyd:latitude_randomized": {
+        "@value": "58.439713356276755",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "6.674748686473651",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test14",
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test18",
+      "oyd:latitude_randomized": {
+        "@value": "46.5466825628371",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "41.63344016101288",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test7",
+      "oyd:latitude_randomized": {
+        "@value": "36.86384634539812",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "42.10515257681624",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object1-test2",
+      "oyd:geburtsdatum_generalized": {
+        "@id": "oyd:geburtsdatum_0"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test13",
+      "oyd:latitude_randomized": {
+        "@value": "-12.561438884890912",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "32.17772441838079",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object2-test2",
+      "oyd:latitude_randomized": {
+        "@value": "53.19871524844289",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "13.728288636378224",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:mixed-objects6",
+      "oyd:no-anonymization-attribute": {
+        "@value": "22",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+      },
+      "oyd:latitude_randomized": {
+        "@value": "16.36906178361231",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-31.821031769626785",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test9",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:mixed-objects1",
+      "oyd:no-anonymization-attribute": {
+        "@value": "17",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+      },
+      "oyd:gehalt_generalized": {
+        "@id": "oyd:gehalt_0"
+      },
+      "oyd:latitude_randomized": {
+        "@value": "56.76300262608775",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "15.460072257861722",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:name_masked": "*****",
+      "@type": [
+        "oyd:Object2",
+        "oyd:Object1"
+      ]
+    },
+    {
+      "@id": "oyd:object1-test16",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object2-test9",
+      "oyd:latitude_randomized": {
+        "@value": "44.368739556504536",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "39.0691053033358",
+        "@type": "http://www.w3.org/2001/XMLSchema#double"
+      },
+      "@type": "oyd:Object2"
+    },
+    {
+      "@id": "oyd:object1-test4",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    },
+    {
+      "@id": "oyd:object1-test11",
+      "oyd:name_masked": "*****",
+      "@type": "oyd:Object1"
+    }
+  ],
+  "@context": {
+    "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo2/"
+  }
+}

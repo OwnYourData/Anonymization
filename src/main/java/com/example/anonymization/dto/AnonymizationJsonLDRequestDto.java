@@ -2,6 +2,8 @@ package com.example.anonymization.dto;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +12,18 @@ import lombok.Setter;
 @Schema(name="AnonymizationJsonLDRequestDto", description="DTO for JSON-LD anonymization request")
 public class AnonymizationJsonLDRequestDto {
 
-    @Schema(description = "The configuration URL")
+    @Schema(
+            description = "The configuration URL",
+            requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotBlank(message = "configurationUrl is mandatory")
     private String configurationUrl;
 
-    @Schema(description = "Data to be anonymized")
+    @Schema(
+            description = "Data to be anonymized",
+            requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotNull(message = "data is mandatory")
     private JsonNode data;
 
     @Schema(

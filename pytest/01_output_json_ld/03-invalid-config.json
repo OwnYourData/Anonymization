@@ -1,0 +1,7 @@
+{
+  "type": "about:blank",
+  "title": "Error in ontology fetching or parsing",
+  "status": 404,
+  "detail": "Exception when parsing the fetched ontology",
+  "instance": "/api/anonymization"
+}

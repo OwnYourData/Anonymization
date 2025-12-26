@@ -1,0 +1,608 @@
+{
+    "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+    "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+    "includeOriginalData": false,
+    "randomSeed": 1234,
+    "data": [
+        {
+            "type": "AnonymisationDemo",
+            "ID": "1",
+            "longitude": "-13.674853",
+            "geburtsdatum": "1916-03-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "2",
+            "longitude": "-127.162885",
+            "geburtsdatum": "1968-09-05"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "3",
+            "longitude": "-7.784340",
+            "geburtsdatum": "1985-09-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "4",
+            "longitude": "-107.483122",
+            "geburtsdatum": "2011-02-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "5",
+            "longitude": "169.094404",
+            "geburtsdatum": "1948-05-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "6",
+            "longitude": "-132.414638",
+            "geburtsdatum": "2014-04-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "7",
+            "longitude": "34.876585",
+            "geburtsdatum": "2007-03-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "8",
+            "longitude": "-2.798904",
+            "geburtsdatum": "1975-03-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "9",
+            "longitude": "-52.172321",
+            "geburtsdatum": "2006-03-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "10",
+            "longitude": "168.995353",
+            "geburtsdatum": "1981-05-19"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "11",
+            "longitude": "-152.985664",
+            "geburtsdatum": "2024-12-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "12",
+            "longitude": "0.090349",
+            "geburtsdatum": "1944-07-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "13",
+            "longitude": "-121.798406",
+            "geburtsdatum": "1937-02-05"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "14",
+            "longitude": "40.640500",
+            "geburtsdatum": "1949-06-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "15",
+            "longitude": "-168.869964",
+            "geburtsdatum": "1928-08-03"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "16",
+            "longitude": "-123.409057",
+            "geburtsdatum": "1927-06-30"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "17",
+            "longitude": "-14.107933",
+            "geburtsdatum": "1976-01-31"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "18",
+            "longitude": "95.032919",
+            "geburtsdatum": "1959-02-22"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "19",
+            "longitude": "170.441369",
+            "geburtsdatum": "1964-07-03"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "20",
+            "longitude": "158.283687",
+            "geburtsdatum": "1940-08-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "21",
+            "longitude": "-166.633445",
+            "geburtsdatum": "2025-04-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "22",
+            "longitude": "-108.856905",
+            "geburtsdatum": "2013-11-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "23",
+            "longitude": "62.819410",
+            "geburtsdatum": "1910-12-09"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "24",
+            "longitude": "99.771172",
+            "geburtsdatum": "1998-05-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "25",
+            "longitude": "-53.139234",
+            "geburtsdatum": "1967-12-19"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "26",
+            "longitude": "143.554523",
+            "geburtsdatum": "1926-05-16"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "27",
+            "longitude": "17.961539",
+            "geburtsdatum": "1962-03-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "28",
+            "longitude": "106.837224",
+            "geburtsdatum": "2023-04-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "29",
+            "longitude": "111.745126",
+            "geburtsdatum": "2012-10-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "30",
+            "longitude": "-152.546832",
+            "geburtsdatum": "1981-03-01"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "31",
+            "longitude": "-75.038907",
+            "geburtsdatum": "1988-02-01"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "32",
+            "longitude": "12.714384",
+            "geburtsdatum": "1989-04-22"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "33",
+            "longitude": "12.943157",
+            "geburtsdatum": "1942-03-10"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "34",
+            "longitude": "-22.905298",
+            "geburtsdatum": "1997-10-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "35",
+            "longitude": "118.419305",
+            "geburtsdatum": "2017-04-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "36",
+            "longitude": "-108.351917",
+            "geburtsdatum": "1953-05-31"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "37",
+            "longitude": "98.339589",
+            "geburtsdatum": "2006-09-16"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "38",
+            "longitude": "57.469588",
+            "geburtsdatum": "2022-10-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "39",
+            "longitude": "-26.142716",
+            "geburtsdatum": "1953-05-31"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "40",
+            "longitude": "-57.073372",
+            "geburtsdatum": "1987-01-10"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "41",
+            "longitude": "-123.686548",
+            "geburtsdatum": "1955-02-16"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "42",
+            "longitude": "99.569005",
+            "geburtsdatum": "2006-11-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "43",
+            "longitude": "-69.456456",
+            "geburtsdatum": "2005-08-28"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "44",
+            "longitude": "-172.573405",
+            "geburtsdatum": "1925-12-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "45",
+            "longitude": "69.828707",
+            "geburtsdatum": "1998-08-05"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "46",
+            "longitude": "-75.174891",
+            "geburtsdatum": "2000-12-08"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "47",
+            "longitude": "-19.038616",
+            "geburtsdatum": "2017-03-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "48",
+            "longitude": "-167.538071",
+            "geburtsdatum": "1914-09-10"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "49",
+            "longitude": "152.433172",
+            "geburtsdatum": "1922-10-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "50",
+            "longitude": "47.130871",
+            "geburtsdatum": "1940-03-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "51",
+            "longitude": "-132.186406",
+            "geburtsdatum": "1995-04-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "52",
+            "longitude": "61.608127",
+            "geburtsdatum": "1918-11-16"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "53",
+            "longitude": "34.045053",
+            "geburtsdatum": "1929-08-09"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "54",
+            "longitude": "18.377881",
+            "geburtsdatum": "1955-05-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "55",
+            "longitude": "85.316300",
+            "geburtsdatum": "1942-09-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "56",
+            "longitude": "-19.870468",
+            "geburtsdatum": "1956-12-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "57",
+            "longitude": "7.141886",
+            "geburtsdatum": "2018-03-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "58",
+            "longitude": "106.934713",
+            "geburtsdatum": "1961-04-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "59",
+            "longitude": "-148.875906",
+            "geburtsdatum": "1914-07-02"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "60",
+            "longitude": "158.239358",
+            "geburtsdatum": "1960-09-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "61",
+            "longitude": "116.899169",
+            "geburtsdatum": "1949-07-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "62",
+            "longitude": "58.699171",
+            "geburtsdatum": "2024-08-19"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "63",
+            "longitude": "135.071447",
+            "geburtsdatum": "1969-11-04"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "64",
+            "longitude": "-25.196147",
+            "geburtsdatum": "1928-05-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "65",
+            "longitude": "128.156991",
+            "geburtsdatum": "1915-10-30"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "66",
+            "longitude": "109.157234",
+            "geburtsdatum": "1969-05-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "67",
+            "longitude": "56.235512",
+            "geburtsdatum": "1997-11-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "68",
+            "longitude": "84.999620",
+            "geburtsdatum": "1999-03-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "69",
+            "longitude": "-100.428296",
+            "geburtsdatum": "1994-06-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "70",
+            "longitude": "-39.242152",
+            "geburtsdatum": "1961-04-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "71",
+            "longitude": "24.448104",
+            "geburtsdatum": "1995-08-09"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "72",
+            "longitude": "-21.620906",
+            "geburtsdatum": "2021-02-10"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "73",
+            "longitude": "-107.741170",
+            "geburtsdatum": "1996-01-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "74",
+            "longitude": "-136.362545",
+            "geburtsdatum": "1939-05-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "75",
+            "longitude": "91.750805",
+            "geburtsdatum": "1978-04-14"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "76",
+            "longitude": "74.756659",
+            "geburtsdatum": "1973-01-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "77",
+            "longitude": "-49.035140",
+            "geburtsdatum": "1972-09-22"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "78",
+            "longitude": "-114.903990",
+            "geburtsdatum": "1965-04-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "79",
+            "longitude": "117.563032",
+            "geburtsdatum": "2013-07-08"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "80",
+            "longitude": "-173.204508",
+            "geburtsdatum": "1929-02-03"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "81",
+            "longitude": "-167.391907",
+            "geburtsdatum": "1953-03-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "82",
+            "longitude": "-8.534940",
+            "geburtsdatum": "1911-10-14"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "83",
+            "longitude": "12.209239",
+            "geburtsdatum": "2001-12-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "84",
+            "longitude": "158.746188",
+            "geburtsdatum": "1971-08-13"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "85",
+            "longitude": "62.638851",
+            "geburtsdatum": "1910-11-14"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "86",
+            "longitude": "-57.144848",
+            "geburtsdatum": "1976-08-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "87",
+            "longitude": "159.960627",
+            "geburtsdatum": "1988-12-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "88",
+            "longitude": "126.288278",
+            "geburtsdatum": "1992-06-03"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "89",
+            "longitude": "-3.590177",
+            "geburtsdatum": "1942-07-10"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "90",
+            "longitude": "11.901425",
+            "geburtsdatum": "2008-10-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "91",
+            "longitude": "-73.692534",
+            "geburtsdatum": "1958-12-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "92",
+            "longitude": "-148.136676",
+            "geburtsdatum": "1985-03-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "93",
+            "longitude": "-93.562916",
+            "geburtsdatum": "1980-07-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "94",
+            "longitude": "-56.754109",
+            "geburtsdatum": "1955-09-09"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "95",
+            "longitude": "-22.804663",
+            "geburtsdatum": "1957-03-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "96",
+            "longitude": "-113.244622",
+            "geburtsdatum": "1917-02-05"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "97",
+            "longitude": "40.182285",
+            "geburtsdatum": "2015-08-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "98",
+            "longitude": "-24.033411",
+            "geburtsdatum": "2001-10-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "99",
+            "longitude": "-29.522413",
+            "geburtsdatum": "1976-03-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "100",
+            "longitude": "28.758049",
+            "geburtsdatum": "1950-03-06"
+        }
+    ]
+}

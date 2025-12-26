@@ -1,0 +1,913 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "includeOriginalData": false,
+  "randomSeed": 1234,
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:1",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -13.674853,
+        "oyd:geburtsdatum": {
+          "@value": "1916-03-06",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:2",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -127.162885,
+        "oyd:geburtsdatum": {
+          "@value": "1968-09-05",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:3",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -7.78434,
+        "oyd:geburtsdatum": {
+          "@value": "1985-09-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:4",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -107.483122,
+        "oyd:geburtsdatum": {
+          "@value": "2011-02-15",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:5",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 169.094404,
+        "oyd:geburtsdatum": {
+          "@value": "1948-05-12",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:6",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -132.414638,
+        "oyd:geburtsdatum": {
+          "@value": "2014-04-07",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:7",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 34.876585,
+        "oyd:geburtsdatum": {
+          "@value": "2007-03-26",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:8",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -2.798904,
+        "oyd:geburtsdatum": {
+          "@value": "1975-03-06",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:9",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -52.172321,
+        "oyd:geburtsdatum": {
+          "@value": "2006-03-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:10",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 168.995353,
+        "oyd:geburtsdatum": {
+          "@value": "1981-05-19",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:11",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -152.985664,
+        "oyd:geburtsdatum": {
+          "@value": "2024-12-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:12",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 0.090349,
+        "oyd:geburtsdatum": {
+          "@value": "1944-07-23",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:13",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -121.798406,
+        "oyd:geburtsdatum": {
+          "@value": "1937-02-05",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:14",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 40.6405,
+        "oyd:geburtsdatum": {
+          "@value": "1949-06-17",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:15",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -168.869964,
+        "oyd:geburtsdatum": {
+          "@value": "1928-08-03",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:16",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -123.409057,
+        "oyd:geburtsdatum": {
+          "@value": "1927-06-30",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:17",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -14.107933,
+        "oyd:geburtsdatum": {
+          "@value": "1976-01-31",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:18",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 95.032919,
+        "oyd:geburtsdatum": {
+          "@value": "1959-02-22",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:19",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 170.441369,
+        "oyd:geburtsdatum": {
+          "@value": "1964-07-03",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:20",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 158.283687,
+        "oyd:geburtsdatum": {
+          "@value": "1940-08-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:21",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -166.633445,
+        "oyd:geburtsdatum": {
+          "@value": "2025-04-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:22",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -108.856905,
+        "oyd:geburtsdatum": {
+          "@value": "2013-11-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:23",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 62.81941,
+        "oyd:geburtsdatum": {
+          "@value": "1910-12-09",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:24",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 99.771172,
+        "oyd:geburtsdatum": {
+          "@value": "1998-05-17",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:25",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -53.139234,
+        "oyd:geburtsdatum": {
+          "@value": "1967-12-19",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:26",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 143.554523,
+        "oyd:geburtsdatum": {
+          "@value": "1926-05-16",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:27",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 17.961539,
+        "oyd:geburtsdatum": {
+          "@value": "1962-03-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:28",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 106.837224,
+        "oyd:geburtsdatum": {
+          "@value": "2023-04-15",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:29",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 111.745126,
+        "oyd:geburtsdatum": {
+          "@value": "2012-10-27",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:30",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -152.546832,
+        "oyd:geburtsdatum": {
+          "@value": "1981-03-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:31",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -75.038907,
+        "oyd:geburtsdatum": {
+          "@value": "1988-02-01",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:32",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 12.714384,
+        "oyd:geburtsdatum": {
+          "@value": "1989-04-22",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:33",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 12.943157,
+        "oyd:geburtsdatum": {
+          "@value": "1942-03-10",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:34",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -22.905298,
+        "oyd:geburtsdatum": {
+          "@value": "1997-10-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:35",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 118.419305,
+        "oyd:geburtsdatum": {
+          "@value": "2017-04-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:36",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -108.351917,
+        "oyd:geburtsdatum": {
+          "@value": "1953-05-31",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:37",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 98.339589,
+        "oyd:geburtsdatum": {
+          "@value": "2006-09-16",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:38",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 57.469588,
+        "oyd:geburtsdatum": {
+          "@value": "2022-10-21",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:39",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -26.142716,
+        "oyd:geburtsdatum": {
+          "@value": "1953-05-31",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:40",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -57.073372,
+        "oyd:geburtsdatum": {
+          "@value": "1987-01-10",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:41",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -123.686548,
+        "oyd:geburtsdatum": {
+          "@value": "1955-02-16",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:42",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 99.569005,
+        "oyd:geburtsdatum": {
+          "@value": "2006-11-23",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:43",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -69.456456,
+        "oyd:geburtsdatum": {
+          "@value": "2005-08-28",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:44",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -172.573405,
+        "oyd:geburtsdatum": {
+          "@value": "1925-12-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:45",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 69.828707,
+        "oyd:geburtsdatum": {
+          "@value": "1998-08-05",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:46",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -75.174891,
+        "oyd:geburtsdatum": {
+          "@value": "2000-12-08",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:47",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -19.038616,
+        "oyd:geburtsdatum": {
+          "@value": "2017-03-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:48",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -167.538071,
+        "oyd:geburtsdatum": {
+          "@value": "1914-09-10",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:49",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 152.433172,
+        "oyd:geburtsdatum": {
+          "@value": "1922-10-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:50",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 47.130871,
+        "oyd:geburtsdatum": {
+          "@value": "1940-03-21",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:51",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -132.186406,
+        "oyd:geburtsdatum": {
+          "@value": "1995-04-12",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:52",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 61.608127,
+        "oyd:geburtsdatum": {
+          "@value": "1918-11-16",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:53",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 34.045053,
+        "oyd:geburtsdatum": {
+          "@value": "1929-08-09",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:54",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 18.377881,
+        "oyd:geburtsdatum": {
+          "@value": "1955-05-27",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:55",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 85.3163,
+        "oyd:geburtsdatum": {
+          "@value": "1942-09-23",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:56",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -19.870468,
+        "oyd:geburtsdatum": {
+          "@value": "1956-12-27",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:57",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 7.141886,
+        "oyd:geburtsdatum": {
+          "@value": "2018-03-17",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:58",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 106.934713,
+        "oyd:geburtsdatum": {
+          "@value": "1961-04-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:59",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -148.875906,
+        "oyd:geburtsdatum": {
+          "@value": "1914-07-02",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:60",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 158.239358,
+        "oyd:geburtsdatum": {
+          "@value": "1960-09-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:61",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 116.899169,
+        "oyd:geburtsdatum": {
+          "@value": "1949-07-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:62",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 58.699171,
+        "oyd:geburtsdatum": {
+          "@value": "2024-08-19",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:63",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 135.071447,
+        "oyd:geburtsdatum": {
+          "@value": "1969-11-04",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:64",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -25.196147,
+        "oyd:geburtsdatum": {
+          "@value": "1928-05-21",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:65",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 128.156991,
+        "oyd:geburtsdatum": {
+          "@value": "1915-10-30",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:66",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 109.157234,
+        "oyd:geburtsdatum": {
+          "@value": "1969-05-12",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:67",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 56.235512,
+        "oyd:geburtsdatum": {
+          "@value": "1997-11-07",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:68",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 84.99962,
+        "oyd:geburtsdatum": {
+          "@value": "1999-03-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:69",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -100.428296,
+        "oyd:geburtsdatum": {
+          "@value": "1994-06-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:70",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -39.242152,
+        "oyd:geburtsdatum": {
+          "@value": "1961-04-06",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:71",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 24.448104,
+        "oyd:geburtsdatum": {
+          "@value": "1995-08-09",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:72",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -21.620906,
+        "oyd:geburtsdatum": {
+          "@value": "2021-02-10",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:73",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -107.74117,
+        "oyd:geburtsdatum": {
+          "@value": "1996-01-27",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:74",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -136.362545,
+        "oyd:geburtsdatum": {
+          "@value": "1939-05-06",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:75",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 91.750805,
+        "oyd:geburtsdatum": {
+          "@value": "1978-04-14",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:76",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 74.756659,
+        "oyd:geburtsdatum": {
+          "@value": "1973-01-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:77",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -49.03514,
+        "oyd:geburtsdatum": {
+          "@value": "1972-09-22",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:78",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -114.90399,
+        "oyd:geburtsdatum": {
+          "@value": "1965-04-15",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:79",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 117.563032,
+        "oyd:geburtsdatum": {
+          "@value": "2013-07-08",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:80",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -173.204508,
+        "oyd:geburtsdatum": {
+          "@value": "1929-02-03",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:81",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -167.391907,
+        "oyd:geburtsdatum": {
+          "@value": "1953-03-18",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:82",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -8.53494,
+        "oyd:geburtsdatum": {
+          "@value": "1911-10-14",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:83",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 12.209239,
+        "oyd:geburtsdatum": {
+          "@value": "2001-12-23",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:84",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 158.746188,
+        "oyd:geburtsdatum": {
+          "@value": "1971-08-13",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:85",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 62.638851,
+        "oyd:geburtsdatum": {
+          "@value": "1910-11-14",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:86",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -57.144848,
+        "oyd:geburtsdatum": {
+          "@value": "1976-08-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:87",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 159.960627,
+        "oyd:geburtsdatum": {
+          "@value": "1988-12-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:88",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 126.288278,
+        "oyd:geburtsdatum": {
+          "@value": "1992-06-03",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:89",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -3.590177,
+        "oyd:geburtsdatum": {
+          "@value": "1942-07-10",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:90",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 11.901425,
+        "oyd:geburtsdatum": {
+          "@value": "2008-10-15",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:91",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -73.692534,
+        "oyd:geburtsdatum": {
+          "@value": "1958-12-07",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:92",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -148.136676,
+        "oyd:geburtsdatum": {
+          "@value": "1985-03-06",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:93",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -93.562916,
+        "oyd:geburtsdatum": {
+          "@value": "1980-07-12",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:94",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -56.754109,
+        "oyd:geburtsdatum": {
+          "@value": "1955-09-09",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:95",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -22.804663,
+        "oyd:geburtsdatum": {
+          "@value": "1957-03-21",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:96",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -113.244622,
+        "oyd:geburtsdatum": {
+          "@value": "1917-02-05",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:97",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 40.182285,
+        "oyd:geburtsdatum": {
+          "@value": "2015-08-07",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:98",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -24.033411,
+        "oyd:geburtsdatum": {
+          "@value": "2001-10-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:99",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": -29.522413,
+        "oyd:geburtsdatum": {
+          "@value": "1976-03-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:100",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:longitude": 28.758049,
+        "oyd:geburtsdatum": {
+          "@value": "1950-03-06",
+          "@type": "xsd:date"
+        }
+      }
+    ]
+  }
+}

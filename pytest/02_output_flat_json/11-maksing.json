@@ -1,0 +1,79 @@
+{
+  "data": [
+    {
+      "name_masked": "*****",
+      "ID": "1",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "2",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "3",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "4",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "5",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "6",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "7",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "8",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "9",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "ID": "10",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    }
+  ],
+  "kpis": {
+    "kpiAnonymisationDemo": {
+      "k-Anonymity": 10
+    }
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "@graph": [
+    {
+      "@id": "oyd:19",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:2",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:14",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:27",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:22",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:35",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:48",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:30",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:43",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:56",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:69",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:51",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:64",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:77",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:72",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:85",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:98",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:80",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:93",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:6",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:18",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:1",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:13",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:26",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:39",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:21",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:34",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:47",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:42",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:55",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:68",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiAnonymisationDemo",
+      "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+        "@value": "7",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/hasAttribute": {
+        "@id": "oyd:adresse"
+      }
+    },
+    {
+      "@id": "oyd:adresse",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "11",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:100",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:50",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:63",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:76",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:89",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:71",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:84",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:97",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:92",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:5",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:17",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:12",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:25",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:38",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:20",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:33",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:46",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:59",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:41",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:54",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:67",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:62",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:75",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:88",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:70",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:83",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:96",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:9",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:91",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:4",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:16",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:29",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:11",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:24",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:37",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:32",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:45",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:58",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:40",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:53",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:66",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:79",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:61",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:74",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:87",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:82",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:95",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:8",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:90",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:3",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:15",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:28",
+      "oyd:adresse_generalized": "Steiermark",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:10",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:23",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:36",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:49",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:31",
+      "oyd:adresse_generalized": "Niederösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:44",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:57",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:52",
+      "oyd:adresse_generalized": "Wien",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:65",
+      "oyd:adresse_generalized": "Tirol",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:78",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:60",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:73",
+      "oyd:adresse_generalized": "Salzburg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:86",
+      "oyd:adresse_generalized": "Vorarlberg",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:99",
+      "oyd:adresse_generalized": "Oberösterreich",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:81",
+      "oyd:adresse_generalized": "Kärnten",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:94",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:7",
+      "oyd:adresse_generalized": "Burgenland",
+      "@type": "oyd:AnonymisationDemo"
+    }
+  ],
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+  }
+}

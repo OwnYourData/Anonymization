@@ -1,0 +1,7 @@
+{
+  "type": "about:blank",
+  "title": "Error in ontology fetching or parsing",
+  "status": 404,
+  "detail": "Failed to fetch ontology from URL: https://invalidURL",
+  "instance": "/api/anonymization/flatjson"
+}

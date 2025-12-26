@@ -1,0 +1,620 @@
+{
+    "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+    "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+    "includeOriginalData": false,
+    "randomSeed": 1234,
+    "data": [
+        {
+            "type": "AnonymisationDemo",
+            "ID": "1",
+            "start_pv": "2013-01-08"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "2",
+            "latitude": "-39.2824055",
+            "longitude": "-155.518760",
+            "start_pv": "2011-11-16"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "3",
+            "latitude": "4.951539",
+            "longitude": "-17.980630",
+            "start_pv": "2022-02-28"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "4",
+            "latitude": "-22.8600205",
+            "longitude": "147.591864"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "5",
+            "longitude": "55.796084",
+            "start_pv": "2020-08-19"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "6",
+            "latitude": "-43.578153",
+            "start_pv": "2023-03-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "7",
+            "latitude": "37.724213",
+            "start_pv": "2012-11-22"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "8",
+            "latitude": "36.225924",
+            "longitude": "-123.017995",
+            "start_pv": "2023-06-22"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "9",
+            "latitude": "77.651111",
+            "longitude": "-178.729388",
+            "start_pv": "2025-01-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "10",
+            "latitude": "-37.692893",
+            "longitude": "-93.324316",
+            "start_pv": "2024-02-01"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "11",
+            "longitude": "-175.706038",
+            "start_pv": "2007-02-10"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "12",
+            "latitude": "-64.506901",
+            "longitude": "-44.188750"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "13",
+            "longitude": "-146.437893",
+            "start_pv": "2009-01-13"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "14",
+            "latitude": "24.9760525",
+            "longitude": "-116.463932"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "15",
+            "latitude": "-43.3780835"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "16",
+            "latitude": "-5.7864295",
+            "longitude": "108.783325",
+            "start_pv": "2017-03-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "17",
+            "latitude": "86.132024",
+            "longitude": "-30.458738",
+            "start_pv": "2008-08-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "19",
+            "latitude": "-8.706006",
+            "longitude": "-82.793789",
+            "start_pv": "2019-04-02"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "21",
+            "latitude": "52.424230",
+            "start_pv": "2005-08-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "22"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "23",
+            "longitude": "82.582309"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "24",
+            "latitude": "-1.7751325",
+            "longitude": "-7.851770",
+            "start_pv": "2005-10-08"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "25",
+            "latitude": "-60.573543",
+            "longitude": "130.720753",
+            "start_pv": "2018-03-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "26",
+            "start_pv": "2022-12-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "27",
+            "latitude": "-67.0833025",
+            "start_pv": "2016-04-14"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "28",
+            "latitude": "14.213570",
+            "start_pv": "2015-12-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "29",
+            "latitude": "17.8667925",
+            "longitude": "104.150890",
+            "start_pv": "2008-06-04"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "30",
+            "latitude": "65.448449",
+            "longitude": "-44.791181"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "31",
+            "longitude": "-1.870444",
+            "start_pv": "2015-05-24"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "32",
+            "latitude": "-85.4971275",
+            "longitude": "-103.778760",
+            "start_pv": "2022-10-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "33",
+            "latitude": "-45.3667035",
+            "longitude": "-79.576898",
+            "start_pv": "2023-09-08"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "34",
+            "latitude": "9.172651",
+            "longitude": "-150.131047",
+            "start_pv": "2022-03-28"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "35",
+            "latitude": "-52.947706",
+            "longitude": "56.186683",
+            "start_pv": "2024-05-17"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "36",
+            "latitude": "-54.6947385",
+            "longitude": "33.166915",
+            "start_pv": "2009-12-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "37",
+            "latitude": "27.745742",
+            "longitude": "126.135672",
+            "start_pv": "2005-04-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "38",
+            "latitude": "82.1391495",
+            "longitude": "88.876239",
+            "start_pv": "2014-03-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "39",
+            "latitude": "-51.9887085",
+            "longitude": "90.924802",
+            "start_pv": "2011-09-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "40",
+            "latitude": "-30.855377",
+            "longitude": "-85.774624"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "41",
+            "latitude": "18.192975",
+            "start_pv": "2012-11-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "42",
+            "longitude": "-73.202908"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "43",
+            "latitude": "32.5121425"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "44",
+            "latitude": "57.5651275",
+            "longitude": "-62.269158"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "45",
+            "longitude": "-4.380880",
+            "start_pv": "2013-05-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "46",
+            "latitude": "-3.2153445",
+            "longitude": "164.366753",
+            "start_pv": "2016-02-03"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "47",
+            "latitude": "69.0363005",
+            "longitude": "-164.473329",
+            "start_pv": "2019-12-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "48",
+            "latitude": "42.7673985"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "49",
+            "latitude": "23.710647",
+            "start_pv": "2014-03-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "50",
+            "latitude": "57.528008",
+            "longitude": "-22.917790",
+            "start_pv": "2021-02-05"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "51",
+            "longitude": "-112.553216",
+            "start_pv": "2011-08-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "52",
+            "latitude": "-66.7113625",
+            "longitude": "-45.847749"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "53",
+            "latitude": "8.1294035",
+            "longitude": "-10.316870",
+            "start_pv": "2021-09-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "54",
+            "longitude": "-68.901178",
+            "start_pv": "2024-03-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "55",
+            "latitude": "-18.9452265",
+            "longitude": "92.583691"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "56",
+            "latitude": "12.6435355",
+            "longitude": "95.804564"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "57",
+            "longitude": "13.223600",
+            "start_pv": "2018-01-12"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "58",
+            "latitude": "71.350443",
+            "longitude": "-0.346038",
+            "start_pv": "2015-03-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "59",
+            "start_pv": "2013-01-14"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "60",
+            "latitude": "-89.379551",
+            "start_pv": "2007-03-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "61",
+            "latitude": "-75.923052",
+            "start_pv": "2022-03-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "62"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "63",
+            "latitude": "17.888872",
+            "longitude": "-42.737777",
+            "start_pv": "2006-08-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "64",
+            "latitude": "59.941838",
+            "start_pv": "2025-09-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "65",
+            "latitude": "69.510754",
+            "longitude": "58.954703",
+            "start_pv": "2025-12-21"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "66",
+            "latitude": "34.4935655",
+            "longitude": "138.207378",
+            "start_pv": "2020-09-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "67",
+            "latitude": "-80.086079",
+            "start_pv": "2022-09-28"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "68",
+            "start_pv": "2014-05-15"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "69",
+            "latitude": "-27.087640",
+            "longitude": "6.115702",
+            "start_pv": "2024-03-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "70",
+            "latitude": "8.9855055",
+            "longitude": "36.733929",
+            "start_pv": "2006-07-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "71",
+            "latitude": "-55.1423365"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "72",
+            "latitude": "77.013889",
+            "start_pv": "2013-04-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "73",
+            "latitude": "-10.3600315",
+            "longitude": "57.992513"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "74",
+            "longitude": "33.267954"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "75",
+            "latitude": "-0.4430685",
+            "longitude": "47.604483",
+            "start_pv": "2006-06-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "76",
+            "longitude": "-112.989394",
+            "start_pv": "2006-11-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "77",
+            "longitude": "-70.909770",
+            "start_pv": "2008-04-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "78",
+            "latitude": "44.185197",
+            "longitude": "-86.615712",
+            "start_pv": "2020-11-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "79",
+            "longitude": "172.047019",
+            "start_pv": "2024-12-07"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "80",
+            "latitude": "-58.1082585",
+            "longitude": "165.356570",
+            "start_pv": "2011-10-26"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "81",
+            "latitude": "56.0046505"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "82",
+            "latitude": "-83.0078375"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "83",
+            "longitude": "-179.540254"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "84",
+            "latitude": "-36.606051",
+            "start_pv": "2024-03-08"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "85",
+            "latitude": "43.0311305",
+            "longitude": "-160.937784"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "86",
+            "latitude": "-70.6918685",
+            "start_pv": "2010-08-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "87",
+            "latitude": "73.368521",
+            "start_pv": "2020-11-04"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "88",
+            "latitude": "62.7020165",
+            "longitude": "-2.241099",
+            "start_pv": "2011-01-16"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "89",
+            "latitude": "-80.938544",
+            "start_pv": "2016-07-03"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "90",
+            "longitude": "68.616016",
+            "start_pv": "2019-12-18"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "91",
+            "latitude": "58.8125645",
+            "start_pv": "2025-02-06"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "92",
+            "latitude": "80.6099765",
+            "start_pv": "2025-06-13"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "93",
+            "latitude": "-68.5411195",
+            "longitude": "-151.116955"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "94",
+            "latitude": "-18.527114",
+            "longitude": "178.267211",
+            "start_pv": "2020-04-04"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "95",
+            "latitude": "28.892634",
+            "longitude": "-68.834144",
+            "start_pv": "2013-04-28"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "96",
+            "longitude": "137.568219",
+            "start_pv": "2020-02-19"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "97",
+            "latitude": "85.901794",
+            "start_pv": "2024-05-02"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "98",
+            "latitude": "29.6447975",
+            "start_pv": "2009-07-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "99",
+            "longitude": "-21.202157"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "100",
+            "latitude": "-79.4814085",
+            "start_pv": "2014-11-15"
+        }
+    ]
+}

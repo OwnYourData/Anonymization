@@ -1,0 +1,7 @@
+{
+  "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiAnonymisationDemo",
+  "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+    "@value": "1",
+    "@type": "http://www.w3.org/2001/XMLSchema#long"
+  }
+}

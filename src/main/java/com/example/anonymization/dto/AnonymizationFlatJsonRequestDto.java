@@ -2,6 +2,8 @@ package com.example.anonymization.dto;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.util.List;
@@ -11,12 +13,15 @@ import java.util.Map;
 public class AnonymizationFlatJsonRequestDto {
 
     @Schema(description = "The configuration URL")
+    @NotBlank(message = "configurationUrl is mandatory")
     private String configurationUrl;
 
     @Schema(description = "Prefix of the anonymization properties")
+    @NotBlank(message = "Prefix is mandatory")
     private String prefix;
 
     @Schema(description = "Data to be anonymized")
+    @NotEmpty(message = "data is mandatory")
     private List<Map<String, Object>> data;
 
     @Schema(

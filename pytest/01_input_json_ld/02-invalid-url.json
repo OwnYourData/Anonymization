@@ -1,0 +1,112 @@
+{
+  "configurationUrl": "https://invalidURL",
+  "includeOriginalData": false,
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:1",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": -33.91762,
+        "oyd:longitude": 135.862257,
+        "oyd:start_pv": {
+          "@value": "2019-06-24",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:2",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 62.2787945,
+        "oyd:longitude": 175.823607,
+        "oyd:start_pv": {
+          "@value": "2025-02-11",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:3",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": -33.4052085,
+        "oyd:longitude": -161.577102,
+        "oyd:start_pv": {
+          "@value": "2008-05-25",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:4",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 85.9949255,
+        "oyd:longitude": 29.739164,
+        "oyd:start_pv": {
+          "@value": "2023-12-23",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:5",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 24.77249,
+        "oyd:longitude": -149.46418,
+        "oyd:start_pv": {
+          "@value": "2018-01-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:6",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": -24.213107,
+        "oyd:longitude": -81.977983,
+        "oyd:start_pv": {
+          "@value": "2016-05-27",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:7",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": -72.0538175,
+        "oyd:longitude": 94.385098,
+        "oyd:start_pv": {
+          "@value": "2005-05-05",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:8",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": -59.727124,
+        "oyd:longitude": -134.470281,
+        "oyd:start_pv": {
+          "@value": "2022-10-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:9",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": 77.76004,
+        "oyd:longitude": 21.110092,
+        "oyd:start_pv": {
+          "@value": "2018-05-20",
+          "@type": "xsd:date"
+        }
+      },
+      {
+        "@id": "oyd:10",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:latitude": -71.009938,
+        "oyd:longitude": -133.631438,
+        "oyd:start_pv": {
+          "@value": "2013-03-14",
+          "@type": "xsd:date"
+        }
+      }
+    ]
+  }
+}

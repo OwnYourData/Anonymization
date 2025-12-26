@@ -1,0 +1,61 @@
+{
+  "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "data": {
+    "@context": {
+      "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@graph": [
+      {
+        "@id": "oyd:1",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Benedikt Oberndorfer-Freitag"
+      },
+      {
+        "@id": "oyd:2",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Herr Benedikt Hofstetter"
+      },
+      {
+        "@id": "oyd:3",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Nico Beck"
+      },
+      {
+        "@id": "oyd:4",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Univ.Prof. Anna-Lena Grabner"
+      },
+      {
+        "@id": "oyd:5",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Hubert Schrittwieser"
+      },
+      {
+        "@id": "oyd:6",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Jovana Angerer"
+      },
+      {
+        "@id": "oyd:7",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Elsa Hammer"
+      },
+      {
+        "@id": "oyd:8",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Mathias K\u00f6ssler-Reiner"
+      },
+      {
+        "@id": "oyd:9",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Herr Eduard Schachinger"
+      },
+      {
+        "@id": "oyd:10",
+        "@type": "oyd:AnonymisationDemo",
+        "oyd:name": "Ing. Marijana Ringhofer"
+      }
+    ]
+  }
+}

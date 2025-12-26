@@ -1,0 +1,469 @@
+{
+  "data": [
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {},
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ]
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "types": [
+        "Object1"
+      ]
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ]
+    },
+    {
+      "name_masked": "*****",
+      "types": [
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "longitude_randomized": "49.6023789021293",
+      "latitude_randomized": "5.496055768442844",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "62.86837487403613",
+      "latitude_randomized": "14.809940006347524",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "143.16784710760334",
+      "latitude_randomized": "38.4140829303051",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "117.76463478927258",
+      "latitude_randomized": "18.53019523998265",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "50.03695456521827",
+      "latitude_randomized": "44.29478044196685",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "53.68352600180975",
+      "latitude_randomized": "-2.3530014861253825",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "-74.59019551193404",
+      "latitude_randomized": "40.81820946738426",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "37.66025591550678",
+      "latitude_randomized": "55.3357351776129",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "88.33284202280231",
+      "latitude_randomized": "-28.197897226310033",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "140.25497948712132",
+      "latitude_randomized": "-18.880059038805754",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "15.112715142822278",
+      "latitude_randomized": "55.836052457448886",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "70.58636057621061",
+      "latitude_randomized": "46.56765388727855",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "117.9757593396404",
+      "latitude_randomized": "-8.642658948079664",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "-39.77556874644176",
+      "latitude_randomized": "25.38842516514081",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "111.62565863041026",
+      "latitude_randomized": "56.821197109962064",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "19.837950983032748",
+      "latitude_randomized": "5.421914648137069",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "62.7342438893827",
+      "latitude_randomized": "20.342820868974492",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "49.31343041507826",
+      "latitude_randomized": "43.91280015997846",
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "types": [
+        "Object2"
+      ]
+    },
+    {
+      "longitude_randomized": "17.712825404540464",
+      "latitude_randomized": "21.839724255703835",
+      "name_masked": "*****",
+      "no_anonymization_attribute": "17",
+      "types": [
+        "Object2",
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "longitude_randomized": "15.368523031202741",
+      "latitude_randomized": "5.802141096102517",
+      "name_masked": "*****",
+      "types": [
+        "Object2",
+        "Object1"
+      ]
+    },
+    {
+      "longitude_randomized": "93.29431165607186",
+      "latitude_randomized": "18.38327500126956",
+      "no_anonymization_attribute": "5",
+      "types": [
+        "Object1",
+        "Object2"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "longitude_randomized": "4.716868020959057",
+      "latitude_randomized": "-12.426317336455227",
+      "types": [
+        "Object2",
+        "Object1"
+      ]
+    },
+    {
+      "longitude_randomized": "110.17721764063722",
+      "latitude_randomized": "9.114245253424173",
+      "name_masked": "*****",
+      "types": [
+        "Object1",
+        "Object2"
+      ],
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "longitude_randomized": "-3.5408198839502845",
+      "latitude_randomized": "28.23476668776476",
+      "no_anonymization_attribute": "22",
+      "types": [
+        "Object2",
+        "Object1"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "longitude_randomized": "57.10620549636525",
+      "latitude_randomized": "-14.190913855785496",
+      "types": [
+        "Object2",
+        "Object1"
+      ]
+    },
+    {
+      "longitude_randomized": "45.85114139487982",
+      "latitude_randomized": "20.961520726870216",
+      "name_masked": "*****",
+      "types": [
+        "Object1",
+        "Object2"
+      ],
+      "gehalt_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      },
+      "geburtsdatum_generalized": {
+        "min": "obfuscated",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "longitude_randomized": "119.13749703309696",
+      "latitude_randomized": "59.59435618445852",
+      "no_anonymization_attribute": "3",
+      "types": [
+        "Object2",
+        "Object1"
+      ]
+    },
+    {
+      "name": "last mixed object",
+      "latitude": "52.37",
+      "no_anonymization_attribute": "11",
+      "longitude": "4.9"
+    }
+  ],
+  "kpis": {
+    "kpiObject2": {
+      "k-Anonymity": 2,
+      "longitude": {
+        "anonymization": "randomization",
+        "nrBuckets": 1
+      },
+      "latitude": {
+        "anonymization": "randomization",
+        "nrBuckets": 1
+      }
+    },
+    "kpiObject1": {
+      "k-Anonymity": 5,
+      "geburtsdatum": {
+        "anonymization": "generalization",
+        "nrBuckets": 1
+      },
+      "gehalt": {
+        "anonymization": "generalization",
+        "nrBuckets": 1
+      }
+    }
+  }
+}

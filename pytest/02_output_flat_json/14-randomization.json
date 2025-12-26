@@ -1,0 +1,817 @@
+{
+  "data": [
+    {
+      "geburtsdatum_randomized": "1976-12-13",
+      "ID": "1",
+      "longitude_randomized": "24.46797674259983",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1950-10-29",
+      "ID": "2",
+      "longitude_randomized": "-109.12820500514862",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1984-04-13",
+      "ID": "3",
+      "longitude_randomized": "13.105192786874763",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1989-06-01",
+      "ID": "4",
+      "longitude_randomized": "-73.59981495978266",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1969-03-22",
+      "ID": "5",
+      "longitude_randomized": "58.005930567607166",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2019-11-18",
+      "ID": "6",
+      "longitude_randomized": "-126.81568388174371",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1966-11-23",
+      "ID": "7",
+      "longitude_randomized": "53.37563204315747",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1976-07-18",
+      "ID": "8",
+      "longitude_randomized": "4.617770272345602",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1986-12-30",
+      "ID": "9",
+      "longitude_randomized": "3.133607875358841",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1969-02-04",
+      "ID": "10",
+      "longitude_randomized": "96.45724352307523",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1963-09-08",
+      "ID": "11",
+      "longitude_randomized": "-118.01276639721891",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1949-08-22",
+      "ID": "12",
+      "longitude_randomized": "31.254496066652596",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1928-05-11",
+      "ID": "13",
+      "longitude_randomized": "-101.38426928701071",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1934-09-20",
+      "ID": "14",
+      "longitude_randomized": "96.00631778269087",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1940-09-10",
+      "ID": "15",
+      "longitude_randomized": "-68.7914120765423",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1970-10-22",
+      "ID": "16",
+      "longitude_randomized": "-104.69721388191265",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1969-10-31",
+      "ID": "17",
+      "longitude_randomized": "-9.154814669684065",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1956-02-29",
+      "ID": "18",
+      "longitude_randomized": "135.87252492828307",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1953-11-20",
+      "ID": "19",
+      "longitude_randomized": "80.79401783710884",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1970-11-04",
+      "ID": "20",
+      "longitude_randomized": "62.84173253563975",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1994-06-09",
+      "ID": "21",
+      "longitude_randomized": "-143.29770830238965",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1992-06-16",
+      "ID": "22",
+      "longitude_randomized": "-99.51691326499311",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1930-04-07",
+      "ID": "23",
+      "longitude_randomized": "78.66855447429376",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1966-04-26",
+      "ID": "24",
+      "longitude_randomized": "119.90186903776689",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1970-06-05",
+      "ID": "25",
+      "longitude_randomized": "-39.884089228138244",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1949-09-09",
+      "ID": "26",
+      "longitude_randomized": "87.35001309130026",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1968-03-31",
+      "ID": "27",
+      "longitude_randomized": "61.345438235343195",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1974-08-22",
+      "ID": "28",
+      "longitude_randomized": "128.55992100513149",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2021-06-24",
+      "ID": "29",
+      "longitude_randomized": "115.267867702713",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2010-10-22",
+      "ID": "30",
+      "longitude_randomized": "-90.5842338898519",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2001-11-30",
+      "ID": "31",
+      "longitude_randomized": "-65.63467393837001",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1967-12-10",
+      "ID": "32",
+      "longitude_randomized": "43.16582481709888",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1930-02-20",
+      "ID": "33",
+      "longitude_randomized": "21.481275554110944",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1982-03-25",
+      "ID": "34",
+      "longitude_randomized": "14.538040714152896",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1989-10-13",
+      "ID": "35",
+      "longitude_randomized": "142.68691742838953",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1945-04-10",
+      "ID": "36",
+      "longitude_randomized": "-84.53461808589893",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1992-02-12",
+      "ID": "37",
+      "longitude_randomized": "149.39961483982515",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1966-03-20",
+      "ID": "38",
+      "longitude_randomized": "58.88289277489165",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1970-02-26",
+      "ID": "39",
+      "longitude_randomized": "-10.040984767659449",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1963-03-28",
+      "ID": "40",
+      "longitude_randomized": "-35.90777386882103",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1970-07-28",
+      "ID": "41",
+      "longitude_randomized": "-69.41517861108287",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2011-12-11",
+      "ID": "42",
+      "longitude_randomized": "103.99306773893893",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2009-06-29",
+      "ID": "43",
+      "longitude_randomized": "-35.34890984801673",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1951-10-05",
+      "ID": "44",
+      "longitude_randomized": "-58.028905333546575",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1998-06-05",
+      "ID": "45",
+      "longitude_randomized": "111.34278226900864",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2013-10-07",
+      "ID": "46",
+      "longitude_randomized": "-52.875954968635995",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2010-06-06",
+      "ID": "47",
+      "longitude_randomized": "-3.777135933151044",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1939-05-01",
+      "ID": "48",
+      "longitude_randomized": "-114.6736420864662",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1945-07-09",
+      "ID": "49",
+      "longitude_randomized": "105.54001118332837",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1960-08-10",
+      "ID": "50",
+      "longitude_randomized": "92.24150323725195",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2018-10-02",
+      "ID": "51",
+      "longitude_randomized": "-128.21998065642134",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1913-05-05",
+      "ID": "52",
+      "longitude_randomized": "80.10861606935177",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1926-09-29",
+      "ID": "53",
+      "longitude_randomized": "70.89039636111855",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1962-12-12",
+      "ID": "54",
+      "longitude_randomized": "27.90579275619813",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1952-10-19",
+      "ID": "55",
+      "longitude_randomized": "117.32155880445089",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1947-02-02",
+      "ID": "56",
+      "longitude_randomized": "16.52578284839502",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2007-04-01",
+      "ID": "57",
+      "longitude_randomized": "43.34811417085038",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1966-04-10",
+      "ID": "58",
+      "longitude_randomized": "163.1075093940927",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1919-12-10",
+      "ID": "59",
+      "longitude_randomized": "-57.31119067859585",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1943-11-30",
+      "ID": "60",
+      "longitude_randomized": "159.85402410460364",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1921-09-27",
+      "ID": "61",
+      "longitude_randomized": "165.1740202366655",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2024-04-19",
+      "ID": "62",
+      "longitude_randomized": "76.40135353823833",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1988-05-09",
+      "ID": "63",
+      "longitude_randomized": "88.88835857287486",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1950-02-11",
+      "ID": "64",
+      "longitude_randomized": "17.49146968043488",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1959-01-24",
+      "ID": "65",
+      "longitude_randomized": "136.62729045155564",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1981-07-24",
+      "ID": "66",
+      "longitude_randomized": "153.37142342037885",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2016-11-22",
+      "ID": "67",
+      "longitude_randomized": "90.06966528069775",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1992-10-09",
+      "ID": "68",
+      "longitude_randomized": "140.79083555513154",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1999-07-16",
+      "ID": "69",
+      "longitude_randomized": "-39.02008489750354",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1940-11-12",
+      "ID": "70",
+      "longitude_randomized": "8.413759771307717",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1986-12-24",
+      "ID": "71",
+      "longitude_randomized": "58.51653554790223",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2012-12-20",
+      "ID": "72",
+      "longitude_randomized": "22.911862173566778",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2001-07-03",
+      "ID": "73",
+      "longitude_randomized": "-105.24764285364417",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1940-06-06",
+      "ID": "74",
+      "longitude_randomized": "-102.13612744536375",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1961-01-07",
+      "ID": "75",
+      "longitude_randomized": "108.33894137008437",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1994-02-12",
+      "ID": "76",
+      "longitude_randomized": "99.30750962337044",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1950-02-26",
+      "ID": "77",
+      "longitude_randomized": "-43.98917546450098",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1973-06-13",
+      "ID": "78",
+      "longitude_randomized": "-90.26110714305531",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2002-02-23",
+      "ID": "79",
+      "longitude_randomized": "166.5763237475639",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1949-05-13",
+      "ID": "80",
+      "longitude_randomized": "-94.94725506480471",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1949-02-04",
+      "ID": "81",
+      "longitude_randomized": "-128.6836102634407",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1961-06-10",
+      "ID": "82",
+      "longitude_randomized": "0.47412734454277405",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2012-09-30",
+      "ID": "83",
+      "longitude_randomized": "59.1464000843945",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2000-03-24",
+      "ID": "84",
+      "longitude_randomized": "108.9515199025941",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1917-02-26",
+      "ID": "85",
+      "longitude_randomized": "73.15256060125141",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1956-02-29",
+      "ID": "86",
+      "longitude_randomized": "-7.530546138365416",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1965-03-11",
+      "ID": "87",
+      "longitude_randomized": "64.30591067341042",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2001-11-02",
+      "ID": "88",
+      "longitude_randomized": "82.121525777035",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1925-06-18",
+      "ID": "89",
+      "longitude_randomized": "1.8809682052600052",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1996-11-04",
+      "ID": "90",
+      "longitude_randomized": "17.355750151942377",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1948-08-16",
+      "ID": "91",
+      "longitude_randomized": "-32.79904467217011",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2006-08-31",
+      "ID": "92",
+      "longitude_randomized": "-146.61084660995928",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1969-02-28",
+      "ID": "93",
+      "longitude_randomized": "-40.941114651190944",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1950-07-04",
+      "ID": "94",
+      "longitude_randomized": "-42.199563168428426",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1966-11-28",
+      "ID": "95",
+      "longitude_randomized": "26.998757438868072",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1962-07-29",
+      "ID": "96",
+      "longitude_randomized": "-70.06082477427738",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2013-01-31",
+      "ID": "97",
+      "longitude_randomized": "78.47754250776089",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "2001-05-30",
+      "ID": "98",
+      "longitude_randomized": "-7.370505450652079",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1952-03-17",
+      "ID": "99",
+      "longitude_randomized": "-26.086679072410483",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "geburtsdatum_randomized": "1939-01-29",
+      "ID": "100",
+      "longitude_randomized": "60.161208413234164",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    }
+  ],
+  "kpis": {
+    "kpiAnonymisationDemo": {
+      "k-Anonymity": 6,
+      "geburtsdatum": {
+        "anonymization": "randomization",
+        "nrBuckets": 3
+      },
+      "longitude": {
+        "anonymization": "randomization",
+        "nrBuckets": 3
+      }
+    }
+  }
+}

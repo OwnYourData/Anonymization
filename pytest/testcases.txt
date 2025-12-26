@@ -1,0 +1,30 @@
+---- Json-LD ----
+--- Error Cases ---
+01: parameter is missing
+02: invalid url
+03: invalid configuration (content of URL no valid rdf)
+04: json-ld endpoint not with json-ld
+
+--- happy cases ---
+11: masking
+12: generalization numeric
+13: generalization address
+14: randomization
+15: multiple attributes & missing values
+16: multi-object anonymization
+
+---- Flat-Json ----
+--- Error Cases ---
+01: parameter is missing
+02: invalid url
+03: invalid configuration (content of URL no valid rdf)
+04: json-ld endpoint not with flat-json
+05: invalid prefix
+
+--- happy cases ---
+11: masking
+12: generalization numeric
+13: generalization address
+14: randomization
+15: multiple attributes & missing values
+16: multi-object anonymization
