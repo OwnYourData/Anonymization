@@ -1,0 +1,1274 @@
+{
+  "data": [
+    {
+      "ID": "1",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "2",
+      "longitude_randomized": "-87.46821794336068",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "3",
+      "longitude_randomized": "32.2669807025503",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "4",
+      "longitude_randomized": "-51.252822751381615",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "5",
+      "longitude_randomized": "123.45494969355687",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "6",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "7",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "8",
+      "longitude_randomized": "-118.22757232588027",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "9",
+      "longitude_randomized": "160.90207923064807",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "10",
+      "longitude_randomized": "112.78354117808372",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "11",
+      "longitude_randomized": "127.85733542273076",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "12",
+      "longitude_randomized": "-7.726858068847605",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "13",
+      "longitude_randomized": "161.01224352975666",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "14",
+      "longitude_randomized": "3.3551002747354346",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "15",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "16",
+      "longitude_randomized": "-70.7870630165737",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "17",
+      "longitude_randomized": "92.9093175529438",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "18",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "19",
+      "longitude_randomized": "19.758809138538837",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "20",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "21",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "22",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "23",
+      "longitude_randomized": "110.856776115662",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "24",
+      "longitude_randomized": "165.68984247642177",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "25",
+      "longitude_randomized": "-170.55816602592773",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "26",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "27",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "28",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "29",
+      "longitude_randomized": "-165.40288870336184",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "30",
+      "longitude_randomized": "42.105863015007934",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "31",
+      "longitude_randomized": "11.05025024291874",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "32",
+      "longitude_randomized": "-35.94877500585949",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "33",
+      "longitude_randomized": "102.74286949824966",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "34",
+      "longitude_randomized": "52.59381888280089",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "35",
+      "longitude_randomized": "80.02244703883221",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "36",
+      "longitude_randomized": "-120.99395606775259",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "37",
+      "longitude_randomized": "72.50577568390972",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "38",
+      "longitude_randomized": "128.42221928869364",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "39",
+      "longitude_randomized": "-67.42347552782564",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "40",
+      "longitude_randomized": "-8.358435546512212",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "41",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "42",
+      "longitude_randomized": "-36.34073206344985",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "43",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "44",
+      "longitude_randomized": "153.54831923302103",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "45",
+      "longitude_randomized": "11.025482377683065",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "46",
+      "longitude_randomized": "-63.26557355723406",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "47",
+      "longitude_randomized": "-7.41819857683555",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "48",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "49",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "50",
+      "longitude_randomized": "151.4793273829847",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "51",
+      "longitude_randomized": "-98.13678529179194",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "52",
+      "longitude_randomized": "123.7684866458066",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "53",
+      "longitude_randomized": "31.271902296478714",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "54",
+      "longitude_randomized": "-59.39477909685348",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "55",
+      "longitude_randomized": "-98.51600797410113",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "56",
+      "longitude_randomized": "126.01819930162183",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "57",
+      "longitude_randomized": "76.1973213521126",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "58",
+      "longitude_randomized": "58.49975263486331",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "59",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "60",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "61",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "62",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "63",
+      "longitude_randomized": "111.16789910069238",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "64",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "65",
+      "longitude_randomized": "103.15592076298842",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "66",
+      "longitude_randomized": "-85.07696965910324",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "67",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "68",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "69",
+      "longitude_randomized": "165.11994422430064",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "70",
+      "longitude_randomized": "-148.22837049765656",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "71",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "72",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "73",
+      "longitude_randomized": "-128.6172407619717",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "74",
+      "longitude_randomized": "-172.27935421501567",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "75",
+      "longitude_randomized": "-105.99825730998207",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "76",
+      "longitude_randomized": "-92.66679578746215",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "77",
+      "longitude_randomized": "21.500462522022588",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "78",
+      "longitude_randomized": "-17.038581180356445",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "79",
+      "longitude_randomized": "-59.46517688835175",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "80",
+      "longitude_randomized": "52.42655382969602",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "81",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "82",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "83",
+      "longitude_randomized": "51.81166968791973",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "84",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "85",
+      "longitude_randomized": "-46.981050975606735",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "86",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "87",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "88",
+      "longitude_randomized": "148.13884930347334",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "89",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "90",
+      "longitude_randomized": "174.47456188028679",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "91",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "92",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "93",
+      "longitude_randomized": "-36.85114090537711",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      }
+    },
+    {
+      "ID": "94",
+      "longitude_randomized": "-165.07101585617337",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "95",
+      "longitude_randomized": "59.79659311814625",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "96",
+      "longitude_randomized": "69.58267449079247",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "97",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "2016-03-09",
+        "max": "obfuscated"
+      }
+    },
+    {
+      "ID": "98",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "8.5574545",
+        "max": "obfuscated"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    },
+    {
+      "ID": "99",
+      "longitude_randomized": "52.65392529681637",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "ID": "100",
+      "types": [
+        "AnonymisationDemo"
+      ],
+      "latitude_generalized": {
+        "min": "obfuscated",
+        "max": "8.5574545"
+      },
+      "start_pv_generalized": {
+        "min": "obfuscated",
+        "max": "2016-03-09"
+      }
+    }
+  ],
+  "kpis": {
+    "kpiAnonymisationDemo": {
+      "k-Anonymity": 1,
+      "start_pv": {
+        "anonymization": "generalization",
+        "nrBuckets": 2
+      },
+      "latitude": {
+        "anonymization": "generalization",
+        "nrBuckets": 2
+      },
+      "longitude": {
+        "anonymization": "randomization",
+        "nrBuckets": 1
+      }
+    }
+  }
+}

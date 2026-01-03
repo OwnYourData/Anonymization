@@ -1,0 +1,1187 @@
+{
+  "@graph": [
+    {
+      "@id": "oyd:99",
+      "oyd:longitude_randomized": {
+        "@value": "52.65392529681637",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:18",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:26",
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:start_pv_1",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "For the higher bound the maximum value is obfuscated",
+      "http://www.w3.org/2000/01/rdf-schema#min": {
+        "@value": "2016-03-09",
+        "@type": "java:java.time.LocalDate"
+      },
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:34",
+      "oyd:longitude_randomized": {
+        "@value": "52.59381888280089",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:latitude_1",
+      "http://www.w3.org/2000/01/rdf-schema#comment": "For the higher bound the maximum value is obfuscated",
+      "http://www.w3.org/2000/01/rdf-schema#min": {
+        "@value": "8.5574545",
+        "@type": "xsd:double"
+      },
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:42",
+      "oyd:longitude_randomized": {
+        "@value": "-36.34073206344985",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:50",
+      "oyd:longitude_randomized": {
+        "@value": "151.4793273829847",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:2",
+      "oyd:longitude_randomized": {
+        "@value": "-87.46821794336068",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:start_pv_0",
+      "http://www.w3.org/2000/01/rdf-schema#max": {
+        "@value": "2016-03-09",
+        "@type": "java:java.time.LocalDate"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#comment": "For the lower bound the minimum value is obfuscated",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:latitude_0",
+      "http://www.w3.org/2000/01/rdf-schema#max": {
+        "@value": "8.5574545",
+        "@type": "xsd:double"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#comment": "For the lower bound the minimum value is obfuscated",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:78",
+      "oyd:longitude_randomized": {
+        "@value": "-17.038581180356445",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:86",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:94",
+      "oyd:longitude_randomized": {
+        "@value": "-165.07101585617337",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:13",
+      "oyd:longitude_randomized": {
+        "@value": "161.01224352975666",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:21",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:49",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:57",
+      "oyd:longitude_randomized": {
+        "@value": "76.1973213521126",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:65",
+      "oyd:longitude_randomized": {
+        "@value": "103.15592076298842",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:73",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-128.6172407619717",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:81",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:9",
+      "oyd:longitude_randomized": {
+        "@value": "160.90207923064807",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:28",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:36",
+      "oyd:longitude_randomized": {
+        "@value": "-120.99395606775259",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:44",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "153.54831923302103",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:52",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "123.7684866458066",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:4",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-51.252822751381615",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:60",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:88",
+      "oyd:longitude_randomized": {
+        "@value": "148.13884930347334",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:96",
+      "oyd:longitude_randomized": {
+        "@value": "69.58267449079247",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:15",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:23",
+      "oyd:longitude_randomized": {
+        "@value": "110.856776115662",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:31",
+      "oyd:longitude_randomized": {
+        "@value": "11.05025024291874",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:59",
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:67",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:75",
+      "oyd:longitude_randomized": {
+        "@value": "-105.99825730998207",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:83",
+      "oyd:longitude_randomized": {
+        "@value": "51.81166968791973",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:91",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:10",
+      "oyd:longitude_randomized": {
+        "@value": "112.78354117808372",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:38",
+      "oyd:longitude_randomized": {
+        "@value": "128.42221928869364",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:46",
+      "oyd:longitude_randomized": {
+        "@value": "-63.26557355723406",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:54",
+      "oyd:longitude_randomized": {
+        "@value": "-59.39477909685348",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:6",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:62",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:70",
+      "oyd:longitude_randomized": {
+        "@value": "-148.22837049765656",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:98",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:17",
+      "oyd:longitude_randomized": {
+        "@value": "92.9093175529438",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:25",
+      "oyd:longitude_randomized": {
+        "@value": "-170.55816602592773",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:33",
+      "oyd:longitude_randomized": {
+        "@value": "102.74286949824966",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:41",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:1",
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:69",
+      "oyd:longitude_randomized": {
+        "@value": "165.11994422430064",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:77",
+      "oyd:longitude_randomized": {
+        "@value": "21.500462522022588",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:85",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-46.981050975606735",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:93",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-36.85114090537711",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:12",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-7.726858068847605",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:20",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:48",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:56",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "126.01819930162183",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:64",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:72",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:8",
+      "oyd:longitude_randomized": {
+        "@value": "-118.22757232588027",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:80",
+      "oyd:longitude_randomized": {
+        "@value": "52.42655382969602",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:latitude",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "2",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:19",
+      "oyd:longitude_randomized": {
+        "@value": "19.758809138538837",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:27",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:35",
+      "oyd:longitude_randomized": {
+        "@value": "80.02244703883221",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:43",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:51",
+      "oyd:longitude_randomized": {
+        "@value": "-98.13678529179194",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:3",
+      "oyd:longitude_randomized": {
+        "@value": "32.2669807025503",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:start_pv",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "2",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:100",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:79",
+      "oyd:longitude_randomized": {
+        "@value": "-59.46517688835175",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:87",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:95",
+      "oyd:longitude_randomized": {
+        "@value": "59.79659311814625",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:14",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "3.3551002747354346",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:22",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:30",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "42.105863015007934",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:58",
+      "oyd:longitude_randomized": {
+        "@value": "58.49975263486331",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:66",
+      "oyd:longitude_randomized": {
+        "@value": "-85.07696965910324",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:74",
+      "oyd:longitude_randomized": {
+        "@value": "-172.27935421501567",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:82",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:90",
+      "oyd:longitude_randomized": {
+        "@value": "174.47456188028679",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:29",
+      "oyd:longitude_randomized": {
+        "@value": "-165.40288870336184",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:37",
+      "oyd:longitude_randomized": {
+        "@value": "72.50577568390972",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:45",
+      "oyd:longitude_randomized": {
+        "@value": "11.025482377683065",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:53",
+      "oyd:longitude_randomized": {
+        "@value": "31.271902296478714",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:5",
+      "oyd:longitude_randomized": {
+        "@value": "123.45494969355687",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:61",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:89",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:97",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:longitude",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "1",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "randomization"
+    },
+    {
+      "@id": "oyd:16",
+      "oyd:longitude_randomized": {
+        "@value": "-70.7870630165737",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:24",
+      "oyd:longitude_randomized": {
+        "@value": "165.68984247642177",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:32",
+      "oyd:longitude_randomized": {
+        "@value": "-35.94877500585949",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:40",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-8.358435546512212",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiAnonymisationDemo",
+      "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+        "@value": "1",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/hasAttribute": [
+        {
+          "@id": "oyd:start_pv"
+        },
+        {
+          "@id": "oyd:latitude"
+        },
+        {
+          "@id": "oyd:longitude"
+        }
+      ]
+    },
+    {
+      "@id": "oyd:68",
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:76",
+      "oyd:longitude_randomized": {
+        "@value": "-92.66679578746215",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:84",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:92",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:11",
+      "oyd:longitude_randomized": {
+        "@value": "127.85733542273076",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:39",
+      "oyd:longitude_randomized": {
+        "@value": "-67.42347552782564",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:47",
+      "oyd:longitude_randomized": {
+        "@value": "-7.41819857683555",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_1"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:55",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:longitude_randomized": {
+        "@value": "-98.51600797410113",
+        "@type": "xsd:double"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:63",
+      "oyd:longitude_randomized": {
+        "@value": "111.16789910069238",
+        "@type": "xsd:double"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:7",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_1"
+      },
+      "oyd:start_pv_generalized": {
+        "@id": "oyd:start_pv_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:71",
+      "oyd:latitude_generalized": {
+        "@id": "oyd:latitude_0"
+      },
+      "@type": "oyd:AnonymisationDemo"
+    }
+  ],
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+  }
+}
