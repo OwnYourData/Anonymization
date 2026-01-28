@@ -1,6 +1,5 @@
 package com.example.anonymization.service.anonymizer;
 
-
 import com.example.anonymization.entities.Configuration;
 import com.example.anonymization.data.QueryService;
 import org.apache.jena.atlas.lib.Pair;
@@ -24,8 +23,7 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
             Configuration config,
             Resource anonymizationObject,
             long numberAttributes,
-            boolean calculateKpi
-            ) {
+            boolean calculateKpi) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
@@ -38,26 +36,24 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
     }
 
     protected abstract List<Pair<Resource, T>> getSortedValues(Map<Resource, RDFNode> data);
+
     protected abstract T getMedianValue(T value1, T value2);
 
     protected Map<Resource, Resource> getRanges(
             List<Pair<Resource, T>> sortedValues,
             int numberBuckets,
-            List<Resource> buckets
-    ) {
+            List<Resource> buckets) {
         List<Pair<Resource, Integer>> positionValues = new LinkedList<>();
         for (int i = 0; i < sortedValues.size(); i++) {
             positionValues.add(new Pair<>(
                     sortedValues.get(i).getLeft(),
-                    numberBuckets * i / sortedValues.size())
-            );
+                    numberBuckets * i / sortedValues.size()));
         }
         return positionValues.stream()
                 .map(e -> new Pair<>(e.getLeft(), buckets.get(e.getRight())))
                 .collect(Collectors.toMap(
                         Pair::getLeft,
-                        Pair::getRight
-                ));
+                        Pair::getRight));
     }
 
     protected void writeToModel(Model model, Map<Resource, Resource> data, Property property) {
@@ -69,8 +65,7 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
             Model model,
             int nrOfBuckets,
             List<Pair<Resource, T>> sortedValues,
-            Property property
-    ) {
+            Property property) {
         Property min = model.createProperty(RDF_MIN);
         Property max = model.createProperty(RDF_MAX);
         return IntStream.range(0, nrOfBuckets)
@@ -83,16 +78,14 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
                     } else {
                         generalizationResource.addProperty(
                                 RDFS.comment,
-                                "For the lower bound the minimum value is obfuscated"
-                        );
+                                "For the lower bound the minimum value is obfuscated");
                     }
                     if (position != nrOfBuckets - 1) {
                         generalizationResource.addLiteral(max, range.get(1));
                     } else {
                         generalizationResource.addProperty(
                                 RDFS.comment,
-                                "For the higher bound the maximum value is obfuscated"
-                        );
+                                "For the higher bound the maximum value is obfuscated");
                     }
                     return generalizationResource;
                 }).toList();
@@ -102,13 +95,11 @@ public abstract class Generalization<T> extends Anonymization<Configuration> {
         int lowerBoundIndex = bucketNumber * sortedValues.size() / nrOfBuckets;
         T lowerBound = getMedianValue(
                 lowerBoundIndex > 0 ? sortedValues.get(lowerBoundIndex - 1).getRight() : null,
-                sortedValues.get(lowerBoundIndex).getRight()
-        );
+                sortedValues.get(lowerBoundIndex).getRight());
         int upperBoundIndex = ((bucketNumber + 1) * sortedValues.size() / nrOfBuckets) - 1;
         T upperBound = getMedianValue(
                 sortedValues.get(upperBoundIndex).getRight(),
-                upperBoundIndex + 1 < sortedValues.size() ? sortedValues.get(upperBoundIndex + 1).getRight() : null
-        );
+                upperBoundIndex + 1 < sortedValues.size() ? sortedValues.get(upperBoundIndex + 1).getRight() : null);
         return List.of(lowerBound, upperBound);
     }
 }

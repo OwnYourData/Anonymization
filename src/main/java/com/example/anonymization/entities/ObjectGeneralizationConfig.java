@@ -28,8 +28,7 @@ public class ObjectGeneralizationConfig extends Configuration {
             int nrAttr,
             Resource anonymizationObject,
             boolean calculateKpi,
-            long seed
-    ) {
+            long seed) {
         return new GeneralizationObject(model, property, data, nrAttr, this, anonymizationObject, calculateKpi);
     }
 }

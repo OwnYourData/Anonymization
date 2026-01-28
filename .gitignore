@@ -34,3 +34,6 @@ build/
 
 ### Notes ###
 notes.txt
+
+### Agent ###
+.agent/settings.json

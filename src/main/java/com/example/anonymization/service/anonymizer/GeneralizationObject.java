@@ -19,9 +19,9 @@ public class GeneralizationObject extends Anonymization<ObjectGeneralizationConf
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject,
-            boolean calculateKpi
-    ) {
-        super(model, property, data, (ObjectGeneralizationConfig) config, anonymizationObject, numberAttributes, calculateKpi);
+            boolean calculateKpi) {
+        super(model, property, data, (ObjectGeneralizationConfig) config, anonymizationObject, numberAttributes,
+                calculateKpi);
     }
 
     @Override
@@ -37,10 +37,9 @@ public class GeneralizationObject extends Anonymization<ObjectGeneralizationConf
                             Map.Entry::getKey,
                             e -> {
                                 Statement stmt = model.getProperty(e.getValue().asResource(), objectProperty);
-                                return stmt != null && stmt.getObject().isLiteral() ?
-                                        stmt.getLiteral() : model.createLiteral("");
-                            }
-                    ));
+                                return stmt != null && stmt.getObject().isLiteral() ? stmt.getLiteral()
+                                        : model.createLiteral("");
+                            }));
             if (checkIfAnonymizationIsEnough(propertyData)) {
                 propertyData.forEach((key, value) -> key.addProperty(generalized, value));
                 return;
@@ -53,8 +52,7 @@ public class GeneralizationObject extends Anonymization<ObjectGeneralizationConf
         Collection<Long> groupCounts = propertyData.entrySet().stream()
                 .collect(Collectors.groupingBy(
                         e -> e.getValue().getValue(),
-                        Collectors.counting()
-                ))
+                        Collectors.counting()))
                 .values();
         return groupCounts.size() <= numberBuckets && Collections.min(groupCounts) > data.size() * 0.5 / numberBuckets;
     }

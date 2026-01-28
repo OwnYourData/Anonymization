@@ -17,8 +17,7 @@ public class GeneralizationDateTime extends Generalization<Calendar> {
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject,
-            boolean calculateKpi
-    ) {
+            boolean calculateKpi) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
@@ -51,7 +50,8 @@ public class GeneralizationDateTime extends Generalization<Calendar> {
             XSDDateTime xsdDateTime = (XSDDateTime) XSDDatatype.XSDdate.parse(node.asLiteral().getString());
             return xsdDateTime.asCalendar();
         } catch (Exception e) {
-            throw new IllegalArgumentException("Node is not Literal or not a valid xsd:date or xsd:dateTime: " + node, e);
+            throw new IllegalArgumentException("Node is not Literal or not a valid xsd:date or xsd:dateTime: " + node,
+                    e);
         }
     }
 }
