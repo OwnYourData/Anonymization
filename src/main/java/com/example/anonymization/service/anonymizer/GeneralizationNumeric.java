@@ -17,8 +17,7 @@ public class GeneralizationNumeric extends Generalization<Double> {
             long numberAttributes,
             Configuration config,
             Resource anonymizationObject,
-            boolean calculateKpi
-    ) {
+            boolean calculateKpi) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 

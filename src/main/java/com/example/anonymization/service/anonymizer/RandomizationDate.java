@@ -24,8 +24,7 @@ public class RandomizationDate extends Randomization {
             Configuration config,
             Resource anonymizationObject,
             boolean calculateKpi,
-            long seed
-    ) {
+            long seed) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
         this.random = new Random(seed);
     }
@@ -42,8 +41,8 @@ public class RandomizationDate extends Randomization {
         int noiseDays = Integer.MAX_VALUE;
 
         long valueDay = literalToLocalDate(value).toEpochDay();
-        long minDay   = literalToLocalDate(min).toEpochDay();
-        long maxDay   = literalToLocalDate(max).toEpochDay();
+        long minDay = literalToLocalDate(min).toEpochDay();
+        long maxDay = literalToLocalDate(max).toEpochDay();
 
         while (valueDay + noiseDays > maxDay || valueDay + noiseDays < minDay) {
             noiseDays = (int) Math.round(random.nextGaussian() * distance);

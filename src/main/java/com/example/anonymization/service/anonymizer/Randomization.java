@@ -14,8 +14,7 @@ public abstract class Randomization extends Anonymization<Configuration> {
             Configuration config,
             Resource anonymizationObject,
             long numberAttributes,
-            boolean calculateKpi
-    ) {
+            boolean calculateKpi) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
     }
 
@@ -40,29 +39,21 @@ public abstract class Randomization extends Anonymization<Configuration> {
         for (int idx = 0; idx < sorted.size(); idx++) {
             Map.Entry<Resource, Literal> entry = sorted.get(idx);
 
-            while (
-                    lowerBound < sorted.size() - (randomizationValue + 1) &&
-                            (lowerBound < idx - randomizationValue ||
-                                    Math.abs(distance(sorted.get(lowerBound).getValue(), entry.getValue())) >
-                                            Math.abs(distance(
-                                                    sorted.get(lowerBound + randomizationValue + 1).getValue(),
-                                                    entry.getValue()
-                                            ))
-                            )
-            ) {
+            while (lowerBound < sorted.size() - (randomizationValue + 1) &&
+                    (lowerBound < idx - randomizationValue ||
+                            Math.abs(distance(sorted.get(lowerBound).getValue(), entry.getValue())) > Math.abs(distance(
+                                    sorted.get(lowerBound + randomizationValue + 1).getValue(),
+                                    entry.getValue())))) {
                 lowerBound++;
             }
 
             double dist = Math.max(
                     Math.abs(distance(sorted.get(lowerBound).getValue(), entry.getValue())),
-                    Math.abs(distance(sorted.get(lowerBound + randomizationValue).getValue(), entry.getValue()))
-            );
+                    Math.abs(distance(sorted.get(lowerBound + randomizationValue).getValue(), entry.getValue())));
             randomized.put(
                     entry.getKey(),
                     createRandomizedLiteral(
-                            entry.getValue(), dist, sorted.getFirst().getValue(), sorted.getLast().getValue()
-                    )
-            );
+                            entry.getValue(), dist, sorted.getFirst().getValue(), sorted.getLast().getValue()));
         }
         return randomized;
     }
@@ -71,8 +62,7 @@ public abstract class Randomization extends Anonymization<Configuration> {
         try {
             return data.entrySet().stream()
                     .map(entry -> Map.entry(entry.getKey(), entry.getValue().asLiteral()))
-                    .sorted((e1, e2) ->
-                            getComparator().compare(e1.getValue(), e2.getValue()))
+                    .sorted((e1, e2) -> getComparator().compare(e1.getValue(), e2.getValue()))
                     .toList();
         } catch (Exception e) {
             throw new IllegalArgumentException("Randomization can only be applied to literal values.");
