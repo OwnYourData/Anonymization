@@ -22,8 +22,7 @@ public class RandomizationDateTime extends Randomization {
             Configuration config,
             Resource anonymizationObject,
             boolean calculateKpi,
-            long seed
-    ) {
+            long seed) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
         this.random = new Random(seed);
     }
@@ -39,7 +38,7 @@ public class RandomizationDateTime extends Randomization {
         long dateSeconds = literalToDate(value).getTimeInMillis() / 1_000;
         long maxSeconds = literalToDate(max).getTimeInMillis() / 1_000;
         long minSeconds = literalToDate(min).getTimeInMillis() / 1_000;
-        while(dateSeconds + noise > maxSeconds || dateSeconds + noise < minSeconds) {
+        while (dateSeconds + noise > maxSeconds || dateSeconds + noise < minSeconds) {
             noise = (int) (random.nextGaussian() * distance);
             if (dateSeconds + noise > maxSeconds || dateSeconds + noise < minSeconds) {
                 noise *= -1;

@@ -2,6 +2,7 @@
   "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
   "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
   "includeOriginalData": false,
+  "useAdjustedAttributes": true,
   "data": [
     {
       "type": "AnonymisationDemo",

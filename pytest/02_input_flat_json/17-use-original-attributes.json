@@ -1,0 +1,89 @@
+{
+    "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+    "prefix": "https://soya.ownyourdata.eu/AnonymisationDemo/",
+    "useAdjustedAttributes": false,
+    "includeOriginalData": false,
+    "randomSeed": 1234,
+    "data": [
+        {
+            "type": "AnonymisationDemo",
+            "ID": "1",
+            "name": "Benedikt Oberndorfer-Freitag",
+            "latitude": "-33.91762",
+            "longitude": "135.862257",
+            "start_pv": "2019-06-24"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "2",
+            "name": "Herr Benedikt Hofstetter",
+            "latitude": "62.2787945",
+            "longitude": "175.823607",
+            "start_pv": "2025-02-11"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "3",
+            "name": "Nico Beck",
+            "latitude": "-33.4052085",
+            "longitude": "-161.577102",
+            "start_pv": "2008-05-25"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "4",
+            "name": "Univ.Prof. Anna-Lena Grabner",
+            "latitude": "85.9949255",
+            "longitude": "29.739164",
+            "start_pv": "2023-12-23"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "5",
+            "name": "Hubert Schrittwieser",
+            "latitude": "24.77249",
+            "longitude": "-149.46418",
+            "start_pv": "2018-01-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "6",
+            "name": "Jovana Angerer",
+            "latitude": "-24.213107",
+            "longitude": "-81.977983",
+            "start_pv": "2016-05-27"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "7",
+            "name": "Elsa Hammer",
+            "latitude": "-72.0538175",
+            "longitude": "94.385098",
+            "start_pv": "2005-05-05"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "8",
+            "name": "Mathias Kössler-Reiner",
+            "latitude": "-59.727124",
+            "longitude": "-134.470281",
+            "start_pv": "2022-10-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "9",
+            "name": "Herr Eduard Schachinger",
+            "latitude": "77.76004",
+            "longitude": "21.110092",
+            "start_pv": "2018-05-20"
+        },
+        {
+            "type": "AnonymisationDemo",
+            "ID": "10",
+            "name": "Ing. Marijana Ringhofer",
+            "latitude": "-71.009938",
+            "longitude": "-133.631438",
+            "start_pv": "2013-03-14"
+        }
+    ]
+}

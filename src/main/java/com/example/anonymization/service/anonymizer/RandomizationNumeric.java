@@ -17,8 +17,7 @@ public class RandomizationNumeric extends Randomization {
             Configuration config,
             Resource anonymizationObject,
             boolean calculateKpi,
-            long seed
-    ) {
+            long seed) {
         super(model, property, data, config, anonymizationObject, numberAttributes, calculateKpi);
         this.random = new Random(seed);
     }
@@ -32,11 +31,10 @@ public class RandomizationNumeric extends Randomization {
     protected Literal createRandomizedLiteral(Literal value, double distance, Literal min, Literal max) {
         double noise;
         double randomizedValue = Double.MAX_VALUE;
-        while(randomizedValue > max.getDouble() || randomizedValue < min.getDouble()) {
+        while (randomizedValue > max.getDouble() || randomizedValue < min.getDouble()) {
             noise = random.nextDouble() * distance;
             randomizedValue = value.getDouble() + noise > max.getDouble() ||
-                    value.getDouble() + noise < min.getDouble() ?
-                    value.getDouble() - noise : value.getDouble() + noise;
+                    value.getDouble() + noise < min.getDouble() ? value.getDouble() - noise : value.getDouble() + noise;
         }
         return ResourceFactory.createTypedLiteral(randomizedValue);
     }

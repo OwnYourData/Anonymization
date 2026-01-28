@@ -7,14 +7,12 @@ import java.util.Map;
 
 public class Masking extends Anonymization<Configuration> {
 
-
     public Masking(
             Model model,
             Property property,
             Map<Resource, RDFNode> data,
             Configuration config,
-            Resource anonymizationObject
-    ) {
+            Resource anonymizationObject) {
         super(model, property, data, config, anonymizationObject);
     }
 

@@ -1,0 +1,101 @@
+{
+  "data": [
+    {
+      "longitude": "-145.7710478274883",
+      "name": "*****",
+      "ID": "1",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "170.45894927877865",
+      "name": "*****",
+      "ID": "2",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "56.58017730890995",
+      "name": "*****",
+      "ID": "3",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "96.10819791413606",
+      "name": "*****",
+      "ID": "4",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "160.00086443035474",
+      "name": "*****",
+      "ID": "5",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "4.631080539568742",
+      "name": "*****",
+      "ID": "6",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "-63.62396995938809",
+      "name": "*****",
+      "ID": "7",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "131.6341764973941",
+      "name": "*****",
+      "ID": "8",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "58.35540384237945",
+      "name": "*****",
+      "ID": "9",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    },
+    {
+      "longitude": "8.17117003866747",
+      "name": "*****",
+      "ID": "10",
+      "types": [
+        "AnonymisationDemo"
+      ]
+    }
+  ],
+  "kpis": {
+    "kpiAnonymisationDemo": {
+      "k-Anonymity": 8,
+      "start_pv": {
+        "anonymization": "generalization",
+        "nrBuckets": 1
+      },
+      "latitude": {
+        "anonymization": "generalization",
+        "nrBuckets": 1
+      },
+      "longitude": {
+        "anonymization": "randomization",
+        "nrBuckets": 1
+      }
+    }
+  }
+}

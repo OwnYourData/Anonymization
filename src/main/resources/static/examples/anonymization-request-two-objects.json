@@ -1,5 +1,6 @@
 {
   "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo2",
+  "useAdjustedAttributes": true,
   "data": {
     "@context": {
       "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo2/"
@@ -8,8 +9,8 @@
       {
         "@id": "oyd:object1-test1",
         "@type": "oyd:Object1",
-        "oyd:name" : "object1test1 name",
-        "oyd:gehalt" : 42000,
+        "oyd:name": "object1test1 name",
+        "oyd:gehalt": 42000,
         "oyd:geburtsdatum": {
           "@value": "2000-10-01",
           "@type": "xsd:date"
@@ -18,8 +19,8 @@
       {
         "@id": "oyd:object1-test2",
         "@type": "oyd:Object1",
-        "oyd:name" : "object1test2 name",
-        "oyd:gehalt" : 65000,
+        "oyd:name": "object1test2 name",
+        "oyd:gehalt": 65000,
         "oyd:geburtsdatum": {
           "@value": "1987-03-02",
           "@type": "xsd:date"
@@ -265,7 +266,10 @@
       },
       {
         "@id": "oyd:mixed-objects1",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 10.75,
         "oyd:latitude": 59.91,
         "oyd:name": "mixed1 name",
@@ -274,14 +278,20 @@
       },
       {
         "@id": "oyd:mixed-objects2",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 139.69,
         "oyd:latitude": 35.68,
         "oyd:name": "mixed2 name"
       },
       {
         "@id": "oyd:mixed-objects3",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": -0.13,
         "oyd:latitude": 51.51,
         "oyd:gehalt": 32000,
@@ -293,13 +303,19 @@
       },
       {
         "@id": "oyd:mixed-objects4",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 2.35,
         "oyd:latitude": 48.86
       },
       {
         "@id": "oyd:mixed-objects5",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 151.21,
         "oyd:latitude": -33.87,
         "oyd:name": "mixed5 value",
@@ -310,7 +326,10 @@
       },
       {
         "@id": "oyd:mixed-objects6",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": -43.17,
         "oyd:latitude": -22.90,
         "oyd:gehalt": 75000,
@@ -318,13 +337,19 @@
       },
       {
         "@id": "oyd:mixed-objects7",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 18.07,
         "oyd:latitude": 59.33
       },
       {
         "@id": "oyd:mixed-objects8",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 12.49,
         "oyd:latitude": 41.90,
         "oyd:name": "mixed8 object",
@@ -336,14 +361,20 @@
       },
       {
         "@id": "oyd:mixed-objects9",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": -74.00,
         "oyd:latitude": 40.71,
         "oyd:no-anonymization-attribute": 3
       },
       {
         "@id": "oyd:mixed-objects10",
-        "@type": ["oyd:Object1", "oyd:Object2"],
+        "@type": [
+          "oyd:Object1",
+          "oyd:Object2"
+        ],
         "oyd:longitude": 4.90,
         "oyd:latitude": 52.37,
         "oyd:name": "last mixed object",

@@ -1,5 +1,6 @@
 {
   "configurationUrl": "https://soya.ownyourdata.eu/AnonymisationDemo",
+  "useAdjustedAttributes": true,
   "data": {
     "@context": {
       "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"

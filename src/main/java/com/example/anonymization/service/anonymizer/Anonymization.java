@@ -16,11 +16,16 @@ public abstract class Anonymization<T extends Configuration> {
 
     private static final Logger logger = LogManager.getLogger(Anonymization.class);
 
-    @NotNull Model model;
-    @NotNull Property property;
-    @NotNull Map<Resource, RDFNode> data;
-    @NotNull T config;
-    @NotNull Resource anonymizationObject;
+    @NotNull
+    Model model;
+    @NotNull
+    Property property;
+    @NotNull
+    Map<Resource, RDFNode> data;
+    @NotNull
+    T config;
+    @NotNull
+    Resource anonymizationObject;
     int numberBuckets;
     boolean calculateKpi;
 
@@ -31,8 +36,7 @@ public abstract class Anonymization<T extends Configuration> {
             T config,
             Resource anonymizationObject,
             long numberAttributes,
-            boolean calculateKpi
-    ) {
+            boolean calculateKpi) {
         this(model, property, data, config, anonymizationObject);
         this.numberBuckets = calculateNumberOfBuckets(data.size(), numberAttributes);
         this.calculateKpi = calculateKpi;
@@ -43,8 +47,7 @@ public abstract class Anonymization<T extends Configuration> {
             Property property,
             Map<Resource, RDFNode> data,
             T config,
-            Resource anonymizationObject
-    ) {
+            Resource anonymizationObject) {
         this.model = model;
         this.property = property;
         this.data = data;
@@ -63,8 +66,7 @@ public abstract class Anonymization<T extends Configuration> {
                     property,
                     numberBuckets,
                     config.getAnonymization(),
-                    anonymizationObject
-            );
+                    anonymizationObject);
         }
         applyAnonymization();
     }
@@ -73,8 +75,6 @@ public abstract class Anonymization<T extends Configuration> {
         return (int) floor(
                 1.0 / pow(
                         1.0 - pow(1.0 - pow(0.99, 1.0 / dataSize), 1.0 / dataSize),
-                        1.0 / numberAttributes
-                )
-        );
+                        1.0 / numberAttributes));
     }
 }
