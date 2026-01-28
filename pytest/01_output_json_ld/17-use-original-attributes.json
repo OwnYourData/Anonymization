@@ -1,0 +1,216 @@
+{
+  "@graph": [
+    {
+      "@id": "oyd:7",
+      "oyd:longitude": {
+        "@value": "-63.62396995938809",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:latitude_0",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "For the higher bound the maximum value is obfuscated",
+        "For the lower bound the minimum value is obfuscated"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:start_pv_0",
+      "http://www.w3.org/2000/01/rdf-schema#comment": [
+        "For the higher bound the maximum value is obfuscated",
+        "For the lower bound the minimum value is obfuscated"
+      ],
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://ns.ownyourdata.eu/ns/soya-context/generalization"
+    },
+    {
+      "@id": "oyd:latitude",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "1",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:9",
+      "oyd:longitude": {
+        "@value": "58.35540384237945",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:2",
+      "oyd:longitude": {
+        "@value": "170.45894927877865",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:10",
+      "oyd:longitude": {
+        "@value": "8.17117003866747",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:4",
+      "oyd:longitude": {
+        "@value": "96.10819791413606",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:start_pv",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "1",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "generalization"
+    },
+    {
+      "@id": "oyd:6",
+      "oyd:longitude": {
+        "@value": "4.631080539568742",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "http://ns.ownyourdata.eu/ns/soya-context/kpiAnonymisationDemo",
+      "http://ns.ownyourdata.eu/ns/soya-context/kanonymity": {
+        "@value": "8",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/hasAttribute": [
+        {
+          "@id": "oyd:start_pv"
+        },
+        {
+          "@id": "oyd:latitude"
+        },
+        {
+          "@id": "oyd:longitude"
+        }
+      ]
+    },
+    {
+      "@id": "oyd:longitude",
+      "http://ns.ownyourdata.eu/ns/soya-context/nrBucketsUsed": {
+        "@value": "1",
+        "@type": "xsd:long"
+      },
+      "http://ns.ownyourdata.eu/ns/soya-context/anonymizationTyp": "randomization"
+    },
+    {
+      "@id": "oyd:8",
+      "oyd:longitude": {
+        "@value": "131.6341764973941",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:1",
+      "oyd:longitude": {
+        "@value": "-145.7710478274883",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:3",
+      "oyd:longitude": {
+        "@value": "56.58017730890995",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    },
+    {
+      "@id": "oyd:5",
+      "oyd:longitude": {
+        "@value": "160.00086443035474",
+        "@type": "xsd:double"
+      },
+      "oyd:latitude": {
+        "@id": "oyd:latitude_0"
+      },
+      "oyd:start_pv": {
+        "@id": "oyd:start_pv_0"
+      },
+      "oyd:name": "*****",
+      "@type": "oyd:AnonymisationDemo"
+    }
+  ],
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "oyd": "https://soya.ownyourdata.eu/AnonymisationDemo/"
+  }
+}

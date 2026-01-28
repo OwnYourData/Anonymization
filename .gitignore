@@ -36,4 +36,5 @@ build/
 notes.txt
 
 ### Agent ###
-.agent/settings.json
+.agent/settings.yaml
+.agent/tasks.yaml
