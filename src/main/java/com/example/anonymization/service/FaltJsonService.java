@@ -12,6 +12,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -25,6 +27,8 @@ import static java.util.stream.Collectors.toMap;
 @Service
 public class FaltJsonService {
 
+    private static final Logger logger = LoggerFactory.getLogger(FaltJsonService.class);
+
     public static final String FLAT_OBJECT_NAME = "anonymizationObject";
 
     /**
@@ -34,6 +38,7 @@ public class FaltJsonService {
      * @param prefix prefix for the properties
      */
     public static void addDataToFlatModel(Model model, List<Map<String, Object>> data, String prefix) {
+        logger.debug("Adding flat data to model [entries={}, prefix={}]", data.size(), prefix);
         int counter = 0;
         Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         for (Map<String, Object> entry : data) {
@@ -56,6 +61,7 @@ public class FaltJsonService {
             }
             counter++;
         }
+        logger.debug("Flat data added to model [totalEntries={}]", counter);
     }
 
     private static void addTypeProperty(Object value, Resource object, Model model, String prefix) {
@@ -99,6 +105,7 @@ public class FaltJsonService {
             String prefix,
             boolean calculateKpi
     ) throws JsonProcessingException {
+        logger.debug("Creating flat JSON output [objectTypes={}, kpi={}]", objectTypes.size(), calculateKpi);
         Resource flatObject = model.createResource(prefix + FLAT_OBJECT_NAME);
         Map<Resource, Map<Property, Literal>> data = getLiteralData(model, flatObject);
         Map<Resource, List<Resource>> types = QueryService.getTypesForResources(model, flatObject);
@@ -259,9 +266,11 @@ public class FaltJsonService {
 
     private static void validateKey(String key) {
         if (key == null || key.isEmpty()) {
+            logger.warn("Rejected null or empty property key in flat JSON input");
             throw new RequestModelException("Property key cannot be null or empty");
         }
         if (!key.matches("^[a-zA-Z_][a-zA-Z0-9_]*$")) {
+            logger.warn("Rejected invalid property key in flat JSON input [key={}]", key);
             throw new RequestModelException("Invalid property key: " + key +
                     ". It must start with a letter or underscore and contain only letters, digits, or underscores.");
         }

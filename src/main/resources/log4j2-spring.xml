@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <!-- Structured log pattern with timestamp, level, thread, logger, and message -->
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%t] %c{1.} - %msg%n</Property>
+        <Property name="LOG_DIR">logs</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console output for development and container stdout -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+
+        <!-- Rolling file for persistent log storage in production -->
+        <RollingFile name="ApplicationLog"
+                     fileName="${LOG_DIR}/anonymization.log"
+                     filePattern="${LOG_DIR}/anonymization-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="30" />
+        </RollingFile>
+
+        <!-- Separate error log for quick identification of issues -->
+        <RollingFile name="ErrorLog"
+                     fileName="${LOG_DIR}/anonymization-error.log"
+                     filePattern="${LOG_DIR}/anonymization-error-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <LevelRangeFilter minLevel="ERROR" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <DefaultRolloverStrategy max="60" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Application loggers -->
+        <Logger name="com.example.anonymization" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="ApplicationLog" />
+            <AppenderRef ref="ErrorLog" />
+        </Logger>
+
+        <!-- Spring framework: reduce noise -->
+        <Logger name="org.springframework" level="WARN" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="ApplicationLog" />
+            <AppenderRef ref="ErrorLog" />
+        </Logger>
+
+        <!-- Apache Jena: reduce noise from RDF processing -->
+        <Logger name="org.apache.jena" level="WARN" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="ApplicationLog" />
+            <AppenderRef ref="ErrorLog" />
+        </Logger>
+
+        <Root level="WARN">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="ApplicationLog" />
+            <AppenderRef ref="ErrorLog" />
+        </Root>
+    </Loggers>
+</Configuration>

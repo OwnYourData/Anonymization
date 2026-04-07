@@ -76,7 +76,8 @@ public class KpiService {
                         Model model,
                         Resource anonymizationObject,
                         Set<Property> attributes, Map<Property, Configuration> configurations) {
-                logger.info("Calculating k-anonymity for object: {}", anonymizationObject.getURI());
+                logger.debug("Calculating k-anonymity [object={}, attributes={}]",
+                        anonymizationObject.getURI(), attributes.size());
                 Map<Resource, Set<Resource>> similarValues = new HashMap<>();
                 List<Set<Resource>> groups = QueryService.getGeneralizationGroups(model, anonymizationObject,
                                 attributes);
@@ -96,6 +97,7 @@ public class KpiService {
                                 });
                 return similarValues.values().stream().mapToInt(Set::size).min().orElse(0);
         }
+
 
         private static Map<Resource, Set<Resource>> getSimilarValues(
                         Model model,

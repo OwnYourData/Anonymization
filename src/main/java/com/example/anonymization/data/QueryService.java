@@ -6,6 +6,8 @@ import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.update.UpdateAction;
 import org.apache.jena.update.UpdateRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,6 +17,8 @@ import static com.example.anonymization.service.KpiService.*;
 
 @Service
 public class QueryService {
+
+    private static final Logger logger = LoggerFactory.getLogger(QueryService.class);
 
     public static final String SOYA_URL = "http://ns.ownyourdata.eu/ns/soya-context/";
 
@@ -26,6 +30,7 @@ public class QueryService {
      *         anonymization type
      */
     public static List<ConfigurationResult> getConfigurations(Model model) {
+        logger.debug("Querying model for anonymization configurations");
         List<ConfigurationResult> configurations = new ArrayList<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(QueryBuildingService.createConfigQuery(), model)) {
             ResultSet rs = qexec.execSelect();
@@ -39,6 +44,7 @@ public class QueryService {
                         solution.getLiteral("?anonymization")));
             }
         }
+        logger.debug("Found {} configuration entries", configurations.size());
         return configurations;
     }
 
@@ -83,6 +89,8 @@ public class QueryService {
                 results.put(solution.getResource("object"), propertyValues);
             }
         } catch (Exception ex) {
+            logger.warn("Error fetching data for anonymization [objectType={}]: {}",
+                    objectType.getURI(), ex.getMessage());
             throw new RequestModelException("Error during fetching data for anonymization: " + ex.getMessage());
         }
         return results;
@@ -112,6 +120,7 @@ public class QueryService {
                 }
             });
         } catch (Exception ex) {
+            logger.error("Error fetching KPI data: {}", ex.getMessage());
             throw new AnonymizationException("Error during fetching KPI data: " + ex.getMessage());
         }
         return results;
@@ -139,6 +148,8 @@ public class QueryService {
                 }
             }
         } catch (Exception e) {
+            logger.warn("Error fetching properties for anonymization [objectType={}]: {}",
+                    objectType.getURI(), e.getMessage());
             throw new RequestModelException("Error during fetching properties for anonymization: " + e.getMessage());
         }
         return properties;
@@ -157,6 +168,8 @@ public class QueryService {
                     .asUpdate();
             UpdateAction.execute(updateRequest, model);
         } catch (Exception ex) {
+            logger.error("Error deleting original properties [objectType={}]: {}",
+                    objectType.getURI(), ex.getMessage());
             throw new AnonymizationException("Error during deleting original properties: " + ex.getMessage());
         }
     }
@@ -184,6 +197,8 @@ public class QueryService {
                         sol.getLiteral("randomized")));
             }
         } catch (Exception ex) {
+            logger.error("Error fetching randomization results [objectType={}, property={}]: {}",
+                    anonymizationObject.getURI(), property.getLocalName(), ex.getMessage());
             throw new AnonymizationException("Error during fetching randomization results: " + ex.getMessage());
         }
         return results;
@@ -212,6 +227,8 @@ public class QueryService {
                                 .collect(Collectors.toSet()));
             }
         } catch (Exception ex) {
+            logger.error("Error fetching generalization groups [objectType={}]: {}",
+                    anonymizationObject.getURI(), ex.getMessage());
             throw new AnonymizationException("Error during fetching generalization groups: " + ex.getMessage());
         }
         return results;
@@ -270,6 +287,8 @@ public class QueryService {
                 results.put(sol.getResource("object"), values);
             }
         } catch (Exception ex) {
+            logger.error("Error fetching generalization data [objectType={}]: {}",
+                    objectType.getURI(), ex.getMessage());
             throw new AnonymizationException("Error during fetching generalization data: " + ex.getMessage());
         }
         return results;

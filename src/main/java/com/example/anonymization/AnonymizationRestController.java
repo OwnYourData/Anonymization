@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AnonymizationRestController {
+
+        private static final Logger logger = LoggerFactory.getLogger(AnonymizationRestController.class);
 
         @ApiResponses({
                         @ApiResponse(responseCode = "202", description = "Accepted", content = @Content(mediaType = "application/json")),
@@ -32,7 +36,13 @@ public class AnonymizationRestController {
                         "application/ld+json" }, produces = "application/json")
         public ResponseEntity<String> anonymization(
                         @Valid @RequestBody AnonymizationJsonLDRequestDto anonymizationRequest) {
-                return AnonymizationService.applyAnonymization(anonymizationRequest);
+                logger.info("Received JSON-LD anonymization request [configUrl={}]",
+                                anonymizationRequest.getConfigurationUrl());
+                long startTime = System.currentTimeMillis();
+                ResponseEntity<String> response = AnonymizationService.applyAnonymization(anonymizationRequest);
+                logger.info("JSON-LD anonymization completed [status={}, durationMs={}]",
+                                response.getStatusCode(), System.currentTimeMillis() - startTime);
+                return response;
         }
 
         @ApiResponses({
@@ -48,7 +58,15 @@ public class AnonymizationRestController {
         public ResponseEntity<String> anonymizationFlat(
                         @Valid @RequestBody AnonymizationFlatJsonRequestDto anonymizationRequest)
                         throws JsonProcessingException {
-                return AnonymizationService.applyAnonymizationFlatJson(anonymizationRequest);
+                logger.info("Received flat-JSON anonymization request [configUrl={}, dataSize={}, prefix={}]",
+                                anonymizationRequest.getConfigurationUrl(),
+                                anonymizationRequest.getData() != null ? anonymizationRequest.getData().size() : 0,
+                                anonymizationRequest.getPrefix());
+                long startTime = System.currentTimeMillis();
+                ResponseEntity<String> response = AnonymizationService.applyAnonymizationFlatJson(anonymizationRequest);
+                logger.info("Flat-JSON anonymization completed [status={}, durationMs={}]",
+                                response.getStatusCode(), System.currentTimeMillis() - startTime);
+                return response;
         }
 
 }
