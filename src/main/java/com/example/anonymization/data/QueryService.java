@@ -20,8 +20,10 @@ public class QueryService {
 
     /**
      * Fetches the configuration from an input model
+     * 
      * @param model the input model
-     * @return configuration representation with object, property, datatype and anonymization type
+     * @return configuration representation with object, property, datatype and
+     *         anonymization type
      */
     public static List<ConfigurationResult> getConfigurations(Model model) {
         List<ConfigurationResult> configurations = new ArrayList<>();
@@ -30,15 +32,14 @@ public class QueryService {
             while (rs.hasNext()) {
                 // TODO maybe include check for Literal in query
                 QuerySolution solution = rs.nextSolution();
-                configurations.add(new  ConfigurationResult(
+                configurations.add(new ConfigurationResult(
                         solution.getResource("?anonymizationObject"),
                         ResourceFactory.createProperty(solution.getResource("?property").getURI()),
                         solution.getResource("?datatype"),
-                        solution.getLiteral("?anonymization")
-                ));
+                        solution.getLiteral("?anonymization")));
             }
         }
-        return  configurations;
+        return configurations;
     }
 
     public static List<String> getAttributeOrder(Model model, Resource attribute) {
@@ -56,7 +57,8 @@ public class QueryService {
 
     /**
      * Extracts the data for a given set of attributes and an object type
-     * @param model the input model
+     * 
+     * @param model      the input model
      * @param properties attributes for which data should be fetched
      * @param objectType the type for which data should be fetched
      * @return mapping of resources of the object type with their property data
@@ -64,13 +66,12 @@ public class QueryService {
     public static Map<Resource, Map<Property, RDFNode>> getData(
             Model model,
             Collection<Property> properties,
-            Resource objectType
-    ) {
+            Resource objectType) {
         Query query = QueryBuildingService.createDataModelQuery(properties, objectType).asQuery();
         Map<Resource, Map<Property, RDFNode>> results = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
-            while(resultSet.hasNext()) {
+            while (resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
                 Map<Property, RDFNode> propertyValues = new HashMap<>();
                 properties.forEach(property -> {
@@ -89,14 +90,16 @@ public class QueryService {
 
     /**
      * Extracts the data for a given set of attributes and an object type
-     * @param model the input model
+     * 
+     * @param model      the input model
      * @param properties attributes for which data should be fetched
      * @return mapping of resources of the object type with their property data
      */
     public static Map<Property, Literal> getDataKpi(Model model, Set<Property> properties) {
         Query query = QueryBuildingService.createKpiDataQuery(
                 properties,
-                model.getResource(SOYA_URL + "kpiObjectAnonymizationDemo2") // TODO query for the right url (kpiObject + local url of resource)
+                model.getResource(SOYA_URL + "kpiObjectAnonymizationDemo2") // TODO query for the right url (kpiObject +
+                                                                            // local url of resource)
         ).asQuery();
         Map<Property, Literal> results = new HashMap<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
@@ -114,20 +117,22 @@ public class QueryService {
         return results;
     }
 
-
     /**
-     * Extracts the parameters to with anonymization should be applied --> config is defined and the property is used
+     * Extracts the parameters to with anonymization should be applied --> config is
+     * defined and the property is used
      * at least for one object
-     * @param model the input model
-     * @param configs list of configurations
-     * @param objectType definition of the object type to which anonymization is applied
+     * 
+     * @param model      the input model
+     * @param configs    list of configurations
+     * @param objectType definition of the object type to which anonymization is
+     *                   applied
      */
     public static Set<Property> getProperties(Model model, Set<Property> configs, Resource objectType) {
         Query query = QueryBuildingService.createPropertyQuery(configs, objectType).asQuery();
         Set<Property> properties = new HashSet<>();
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet resultSet = qexec.execSelect();
-            while(resultSet.hasNext()) {
+            while (resultSet.hasNext()) {
                 QuerySolution solution = resultSet.nextSolution();
                 if (solution.getLiteral("used").getBoolean()) {
                     properties.add(model.getProperty(solution.getResource("predicate").getURI()));
@@ -141,13 +146,15 @@ public class QueryService {
 
     /**
      * Deletes the original values that are now replaced with anonymized values
-     * @param model the input model
+     * 
+     * @param model      the input model
      * @param properties the properties that are removed
      * @param objectType the object type for which the data is removed
      */
     public static void deleteOriginalProperties(Model model, Set<Property> properties, Resource objectType) {
         try {
-            UpdateRequest updateRequest = QueryBuildingService.deleteOriginalPropertyQuery(properties, objectType).asUpdate();
+            UpdateRequest updateRequest = QueryBuildingService.deleteOriginalPropertyQuery(properties, objectType)
+                    .asUpdate();
             UpdateAction.execute(updateRequest, model);
         } catch (Exception ex) {
             throw new AnonymizationException("Error during deleting original properties: " + ex.getMessage());
@@ -156,12 +163,15 @@ public class QueryService {
 
     /**
      * Extracts the randomized properties and the original values
-     * @param model the input model
+     * 
+     * @param model               the input model
      * @param anonymizationObject the object type for which the data is returned
-     * @param property the randomization property
-     * @return randomization representation as a list of objects with their randomized and original properties
+     * @param property            the randomization property
+     * @return randomization representation as a list of objects with their
+     *         randomized and original properties
      */
-    public static List<RandomizationResult> getRandomizationResults(Model model, Resource anonymizationObject, Property property) {
+    public static List<RandomizationResult> getRandomizationResults(Model model, Resource anonymizationObject,
+            Property property) {
         Query query = QueryBuildingService.createRandomizationQuery(model, anonymizationObject, property).asQuery();
         List<RandomizationResult> results = new ArrayList<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
@@ -171,8 +181,7 @@ public class QueryService {
                 results.add(new RandomizationResult(
                         sol.getResource("object"),
                         sol.getLiteral("original"),
-                        sol.getLiteral("randomized")
-                ));
+                        sol.getLiteral("randomized")));
             }
         } catch (Exception ex) {
             throw new AnonymizationException("Error during fetching randomization results: " + ex.getMessage());
@@ -182,12 +191,14 @@ public class QueryService {
 
     /**
      * Extracts a group representation of the generalization result
-     * @param model the input model
+     * 
+     * @param model               the input model
      * @param anonymizationObject the object type for which the data is returned
-     * @param properties set of properties by which the result is grouped
+     * @param properties          set of properties by which the result is grouped
      * @return groups of resources with the same property values
      */
-    public static List<Set<Resource>> getGeneralizationGroups(Model model, Resource anonymizationObject, Set<Property> properties) {
+    public static List<Set<Resource>> getGeneralizationGroups(Model model, Resource anonymizationObject,
+            Set<Property> properties) {
         ParameterizedSparqlString queryString = QueryBuildingService.createGroupsQuery(properties, anonymizationObject);
         Query query = queryString.asQuery();
         List<Set<Resource>> results = new ArrayList<>();
@@ -198,8 +209,7 @@ public class QueryService {
                 results.add(
                         Arrays.stream(String.valueOf(sol.get("values"))
                                 .split(",")).map(uri -> model.createResource(uri.trim()))
-                                .collect(Collectors.toSet())
-                );
+                                .collect(Collectors.toSet()));
             }
         } catch (Exception ex) {
             throw new AnonymizationException("Error during fetching generalization groups: " + ex.getMessage());
@@ -209,7 +219,8 @@ public class QueryService {
 
     /**
      * Extracts all data for a list of object types
-     * @param model the input model
+     * 
+     * @param model      the input model
      * @param objectType the object type for which the data is returned
      * @return mapping of resources of the object type with their property data
      */
@@ -227,17 +238,20 @@ public class QueryService {
     }
 
     /**
-     * Extracts the generalization data (min and max values) for a set of properties and object types
-     * @param model the input model
+     * Extracts the generalization data (min and max values) for a set of properties
+     * and object types
+     * 
+     * @param model      the input model
      * @param objectType the object type for which the data is returned
-     * @param properties set of properties for which the generalization data is fetched
-     * @return mapping of resources of the object type with their min and max property values
+     * @param properties set of properties for which the generalization data is
+     *                   fetched
+     * @return mapping of resources of the object type with their min and max
+     *         property values
      */
     public static Map<Resource, Map<Property, Literal[]>> getGeneralizationData(
             Model model,
             Resource objectType,
-            Set<Property> properties
-    ) {
+            Set<Property> properties) {
         ParameterizedSparqlString queryString = QueryBuildingService.createGeneralizationData(properties, objectType);
         Query query = queryString.asQuery();
         Map<Resource, Map<Property, Literal[]>> results = new HashMap<>();
@@ -250,7 +264,7 @@ public class QueryService {
                     if (sol.getResource("_" + property.getLocalName()) != null) {
                         Literal minValue = sol.getLiteral("_min_" + property.getLocalName());
                         Literal maxValue = sol.getLiteral("_max_" + property.getLocalName());
-                        values.put(property, new Literal[]{minValue, maxValue});
+                        values.put(property, new Literal[] { minValue, maxValue });
                     }
                 });
                 results.put(sol.getResource("object"), values);
@@ -263,15 +277,15 @@ public class QueryService {
 
     /**
      * Extracts the k-anonymity value for a set of object types
-     * @param model the input model
+     * 
+     * @param model       the input model
      * @param objectTypes the object types for which the k-anonymity is returned
      * @return mapping of object types with their k-anonymity value
      */
     public static Map<Resource, Long> getKAnonymity(Model model, Collection<Resource> objectTypes) {
         ParameterizedSparqlString queryString = QueryBuildingService.createKAnonymityQuery(
                 objectTypes.stream().map(o -> model.getResource(KPI_OBJECT_URI + o.getLocalName())).toList(),
-                model.createProperty(K_ANONYMITY)
-        );
+                model.createProperty(K_ANONYMITY));
         Query query = queryString.asQuery();
         Map<Resource, Long> results = new HashMap<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
@@ -286,7 +300,8 @@ public class QueryService {
 
     /**
      * Extracts the other types of resources of a given object type
-     * @param model the input model
+     * 
+     * @param model      the input model
      * @param objectType the object type for which the data is returned
      * @return mapping of resources with their types
      */
@@ -309,40 +324,42 @@ public class QueryService {
 
     /**
      * Extracts the attribute information for a set of object types
-     * @param model the input model
-     * @param objectTypes the object types for which the attribute information is returned
+     * 
+     * @param model       the input model
+     * @param objectTypes the object types for which the attribute information is
+     *                    returned
      * @return mapping of object types with their attribute information
      */
     public static Map<Resource, List<QueryService.AttributeInformation>> getAttributeInformation(
-            Model model, Collection<Resource> objectTypes
-    ) {
+            Model model, Collection<Resource> objectTypes) {
         ParameterizedSparqlString queryString = QueryBuildingService.createAttributeInformationQuery(
                 objectTypes.stream().map(o -> model.getResource(KPI_OBJECT_URI + o.getLocalName())).toList(),
                 model.createProperty(HAS_ATTRIBUTE_URI),
                 model.createProperty(NR_BUCKETS_URI),
-                model.createProperty(ANONYMIZATION_TYP_URI)
-        );
+                model.createProperty(ANONYMIZATION_TYP_URI));
         Query query = queryString.asQuery();
         Map<Resource, List<QueryService.AttributeInformation>> result = new HashMap<>();
         try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
             ResultSet rs = qe.execSelect();
             while (rs.hasNext()) {
                 QuerySolution sol = rs.next();
-                Long nrBuckets = sol.getLiteral("nrBuckets") == null ?
-                        null : sol.getLiteral("nrBuckets").getLong();
+                Long nrBuckets = sol.getLiteral("nrBuckets") == null ? null : sol.getLiteral("nrBuckets").getLong();
                 result.putIfAbsent(sol.getResource("kpiObject"), new ArrayList<>());
                 result.get(sol.getResource("kpiObject")).add(new AttributeInformation(
                         sol.getResource("attribute"),
                         sol.getLiteral("anonymization").toString(),
-                        nrBuckets
-                ));
+                        nrBuckets));
             }
         }
         return result;
     }
 
+    public record ConfigurationResult(Resource object, Property property, Resource datatype, Literal anonymization) {
+    }
 
-    public record ConfigurationResult(Resource object, Property property, Resource datatype, Literal anonymization) {}
-    public record RandomizationResult(Resource object, Literal original, Literal randomized) {}
-    public record AttributeInformation(Resource attribute, String anonymization, Long nrBuckets) {}
+    public record RandomizationResult(Resource object, Literal original, Literal randomized) {
+    }
+
+    public record AttributeInformation(Resource attribute, String anonymization, Long nrBuckets) {
+    }
 }
