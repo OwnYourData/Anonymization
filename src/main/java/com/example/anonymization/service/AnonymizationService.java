@@ -11,8 +11,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,10 +24,12 @@ import java.util.*;
 @Service
 public class AnonymizationService {
 
-        private static final Logger logger = LogManager.getLogger(AnonymizationService.class);
+        private static final Logger logger = LoggerFactory.getLogger(AnonymizationService.class);
 
         public static ResponseEntity<String> applyAnonymization(AnonymizationJsonLDRequestDto request) {
-                logger.info("Starting json-ld anonymization process");
+                logger.info("Starting JSON-LD anonymization [configUrl={}, kpi={}, includeOriginal={}, useAdjustedAttrs={}]",
+                                request.getConfigurationUrl(), request.isCalculateKpi(),
+                                request.isIncludeOriginalData(), request.isUseAdjustedAttributes());
                 Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService
                                 .fetchConfigForObjects(request.getConfigurationUrl());
                 Model model = getModel(request.getData());
@@ -35,10 +37,10 @@ public class AnonymizationService {
                                 (o, c) -> applyAnonymizationForObject(
                                                 o, c, model, request.isCalculateKpi(), request.isIncludeOriginalData(),
                                                 request.getRandomSeed(), request.isUseAdjustedAttributes()));
-                logger.info("Finished json-ld anonymization process");
+                logger.info("JSON-LD anonymization completed [objectsProcessed={}]", anonymizationObjects.size());
                 StringWriter out = new StringWriter();
                 model.write(out, "JSON-LD");
-                logger.info(out.toString());
+                logger.debug("JSON-LD output size: {} characters", out.toString().length());
                 return new ResponseEntity<>(
                                 out.toString(),
                                 HttpStatus.ACCEPTED);
@@ -46,7 +48,10 @@ public class AnonymizationService {
 
         public static ResponseEntity<String> applyAnonymizationFlatJson(
                         AnonymizationFlatJsonRequestDto request) throws JsonProcessingException {
-                logger.info("Starting flat-json anonymization process");
+                logger.info("Starting flat-JSON anonymization [configUrl={}, dataEntries={}, kpi={}, includeOriginal={}]",
+                                request.getConfigurationUrl(),
+                                request.getData() != null ? request.getData().size() : 0,
+                                request.isCalculateKpi(), request.isIncludeOriginalData());
                 Model model = ModelFactory.createDefaultModel();
                 FaltJsonService.addDataToFlatModel(model, request.getData(), request.getPrefix());
                 Map<Resource, Map<Property, Configuration>> anonymizationObjects = ConfigurationService
@@ -61,7 +66,8 @@ public class AnonymizationService {
                                 anonymizationObjects.keySet(),
                                 request.getPrefix(),
                                 request.isCalculateKpi());
-                logger.info("Finished flat-json anonymization process");
+                logger.info("Flat-JSON anonymization completed [objectsProcessed={}]", anonymizationObjects.size());
+                logger.debug("Flat-JSON output size: {} characters", out.length());
                 return new ResponseEntity<>(out, HttpStatus.ACCEPTED);
         }
 
@@ -73,11 +79,14 @@ public class AnonymizationService {
                         boolean includeOriginalData,
                         long seed,
                         boolean useAdjustedAttributes) {
-                logger.info("Applying anonymization for object: {}", anonymizationObject.getURI());
+                logger.debug("Applying anonymization for object [uri={}, properties={}, kpi={}, includeOriginal={}]",
+                                anonymizationObject.getURI(), configurations.size(), calculateKpi, includeOriginalData);
                 Set<Property> attributes = QueryService.getProperties(model, configurations.keySet(),
                                 anonymizationObject);
                 Map<Resource, Map<Property, RDFNode>> data = QueryService.getData(model, attributes,
                                 anonymizationObject);
+                logger.debug("Data fetched for anonymization [object={}, attributes={}, records={}]",
+                                anonymizationObject.getLocalName(), attributes.size(), data.size());
                 Map<Property, Map<Resource, RDFNode>> horizontalData = convertToHorizontalSchema(data, attributes);
                 int nrAnonymizeAttributes = getNumberOfAnonymizingAttributes(configurations, attributes);
                 horizontalData.entrySet().stream().map(e -> configurations.get(e.getKey()).createAnonymization(
@@ -88,20 +97,20 @@ public class AnonymizationService {
                                 anonymizationObject,
                                 calculateKpi,
                                 seed)).forEach(Anonymization::anonymization);
-                logger.info("Anonymization applied for object: {}", anonymizationObject.getURI());
+                logger.debug("Anonymization applied for object [uri={}]", anonymizationObject.getURI());
                 if (calculateKpi) {
                         KpiService.addKpiObject(model, anonymizationObject, attributes, configurations);
-                        logger.info("Kpi added for object: {}", anonymizationObject.getURI());
+                        logger.debug("KPI added for object [uri={}]", anonymizationObject.getURI());
                 }
                 if (!includeOriginalData) {
                         QueryService.deleteOriginalProperties(model, attributes, anonymizationObject);
-                        logger.info("Original data removed for object: {}", anonymizationObject.getURI());
+                        logger.debug("Original data removed for object [uri={}]", anonymizationObject.getURI());
                 }
                 // Rename properties if useAdjustedAttributes=false (AFTER deleting original
                 // values)
                 if (!useAdjustedAttributes) {
                         renameAnonymizedProperties(model, attributes, configurations);
-                        logger.info("Anonymized properties renamed to original names for object: {}",
+                        logger.debug("Anonymized properties renamed to original names for object [uri={}]",
                                         anonymizationObject.getURI());
                 }
         }

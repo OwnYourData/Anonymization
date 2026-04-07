@@ -28,6 +28,7 @@ public class GlobalExceptionHandler {
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 fieldErrors.put(error.getField(), error.getDefaultMessage())
         );
+        logger.warn("Request validation failed [fields={}]", fieldErrors);
         Map<String, Object> body = new HashMap<>();
         body.put("status", HttpStatus.BAD_REQUEST.value());
         body.put("error", "Validation failed");
@@ -37,7 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(OntologyException.class)
     public ResponseEntity<ProblemDetail> handleNotFound(OntologyException ex) {
-        logger.error("OntologyException: {}", ex.getMessage());
+        logger.warn("OntologyException: {}", ex.getMessage());
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         pd.setTitle("Error in ontology fetching or parsing");
         pd.setDetail(ex.getMessage());
@@ -46,7 +47,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AnonymizationException.class)
     public ResponseEntity<ProblemDetail> handleAnonymizationException(AnonymizationException ex) {
-        logger.error("AnonymizationException: {}", ex.getMessage());
+        logger.error("AnonymizationException: {}", ex.getMessage(), ex);
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         pd.setTitle("Error during anonymization process");
         pd.setDetail(ex.getMessage());
@@ -55,7 +56,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RequestModelException.class)
     public ResponseEntity<ProblemDetail> handleRequestModelException(RequestModelException ex) {
-        logger.error("RequestModelException: {}", ex.getMessage());
+        logger.warn("RequestModelException: {}", ex.getMessage());
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         pd.setTitle("Invalid request model");
         pd.setDetail(ex.getMessage());
@@ -64,10 +65,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(JsonProcessingException.class)
     public ResponseEntity<ProblemDetail> handleJsonException(JsonProcessingException ex) {
-        logger.error("JsonProcessingException: {}", ex.getMessage());
+        logger.error("JsonProcessingException: {}", ex.getMessage(), ex);
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         pd.setTitle("Error creation Json output");
         pd.setDetail(ex.getMessage());
+        return ResponseEntity.status(pd.getStatus()).body(pd);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ProblemDetail> handleUnexpectedException(Exception ex) {
+        logger.error("Unexpected error occurred: {}", ex.getMessage(), ex);
+        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        pd.setTitle("Unexpected error");
+        pd.setDetail("An unexpected error occurred. Please try again later.");
         return ResponseEntity.status(pd.getStatus()).body(pd);
     }
 }

@@ -38,3 +38,6 @@ notes.txt
 ### Agent ###
 .agent/settings.yaml
 .agent/tasks.yaml
+
+### Logs ###
+logs/

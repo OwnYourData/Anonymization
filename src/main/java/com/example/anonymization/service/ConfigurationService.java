@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFParser;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ import java.util.*;
 @Service
 public class ConfigurationService {
 
-    private static final Logger logger = LogManager.getLogger(Configuration.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConfigurationService.class);
 
     /**
      * Fetches the configuration from the given URL and extracts it into a map.
@@ -53,9 +53,9 @@ public class ConfigurationService {
 
     @NotNull
     private static Model getModel(String url) {
-        logger.info("Fetching config from url: {}", url);
+        logger.info("Fetching ontology config [url={}]", url);
         String configString = fetchStringContent(url);
-        logger.info("Config successfully fetched");
+        logger.debug("Config fetched successfully [url={}, length={}]", url, configString.length());
         try {
             Model configModel = ModelFactory.createDefaultModel();
             RDFParser.create()
@@ -64,6 +64,7 @@ public class ConfigurationService {
                     .parse(configModel);
             return configModel;
         } catch (Exception e) {
+            logger.error("Failed to parse ontology from URL [url={}]", url, e);
             throw new OntologyException("Exception when parsing the fetched ontology");
         }
     }
@@ -90,9 +91,11 @@ public class ConfigurationService {
                 );
             }
         } catch (URISyntaxException | IOException e) {
+            logger.error("Failed to fetch ontology [url={}]: {}", url, e.getMessage());
             throw new OntologyException("Failed to fetch ontology from URL: " + url);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Restore thread interruption status
+            logger.error("Thread interrupted while fetching ontology [url={}]", url);
+            Thread.currentThread().interrupt();
             throw new OntologyException("Thread was interrupted while fetching ontology from URL: " + url);
         }
     }
@@ -101,7 +104,7 @@ public class ConfigurationService {
     private static Map<Resource, Map<Property, Configuration>> extractConfig(Model model) {
         Map<Resource, Map<Property, Configuration>> configs = new HashMap<>();
         Set<Property> properties = new HashSet<>();
-        logger.info("Extracting configuration from server response");
+        logger.debug("Extracting configuration from server response");
         QueryService.getConfigurations(model).forEach(entry -> {
             if (properties.contains(entry.property())) {
                 throw new OntologyException(
@@ -116,14 +119,14 @@ public class ConfigurationService {
                     entry.property(),
                     createConfiguration(entry.datatype(), entry.anonymization(), entry.property(), model)
             );
-            logger.info(
-                    "New Config: {}, {}, {}",
+            logger.debug(
+                    "Config entry parsed [property={}, datatype={}, anonymization={}]",
                     extractValueFromURL(entry.property().toString()),
                     extractValueFromURL(entry.datatype().toString()),
                     extractValueFromURL(entry.anonymization().toString())
             );
         });
-        logger.info("Configuration successfully converted");
+        logger.info("Configuration extracted [objectCount={}, propertyCount={}]", configs.size(), properties.size());
         return configs;
     }
 
